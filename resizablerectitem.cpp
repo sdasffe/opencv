@@ -226,13 +226,11 @@ void ResizableRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         // 通知场景几何即将变化（重要！避免拖影）
         prepareGeometryChange();
         setRect(newRect);  // 应用新矩形
-        emit rectChanged();  // ✅ 通知矩形改变
         return;  // 事件已处理
     }
 
     QGraphicsRectItem::mouseMoveEvent(event);  // 移动操作交给父类
     if (m_resizing && m_handleType == Move) {
-        emit rectChanged();  // ✅ 移动时也通知
     }
 }
 
@@ -251,7 +249,6 @@ void ResizableRectItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         if (scene()) {
             scene()->update();  // 更新整个场景，清除可能的拖影
         }
-        emit rectChanged();  // ✅ 通知矩形改变
     }
     QGraphicsRectItem::mouseReleaseEvent(event);
 }

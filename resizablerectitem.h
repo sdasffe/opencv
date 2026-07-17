@@ -92,9 +92,6 @@ protected:
      */
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
-signals:  // 添加信号
-    void rectChanged();  // 矩形位置或大小改变时发出
-
 private:
     // ========== 私有辅助方法 ==========
 

@@ -70,12 +70,6 @@ void Widget::addRectItem(qreal x, qreal y, qreal width, qreal height)
     rectItem = new ResizableRectItem(x, y, width, height);
     scene->addItem(rectItem);
     rectItem->setSelected(true);  // 自动显示调整手柄
-
-    // ✅ 连接矩形改变信号
-    connect(rectItem, &ResizableRectItem::rectChanged, [this]() {
-        createBinarizationBlock();
-        updatePixmapItem;
-    });
 }
 void Widget::addEllipseItem(qreal x,qreal y,qreal w,qreal h)
 {
@@ -531,11 +525,15 @@ void Widget::createBinarizationBlock()
         blockList.removeOne(block);        // 从列表移除
         block->deleteLater();              // 延迟删除
     });
-    //矩形改变连接
-    connect(rectItem, &ResizableRectItem::rectChanged, [this, enableCheckBox, lowerSpinBox, upperSpinBox]() {
-        applyBinaryThreshold(lower,upper)
+    // ✅ 监听场景变化（任何图形项移动/缩放都会触发）
+    connect(scene, &QGraphicsScene::changed, [this, lowerSpinBox, upperSpinBox, enableCheckBox](const QList<QRectF> &region) {
+        Q_UNUSED(region)
+        // 矩形变化时实时更新二值化
+        if (enableCheckBox->isChecked()) {
+            QPixmap result = applyBinaryThreshold(lowerSpinBox->value(), upperSpinBox->value());
+            updatePixmapItem(result);
+        }
     });
-
     // ========== 添加到布局和列表 ==========
     // 在底部弹性空间之前插入
     blockLayout->insertWidget(blockLayout->count() - 1, block);
@@ -580,38 +578,43 @@ int Widget::calculateOtsuThreshold()
 // ========== 对矩形区域做二值化 ==========
 QPixmap Widget::applyBinaryThreshold(int lower, int upper)
 {
-    // 没有图片或没有矩形，返回原图
     if (originalPixmap.isNull()) return QPixmap();
     if (!rectItem) return originalPixmap;
 
-    // 获取原始图片
-    QImage image = originalPixmap.toImage().convertToFormat(QImage::Format_Grayscale8);
+    // ========== 保留原图彩色信息 ==========
+    QImage image = originalPixmap.toImage().convertToFormat(QImage::Format_RGB32);
 
-    // 获取矩形在场景中的位置和大小
+    // 同时创建灰度版本用于判断阈值
+    QImage grayImage = originalPixmap.toImage().convertToFormat(QImage::Format_Grayscale8);
+
+    // ========== 正确映射矩形到图片坐标 ==========
     QRectF rectScene = rectItem->mapToScene(rectItem->rect()).boundingRect();
+    QRectF sceneRect = scene->sceneRect();
 
-    // 场景坐标转图片坐标（需要考虑缩放）
-    // pixmapItem 的位置就是场景原点，所以场景坐标 = 图片坐标
+    qreal scaleX = image.width() / sceneRect.width();
+    qreal scaleY = image.height() / sceneRect.height();
+
     QRect rect(
-        qMax(0, (int)rectScene.x()),
-        qMax(0, (int)rectScene.y()),
-        qMin(image.width() - (int)rectScene.x(), (int)rectScene.width()),
-        qMin(image.height() - (int)rectScene.y(), (int)rectScene.height())
+        (int)((rectScene.x() - sceneRect.x()) * scaleX),
+        (int)((rectScene.y() - sceneRect.y()) * scaleY),
+        qMin(image.width(), (int)(rectScene.width() * scaleX)),
+        qMin(image.height(), (int)(rectScene.height() * scaleY))
         );
 
-    // 确保矩形在图片范围内
     rect = rect.intersected(image.rect());
-
     if (rect.isEmpty()) return originalPixmap;
 
-    // ========== 只对矩形区域内的像素做二值化 ==========
+    // ========== 只对矩形区域做二值化 ==========
     for (int y = rect.top(); y <= rect.bottom(); y++) {
-        uchar *line = image.scanLine(y);
+        uchar *grayLine = grayImage.scanLine(y);
+        QRgb *colorLine = reinterpret_cast<QRgb*>(image.scanLine(y));
+
         for (int x = rect.left(); x <= rect.right(); x++) {
-            if (line[x] >= lower && line[x] <= upper) {
-                line[x] = 255;  // 白色
+            // 用灰度值判断阈值
+            if (grayLine[x] >= lower && grayLine[x] <= upper) {
+                colorLine[x] = qRgb(255, 255, 255);  // 白色
             } else {
-                line[x] = 0;    // 黑色
+                colorLine[x] = qRgb(0, 0, 0);        // 黑色
             }
         }
     }
