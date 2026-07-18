@@ -27,12 +27,16 @@ constexpr int BLOCK_MIN_HEIGHT = 160;      // 处理块最小高度
 constexpr int BLOCK_LAYOUT_MARGIN = 8;     // 处理块面板边距
 constexpr int BLOCK_LAYOUT_SPACING = 8;    // 处理块之间间距
 
-// ========== 主题色 ==========
-const char* const COLOR_PRIMARY = "#4CAF50";   // 主色（绿）
-const char* const COLOR_ACCENT = "#2196F3";    // 强调色（蓝）
-const char* const COLOR_DANGER = "#ff5252";    // 危险色（红）
-const char* const COLOR_BORDER = "#ddd";       // 边框色
-const char* const COLOR_BG_LIGHT = "#f5f5f5";  // 浅灰背景
+// ========== 主题色（与 styles/app.qss 保持一致） ==========
+const char* const COLOR_PRIMARY = "#0F766E";      // 主色（青绿）
+const char* const COLOR_PRIMARY_HOVER = "#0D9488";
+const char* const COLOR_ACCENT = "#2563EB";       // 强调色（蓝）
+const char* const COLOR_DANGER = "#DC2626";       // 危险色（红）
+const char* const COLOR_BORDER = "#E2E8F0";       // 边框色
+const char* const COLOR_BG_APP = "#E8ECF1";       // 窗口背景
+const char* const COLOR_BG_PANEL = "#FFFFFF";     // 侧栏面板
+const char* const COLOR_BG_CANVAS = "#1A1D23";    // 画布背景
+const char* const COLOR_BG_LIGHT = "#F8FAFC";     // 浅底
 
 // ========== 支持的图像格式 ==========
 const char* const IMAGE_FILE_FILTER =

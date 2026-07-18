@@ -3,18 +3,18 @@ QT += widgets
 CONFIG += c++17
 
 # ========== OpenCV 配置 ==========
-# 注意：当前使用 vc16 (VS 编译) 版本的库
-INCLUDEPATH += D:/opencv/opencv/build/include
-LIBS += -LD:/opencv/opencv/build/x64/vc16/lib
+INCLUDEPATH += C:/opencv/opencv/build/include
+LIBS += -LC:/opencv/opencv/build/x64/vc16/lib
 LIBS += -lopencv_world4120d
 
-# ========== 头文件搜索路径（分层目录） ==========
+# ========== 头文件搜索路径 ==========
 INCLUDEPATH += $$PWD/core
 INCLUDEPATH += $$PWD/roi
 INCLUDEPATH += $$PWD/blocks
 INCLUDEPATH += $$PWD/algorithms
 INCLUDEPATH += $$PWD/utils
 INCLUDEPATH += $$PWD/config
+INCLUDEPATH += $$PWD/styles
 
 # ========== 源文件 ==========
 SOURCES += \
@@ -23,12 +23,23 @@ SOURCES += \
     core/imageprocessor.cpp \
     roi/resizablerectitem.cpp \
     roi/resizableellipseitem.cpp \
+    roi/resizablerotatedrectitem.cpp \
     blocks/baseblock.cpp \
     blocks/binarizationblock.cpp \
+    blocks/morphologyblock.cpp \
+    blocks/filterblock.cpp \
+    blocks/graytransformblock.cpp \
+    blocks/pseudocolorblock.cpp \
     algorithms/binarization.cpp \
     algorithms/otsu.cpp \
+    algorithms/morphology.cpp \
+    algorithms/filter.cpp \
+    algorithms/graytransform.cpp \
+    algorithms/pseudocolor.cpp \
     utils/imageconverter.cpp \
-    utils/timemeasurer.cpp
+    utils/timemeasurer.cpp \
+    utils/roiprocess.cpp \
+    styles/styleloader.cpp
 
 # ========== 头文件 ==========
 HEADERS += \
@@ -36,19 +47,29 @@ HEADERS += \
     core/imageprocessor.h \
     roi/resizablerectitem.h \
     roi/resizableellipseitem.h \
+    roi/resizablerotatedrectitem.h \
+    roi/roiinfo.h \
     blocks/baseblock.h \
     blocks/binarizationblock.h \
+    blocks/morphologyblock.h \
+    blocks/filterblock.h \
+    blocks/graytransformblock.h \
+    blocks/pseudocolorblock.h \
     algorithms/binarization.h \
     algorithms/otsu.h \
+    algorithms/morphology.h \
+    algorithms/filter.h \
+    algorithms/graytransform.h \
+    algorithms/pseudocolor.h \
     utils/imageconverter.h \
     utils/timemeasurer.h \
-    config/appconfig.h
+    utils/roiprocess.h \
+    config/appconfig.h \
+    styles/styleloader.h
 
-# ========== UI 文件 ==========
-FORMS += \
-    widget.ui
+FORMS += widget.ui
+RESOURCES += resources.qrc
 
-# Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target

@@ -4,61 +4,57 @@
 #include "opencv2/opencv.hpp"
 
 /**
- * @brief 二值化算法集合
- *
- * 纯算法封装，无 UI 依赖。
- * 支持多种二值化模式，所有函数输入输出均为 cv::Mat。
+ * @brief 二值化算法集合（纯算法，无 UI 依赖）
  */
 namespace BinarizationAlgorithm {
 
-// 二值化模式枚举
 enum class ThresholdType {
-    Binary,       // THRESH_BINARY：大于阈值为最大值，否则为0
-    BinaryInv,    // THRESH_BINARY_INV：大于阈值为0，否则为最大值
-    Trunc,        // THRESH_TRUNC：大于阈值截断为阈值，否则不变
-    ToZero,       // THRESH_TOZERO：大于阈值不变，否则为0
-    ToZeroInv     // THRESH_TOZERO_INV：大于阈值为0，否则不变
+    Binary,
+    BinaryInv,
+    Trunc,
+    ToZero,
+    ToZeroInv
 };
 
-/**
- * @brief 全局二值化
- * @param src 输入图像（建议灰度图）
- * @param thresh 阈值
- * @param maxValue 最大值（通常 255）
- * @param type 二值化类型
- * @return 二值化后的图像
- */
+int toCvType(ThresholdType type);
+
 cv::Mat applyThreshold(const cv::Mat &src,
                        double thresh,
                        double maxValue = 255.0,
                        ThresholdType type = ThresholdType::Binary);
 
-/**
- * @brief 范围二值化（区间内为白，区间外为黑）
- * @param src 输入灰度图
- * @param lower 下限阈值
- * @param upper 上限阈值
- * @return 二值化图像（CV_8UC1，区间内=255，区间外=0）
- */
+/** 范围二值化：区间内白，区间外黑 */
 cv::Mat applyRangeThreshold(const cv::Mat &src, int lower, int upper);
 
 /**
- * @brief 对图像指定矩形区域做二值化，其余区域保持原样
- * @param src 输入彩色图（BGR）
- * @param roi 感兴趣区域
- * @param lower 下限阈值
- * @param upper 上限阈值
- * @return 处理后的彩色图（ROI内二值化黑白，ROI外保持彩色）
+ * @brief 仅对 mask 为非 0 的像素做范围二值化，其余保持原图
+ * @param src BGR 图
+ * @param mask 单通道，与 src 同尺寸，255=处理区域
  */
+cv::Mat applyMaskedRangeThreshold(const cv::Mat &src,
+                                  const cv::Mat &mask,
+                                  int lower,
+                                  int upper);
+
+/** 轴对齐矩形 ROI */
 cv::Mat applyRoiRangeThreshold(const cv::Mat &src,
                                const cv::Rect &roi,
                                int lower,
                                int upper);
 
-/**
- * @brief 将 OpenCV 原生阈值类型转换为 int
- */
-int toCvType(ThresholdType type);
+/** 椭圆 ROI（外接矩形） */
+cv::Mat applyEllipseRoiRangeThreshold(const cv::Mat &src,
+                                      const cv::Rect &boundingRect,
+                                      int lower,
+                                      int upper);
+
+/** 旋转矩形 ROI（角度单位：度，与 OpenCV RotatedRect 一致） */
+cv::Mat applyRotatedRoiRangeThreshold(const cv::Mat &src,
+                                      const cv::Point2f &center,
+                                      const cv::Size2f &size,
+                                      float angleDeg,
+                                      int lower,
+                                      int upper);
 
 } // namespace BinarizationAlgorithm
 

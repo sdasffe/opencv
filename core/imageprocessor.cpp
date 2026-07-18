@@ -21,9 +21,8 @@ void ImageProcessor::addBlock(BaseBlock *block)
     connect(block, &BaseBlock::enabledChanged,
             this, &ImageProcessor::onBlockEnabledChanged);
 
-    if (hasImage()) {
-        reprocess();
-    }
+    if (hasImage())
+        emit requestReprocess();
 }
 
 void ImageProcessor::removeBlock(BaseBlock *block)
@@ -33,12 +32,11 @@ void ImageProcessor::removeBlock(BaseBlock *block)
     disconnect(block, nullptr, this, nullptr);
     m_blocks.removeOne(block);
 
-    if (hasImage()) {
-        reprocess();
-    }
+    if (hasImage())
+        emit requestReprocess();
 }
 
-void ImageProcessor::setRoiRect(const QRectF &roi)
+void ImageProcessor::setRoi(const RoiInfo &roi)
 {
     m_roi = roi;
 }
@@ -50,7 +48,6 @@ qint64 ImageProcessor::reprocess()
     TimeMeasurer tm("处理链", false);
 
     QPixmap current = m_original;
-
     for (BaseBlock *block : m_blocks) {
         if (!block->isEnabled()) continue;
         current = block->process(current, m_roi);
@@ -58,21 +55,18 @@ qint64 ImageProcessor::reprocess()
 
     m_result = current;
     m_lastElapsed = tm.elapsedMs();
-
     emit processingFinished(m_lastElapsed);
     return m_lastElapsed;
 }
 
 void ImageProcessor::onBlockParamsChanged()
 {
-    if (hasImage()) {
-        reprocess();
-    }
+    if (hasImage())
+        emit requestReprocess();
 }
 
 void ImageProcessor::onBlockEnabledChanged(bool /*enabled*/)
 {
-    if (hasImage()) {
-        reprocess();
-    }
+    if (hasImage())
+        emit requestReprocess();
 }

@@ -9,7 +9,7 @@
 #include <QPushButton>
 #include <QFrame>
 #include <QPixmap>
-#include <QRectF>
+#include "../roi/roiinfo.h"
 
 /**
  * @brief 处理块基类
@@ -36,10 +36,10 @@ public:
     /**
      * @brief 处理图像（纯虚函数，子类必须实现）
      * @param input 输入图像
-     * @param roi 可选的感兴趣区域（空矩形表示全图处理）
+     * @param roi 感兴趣区域（shape==None 表示全图）
      * @return 处理后的图像
      */
-    virtual QPixmap process(const QPixmap &input, const QRectF &roi = QRectF()) = 0;
+    virtual QPixmap process(const QPixmap &input, const RoiInfo &roi = RoiInfo()) = 0;
 
     /** @brief 处理块名称（用于日志、拖拽匹配等） */
     virtual QString blockName() const = 0;
