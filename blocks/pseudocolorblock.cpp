@@ -1,3 +1,17 @@
+/**
+ * @file pseudocolorblock.cpp
+ * @brief 伪彩色处理块 —— 将灰度强度映射为彩色，便于可视化
+ *
+ * 【在整条链路中的位置】
+ *   通常放在流水线末尾或中间：把灰度/强度图转成 Jet/Hot 等色图
+ *
+ * 【数据流】
+ *   QPixmap → cv::Mat(BGR) → 算法内转灰度 → applyColorMap → QPixmap
+ *
+ * 【参数】
+ *   仅一个 colormap 下拉框，无核大小/迭代等额外参数
+ */
+
 #include "pseudocolorblock.h"
 #include "../utils/imageconverter.h"
 #include "../utils/roiprocess.h"
@@ -9,6 +23,12 @@ PseudoColorBlock::PseudoColorBlock(QWidget *parent)
     setupUI();
 }
 
+/**
+ * @brief 创建伪彩色映射表选择控件
+ *
+ * 每个 addItem 的 userData 存 PseudoColorAlgorithm::Map 枚举，
+ * 算法层再映射到 OpenCV 的 COLORMAP_* 常量
+ */
 void PseudoColorBlock::setupUI()
 {
     addSeparator();
@@ -35,6 +55,12 @@ PseudoColorAlgorithm::Map PseudoColorBlock::currentMap() const
     return static_cast<PseudoColorAlgorithm::Map>(m_mapCombo->currentData().toInt());
 }
 
+/**
+ * @brief 执行伪彩色映射
+ *
+ * 谁调用：ImageProcessor::reprocess()
+ * 注意：算法先转灰度再上色，彩色输入会先失去色相信息
+ */
 QPixmap PseudoColorBlock::process(const QPixmap &input, const RoiInfo &roi)
 {
     if (input.isNull()) return input;

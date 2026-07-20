@@ -264,6 +264,7 @@ Makefile: ..\..\opencv.pro ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\spec_p
 		..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Core.prl \
 		..\..\..\..\6.7.3\msvc2019_64\lib\Qt6EntryPoint.prl \
 		..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\build_pass.prf \
+		..\..\resources.qrc \
 		..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Widgetsd.prl \
 		..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Guid.prl \
 		..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Cored.prl \
@@ -449,6 +450,7 @@ Makefile: ..\..\opencv.pro ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\spec_p
 ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Core.prl:
 ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6EntryPoint.prl:
 ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\build_pass.prf:
+..\..\resources.qrc:
 ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Widgetsd.prl:
 ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Guid.prl:
 ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Cored.prl:

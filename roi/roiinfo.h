@@ -7,9 +7,16 @@
 #include <QtMath>
 
 /**
- * @brief 统一 ROI 描述（图像像素坐标系）
+ * @brief 统一 ROI 描述（图像像素坐标系，与场景坐标一致）
  *
  * shape == None 表示全图处理。
+ *
+ * 谁产生：Widget::getCurrentRoiInfo() 从场景图元读取。
+ * 谁消费：ImageProcessor::setRoi → 各 Block::process → RoiProcess::makeMask/apply。
+ *
+ * 三种形状用不同字段：
+ *   - Rect / Ellipse → rect（轴对齐外接矩形）
+ *   - RotatedRect    → center + size + angleDeg
  */
 struct RoiInfo
 {

@@ -37,7 +37,7 @@
    </property>
    <item>
     <widget class="QWidget" name="widget" native="true">
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0">
       <property name="spacing">
        <number>8</number>
       </property>
@@ -168,13 +168,10 @@
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="toolTip">
-           <string>原图 / 结果切换</string>
+           <string>按住查看原图，松开恢复结果</string>
           </property>
           <property name="text">
            <string>对比</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -232,6 +229,80 @@
       </item>
       <item>
        <widget class="QGraphicsView" name="graphicsView"/>
+      </item>
+      <item>
+       <widget class="QWidget" name="folderBrowserPanel" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>108</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>140</height>
+         </size>
+        </property>
+        <property name="visible">
+         <bool>false</bool>
+        </property>
+        <layout class="QVBoxLayout" name="folderBrowserLayout">
+         <property name="spacing">
+          <number>4</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>4</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="folderBrowserTitle">
+           <property name="text">
+            <string>文件夹图片（点击切换）</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListWidget" name="folderImageList">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>80</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>点击缩略图切换当前图片</string>
+           </property>
+           <property name="movement">
+            <enum>QListView::Movement::Static</enum>
+           </property>
+           <property name="flow">
+            <enum>QListView::Flow::LeftToRight</enum>
+           </property>
+           <property name="resizeMode">
+            <enum>QListView::ResizeMode::Adjust</enum>
+           </property>
+           <property name="viewMode">
+            <enum>QListView::ViewMode::IconMode</enum>
+           </property>
+           <property name="uniformItemSizes">
+            <bool>true</bool>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -341,7 +412,7 @@
        <height>0</height>
       </size>
      </property>
-     <layout class="QVBoxLayout" name="blockPanelOuterLayout">
+     <layout class="QVBoxLayout" name="blockPanelOuterLayout" stretch="0,0,1">
       <property name="spacing">
        <number>6</number>
       </property>
@@ -375,17 +446,50 @@
        </widget>
       </item>
       <item>
-       <spacer name="blockPanelSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
+       <widget class="QScrollArea" name="blockScrollArea">
+        <property name="frameShape">
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
         </property>
-       </spacer>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <widget class="QWidget" name="blockListContainer">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>200</width>
+           <height>638</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="blockListLayout">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="rightMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
+         </layout>
+        </widget>
+       </widget>
       </item>
      </layout>
     </widget>

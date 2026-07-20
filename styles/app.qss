@@ -53,6 +53,49 @@ QGraphicsView#graphicsView:focus {
     border: 1px solid #0F766E;
 }
 
+/* ---------- 文件夹缩略图条（画布下方） ---------- */
+QWidget#folderBrowserPanel {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+}
+
+QLabel#folderBrowserTitle {
+    color: #374151;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 0 4px;
+}
+
+QListWidget#folderImageList {
+    background-color: #F8FAFC;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    padding: 2px;
+}
+
+QListWidget#folderImageList::item {
+    color: #4B5563;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 2px;
+    margin: 2px;
+}
+
+QListWidget#folderImageList::item:hover {
+    background-color: #E0F2F1;
+    border: 1px solid #99F6E4;
+}
+
+QListWidget#folderImageList::item:selected {
+    background-color: #CCFBF1;
+    border: 1px solid #0F766E;
+    color: #0F766E;
+    font-weight: 600;
+}
+
 /* ---------- 按钮（紧凑） ---------- */
 QPushButton {
     font-size: 11px;
@@ -281,6 +324,36 @@ QLabel#chainHintLabel {
 QWidget#blockListContainer {
     background: transparent;
     border: none;
+}
+
+QScrollArea#blockScrollArea {
+    background: transparent;
+    border: none;
+}
+
+QScrollArea#blockScrollArea > QWidget > QWidget {
+    background: transparent;
+}
+
+QScrollArea#blockScrollArea QScrollBar:vertical {
+    width: 8px;
+    background: transparent;
+    margin: 2px;
+}
+
+QScrollArea#blockScrollArea QScrollBar::handle:vertical {
+    background: #CBD5E1;
+    border-radius: 4px;
+    min-height: 24px;
+}
+
+QScrollArea#blockScrollArea QScrollBar::handle:vertical:hover {
+    background: #94A3B8;
+}
+
+QScrollArea#blockScrollArea QScrollBar::add-line:vertical,
+QScrollArea#blockScrollArea QScrollBar::sub-line:vertical {
+    height: 0;
 }
 
 /* ---------- 处理块 ---------- */

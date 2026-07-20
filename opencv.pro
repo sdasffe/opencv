@@ -3,8 +3,8 @@ QT += widgets
 CONFIG += c++17
 
 # ========== OpenCV 配置 ==========
-INCLUDEPATH += C:/opencv/opencv/build/include
-LIBS += -LC:/opencv/opencv/build/x64/vc16/lib
+INCLUDEPATH += D:/opencv/opencv/build/include
+LIBS += -LD:/opencv/opencv/build/x64/vc16/lib
 LIBS += -lopencv_world4120d
 
 # ========== 头文件搜索路径 ==========
