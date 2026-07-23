@@ -1,3 +1,11 @@
+/**
+ * @file resizableellipseitem.cpp
+ * @brief 椭圆 ROI 交互实现
+ *
+ * 与矩形版差异：getHandleAtPos 用 (dx/a)²+(dy/b)²≤1 判断内部移动；
+ * 缩放仅四边；paint 时去掉 State_Selected 避免 Qt 默认选中框干扰虚线椭圆。
+ */
+
 #include "resizableellipseitem.h"
 #include <QGraphicsView>
 #include <QStyleOptionGraphicsItem>
@@ -22,6 +30,7 @@ ResizableEllipseItem::ResizableEllipseItem(qreal x, qreal y, qreal width, qreal 
     setPen(pen);
 }
 
+/** 先测四边热区，再用标准椭圆方程区分内部（Move）与外部（None） */
 ResizableEllipseItem::HandleType ResizableEllipseItem::getHandleAtPos(const QPointF &pos)
 {
     QRectF rect = this->rect();
@@ -44,7 +53,7 @@ ResizableEllipseItem::HandleType ResizableEllipseItem::getHandleAtPos(const QPoi
                  handleSize * 2, handleSize * 2);
     if (right.contains(pos)) return Right;
 
-    // 椭圆内部（椭圆方程判断）
+    // 外接 rect 内再判椭圆方程，避免四角空白区误判为 Move
     if (rect.contains(pos)) {
         QPointF center = rect.center();
         qreal a = rect.width() / 2.0;
@@ -144,6 +153,7 @@ void ResizableEllipseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
+/** 绘制椭圆虚线；选中时不画 Qt 默认矩形选框，改由 drawHandles 显示四边手柄 */
 void ResizableEllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                                  QWidget *widget)
 {

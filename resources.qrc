@@ -1,5 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>styles/app.qss</file>
+        <file>styles/theme_light.qss</file>
+        <file>styles/theme_dark.qss</file>
+    </qresource>
+    <qresource prefix="/i18n">
+        <file alias="opencv_en.qm">i18n/opencv_en.qm</file>
     </qresource>
 </RCC>

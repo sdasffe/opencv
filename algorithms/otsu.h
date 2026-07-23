@@ -4,9 +4,12 @@
 #include "opencv2/opencv.hpp"
 
 /**
- * @brief Otsu 大津法阈值计算
+ * @file otsu.h
+ * @brief Otsu 大津法阈值计算 —— 为二值化块提供自动阈值
  *
- * 纯算法封装，无 UI 依赖，输入灰度图自动计算最佳二值化阈值。
+ * 【在整条链路中的位置】
+ *   BinarizationBlock「Otsu」→ calculateThresholdFromBGR → 写回 SpinBox → 重算二值化
+ *   只返回整数阈值，不直接输出二值图（二值化由 BinarizationAlgorithm 完成）
  */
 namespace OtsuAlgorithm {
 

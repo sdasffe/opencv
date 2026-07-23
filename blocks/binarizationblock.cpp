@@ -38,6 +38,7 @@
 #include "../utils/roiprocess.h"
 #include "../algorithms/binarization.h"
 
+#include <QJsonObject>
 #include <QStyle>
 #include <QVariant>
 #include <algorithm>
@@ -51,8 +52,8 @@
 BinarizationBlock::BinarizationBlock(QWidget *parent)
     : BaseBlock(parent)
 {
-    setupTitle(QStringLiteral("🔲"), QStringLiteral("二值化处理"));
     setupUI();
+    retranslateUi();
 }
 
 /**
@@ -71,32 +72,32 @@ void BinarizationBlock::setupUI()
 
     // ========== 下限阈值行 ==========
     auto *lowerLayout = new QHBoxLayout();
-    auto *lowerLabel = new QLabel(QStringLiteral("下限值"), this);
-    lowerLabel->setObjectName(QStringLiteral("blockFieldLabel"));  // 供 QSS 美化
-    lowerLabel->setFixedWidth(40);
+    m_lowerLabel = new QLabel(this);
+    m_lowerLabel->setObjectName(QStringLiteral("blockFieldLabel"));  // 供 QSS 美化
+    m_lowerLabel->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
 
     m_lowerSpin = new QSpinBox(this);
     m_lowerSpin->setRange(0, 255);  // 灰度范围
     m_lowerSpin->setValue(AppConfig::DEFAULT_BINARY_LOWER);  // 默认 127
-    m_lowerSpin->setFixedWidth(64);
+    m_lowerSpin->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
 
-    lowerLayout->addWidget(lowerLabel);
+    lowerLayout->addWidget(m_lowerLabel);
     lowerLayout->addWidget(m_lowerSpin);
     lowerLayout->addStretch();  // 右侧留白，控件靠左
     contentLayout()->addLayout(lowerLayout);
 
     // ========== 上限阈值行 ==========
     auto *upperLayout = new QHBoxLayout();
-    auto *upperLabel = new QLabel(QStringLiteral("上限值"), this);
-    upperLabel->setObjectName(QStringLiteral("blockFieldLabel"));
-    upperLabel->setFixedWidth(40);
+    m_upperLabel = new QLabel(this);
+    m_upperLabel->setObjectName(QStringLiteral("blockFieldLabel"));
+    m_upperLabel->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
 
     m_upperSpin = new QSpinBox(this);
     m_upperSpin->setRange(0, 255);
     m_upperSpin->setValue(AppConfig::DEFAULT_BINARY_UPPER);  // 默认 255
-    m_upperSpin->setFixedWidth(64);
+    m_upperSpin->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
 
-    upperLayout->addWidget(upperLabel);
+    upperLayout->addWidget(m_upperLabel);
     upperLayout->addWidget(m_upperSpin);
     upperLayout->addStretch();
     contentLayout()->addLayout(upperLayout);
@@ -106,7 +107,6 @@ void BinarizationBlock::setupUI()
     m_autoBtn = new QPushButton(QStringLiteral("Otsu"), this);
     m_autoBtn->setProperty("role", QVariant(QStringLiteral("accent")));
     m_autoBtn->setCursor(Qt::PointingHandCursor);
-    m_autoBtn->setToolTip(QStringLiteral("自动阈值 (Otsu)"));
     contentLayout()->addWidget(m_autoBtn);
     // 动态属性改完后强制刷新样式，否则 accent 可能不生效
     if (m_autoBtn->style()) {
@@ -121,6 +121,18 @@ void BinarizationBlock::setupUI()
             this, &BinarizationBlock::onUpperChanged);
     connect(m_autoBtn, &QPushButton::clicked,
             this, &BinarizationBlock::onAutoThresholdClicked);
+}
+
+void BinarizationBlock::retranslateUi()
+{
+    setupTitle(QStringLiteral("🔲"), tr("二值化处理"));
+    BaseBlock::retranslateUi();
+    if (m_lowerLabel)
+        m_lowerLabel->setText(tr("下限值"));
+    if (m_upperLabel)
+        m_upperLabel->setText(tr("上限值"));
+    if (m_autoBtn)
+        m_autoBtn->setToolTip(tr("自动阈值 (Otsu)"));
 }
 
 /**
@@ -138,7 +150,7 @@ void BinarizationBlock::setupUI()
  *   - 有 ROI：只把 ROI 内的二值化结果贴回，ROI 外保持 input 原样
  *   - 无 ROI：整图都是二值化结果
  */
-QPixmap BinarizationBlock::process(const QPixmap &input, const RoiInfo &roi)
+QPixmap BinarizationBlock::process(const QPixmap &input, const QList<RoiInfo> &rois)
 {
     // ① 空图直接返回，避免后面 OpenCV 断言崩溃
     if (input.isNull()) return input;
@@ -156,7 +168,7 @@ QPixmap BinarizationBlock::process(const QPixmap &input, const RoiInfo &roi)
     // RoiProcess::apply 会：
     //   - 先对整图调用我们的 lambda 得到 processed
     //   - 若有 ROI，用 mask 把 processed 贴回原图副本（ROI 外不变）
-    cv::Mat result = RoiProcess::apply(src, roi, [&](const cv::Mat &m) {
+    cv::Mat result = RoiProcess::apply(src, rois, [&](const cv::Mat &m) {
         cv::Mat gray, binary, bgr;
 
         // 彩色 → 灰度（二值化基于单通道强度）
@@ -173,6 +185,27 @@ QPixmap BinarizationBlock::process(const QPixmap &input, const RoiInfo &roi)
 
     // ⑤ OpenCV → Qt；matToPixmap 约定输入是 BGR，内部会转 RGB 再进 QImage
     return ImageConverter::matToPixmap(result);
+}
+
+QJsonObject BinarizationBlock::saveParams() const
+{
+    QJsonObject obj = BaseBlock::saveParams();
+    obj.insert(QStringLiteral("lower"), m_lowerSpin->value());
+    obj.insert(QStringLiteral("upper"), m_upperSpin->value());
+    return obj;
+}
+
+void BinarizationBlock::loadParams(const QJsonObject &obj)
+{
+    BaseBlock::loadParams(obj);
+    const int lower = obj.value(QStringLiteral("lower")).toInt(m_lowerSpin->value());
+    const int upper = obj.value(QStringLiteral("upper")).toInt(m_upperSpin->value());
+    m_lowerSpin->blockSignals(true);
+    m_upperSpin->blockSignals(true);
+    m_lowerSpin->setValue(lower);
+    m_upperSpin->setValue(upper);
+    m_lowerSpin->blockSignals(false);
+    m_upperSpin->blockSignals(false);
 }
 
 /**

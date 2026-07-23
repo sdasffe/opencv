@@ -14,12 +14,12 @@ EQ            = =
 CC            = cl
 CXX           = cl
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
-CFLAGS        = -nologo -Zc:wchar_t -FS -Zc:strictStrings -Zi -MDd -utf-8 -W3 -w44456 -w44457 -w44458 /Fddebug\opencv.vc.pdb $(DEFINES)
-CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -EHsc /Fddebug\opencv.vc.pdb $(DEFINES)
+CFLAGS        = -nologo -Zc:wchar_t -FS -Zc:strictStrings /utf-8 -Zi -MDd -utf-8 -W3 -w44456 -w44457 -w44458 /Fddebug\opencv.vc.pdb $(DEFINES)
+CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr /utf-8 -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -EHsc /Fddebug\opencv.vc.pdb $(DEFINES)
 INCPATH       = -I..\..\..\opencv -I. -ID:\opencv\opencv\build\include -I..\..\core -I..\..\roi -I..\..\blocks -I..\..\algorithms -I..\..\utils -I..\..\config -I..\..\styles -I..\..\..\..\6.7.3\msvc2019_64\include -I..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets -I..\..\..\..\6.7.3\msvc2019_64\include\QtGui -I..\..\..\..\6.7.3\msvc2019_64\include\QtCore -Idebug -I. -I/include -I..\..\..\..\6.7.3\msvc2019_64\mkspecs\win32-msvc 
 LINKER        = link
-LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:D:\opencv\opencv\build\x64\vc16\lib D:\opencv\opencv\build\x64\vc16\lib\opencv_world4120d.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Widgetsd.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Guid.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Cored.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6EntryPointd.lib shell32.lib  
+LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" /VERSION:1.0
+LIBS          = /LIBPATH:D:\opencv\opencv\build\x64\vc16\lib D:\opencv\opencv\build\x64\vc16\lib\opencv_world4120d.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Widgetsd.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Guid.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Cored.lib debug\version.res D:\Qt\6.7.3\msvc2019_64\lib\Qt6EntryPointd.lib shell32.lib  
 QMAKE         = D:\Qt\6.7.3\msvc2019_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\version.res
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -62,15 +62,18 @@ SOURCES       = ..\..\main.cpp \
 		..\..\blocks\filterblock.cpp \
 		..\..\blocks\graytransformblock.cpp \
 		..\..\blocks\pseudocolorblock.cpp \
+		..\..\blocks\glcmblock.cpp \
 		..\..\algorithms\binarization.cpp \
 		..\..\algorithms\otsu.cpp \
 		..\..\algorithms\morphology.cpp \
 		..\..\algorithms\filter.cpp \
 		..\..\algorithms\graytransform.cpp \
 		..\..\algorithms\pseudocolor.cpp \
+		..\..\algorithms\glcm.cpp \
 		..\..\utils\imageconverter.cpp \
 		..\..\utils\timemeasurer.cpp \
 		..\..\utils\roiprocess.cpp \
+		..\..\utils\applogger.cpp \
 		..\..\styles\styleloader.cpp debug\qrc_resources.cpp \
 		debug\moc_widget.cpp \
 		debug\moc_imageprocessor.cpp \
@@ -79,7 +82,8 @@ SOURCES       = ..\..\main.cpp \
 		debug\moc_morphologyblock.cpp \
 		debug\moc_filterblock.cpp \
 		debug\moc_graytransformblock.cpp \
-		debug\moc_pseudocolorblock.cpp
+		debug\moc_pseudocolorblock.cpp \
+		debug\moc_glcmblock.cpp
 OBJECTS       = debug\main.obj \
 		debug\widget.obj \
 		debug\imageprocessor.obj \
@@ -92,15 +96,18 @@ OBJECTS       = debug\main.obj \
 		debug\filterblock.obj \
 		debug\graytransformblock.obj \
 		debug\pseudocolorblock.obj \
+		debug\glcmblock.obj \
 		debug\binarization.obj \
 		debug\otsu.obj \
 		debug\morphology.obj \
 		debug\filter.obj \
 		debug\graytransform.obj \
 		debug\pseudocolor.obj \
+		debug\glcm.obj \
 		debug\imageconverter.obj \
 		debug\timemeasurer.obj \
 		debug\roiprocess.obj \
+		debug\applogger.obj \
 		debug\styleloader.obj \
 		debug\qrc_resources.obj \
 		debug\moc_widget.obj \
@@ -110,10 +117,12 @@ OBJECTS       = debug\main.obj \
 		debug\moc_morphologyblock.obj \
 		debug\moc_filterblock.obj \
 		debug\moc_graytransformblock.obj \
-		debug\moc_pseudocolorblock.obj
+		debug\moc_pseudocolorblock.obj \
+		debug\moc_glcmblock.obj
 
 DIST          =  ..\..\core\widget.h \
 		..\..\core\imageprocessor.h \
+		..\..\core\imagesession.h \
 		..\..\roi\resizablerectitem.h \
 		..\..\roi\resizableellipseitem.h \
 		..\..\roi\resizablerotatedrectitem.h \
@@ -124,15 +133,18 @@ DIST          =  ..\..\core\widget.h \
 		..\..\blocks\filterblock.h \
 		..\..\blocks\graytransformblock.h \
 		..\..\blocks\pseudocolorblock.h \
+		..\..\blocks\glcmblock.h \
 		..\..\algorithms\binarization.h \
 		..\..\algorithms\otsu.h \
 		..\..\algorithms\morphology.h \
 		..\..\algorithms\filter.h \
 		..\..\algorithms\graytransform.h \
 		..\..\algorithms\pseudocolor.h \
+		..\..\algorithms\glcm.h \
 		..\..\utils\imageconverter.h \
 		..\..\utils\timemeasurer.h \
 		..\..\utils\roiprocess.h \
+		..\..\utils\applogger.h \
 		..\..\config\appconfig.h \
 		..\..\styles\styleloader.h ..\..\main.cpp \
 		..\..\core\widget.cpp \
@@ -146,15 +158,18 @@ DIST          =  ..\..\core\widget.h \
 		..\..\blocks\filterblock.cpp \
 		..\..\blocks\graytransformblock.cpp \
 		..\..\blocks\pseudocolorblock.cpp \
+		..\..\blocks\glcmblock.cpp \
 		..\..\algorithms\binarization.cpp \
 		..\..\algorithms\otsu.cpp \
 		..\..\algorithms\morphology.cpp \
 		..\..\algorithms\filter.cpp \
 		..\..\algorithms\graytransform.cpp \
 		..\..\algorithms\pseudocolor.cpp \
+		..\..\algorithms\glcm.cpp \
 		..\..\utils\imageconverter.cpp \
 		..\..\utils\timemeasurer.cpp \
 		..\..\utils\roiprocess.cpp \
+		..\..\utils\applogger.cpp \
 		..\..\styles\styleloader.cpp
 QMAKE_TARGET  = opencv
 DESTDIR        = debug\ #avoid trailing-slash linebreak
@@ -350,11 +365,14 @@ DESTDIR_TARGET = debug\opencv.exe
 first: all
 all: Makefile.Debug  debug\opencv.exe
 
-debug\opencv.exe: D:\Qt\6.7.3\msvc2019_64\lib\Qt6Widgetsd.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Guid.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Cored.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6EntryPointd.lib ui_widget.h $(OBJECTS) 
+debug\opencv.exe: D:\Qt\6.7.3\msvc2019_64\lib\Qt6Widgetsd.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Guid.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6Cored.lib D:\Qt\6.7.3\msvc2019_64\lib\Qt6EntryPointd.lib ui_widget.h $(OBJECTS) debug\version.res
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
-debug\main.obj debug\widget.obj debug\imageprocessor.obj debug\resizablerectitem.obj debug\resizableellipseitem.obj debug\resizablerotatedrectitem.obj debug\baseblock.obj debug\binarizationblock.obj debug\morphologyblock.obj debug\filterblock.obj debug\graytransformblock.obj debug\pseudocolorblock.obj debug\binarization.obj debug\otsu.obj debug\morphology.obj debug\filter.obj debug\graytransform.obj debug\pseudocolor.obj debug\imageconverter.obj debug\timemeasurer.obj debug\roiprocess.obj debug\styleloader.obj debug\qrc_resources.obj debug\moc_widget.obj debug\moc_imageprocessor.obj debug\moc_baseblock.obj debug\moc_binarizationblock.obj debug\moc_morphologyblock.obj debug\moc_filterblock.obj debug\moc_graytransformblock.obj debug\moc_pseudocolorblock.obj
+debug\main.obj debug\widget.obj debug\imageprocessor.obj debug\resizablerectitem.obj debug\resizableellipseitem.obj debug\resizablerotatedrectitem.obj debug\baseblock.obj debug\binarizationblock.obj debug\morphologyblock.obj debug\filterblock.obj debug\graytransformblock.obj debug\pseudocolorblock.obj debug\glcmblock.obj debug\binarization.obj debug\otsu.obj debug\morphology.obj debug\filter.obj debug\graytransform.obj debug\pseudocolor.obj debug\glcm.obj debug\imageconverter.obj debug\timemeasurer.obj debug\roiprocess.obj debug\applogger.obj debug\styleloader.obj debug\qrc_resources.obj debug\moc_widget.obj debug\moc_imageprocessor.obj debug\moc_baseblock.obj debug\moc_binarizationblock.obj debug\moc_morphologyblock.obj debug\moc_filterblock.obj debug\moc_graytransformblock.obj debug\moc_pseudocolorblock.obj debug\moc_glcmblock.obj
 $(LIBS)
 <<
+
+debug\version.res: ..\..\version.rc
+	rc /NOLOGO -D_DEBUG $(DEFINES) -fo debug\version.res ..\..\version.rc
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\..\opencv.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -362,11 +380,12 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) opencv.zip $(SOURCES) $(DIST) ..\..\..\..\opencv.pro ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\spec_pre.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\common\windows-desktop.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\common\windows-vulkan.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\common\msvc-desktop.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\qconfig.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_ext_freetype.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_ext_libjpeg.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_ext_libpng.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_core.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_core_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_dbus.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_designer.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_entrypoint_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_example_icons_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_freetype_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_gui.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_harfbuzz_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_help.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_help_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_jpeg_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsanimation.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsanimation_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsqmlmodels.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labssettings.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labssettings_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labssharedimage.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labssharedimage_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_linguist.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_network.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_network_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_opengl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_openglwidgets.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_openglwidgets_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_png_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qdoccatch_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qml.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlbuiltins.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlbuiltins_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlcompiler.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlcore.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlcore_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmldom_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlintegration.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlintegration_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmllocalstorage.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlls_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlnetwork.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quick.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2material.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickeffects_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicklayouts.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicklayouts_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_sql.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_svg.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_svgwidgets.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_svgwidgets_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_testlib.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_tools_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_uitools.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_widgets.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_xml.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_zlib_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qt_functions.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qt_config.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\win32-msvc\qmake.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\exclusive_builds.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\common\msvc-version.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\toolchain.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\default_pre.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\win32\default_pre.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\resolve_config.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\exclusive_builds_post.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\default_post.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\build_pass.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qml_debug.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\precompile_header.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\warn_on.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\permissions.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qt.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\resources_functions.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\resources.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\moc.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\win32\opengl.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\uic.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qmake_use.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\file_copies.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\win32\windows.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\testcase_targets.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\exceptions.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\yacc.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\lex.prf ..\..\opencv.pro ..\..\resources.qrc ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Widgetsd.prl ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Guid.prl ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Cored.prl ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6EntryPointd.prl   ..\..\resources.qrc ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\data\dummy.cpp ..\..\core\widget.h ..\..\core\imageprocessor.h ..\..\roi\resizablerectitem.h ..\..\roi\resizableellipseitem.h ..\..\roi\resizablerotatedrectitem.h ..\..\roi\roiinfo.h ..\..\blocks\baseblock.h ..\..\blocks\binarizationblock.h ..\..\blocks\morphologyblock.h ..\..\blocks\filterblock.h ..\..\blocks\graytransformblock.h ..\..\blocks\pseudocolorblock.h ..\..\algorithms\binarization.h ..\..\algorithms\otsu.h ..\..\algorithms\morphology.h ..\..\algorithms\filter.h ..\..\algorithms\graytransform.h ..\..\algorithms\pseudocolor.h ..\..\utils\imageconverter.h ..\..\utils\timemeasurer.h ..\..\utils\roiprocess.h ..\..\config\appconfig.h ..\..\styles\styleloader.h  ..\..\main.cpp ..\..\core\widget.cpp ..\..\core\imageprocessor.cpp ..\..\roi\resizablerectitem.cpp ..\..\roi\resizableellipseitem.cpp ..\..\roi\resizablerotatedrectitem.cpp ..\..\blocks\baseblock.cpp ..\..\blocks\binarizationblock.cpp ..\..\blocks\morphologyblock.cpp ..\..\blocks\filterblock.cpp ..\..\blocks\graytransformblock.cpp ..\..\blocks\pseudocolorblock.cpp ..\..\algorithms\binarization.cpp ..\..\algorithms\otsu.cpp ..\..\algorithms\morphology.cpp ..\..\algorithms\filter.cpp ..\..\algorithms\graytransform.cpp ..\..\algorithms\pseudocolor.cpp ..\..\utils\imageconverter.cpp ..\..\utils\timemeasurer.cpp ..\..\utils\roiprocess.cpp ..\..\styles\styleloader.cpp ..\..\widget.ui    
+	$(ZIP) opencv.zip $(SOURCES) $(DIST) ..\..\..\..\opencv.pro ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\spec_pre.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\common\windows-desktop.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\common\windows-vulkan.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\common\msvc-desktop.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\qconfig.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_ext_freetype.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_ext_libjpeg.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_ext_libpng.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_core.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_core_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_dbus.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_designer.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_entrypoint_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_example_icons_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_freetype_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_gui.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_harfbuzz_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_help.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_help_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_jpeg_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsanimation.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsanimation_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsqmlmodels.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labssettings.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labssettings_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labssharedimage.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labssharedimage_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_linguist.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_network.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_network_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_opengl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_openglwidgets.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_openglwidgets_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_png_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qdoccatch_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qml.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlbuiltins.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlbuiltins_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlcompiler.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlcore.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlcore_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmldom_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlintegration.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlintegration_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmllocalstorage.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlls_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlnetwork.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quick.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2material.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickeffects_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicklayouts.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicklayouts_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_sql.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_svg.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_svgwidgets.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_svgwidgets_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_testlib.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_tools_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_uitools.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_widgets.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_xml.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\modules\qt_lib_zlib_private.pri ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qt_functions.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qt_config.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\win32-msvc\qmake.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\exclusive_builds.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\common\msvc-version.conf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\toolchain.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\default_pre.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\win32\default_pre.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\resolve_config.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\exclusive_builds_post.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\default_post.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\build_pass.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qml_debug.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\precompile_header.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\warn_on.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\permissions.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qt.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\resources_functions.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\resources.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\moc.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\win32\opengl.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\uic.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\qmake_use.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\file_copies.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\win32\windows.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\testcase_targets.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\exceptions.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\yacc.prf ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\lex.prf ..\..\opencv.pro ..\..\resources.qrc ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Widgetsd.prl ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Guid.prl ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6Cored.prl ..\..\..\..\6.7.3\msvc2019_64\lib\Qt6EntryPointd.prl i18n\opencv_en.ts i18n\opencv_en.ts  ..\..\resources.qrc ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\data\dummy.cpp ..\..\core\widget.h ..\..\core\imageprocessor.h ..\..\core\imagesession.h ..\..\roi\resizablerectitem.h ..\..\roi\resizableellipseitem.h ..\..\roi\resizablerotatedrectitem.h ..\..\roi\roiinfo.h ..\..\blocks\baseblock.h ..\..\blocks\binarizationblock.h ..\..\blocks\morphologyblock.h ..\..\blocks\filterblock.h ..\..\blocks\graytransformblock.h ..\..\blocks\pseudocolorblock.h ..\..\blocks\glcmblock.h ..\..\algorithms\binarization.h ..\..\algorithms\otsu.h ..\..\algorithms\morphology.h ..\..\algorithms\filter.h ..\..\algorithms\graytransform.h ..\..\algorithms\pseudocolor.h ..\..\algorithms\glcm.h ..\..\utils\imageconverter.h ..\..\utils\timemeasurer.h ..\..\utils\roiprocess.h ..\..\utils\applogger.h ..\..\config\appconfig.h ..\..\styles\styleloader.h  ..\..\main.cpp ..\..\core\widget.cpp ..\..\core\imageprocessor.cpp ..\..\roi\resizablerectitem.cpp ..\..\roi\resizableellipseitem.cpp ..\..\roi\resizablerotatedrectitem.cpp ..\..\blocks\baseblock.cpp ..\..\blocks\binarizationblock.cpp ..\..\blocks\morphologyblock.cpp ..\..\blocks\filterblock.cpp ..\..\blocks\graytransformblock.cpp ..\..\blocks\pseudocolorblock.cpp ..\..\blocks\glcmblock.cpp ..\..\algorithms\binarization.cpp ..\..\algorithms\otsu.cpp ..\..\algorithms\morphology.cpp ..\..\algorithms\filter.cpp ..\..\algorithms\graytransform.cpp ..\..\algorithms\pseudocolor.cpp ..\..\algorithms\glcm.cpp ..\..\utils\imageconverter.cpp ..\..\utils\timemeasurer.cpp ..\..\utils\roiprocess.cpp ..\..\utils\applogger.cpp ..\..\styles\styleloader.cpp ..\..\widget.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.obj debug\widget.obj debug\imageprocessor.obj debug\resizablerectitem.obj debug\resizableellipseitem.obj debug\resizablerotatedrectitem.obj debug\baseblock.obj debug\binarizationblock.obj debug\morphologyblock.obj debug\filterblock.obj debug\graytransformblock.obj debug\pseudocolorblock.obj debug\binarization.obj debug\otsu.obj debug\morphology.obj debug\filter.obj debug\graytransform.obj debug\pseudocolor.obj debug\imageconverter.obj debug\timemeasurer.obj debug\roiprocess.obj debug\styleloader.obj debug\qrc_resources.obj debug\moc_widget.obj debug\moc_imageprocessor.obj debug\moc_baseblock.obj debug\moc_binarizationblock.obj debug\moc_morphologyblock.obj debug\moc_filterblock.obj debug\moc_graytransformblock.obj debug\moc_pseudocolorblock.obj
+	-$(DEL_FILE) debug\main.obj debug\widget.obj debug\imageprocessor.obj debug\resizablerectitem.obj debug\resizableellipseitem.obj debug\resizablerotatedrectitem.obj debug\baseblock.obj debug\binarizationblock.obj debug\morphologyblock.obj debug\filterblock.obj debug\graytransformblock.obj debug\pseudocolorblock.obj debug\glcmblock.obj debug\binarization.obj debug\otsu.obj debug\morphology.obj debug\filter.obj debug\graytransform.obj debug\pseudocolor.obj debug\glcm.obj debug\imageconverter.obj debug\timemeasurer.obj debug\roiprocess.obj debug\applogger.obj debug\styleloader.obj debug\qrc_resources.obj debug\moc_widget.obj debug\moc_imageprocessor.obj debug\moc_baseblock.obj debug\moc_binarizationblock.obj debug\moc_morphologyblock.obj debug\moc_filterblock.obj debug\moc_graytransformblock.obj debug\moc_pseudocolorblock.obj debug\moc_glcmblock.obj
 	-$(DEL_FILE) debug\opencv.vc.pdb debug\opencv.ilk debug\opencv.idb
+	-$(DEL_FILE) debug\version.res
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash debug\opencv.pdb
@@ -388,18 +407,21 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_resources.cpp
 debug\qrc_resources.cpp: ..\..\resources.qrc \
 		..\..\..\..\6.7.3\msvc2019_64\bin\rcc.exe \
-		..\..\styles\app.qss
+		..\..\i18n\opencv_en.qm \
+		..\..\styles\app.qss \
+		..\..\styles\theme_light.qss \
+		..\..\styles\theme_dark.qss
 	D:\Qt\6.7.3\msvc2019_64\bin\rcc.exe -name resources --no-zstd ..\..\resources.qrc -o debug\qrc_resources.cpp
 
 compiler_moc_predefs_make_all: debug\moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) debug\moc_predefs.h
 debug\moc_predefs.h: ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\data\dummy.cpp
-	cl -BxD:\Qt\6.7.3\msvc2019_64\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\data\dummy.cpp 2>NUL >debug\moc_predefs.h
+	cl -BxD:\Qt\6.7.3\msvc2019_64\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr /utf-8 -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E ..\..\..\..\6.7.3\msvc2019_64\mkspecs\features\data\dummy.cpp 2>NUL >debug\moc_predefs.h
 
-compiler_moc_header_make_all: debug\moc_widget.cpp debug\moc_imageprocessor.cpp debug\moc_baseblock.cpp debug\moc_binarizationblock.cpp debug\moc_morphologyblock.cpp debug\moc_filterblock.cpp debug\moc_graytransformblock.cpp debug\moc_pseudocolorblock.cpp
+compiler_moc_header_make_all: debug\moc_widget.cpp debug\moc_imageprocessor.cpp debug\moc_baseblock.cpp debug\moc_binarizationblock.cpp debug\moc_morphologyblock.cpp debug\moc_filterblock.cpp debug\moc_graytransformblock.cpp debug\moc_pseudocolorblock.cpp debug\moc_glcmblock.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug\moc_widget.cpp debug\moc_imageprocessor.cpp debug\moc_baseblock.cpp debug\moc_binarizationblock.cpp debug\moc_morphologyblock.cpp debug\moc_filterblock.cpp debug\moc_graytransformblock.cpp debug\moc_pseudocolorblock.cpp
+	-$(DEL_FILE) debug\moc_widget.cpp debug\moc_imageprocessor.cpp debug\moc_baseblock.cpp debug\moc_binarizationblock.cpp debug\moc_morphologyblock.cpp debug\moc_filterblock.cpp debug\moc_graytransformblock.cpp debug\moc_pseudocolorblock.cpp debug\moc_glcmblock.cpp
 debug\moc_widget.cpp: ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QWidget \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qwidget.h \
@@ -593,6 +615,7 @@ debug\moc_widget.cpp: ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsPixmapItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qgraphicsitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpainterpath.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QVBoxLayout \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qboxlayout.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlayout.h \
@@ -631,6 +654,28 @@ debug\moc_widget.cpp: ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbasictimer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QFileInfo \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfileinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfile.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfiledevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimezone.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QComboBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcombobox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QAction \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QTranslator \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtranslator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QEvent \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QHash \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonArray \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonarray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QVector \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvector.h \
 		..\..\core\imageprocessor.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
 		..\..\blocks\baseblock.h \
@@ -638,12 +683,16 @@ debug\moc_widget.cpp: ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QCheckBox \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcheckbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
 		..\..\utils\timemeasurer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QElapsedTimer \
+		..\..\core\imagesession.h \
 		..\..\roi\resizablerectitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsRectItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsSceneMouseEvent \
@@ -867,6 +916,17 @@ debug\moc_imageprocessor.cpp: ..\..\core\imageprocessor.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QPushButton \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -1083,6 +1143,17 @@ debug\moc_baseblock.cpp: ..\..\blocks\baseblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -1297,6 +1368,17 @@ debug\moc_binarizationblock.cpp: ..\..\blocks\binarizationblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -1305,7 +1387,6 @@ debug\moc_binarizationblock.cpp: ..\..\blocks\binarizationblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\config\appconfig.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString \
 		debug\moc_predefs.h \
@@ -1518,6 +1599,17 @@ debug\moc_morphologyblock.cpp: ..\..\blocks\morphologyblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -1528,7 +1620,6 @@ debug\moc_morphologyblock.cpp: ..\..\blocks\morphologyblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
@@ -1864,6 +1955,17 @@ debug\moc_filterblock.cpp: ..\..\blocks\filterblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -1874,7 +1976,6 @@ debug\moc_filterblock.cpp: ..\..\blocks\filterblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
@@ -2210,6 +2311,17 @@ debug\moc_graytransformblock.cpp: ..\..\blocks\graytransformblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -2220,7 +2332,6 @@ debug\moc_graytransformblock.cpp: ..\..\blocks\graytransformblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
@@ -2557,6 +2668,17 @@ debug\moc_pseudocolorblock.cpp: ..\..\blocks\pseudocolorblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -2567,7 +2689,6 @@ debug\moc_pseudocolorblock.cpp: ..\..\blocks\pseudocolorblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
@@ -2694,6 +2815,362 @@ debug\moc_pseudocolorblock.cpp: ..\..\blocks\pseudocolorblock.h \
 		debug\moc_predefs.h \
 		..\..\..\..\6.7.3\msvc2019_64\bin\moc.exe
 	D:\Qt\6.7.3\msvc2019_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Debug/debug/moc_predefs.h -ID:/Qt/6.7.3/msvc2019_64/mkspecs/win32-msvc -ID:/Qt/project/opencv -ID:/opencv/opencv/build/include -ID:/Qt/project/opencv/core -ID:/Qt/project/opencv/roi -ID:/Qt/project/opencv/blocks -ID:/Qt/project/opencv/algorithms -ID:/Qt/project/opencv/utils -ID:/Qt/project/opencv/config -ID:/Qt/project/opencv/styles -ID:/Qt/6.7.3/msvc2019_64/include -ID:/Qt/6.7.3/msvc2019_64/include/QtWidgets -ID:/Qt/6.7.3/msvc2019_64/include/QtGui -ID:/Qt/6.7.3/msvc2019_64/include/QtCore -I. -ID:\C++\production\VC\Tools\MSVC\14.51.36231\include -ID:\C++\production\VC\Tools\MSVC\14.51.36231\ATLMFC\include -ID:\C++\production\VC\Auxiliary\VS\include -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" ..\..\blocks\pseudocolorblock.h -o debug\moc_pseudocolorblock.cpp
+
+debug\moc_glcmblock.cpp: ..\..\blocks\glcmblock.h \
+		..\..\blocks\baseblock.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtguiglobal.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qglobal.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversionchecks.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfiginclude.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qconfig.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcore-config.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfigmacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcoreexports.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompilerdetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qprocessordetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsystemdetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtdeprecationmarkers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtpreprocessorsupport.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qassert.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtnoop.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtypes.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversion.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtclasshelpermacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtypeinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerfwd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsysinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlogging.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qflags.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompare_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbasicatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qatomic_cxx11.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qgenericatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qyieldcpu.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qconstructormacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdarwinhelpers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qexceptionhandling.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qforeach.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qttypetraits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfunctionpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qglobalstatic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmalloc.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qminmax.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnumeric.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qoverload.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qswap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtenvironmentvariables.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtresource.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qttranslation.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qversiontagging.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtgui-config.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtguiexports.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtwidgetsexports.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qwindowdefs.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobjectdefs.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnamespace.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtmetamacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfunctionaltools_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qwindowdefs_win.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstring.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qchar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrefcount.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpair.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydatapointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydataops.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainertools_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qxptype_traits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20type_traits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20functional.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20memory.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearrayalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearrayview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringfwd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringliteral.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlatin1stringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qanystringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qutf8stringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringtokenizer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringbuilder.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringconverter.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringconverter_base.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhashfunctions.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiterator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearraylist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringlist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringmatcher.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreevent.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qscopedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmetatype.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompare.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcomparehelpers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatastream.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiodevicebase.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfloat16.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmath.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiterable.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmetacontainer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtaggedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qscopeguard.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobject_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbindingstorage.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmargins.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q23utility.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qaction.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qicon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsize.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpixmap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpaintdevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrect.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpoint.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qcolor.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qrgb.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qrgba64.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qshareddata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qimage.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpixelformat.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtransform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpolygon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qregion.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qline.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvariant.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdebug.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtextstream.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontiguouscache.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsharedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qshareddata_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qset.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhash.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvarlengtharray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qbrush.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qendian.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qcursor.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qbitmap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qevent.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiodevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qurl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qeventpoint.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvector2d.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvectornd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpointingdevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qinputdevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qscreen.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QList \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRect \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QSize \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QSizeF \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QTransform \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnativeinterface.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qscreen_platform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qguiapplication.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreapplication.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdeadlinetimer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qelapsedtimer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qeventloop.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreapplication_platform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfuture.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfutureinterface.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmutex.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtsan_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qresultstore.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfuture_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qthreadpool.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qthread.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrunnable.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qexception.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpromise.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qinputmethod.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlocale.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qguiapplication_platform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QVBoxLayout \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qboxlayout.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlayout.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlayoutitem.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qgridlayout.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QHBoxLayout \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QLabel \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlabel.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qframe.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpicture.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtextdocument.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QCheckBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcheckbox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractbutton.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QPushButton \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
+		..\..\roi\roiinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QComboBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcombobox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtabbar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtabwidget.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qrubberband.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qabstractitemmodel.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QSpinBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qspinbox.h \
+		..\..\config\appconfig.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString \
+		..\..\algorithms\glcm.h \
+		D:\opencv\opencv\build\include\opencv2\opencv.hpp \
+		D:\opencv\opencv\build\include\opencv2\opencv_modules.hpp \
+		D:\opencv\opencv\build\include\opencv2\core.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvdef.h \
+		D:\opencv\opencv\build\include\opencv2\core\version.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\hal\interface.h \
+		D:\opencv\opencv\build\include\opencv2\core\cv_cpu_dispatch.h \
+		D:\opencv\opencv\build\include\opencv2\core\cv_cpu_helper.h \
+		D:\opencv\opencv\build\include\opencv2\core\hal\msa_macros.h \
+		D:\opencv\opencv\build\include\opencv2\core\fast_math.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\base.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd_wrapper.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\neon_utils.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\vsx_utils.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\check.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\traits.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\matx.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\saturate.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\matx.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\types.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\mat.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\bufferpool.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\mat.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\persistence.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\operations.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utility.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\instrumentation.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\tls.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\optim.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\ovx.hpp \
+		D:\opencv\opencv\build\include\opencv2\calib3d.hpp \
+		D:\opencv\opencv\build\include\opencv2\features2d.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\miniflann.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\defines.h \
+		D:\opencv\opencv\build\include\opencv2\flann\config.h \
+		D:\opencv\opencv\build\include\opencv2\core\affine.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logger.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logger.defines.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logtag.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dnn.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\async.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\version.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dict.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\layer.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dnn.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\utils\inference_engine.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\flann_base.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\general.h \
+		D:\opencv\opencv\build\include\opencv2\flann\matrix.h \
+		D:\opencv\opencv\build\include\opencv2\flann\params.h \
+		D:\opencv\opencv\build\include\opencv2\flann\any.h \
+		D:\opencv\opencv\build\include\opencv2\flann\saving.h \
+		D:\opencv\opencv\build\include\opencv2\flann\nn_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\result_set.h \
+		D:\opencv\opencv\build\include\opencv2\flann\all_indices.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kdtree_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\dynamic_bitset.h \
+		D:\opencv\opencv\build\include\opencv2\flann\dist.h \
+		D:\opencv\opencv\build\include\opencv2\flann\heap.h \
+		D:\opencv\opencv\build\include\opencv2\flann\allocator.h \
+		D:\opencv\opencv\build\include\opencv2\flann\random.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kdtree_single_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kmeans_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\logger.h \
+		D:\opencv\opencv\build\include\opencv2\flann\composite_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\linear_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\hierarchical_clustering_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\lsh_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\lsh_table.h \
+		D:\opencv\opencv\build\include\opencv2\flann\autotuned_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\ground_truth.h \
+		D:\opencv\opencv\build\include\opencv2\flann\index_testing.h \
+		D:\opencv\opencv\build\include\opencv2\flann\timer.h \
+		D:\opencv\opencv\build\include\opencv2\flann\sampling.h \
+		D:\opencv\opencv\build\include\opencv2\highgui.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgcodecs.hpp \
+		D:\opencv\opencv\build\include\opencv2\videoio.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgproc.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgproc\segmentation.hpp \
+		D:\opencv\opencv\build\include\opencv2\ml.hpp \
+		D:\opencv\opencv\build\include\opencv2\ml\ml.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_dictionary.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_board.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\graphical_code_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\detection_based_tracker.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\face.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\charuco_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\barcode.hpp \
+		D:\opencv\opencv\build\include\opencv2\photo.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\warpers.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\warpers.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda_types.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\warpers_inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\matchers.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\motion_estimators.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\util.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\util_inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\camera.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\exposure_compensate.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\seam_finders.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\blenders.hpp \
+		D:\opencv\opencv\build\include\opencv2\video.hpp \
+		D:\opencv\opencv\build\include\opencv2\video\tracking.hpp \
+		D:\opencv\opencv\build\include\opencv2\video\background_segm.hpp \
+		debug\moc_predefs.h \
+		..\..\..\..\6.7.3\msvc2019_64\bin\moc.exe
+	D:\Qt\6.7.3\msvc2019_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Debug/debug/moc_predefs.h -ID:/Qt/6.7.3/msvc2019_64/mkspecs/win32-msvc -ID:/Qt/project/opencv -ID:/opencv/opencv/build/include -ID:/Qt/project/opencv/core -ID:/Qt/project/opencv/roi -ID:/Qt/project/opencv/blocks -ID:/Qt/project/opencv/algorithms -ID:/Qt/project/opencv/utils -ID:/Qt/project/opencv/config -ID:/Qt/project/opencv/styles -ID:/Qt/6.7.3/msvc2019_64/include -ID:/Qt/6.7.3/msvc2019_64/include/QtWidgets -ID:/Qt/6.7.3/msvc2019_64/include/QtGui -ID:/Qt/6.7.3/msvc2019_64/include/QtCore -I. -ID:\C++\production\VC\Tools\MSVC\14.51.36231\include -ID:\C++\production\VC\Tools\MSVC\14.51.36231\ATLMFC\include -ID:\C++\production\VC\Auxiliary\VS\include -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" ..\..\blocks\glcmblock.h -o debug\moc_glcmblock.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -2897,6 +3374,7 @@ ui_widget.h: ..\..\widget.ui \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsPixmapItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qgraphicsitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpainterpath.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QVBoxLayout \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qboxlayout.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlayout.h \
@@ -2935,6 +3413,28 @@ ui_widget.h: ..\..\widget.ui \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbasictimer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QFileInfo \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfileinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfile.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfiledevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimezone.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QComboBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcombobox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QAction \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QTranslator \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtranslator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QEvent \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QHash \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonArray \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonarray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QVector \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvector.h \
 		..\..\core\imageprocessor.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
 		..\..\blocks\baseblock.h \
@@ -2942,12 +3442,16 @@ ui_widget.h: ..\..\widget.ui \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QCheckBox \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcheckbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
 		..\..\utils\timemeasurer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QElapsedTimer \
+		..\..\core\imagesession.h \
 		..\..\roi\resizablerectitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsRectItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsSceneMouseEvent \
@@ -3168,6 +3672,7 @@ debug\main.obj: ..\..\main.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsPixmapItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qgraphicsitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpainterpath.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QVBoxLayout \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qboxlayout.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlayout.h \
@@ -3206,6 +3711,28 @@ debug\main.obj: ..\..\main.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbasictimer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QFileInfo \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfileinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfile.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfiledevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimezone.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QComboBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcombobox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QAction \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QTranslator \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtranslator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QEvent \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QHash \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonArray \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonarray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QVector \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvector.h \
 		..\..\core\imageprocessor.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
 		..\..\blocks\baseblock.h \
@@ -3213,12 +3740,16 @@ debug\main.obj: ..\..\main.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QCheckBox \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcheckbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
 		..\..\utils\timemeasurer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QElapsedTimer \
+		..\..\core\imagesession.h \
 		..\..\roi\resizablerectitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsRectItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsSceneMouseEvent \
@@ -3232,10 +3763,15 @@ debug\main.obj: ..\..\main.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsEllipseItem \
 		..\..\roi\resizablerotatedrectitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsObject \
+		..\..\config\appconfig.h \
 		..\..\styles\styleloader.h \
+		..\..\utils\applogger.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QApplication \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qapplication.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QFont
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QCoreApplication \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QFont \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QSettings \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsettings.h
 
 debug\widget.obj: ..\..\core\widget.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QWidget \
@@ -3430,6 +3966,7 @@ debug\widget.obj: ..\..\core\widget.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsPixmapItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qgraphicsitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpainterpath.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QVBoxLayout \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qboxlayout.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlayout.h \
@@ -3468,6 +4005,28 @@ debug\widget.obj: ..\..\core\widget.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbasictimer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QFileInfo \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfileinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfile.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfiledevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimezone.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QComboBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcombobox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QAction \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QTranslator \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtranslator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QEvent \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QHash \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonArray \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonarray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QVector \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvector.h \
 		..\..\core\imageprocessor.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
 		..\..\blocks\baseblock.h \
@@ -3475,12 +4034,16 @@ debug\widget.obj: ..\..\core\widget.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QCheckBox \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcheckbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
 		..\..\utils\timemeasurer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QElapsedTimer \
+		..\..\core\imagesession.h \
 		..\..\roi\resizablerectitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsRectItem \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsSceneMouseEvent \
@@ -3498,12 +4061,13 @@ debug\widget.obj: ..\..\core\widget.cpp ..\..\core\widget.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QVariant \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QApplication \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qapplication.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QComboBox \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcombobox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsView \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qgraphicsview.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qscrollarea.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QScrollArea \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QSpacerItem \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QToolButton \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtoolbutton.h \
 		..\..\config\appconfig.h \
 		..\..\blocks\binarizationblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QSpinBox \
@@ -3630,31 +4194,57 @@ debug\widget.obj: ..\..\core\widget.cpp ..\..\core\widget.h \
 		..\..\algorithms\graytransform.h \
 		..\..\blocks\pseudocolorblock.h \
 		..\..\algorithms\pseudocolor.h \
+		..\..\blocks\glcmblock.h \
+		..\..\algorithms\glcm.h \
 		..\..\algorithms\otsu.h \
 		..\..\utils\imageconverter.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QImage \
+		..\..\utils\applogger.h \
+		..\..\styles\styleloader.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFileDialog \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qfiledialog.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdir.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfile.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfiledevice.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfileinfo.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimezone.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qdialog.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QMessageBox \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qmessagebox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qdialogbuttonbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QDragEnterEvent \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QDragMoveEvent \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QDropEvent \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QDataStream \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QIODevice \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonDocument \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsondocument.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonParseError \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QFile \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QShortcut \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qshortcut.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QKeySequence \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QMenu \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qmenu.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QWidgetAction \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qwidgetaction.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QActionGroup \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qactiongroup.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QSettings \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsettings.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QCoreApplication \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QClipboard \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qclipboard.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QStyle \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QKeyEvent \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QMouseEvent \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QDir \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QFileInfo \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QScrollBar \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qscrollbar.h
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qscrollbar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QListWidgetItem \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QIcon \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QAbstractItemView \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QLayout \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QSizePolicy \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QScreen \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QGuiApplication \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtGlobal
 
 debug\imageprocessor.obj: ..\..\core\imageprocessor.cpp ..\..\core\imageprocessor.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QObject \
@@ -3862,13 +4452,27 @@ debug\imageprocessor.obj: ..\..\core\imageprocessor.cpp ..\..\core\imageprocesso
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QPushButton \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
 		..\..\utils\timemeasurer.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QElapsedTimer \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString \
+		..\..\utils\applogger.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtGlobal \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QStringList
 
 debug\resizablerectitem.obj: ..\..\roi\resizablerectitem.cpp ..\..\roi\resizablerectitem.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QGraphicsRectItem \
@@ -4722,11 +5326,38 @@ debug\baseblock.obj: ..\..\blocks\baseblock.cpp ..\..\blocks\baseblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QCursor
+		..\..\config\appconfig.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QApplication \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qapplication.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QClipboard \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qclipboard.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QCursor \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QDataStream \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QDrag \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qdrag.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QIODevice \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QMenu \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qmenu.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QMimeData \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmimedata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QMouseEvent \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QSizePolicy
 
 debug\binarizationblock.obj: ..\..\blocks\binarizationblock.cpp ..\..\blocks\binarizationblock.h \
 		..\..\blocks\baseblock.h \
@@ -4934,6 +5565,17 @@ debug\binarizationblock.obj: ..\..\blocks\binarizationblock.cpp ..\..\blocks\bin
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -4942,7 +5584,6 @@ debug\binarizationblock.obj: ..\..\blocks\binarizationblock.cpp ..\..\blocks\bin
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\config\appconfig.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString \
 		..\..\utils\imageconverter.h \
@@ -5272,6 +5913,17 @@ debug\morphologyblock.obj: ..\..\blocks\morphologyblock.cpp ..\..\blocks\morphol
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -5282,7 +5934,6 @@ debug\morphologyblock.obj: ..\..\blocks\morphologyblock.cpp ..\..\blocks\morphol
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
@@ -5618,6 +6269,17 @@ debug\filterblock.obj: ..\..\blocks\filterblock.cpp ..\..\blocks\filterblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -5628,7 +6290,6 @@ debug\filterblock.obj: ..\..\blocks\filterblock.cpp ..\..\blocks\filterblock.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
@@ -5964,6 +6625,17 @@ debug\graytransformblock.obj: ..\..\blocks\graytransformblock.cpp ..\..\blocks\g
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -5974,7 +6646,6 @@ debug\graytransformblock.obj: ..\..\blocks\graytransformblock.cpp ..\..\blocks\g
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
@@ -6311,6 +6982,17 @@ debug\pseudocolorblock.obj: ..\..\blocks\pseudocolorblock.cpp ..\..\blocks\pseud
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
 		..\..\roi\roiinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
@@ -6321,7 +7003,6 @@ debug\pseudocolorblock.obj: ..\..\blocks\pseudocolorblock.cpp ..\..\blocks\pseud
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
@@ -6448,6 +7129,361 @@ debug\pseudocolorblock.obj: ..\..\blocks\pseudocolorblock.cpp ..\..\blocks\pseud
 		..\..\utils\imageconverter.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QImage \
 		..\..\utils\roiprocess.h
+
+debug\glcmblock.obj: ..\..\blocks\glcmblock.cpp ..\..\blocks\glcmblock.h \
+		..\..\blocks\baseblock.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtguiglobal.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qglobal.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversionchecks.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfiginclude.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qconfig.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcore-config.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfigmacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcoreexports.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompilerdetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qprocessordetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsystemdetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtdeprecationmarkers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtpreprocessorsupport.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qassert.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtnoop.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtypes.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversion.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtclasshelpermacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtypeinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerfwd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsysinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlogging.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qflags.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompare_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbasicatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qatomic_cxx11.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qgenericatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qyieldcpu.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qconstructormacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdarwinhelpers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qexceptionhandling.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qforeach.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qttypetraits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfunctionpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qglobalstatic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmalloc.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qminmax.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnumeric.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qoverload.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qswap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtenvironmentvariables.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtresource.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qttranslation.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qversiontagging.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtgui-config.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtguiexports.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtwidgetsexports.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qwindowdefs.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobjectdefs.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnamespace.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtmetamacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfunctionaltools_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qwindowdefs_win.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstring.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qchar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrefcount.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpair.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydatapointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydataops.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainertools_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qxptype_traits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20type_traits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20functional.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20memory.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearrayalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearrayview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringfwd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringliteral.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlatin1stringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qanystringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qutf8stringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringtokenizer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringbuilder.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringconverter.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringconverter_base.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhashfunctions.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiterator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearraylist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringlist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringmatcher.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreevent.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qscopedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmetatype.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompare.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcomparehelpers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatastream.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiodevicebase.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfloat16.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmath.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiterable.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmetacontainer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtaggedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qscopeguard.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobject_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbindingstorage.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmargins.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q23utility.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qaction.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qicon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsize.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpixmap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpaintdevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrect.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpoint.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qcolor.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qrgb.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qrgba64.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qshareddata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qimage.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpixelformat.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtransform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpolygon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qregion.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qline.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvariant.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdebug.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtextstream.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontiguouscache.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsharedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qshareddata_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qset.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhash.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvarlengtharray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qbrush.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qendian.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qcursor.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qbitmap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qevent.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiodevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qurl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qeventpoint.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvector2d.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvectornd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpointingdevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qinputdevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qscreen.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QList \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRect \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QSize \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QSizeF \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QTransform \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnativeinterface.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qscreen_platform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qguiapplication.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreapplication.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdeadlinetimer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qelapsedtimer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qeventloop.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreapplication_platform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfuture.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfutureinterface.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmutex.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtsan_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qresultstore.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfuture_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qthreadpool.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qthread.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrunnable.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qexception.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpromise.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qinputmethod.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlocale.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qguiapplication_platform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QVBoxLayout \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qboxlayout.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlayout.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlayoutitem.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qgridlayout.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QHBoxLayout \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QLabel \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qlabel.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qframe.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpicture.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qtextdocument.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QCheckBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcheckbox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractbutton.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QPushButton \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qpushbutton.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QFrame \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPoint \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QContextMenuEvent \
+		..\..\roi\roiinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QComboBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qcombobox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyleoption.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractspinbox.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qvalidator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qslider.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qabstractslider.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qstyle.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtabbar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qtabwidget.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qrubberband.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qabstractitemmodel.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\QSpinBox \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtWidgets\qspinbox.h \
+		..\..\config\appconfig.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString \
+		..\..\algorithms\glcm.h \
+		D:\opencv\opencv\build\include\opencv2\opencv.hpp \
+		D:\opencv\opencv\build\include\opencv2\opencv_modules.hpp \
+		D:\opencv\opencv\build\include\opencv2\core.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvdef.h \
+		D:\opencv\opencv\build\include\opencv2\core\version.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\hal\interface.h \
+		D:\opencv\opencv\build\include\opencv2\core\cv_cpu_dispatch.h \
+		D:\opencv\opencv\build\include\opencv2\core\cv_cpu_helper.h \
+		D:\opencv\opencv\build\include\opencv2\core\hal\msa_macros.h \
+		D:\opencv\opencv\build\include\opencv2\core\fast_math.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\base.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd_wrapper.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\neon_utils.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\vsx_utils.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\check.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\traits.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\matx.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\saturate.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\matx.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\types.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\mat.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\bufferpool.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\mat.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\persistence.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\operations.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utility.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\instrumentation.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\tls.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\optim.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\ovx.hpp \
+		D:\opencv\opencv\build\include\opencv2\calib3d.hpp \
+		D:\opencv\opencv\build\include\opencv2\features2d.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\miniflann.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\defines.h \
+		D:\opencv\opencv\build\include\opencv2\flann\config.h \
+		D:\opencv\opencv\build\include\opencv2\core\affine.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logger.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logger.defines.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logtag.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dnn.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\async.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\version.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dict.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\layer.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dnn.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\utils\inference_engine.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\flann_base.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\general.h \
+		D:\opencv\opencv\build\include\opencv2\flann\matrix.h \
+		D:\opencv\opencv\build\include\opencv2\flann\params.h \
+		D:\opencv\opencv\build\include\opencv2\flann\any.h \
+		D:\opencv\opencv\build\include\opencv2\flann\saving.h \
+		D:\opencv\opencv\build\include\opencv2\flann\nn_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\result_set.h \
+		D:\opencv\opencv\build\include\opencv2\flann\all_indices.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kdtree_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\dynamic_bitset.h \
+		D:\opencv\opencv\build\include\opencv2\flann\dist.h \
+		D:\opencv\opencv\build\include\opencv2\flann\heap.h \
+		D:\opencv\opencv\build\include\opencv2\flann\allocator.h \
+		D:\opencv\opencv\build\include\opencv2\flann\random.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kdtree_single_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kmeans_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\logger.h \
+		D:\opencv\opencv\build\include\opencv2\flann\composite_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\linear_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\hierarchical_clustering_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\lsh_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\lsh_table.h \
+		D:\opencv\opencv\build\include\opencv2\flann\autotuned_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\ground_truth.h \
+		D:\opencv\opencv\build\include\opencv2\flann\index_testing.h \
+		D:\opencv\opencv\build\include\opencv2\flann\timer.h \
+		D:\opencv\opencv\build\include\opencv2\flann\sampling.h \
+		D:\opencv\opencv\build\include\opencv2\highgui.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgcodecs.hpp \
+		D:\opencv\opencv\build\include\opencv2\videoio.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgproc.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgproc\segmentation.hpp \
+		D:\opencv\opencv\build\include\opencv2\ml.hpp \
+		D:\opencv\opencv\build\include\opencv2\ml\ml.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_dictionary.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_board.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\graphical_code_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\detection_based_tracker.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\face.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\charuco_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\barcode.hpp \
+		D:\opencv\opencv\build\include\opencv2\photo.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\warpers.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\warpers.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda_types.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\warpers_inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\matchers.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\motion_estimators.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\util.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\util_inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\camera.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\exposure_compensate.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\seam_finders.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\blenders.hpp \
+		D:\opencv\opencv\build\include\opencv2\video.hpp \
+		D:\opencv\opencv\build\include\opencv2\video\tracking.hpp \
+		D:\opencv\opencv\build\include\opencv2\video\background_segm.hpp \
+		..\..\utils\imageconverter.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QImage
 
 debug\binarization.obj: ..\..\algorithms\binarization.cpp ..\..\algorithms\binarization.h \
 		D:\opencv\opencv\build\include\opencv2\opencv.hpp \
@@ -7139,6 +8175,121 @@ debug\pseudocolor.obj: ..\..\algorithms\pseudocolor.cpp ..\..\algorithms\pseudoc
 		D:\opencv\opencv\build\include\opencv2\video\tracking.hpp \
 		D:\opencv\opencv\build\include\opencv2\video\background_segm.hpp
 
+debug\glcm.obj: ..\..\algorithms\glcm.cpp ..\..\algorithms\glcm.h \
+		D:\opencv\opencv\build\include\opencv2\opencv.hpp \
+		D:\opencv\opencv\build\include\opencv2\opencv_modules.hpp \
+		D:\opencv\opencv\build\include\opencv2\core.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvdef.h \
+		D:\opencv\opencv\build\include\opencv2\core\version.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\hal\interface.h \
+		D:\opencv\opencv\build\include\opencv2\core\cv_cpu_dispatch.h \
+		D:\opencv\opencv\build\include\opencv2\core\cv_cpu_helper.h \
+		D:\opencv\opencv\build\include\opencv2\core\hal\msa_macros.h \
+		D:\opencv\opencv\build\include\opencv2\core\fast_math.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\base.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd_wrapper.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\neon_utils.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\vsx_utils.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\check.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\traits.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\matx.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\saturate.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\matx.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\types.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\mat.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\bufferpool.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\mat.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\persistence.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\operations.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cvstd.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utility.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\instrumentation.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\tls.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\optim.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\ovx.hpp \
+		D:\opencv\opencv\build\include\opencv2\calib3d.hpp \
+		D:\opencv\opencv\build\include\opencv2\features2d.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\miniflann.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\defines.h \
+		D:\opencv\opencv\build\include\opencv2\flann\config.h \
+		D:\opencv\opencv\build\include\opencv2\core\affine.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logger.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logger.defines.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\utils\logtag.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dnn.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\async.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\version.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dict.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\layer.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\dnn.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\dnn\utils\inference_engine.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\flann_base.hpp \
+		D:\opencv\opencv\build\include\opencv2\flann\general.h \
+		D:\opencv\opencv\build\include\opencv2\flann\matrix.h \
+		D:\opencv\opencv\build\include\opencv2\flann\params.h \
+		D:\opencv\opencv\build\include\opencv2\flann\any.h \
+		D:\opencv\opencv\build\include\opencv2\flann\saving.h \
+		D:\opencv\opencv\build\include\opencv2\flann\nn_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\result_set.h \
+		D:\opencv\opencv\build\include\opencv2\flann\all_indices.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kdtree_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\dynamic_bitset.h \
+		D:\opencv\opencv\build\include\opencv2\flann\dist.h \
+		D:\opencv\opencv\build\include\opencv2\flann\heap.h \
+		D:\opencv\opencv\build\include\opencv2\flann\allocator.h \
+		D:\opencv\opencv\build\include\opencv2\flann\random.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kdtree_single_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\kmeans_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\logger.h \
+		D:\opencv\opencv\build\include\opencv2\flann\composite_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\linear_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\hierarchical_clustering_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\lsh_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\lsh_table.h \
+		D:\opencv\opencv\build\include\opencv2\flann\autotuned_index.h \
+		D:\opencv\opencv\build\include\opencv2\flann\ground_truth.h \
+		D:\opencv\opencv\build\include\opencv2\flann\index_testing.h \
+		D:\opencv\opencv\build\include\opencv2\flann\timer.h \
+		D:\opencv\opencv\build\include\opencv2\flann\sampling.h \
+		D:\opencv\opencv\build\include\opencv2\highgui.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgcodecs.hpp \
+		D:\opencv\opencv\build\include\opencv2\videoio.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgproc.hpp \
+		D:\opencv\opencv\build\include\opencv2\imgproc\segmentation.hpp \
+		D:\opencv\opencv\build\include\opencv2\ml.hpp \
+		D:\opencv\opencv\build\include\opencv2\ml\ml.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_dictionary.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\aruco_board.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\graphical_code_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\detection_based_tracker.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\face.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\charuco_detector.hpp \
+		D:\opencv\opencv\build\include\opencv2\objdetect\barcode.hpp \
+		D:\opencv\opencv\build\include\opencv2\photo.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\warpers.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\warpers.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda_types.hpp \
+		D:\opencv\opencv\build\include\opencv2\core\cuda.inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\warpers_inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\matchers.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\motion_estimators.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\util.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\util_inl.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\camera.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\exposure_compensate.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\seam_finders.hpp \
+		D:\opencv\opencv\build\include\opencv2\stitching\detail\blenders.hpp \
+		D:\opencv\opencv\build\include\opencv2\video.hpp \
+		D:\opencv\opencv\build\include\opencv2\video\tracking.hpp \
+		D:\opencv\opencv\build\include\opencv2\video\background_segm.hpp
+
 debug\imageconverter.obj: ..\..\utils\imageconverter.cpp ..\..\utils\imageconverter.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\QPixmap \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtGui\qpixmap.h \
@@ -7476,31 +8627,31 @@ debug\timemeasurer.obj: ..\..\utils\timemeasurer.cpp ..\..\utils\timemeasurer.h 
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvarlengtharray.h
 
 debug\roiprocess.obj: ..\..\utils\roiprocess.cpp ..\..\utils\roiprocess.h \
-		..\..\roi\roiinfo.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrect.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhashfunctions.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstring.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qchar.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qglobal.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversionchecks.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QList \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydatapointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydataops.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpair.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerfwd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfigmacros.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfiginclude.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qconfig.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcore-config.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfigmacros.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcoreexports.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompilerdetection.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qprocessordetection.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsystemdetection.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtdeprecationmarkers.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtpreprocessorsupport.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qassert.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtnoop.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtypes.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qprocessordetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qassert.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompilerdetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsystemdetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcoreexports.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtdeprecationmarkers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversionchecks.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtnoop.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qglobal.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtpreprocessorsupport.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversion.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtclasshelpermacros.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtypeinfo.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerfwd.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsysinfo.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlogging.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qflags.h \
@@ -7526,20 +8677,19 @@ debug\roiprocess.obj: ..\..\utils\roiprocess.cpp ..\..\utils\roiprocess.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtresource.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qttranslation.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qversiontagging.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringview.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearray.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrefcount.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnamespace.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtmetamacros.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydata.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpair.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydatapointer.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydataops.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainertools_impl.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qxptype_traits.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20type_traits.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20functional.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20memory.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnamespace.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtmetamacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhashfunctions.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstring.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qchar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrefcount.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearrayalgorithms.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearrayview.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringfwd.h \
@@ -7552,15 +8702,65 @@ debug\roiprocess.obj: ..\..\utils\roiprocess.cpp ..\..\utils\roiprocess.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringbuilder.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringconverter.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringconverter_base.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiterator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearraylist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringlist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringmatcher.h \
+		..\..\roi\roiinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QRectF \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrect.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmargins.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q23utility.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsize.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpoint.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QPointF \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QSizeF \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QJsonObject \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qjsonvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qshareddata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborvalue.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlocale.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvariant.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmetatype.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompare.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcomparehelpers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatastream.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qscopedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiodevicebase.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfloat16.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmath.h \
-		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiterable.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmetacontainer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtaggedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobjectdefs.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfunctionaltools_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qscopeguard.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdebug.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtextstream.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontiguouscache.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsharedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qshareddata_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qset.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhash.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvarlengtharray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreevent.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobject_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbindingstorage.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcborcommon.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qregularexpression.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qurl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\quuid.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qendian.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtMath \
 		D:\opencv\opencv\build\include\opencv2\opencv.hpp \
 		D:\opencv\opencv\build\include\opencv2\opencv_modules.hpp \
 		D:\opencv\opencv\build\include\opencv2\core.hpp \
@@ -7675,6 +8875,155 @@ debug\roiprocess.obj: ..\..\utils\roiprocess.cpp ..\..\utils\roiprocess.h \
 		D:\opencv\opencv\build\include\opencv2\video\tracking.hpp \
 		D:\opencv\opencv\build\include\opencv2\video\background_segm.hpp \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QtGlobal
+
+debug\applogger.obj: ..\..\utils\applogger.cpp ..\..\utils\applogger.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstring.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qchar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qglobal.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversionchecks.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfiginclude.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qconfig.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcore-config.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtconfigmacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtcoreexports.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompilerdetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qprocessordetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsystemdetection.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtdeprecationmarkers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtpreprocessorsupport.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qassert.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtnoop.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtypes.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtversion.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtclasshelpermacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtypeinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerfwd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsysinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlogging.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qflags.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompare_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbasicatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qatomic_cxx11.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qgenericatomic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qyieldcpu.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qconstructormacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdarwinhelpers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qexceptionhandling.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qforeach.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qttypetraits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfunctionpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qglobalstatic.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmalloc.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qminmax.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnumeric.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qoverload.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qswap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtenvironmentvariables.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtresource.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qttranslation.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qversiontagging.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrefcount.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnamespace.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtmetamacros.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpair.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydatapointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qarraydataops.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainertools_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qxptype_traits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20type_traits.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20functional.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q20memory.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearrayalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearrayview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringfwd.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringliteral.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlatin1stringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qanystringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qutf8stringview.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringtokenizer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringbuilder.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringconverter.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringconverter_base.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QCoreApplication \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreapplication.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreevent.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobjectdefs.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfunctionaltools_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdeadlinetimer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qelapsedtimer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmetatype.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcompare.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcomparehelpers.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatastream.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qscopedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiodevicebase.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfloat16.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhashfunctions.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmath.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qalgorithms.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiterable.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmetacontainer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontainerinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtaggedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qscopeguard.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qeventloop.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobject.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiterator.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbytearraylist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringlist.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qstringmatcher.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qobject_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qbindingstorage.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qnativeinterface.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdebug.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtextstream.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcontiguouscache.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsharedpointer.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qshareddata.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmap.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qshareddata_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qset.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qhash.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvarlengtharray.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcoreapplication_platform.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfuture.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfutureinterface.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qmutex.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtsan_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qresultstore.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfuture_impl.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qthreadpool.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qthread.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qrunnable.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qexception.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qpromise.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qvariant.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\q23utility.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QDateTime \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdatetime.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qcalendar.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qlocale.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QDir \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qdir.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfile.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfiledevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qiodevice.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qfileinfo.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\qtimezone.h \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QFile \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QMutex \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QMutexLocker \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QTextStream \
+		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QStringConverter
 
 debug\styleloader.obj: ..\..\styles\styleloader.cpp ..\..\styles\styleloader.h \
 		..\..\..\..\6.7.3\msvc2019_64\include\QtCore\QString \
@@ -7802,6 +9151,8 @@ debug\moc_filterblock.obj: debug\moc_filterblock.cpp
 debug\moc_graytransformblock.obj: debug\moc_graytransformblock.cpp 
 
 debug\moc_pseudocolorblock.obj: debug\moc_pseudocolorblock.cpp 
+
+debug\moc_glcmblock.obj: debug\moc_glcmblock.cpp 
 
 ####### Install
 

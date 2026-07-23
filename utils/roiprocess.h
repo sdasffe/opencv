@@ -2,6 +2,7 @@
 #define ROIPROCESS_H
 
 #include <functional>
+#include <QList>
 #include "../roi/roiinfo.h"
 #include "opencv2/opencv.hpp"
 
@@ -10,62 +11,37 @@
  * @brief ROI 蒙版与局部处理 —— 算法块与 ROI 图元之间的桥梁
  *
  * 【在整条链路中的位置】
- *   ResizableRectItem 等图元 → Widget 收集几何 → RoiInfo
- *   → 各 Block::process(input, roi) → RoiProcess::apply(...)
- *   → 仅 ROI 内像素被算法修改，外部保持原图
+ *   各 *Block::process 内：RoiProcess::apply(当前图, session.rois, λ算法)
+ *   → 算法对整图运算，再用 mask 只保留 ROI 内结果，ROI 外保持原像素
  *
- * 【设计思路】
- *   算法函数 fn 始终接收「整图」Mat，实现简单；
- *   apply() 负责生成 mask，用 copyTo(mask) 把结果贴回原图副本。
- *   这样每个算法不必各自实现 ROI 裁剪逻辑。
- *
- * 【RoiInfo 来源】
- *   roi/roiinfo.h 定义形状（None/Rect/Ellipse/RotatedRect）与几何参数；
- *   isEmpty() 为 true 时等价于全图处理（mask 全 255）。
- *
- * 【实现文件】
- *   utils/roiprocess.cpp —— makeMask / apply 的具体逻辑
+ * 多 ROI：makeMask/apply 对列表做并集（OR）；空列表 = 全图处理。
  */
 
 namespace RoiProcess {
 
-/**
- * @brief 生成与图像同尺寸的二值蒙版
- *
- * 谁调用：apply() 内部；也可单独用于调试 mask 可视化
- * 何时调用：roi 非空且需要局部处理时
- *
- * @param size 原图宽高（与 srcBgr.size() 一致）
- * @param roi  当前 ROI 描述；isEmpty() 时返回全 255
- * @return CV_8UC1：255 = 该像素参与处理，0 = 保持原图
- *
- * 各形状：
- *   Rect        —— 轴对齐矩形，rect 字段
- *   Ellipse     —— 外接矩形内填充椭圆
- *   RotatedRect —— center + size + angleDeg，手动算四角填多边形
- */
+/** 单 ROI → CV_8UC1 蒙版（255=处理区）；空 ROI 返回全 255 */
 cv::Mat makeMask(const cv::Size &size, const RoiInfo &roi);
 
+/** 多 ROI 并集蒙版；列表全空则等同全图（全 255） */
+cv::Mat makeMask(const cv::Size &size, const QList<RoiInfo> &rois);
+
 /**
- * @brief 在 ROI 内应用算法，ROI 外保留原像素
- *
- * 谁调用：几乎所有 Block::process() 中的 lambda 包装
- * 何时调用：每次 ImageProcessor 重算且 roi 可能非空时
- *
- * @param srcBgr 输入 BGR 图（与流水线约定一致）
- * @param roi    ROI 信息；空则 fn 结果整图返回
- * @param fn     算法回调：Mat(BGR) → Mat(处理结果)，尺寸/通道应与原图一致
- * @return 合成后的 BGR 图
- *
- * 内部流程（详见 roiprocess.cpp）：
- *   1. processed = fn(srcBgr)     // 整图跑算法
- *   2. 若 roi 空 → 直接 return processed
- *   3. mask = makeMask(...)
- *   4. result = srcBgr.clone()
- *   5. processed.copyTo(result, mask)  // 仅 mask==255 处覆盖
+ * 单 ROI 便捷重载，内部转为列表后调用 apply(list)
+ * @param fn 整图算法，如 [](const cv::Mat &m){ return FilterAlgorithm::apply(...); }
  */
 cv::Mat apply(const cv::Mat &srcBgr,
               const RoiInfo &roi,
+              const std::function<cv::Mat(const cv::Mat &)> &fn);
+
+/**
+ * ROI 局部处理主入口
+ * @param srcBgr 当前流水线 BGR/灰度图
+ * @param rois   来自 ImageSession，与画布图元同步
+ * @param fn     对整图执行的算法；输出尺寸/通道会自动对齐 srcBgr
+ * @return 合成图：ROI 内为 fn 结果，ROI 外为 srcBgr 原像素
+ */
+cv::Mat apply(const cv::Mat &srcBgr,
+              const QList<RoiInfo> &rois,
               const std::function<cv::Mat(const cv::Mat &)> &fn);
 
 } // namespace RoiProcess

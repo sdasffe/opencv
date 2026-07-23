@@ -20,6 +20,8 @@
 #include "../utils/imageconverter.h"
 #include "../utils/roiprocess.h"
 
+#include <QJsonObject>
+
 /**
  * @brief 构造函数：初始化标题栏与参数 UI
  *
@@ -30,8 +32,8 @@
 MorphologyBlock::MorphologyBlock(QWidget *parent)
     : BaseBlock(parent)
 {
-    setupTitle(QStringLiteral("🧩"), AppConfig::BLOCK_NAME_MORPHOLOGY);
     setupUI();
+    retranslateUi();
 }
 
 /**
@@ -48,37 +50,36 @@ void MorphologyBlock::setupUI()
 {
     addSeparator();
 
-    // ----- 运算类型下拉框 -----
     m_opCombo = new QComboBox(this);
-    // addItem(显示文字, userData)；currentData() 可还原为 Op 枚举
-    m_opCombo->addItem(QStringLiteral("膨胀"), int(MorphologyAlgorithm::Op::Dilate));
-    m_opCombo->addItem(QStringLiteral("腐蚀"), int(MorphologyAlgorithm::Op::Erode));
-    m_opCombo->addItem(QStringLiteral("开运算"), int(MorphologyAlgorithm::Op::Open));
-    m_opCombo->addItem(QStringLiteral("闭运算"), int(MorphologyAlgorithm::Op::Close));
+    for (int op : {int(MorphologyAlgorithm::Op::Dilate), int(MorphologyAlgorithm::Op::Erode),
+                   int(MorphologyAlgorithm::Op::Open), int(MorphologyAlgorithm::Op::Close),
+                   int(MorphologyAlgorithm::Op::TopHat), int(MorphologyAlgorithm::Op::ButtonHat),
+                   int(MorphologyAlgorithm::Op::MorphologicalGradient)}) {
+        m_opCombo->addItem(QString(), op);
+    }
     contentLayout()->addWidget(m_opCombo);
 
-    // Lambda 工厂：统一创建「标签 + SpinBox」行，减少重复代码
-    auto addSpin = [&](const QString &label, int minV, int maxV, int def) {
+    auto addSpin = [&](QLabel *&labelOut, int minV, int maxV, int def) {
         auto *row = new QHBoxLayout();
-        auto *lb = new QLabel(label, this);
-        lb->setObjectName(QStringLiteral("blockFieldLabel")); // QSS 统一字段标签样式
-        lb->setFixedWidth(40);
+        labelOut = new QLabel(this);
+        labelOut->setObjectName(QStringLiteral("blockFieldLabel"));
+        labelOut->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
         auto *sp = new QSpinBox(this);
         sp->setRange(minV, maxV);
         sp->setValue(def);
-        sp->setFixedWidth(64);
-        row->addWidget(lb);
+        sp->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
+        sp->setSingleStep(2);
+        row->addWidget(labelOut);
         row->addWidget(sp);
         row->addStretch();
         contentLayout()->addLayout(row);
         return sp;
     };
 
-    m_kxSpin = addSpin(QStringLiteral("核 X"), 1, 31, 3);
-    m_kySpin = addSpin(QStringLiteral("核 Y"), 1, 31, 3);
-    m_iterSpin = addSpin(QStringLiteral("次数"), 1, 20, 1);
+    m_kxSpin = addSpin(m_kxLabel, 1, 31, 3);
+    m_kySpin = addSpin(m_kyLabel, 1, 31, 3);
+    m_iterSpin = addSpin(m_iterLabel, 1, 20, 1);
 
-    // 参数变化时通知 ImageProcessor 重算（忽略具体数值，只关心「变了」）
     auto emitChange = [this](int) { emit paramsChanged(); };
     connect(m_opCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, emitChange);
     connect(m_kxSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
@@ -86,13 +87,27 @@ void MorphologyBlock::setupUI()
     connect(m_iterSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
 }
 
-/**
- * @brief 读取当前选中的形态学运算类型
- *
- * 谁调用：process() 内部
- * 输入：m_opCombo 的 currentData（构造时写入的 int 枚举值）
- * 输出：MorphologyAlgorithm::Op
- */
+void MorphologyBlock::retranslateUi()
+{
+    setupTitle(QStringLiteral("🧩"), tr("形态学处理"));
+    BaseBlock::retranslateUi();
+    if (!m_opCombo || m_opCombo->count() < 7)
+        return;
+    m_opCombo->setItemText(0, tr("膨胀"));
+    m_opCombo->setItemText(1, tr("腐蚀"));
+    m_opCombo->setItemText(2, tr("开运算"));
+    m_opCombo->setItemText(3, tr("闭运算"));
+    m_opCombo->setItemText(4, tr("顶帽"));
+    m_opCombo->setItemText(5, tr("底帽"));
+    m_opCombo->setItemText(6, tr("形态学梯度"));
+    if (m_kxLabel)
+        m_kxLabel->setText(tr("核 X"));
+    if (m_kyLabel)
+        m_kyLabel->setText(tr("核 Y"));
+    if (m_iterLabel)
+        m_iterLabel->setText(tr("次数"));
+}
+
 MorphologyAlgorithm::Op MorphologyBlock::currentOp() const
 {
     return static_cast<MorphologyAlgorithm::Op>(m_opCombo->currentData().toInt());
@@ -113,7 +128,7 @@ MorphologyAlgorithm::Op MorphologyBlock::currentOp() const
  *   2. RoiProcess::apply 在 ROI 内跑算法，ROI 外保持原像素
  *   3. cv::Mat → QPixmap 返回 Qt 侧
  */
-QPixmap MorphologyBlock::process(const QPixmap &input, const RoiInfo &roi)
+QPixmap MorphologyBlock::process(const QPixmap &input, const QList<RoiInfo> &rois)
 {
     if (input.isNull()) return input;
 
@@ -122,10 +137,42 @@ QPixmap MorphologyBlock::process(const QPixmap &input, const RoiInfo &roi)
     cv::cvtColor(src, src, cv::COLOR_RGB2BGR);
 
     // lambda 接收整图 BGR，返回整图处理结果；RoiProcess 负责按 mask 贴回
-    cv::Mat out = RoiProcess::apply(src, roi, [&](const cv::Mat &m) {
+    cv::Mat out = RoiProcess::apply(src, rois, [&](const cv::Mat &m) {
         return MorphologyAlgorithm::apply(m, currentOp(),
                                           m_kxSpin->value(), m_kySpin->value(),
                                           m_iterSpin->value());
     });
     return ImageConverter::matToPixmap(out);
+}
+
+/** @brief 导出运算类型、核尺寸、迭代次数到 JSON */
+QJsonObject MorphologyBlock::saveParams() const
+{
+    QJsonObject obj = BaseBlock::saveParams();
+    obj.insert(QStringLiteral("op"), m_opCombo->currentData().toInt());
+    obj.insert(QStringLiteral("kx"), m_kxSpin->value());
+    obj.insert(QStringLiteral("ky"), m_kySpin->value());
+    obj.insert(QStringLiteral("iterations"), m_iterSpin->value());
+    return obj;
+}
+
+/** @brief 从 JSON 恢复参数；blockSignals 避免恢复过程中触发重算 */
+void MorphologyBlock::loadParams(const QJsonObject &obj)
+{
+    BaseBlock::loadParams(obj);
+    const int op = obj.value(QStringLiteral("op")).toInt(m_opCombo->currentData().toInt());
+    const int idx = m_opCombo->findData(op);
+    m_opCombo->blockSignals(true);
+    m_kxSpin->blockSignals(true);
+    m_kySpin->blockSignals(true);
+    m_iterSpin->blockSignals(true);
+    if (idx >= 0)
+        m_opCombo->setCurrentIndex(idx);
+    m_kxSpin->setValue(obj.value(QStringLiteral("kx")).toInt(m_kxSpin->value()));
+    m_kySpin->setValue(obj.value(QStringLiteral("ky")).toInt(m_kySpin->value()));
+    m_iterSpin->setValue(obj.value(QStringLiteral("iterations")).toInt(m_iterSpin->value()));
+    m_opCombo->blockSignals(false);
+    m_kxSpin->blockSignals(false);
+    m_kySpin->blockSignals(false);
+    m_iterSpin->blockSignals(false);
 }

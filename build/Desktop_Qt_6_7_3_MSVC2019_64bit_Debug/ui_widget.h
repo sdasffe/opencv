@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -19,6 +18,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <widget.h>
@@ -32,17 +32,13 @@ public:
     QWidget *widget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QLabel *label;
-    QComboBox *comboBox;
-    QPushButton *pushButton_3;
-    QPushButton *deltete;
+    QToolButton *btnMenuFile;
+    QToolButton *btnMenuRoi;
+    QToolButton *btnMenuSettings;
     QSpacerItem *horizontalSpacer;
     QPushButton *btnApply;
     QPushButton *btnCompare;
     QPushButton *btnSave;
-    QPushButton *btnClearChain;
     QLabel *labelInfo;
     QLabel *label_2;
     QLabel *label_3;
@@ -59,6 +55,10 @@ public:
     QWidget *widget_3;
     QVBoxLayout *blockPanelOuterLayout;
     QLabel *chainTitleLabel;
+    QHBoxLayout *chainIoLayout;
+    QPushButton *btnExportChain;
+    QPushButton *btnImportChain;
+    QPushButton *btnClearChain;
     QLabel *chainHintLabel;
     QScrollArea *blockScrollArea;
     QWidget *blockListContainer;
@@ -69,9 +69,9 @@ public:
         if (Widget->objectName().isEmpty())
             Widget->setObjectName("Widget");
         Widget->resize(1200, 720);
-        Widget->setMinimumSize(QSize(960, 560));
+        Widget->setMinimumSize(QSize(800, 520));
         horizontalLayout = new QHBoxLayout(Widget);
-        horizontalLayout->setSpacing(10);
+        horizontalLayout->setSpacing(8);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(10, 10, 10, 10);
         widget = new QWidget(Widget);
@@ -83,43 +83,29 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(8);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName("pushButton");
-        pushButton->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+        btnMenuFile = new QToolButton(widget);
+        btnMenuFile->setObjectName("btnMenuFile");
+        btnMenuFile->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+        btnMenuFile->setPopupMode(QToolButton::InstantPopup);
+        btnMenuFile->setToolButtonStyle(Qt::ToolButtonTextOnly);
 
-        horizontalLayout_2->addWidget(pushButton);
+        horizontalLayout_2->addWidget(btnMenuFile);
 
-        pushButton_2 = new QPushButton(widget);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+        btnMenuRoi = new QToolButton(widget);
+        btnMenuRoi->setObjectName("btnMenuRoi");
+        btnMenuRoi->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+        btnMenuRoi->setPopupMode(QToolButton::InstantPopup);
+        btnMenuRoi->setToolButtonStyle(Qt::ToolButtonTextOnly);
 
-        horizontalLayout_2->addWidget(pushButton_2);
+        horizontalLayout_2->addWidget(btnMenuRoi);
 
-        label = new QLabel(widget);
-        label->setObjectName("label");
+        btnMenuSettings = new QToolButton(widget);
+        btnMenuSettings->setObjectName("btnMenuSettings");
+        btnMenuSettings->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+        btnMenuSettings->setPopupMode(QToolButton::InstantPopup);
+        btnMenuSettings->setToolButtonStyle(Qt::ToolButtonTextOnly);
 
-        horizontalLayout_2->addWidget(label);
-
-        comboBox = new QComboBox(widget);
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->setObjectName("comboBox");
-        comboBox->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-
-        horizontalLayout_2->addWidget(comboBox);
-
-        pushButton_3 = new QPushButton(widget);
-        pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-
-        horizontalLayout_2->addWidget(pushButton_3);
-
-        deltete = new QPushButton(widget);
-        deltete->setObjectName("deltete");
-        deltete->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-
-        horizontalLayout_2->addWidget(deltete);
+        horizontalLayout_2->addWidget(btnMenuSettings);
 
         horizontalSpacer = new QSpacerItem(20, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
@@ -142,12 +128,6 @@ public:
         btnSave->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
 
         horizontalLayout_2->addWidget(btnSave);
-
-        btnClearChain = new QPushButton(widget);
-        btnClearChain->setObjectName("btnClearChain");
-        btnClearChain->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-
-        horizontalLayout_2->addWidget(btnClearChain);
 
         labelInfo = new QLabel(widget);
         labelInfo->setObjectName("labelInfo");
@@ -207,11 +187,11 @@ public:
 
         widget_2 = new QWidget(Widget);
         widget_2->setObjectName("widget_2");
-        widget_2->setMinimumSize(QSize(160, 0));
+        widget_2->setMinimumSize(QSize(100, 0));
         verticalLayout_3 = new QVBoxLayout(widget_2);
-        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setSpacing(4);
         verticalLayout_3->setObjectName("verticalLayout_3");
-        verticalLayout_3->setContentsMargins(10, 10, 10, 10);
+        verticalLayout_3->setContentsMargins(8, 8, 8, 8);
         algoTitleLabel = new QLabel(widget_2);
         algoTitleLabel->setObjectName("algoTitleLabel");
 
@@ -219,17 +199,19 @@ public:
 
         listWidget = new MyListWidget(widget_2);
         QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget);
-        __qlistwidgetitem->setTextAlignment(Qt::AlignCenter);
+        __qlistwidgetitem->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         QListWidgetItem *__qlistwidgetitem1 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem1->setTextAlignment(Qt::AlignCenter);
+        __qlistwidgetitem1->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         QListWidgetItem *__qlistwidgetitem2 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem2->setTextAlignment(Qt::AlignCenter);
+        __qlistwidgetitem2->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         QListWidgetItem *__qlistwidgetitem3 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem3->setTextAlignment(Qt::AlignCenter);
+        __qlistwidgetitem3->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         QListWidgetItem *__qlistwidgetitem4 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem4->setTextAlignment(Qt::AlignCenter);
+        __qlistwidgetitem4->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+        QListWidgetItem *__qlistwidgetitem5 = new QListWidgetItem(listWidget);
+        __qlistwidgetitem5->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         listWidget->setObjectName("listWidget");
-        listWidget->setMinimumSize(QSize(0, 250));
+        listWidget->setMinimumSize(QSize(0, 120));
 
         verticalLayout_3->addWidget(listWidget);
 
@@ -242,15 +224,39 @@ public:
 
         widget_3 = new QWidget(Widget);
         widget_3->setObjectName("widget_3");
-        widget_3->setMinimumSize(QSize(220, 0));
+        widget_3->setMinimumSize(QSize(160, 0));
         blockPanelOuterLayout = new QVBoxLayout(widget_3);
-        blockPanelOuterLayout->setSpacing(6);
+        blockPanelOuterLayout->setSpacing(4);
         blockPanelOuterLayout->setObjectName("blockPanelOuterLayout");
-        blockPanelOuterLayout->setContentsMargins(10, 10, 10, 10);
+        blockPanelOuterLayout->setContentsMargins(8, 8, 8, 8);
         chainTitleLabel = new QLabel(widget_3);
         chainTitleLabel->setObjectName("chainTitleLabel");
 
         blockPanelOuterLayout->addWidget(chainTitleLabel);
+
+        chainIoLayout = new QHBoxLayout();
+        chainIoLayout->setSpacing(6);
+        chainIoLayout->setObjectName("chainIoLayout");
+        btnExportChain = new QPushButton(widget_3);
+        btnExportChain->setObjectName("btnExportChain");
+        btnExportChain->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+
+        chainIoLayout->addWidget(btnExportChain);
+
+        btnImportChain = new QPushButton(widget_3);
+        btnImportChain->setObjectName("btnImportChain");
+        btnImportChain->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+
+        chainIoLayout->addWidget(btnImportChain);
+
+        btnClearChain = new QPushButton(widget_3);
+        btnClearChain->setObjectName("btnClearChain");
+        btnClearChain->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+
+        chainIoLayout->addWidget(btnClearChain);
+
+
+        blockPanelOuterLayout->addLayout(chainIoLayout);
 
         chainHintLabel = new QLabel(widget_3);
         chainHintLabel->setObjectName("chainHintLabel");
@@ -264,10 +270,10 @@ public:
         blockScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
         blockScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
         blockScrollArea->setWidgetResizable(true);
-        blockScrollArea->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignTop);
+        blockScrollArea->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
         blockListContainer = new QWidget();
         blockListContainer->setObjectName("blockListContainer");
-        blockListContainer->setGeometry(QRect(0, 0, 180, 200));
+        blockListContainer->setGeometry(QRect(0, 0, 200, 638));
         blockListLayout = new QVBoxLayout(blockListContainer);
         blockListLayout->setSpacing(8);
         blockListLayout->setObjectName("blockListLayout");
@@ -276,7 +282,7 @@ public:
 
         blockPanelOuterLayout->addWidget(blockScrollArea);
 
-        blockPanelOuterLayout->setStretch(2, 1);
+        blockPanelOuterLayout->setStretch(3, 1);
 
         horizontalLayout->addWidget(widget_3);
 
@@ -293,23 +299,17 @@ public:
     {
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "\345\233\276\345\203\217\345\244\204\347\220\206\345\267\245\345\205\267", nullptr));
 #if QT_CONFIG(tooltip)
-        pushButton->setToolTip(QCoreApplication::translate("Widget", "\346\211\223\345\274\200\345\233\276\347\211\207", nullptr));
+        btnMenuFile->setToolTip(QCoreApplication::translate("Widget", "\346\226\207\344\273\266", nullptr));
 #endif // QT_CONFIG(tooltip)
-        pushButton->setText(QCoreApplication::translate("Widget", "\346\211\223\345\274\200", nullptr));
+        btnMenuFile->setText(QCoreApplication::translate("Widget", "\346\226\207\344\273\266", nullptr));
 #if QT_CONFIG(tooltip)
-        pushButton_2->setToolTip(QCoreApplication::translate("Widget", "\346\211\223\345\274\200\346\226\207\344\273\266\345\244\271", nullptr));
+        btnMenuRoi->setToolTip(QCoreApplication::translate("Widget", "ROI \351\200\211\345\214\272", nullptr));
 #endif // QT_CONFIG(tooltip)
-        pushButton_2->setText(QCoreApplication::translate("Widget", "\346\226\207\344\273\266\345\244\271", nullptr));
-        label->setText(QCoreApplication::translate("Widget", "ROI", nullptr));
-        comboBox->setItemText(0, QCoreApplication::translate("Widget", "\347\237\251\345\275\242", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("Widget", "\345\234\206\345\275\242", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("Widget", "\346\227\213\350\275\254\347\237\251\345\275\242", nullptr));
-
-        pushButton_3->setText(QCoreApplication::translate("Widget", "\346\267\273\345\212\240", nullptr));
+        btnMenuRoi->setText(QCoreApplication::translate("Widget", "ROI", nullptr));
 #if QT_CONFIG(tooltip)
-        deltete->setToolTip(QCoreApplication::translate("Widget", "\345\210\240\351\231\244\351\200\211\344\270\255 ROI", nullptr));
+        btnMenuSettings->setToolTip(QCoreApplication::translate("Widget", "\350\256\276\347\275\256", nullptr));
 #endif // QT_CONFIG(tooltip)
-        deltete->setText(QCoreApplication::translate("Widget", "\345\210\240\351\231\244", nullptr));
+        btnMenuSettings->setText(QCoreApplication::translate("Widget", "\350\256\276\347\275\256", nullptr));
 #if QT_CONFIG(tooltip)
         btnApply->setToolTip(QCoreApplication::translate("Widget", "\346\214\211\345\275\223\345\211\215 ROI \344\270\216\345\244\204\347\220\206\351\223\276\351\207\215\346\226\260\350\256\241\347\256\227", nullptr));
 #endif // QT_CONFIG(tooltip)
@@ -322,10 +322,6 @@ public:
         btnSave->setToolTip(QCoreApplication::translate("Widget", "\344\277\235\345\255\230\345\244\204\347\220\206\347\273\223\346\236\234", nullptr));
 #endif // QT_CONFIG(tooltip)
         btnSave->setText(QCoreApplication::translate("Widget", "\344\277\235\345\255\230", nullptr));
-#if QT_CONFIG(tooltip)
-        btnClearChain->setToolTip(QCoreApplication::translate("Widget", "\346\270\205\347\251\272\345\244\204\347\220\206\351\223\276", nullptr));
-#endif // QT_CONFIG(tooltip)
-        btnClearChain->setText(QCoreApplication::translate("Widget", "\346\270\205\347\251\272", nullptr));
 #if QT_CONFIG(tooltip)
         labelInfo->setToolTip(QCoreApplication::translate("Widget", "\345\233\276\347\211\207\344\277\241\346\201\257", nullptr));
 #endif // QT_CONFIG(tooltip)
@@ -350,9 +346,23 @@ public:
         ___qlistwidgetitem3->setText(QCoreApplication::translate("Widget", "\347\201\260\345\272\246\345\217\230\346\215\242", nullptr));
         QListWidgetItem *___qlistwidgetitem4 = listWidget->item(4);
         ___qlistwidgetitem4->setText(QCoreApplication::translate("Widget", "\344\274\252\345\275\251\350\211\262\345\244\204\347\220\206", nullptr));
+        QListWidgetItem *___qlistwidgetitem5 = listWidget->item(5);
+        ___qlistwidgetitem5->setText(QCoreApplication::translate("Widget", "\347\201\260\345\272\246\345\205\261\347\224\237\347\237\251\351\230\265", nullptr));
         listWidget->setSortingEnabled(__sortingEnabled);
 
-        chainTitleLabel->setText(QCoreApplication::translate("Widget", "\345\244\204\347\220\206\351\223\276", nullptr));
+        chainTitleLabel->setText(QCoreApplication::translate("Widget", "\345\233\276\345\203\217\345\244\204\347\220\206\345\267\245\345\205\267\347\256\261", nullptr));
+#if QT_CONFIG(tooltip)
+        btnExportChain->setToolTip(QCoreApplication::translate("Widget", "\345\257\274\345\207\272\345\275\223\345\211\215\345\244\204\347\220\206\351\223\276\344\270\272 JSON", nullptr));
+#endif // QT_CONFIG(tooltip)
+        btnExportChain->setText(QCoreApplication::translate("Widget", "\345\257\274\345\207\272", nullptr));
+#if QT_CONFIG(tooltip)
+        btnImportChain->setToolTip(QCoreApplication::translate("Widget", "\344\273\216 JSON \345\257\274\345\205\245\345\244\204\347\220\206\351\223\276", nullptr));
+#endif // QT_CONFIG(tooltip)
+        btnImportChain->setText(QCoreApplication::translate("Widget", "\345\257\274\345\205\245", nullptr));
+#if QT_CONFIG(tooltip)
+        btnClearChain->setToolTip(QCoreApplication::translate("Widget", "\346\270\205\347\251\272\345\233\276\345\203\217\345\244\204\347\220\206\345\267\245\345\205\267\347\256\261", nullptr));
+#endif // QT_CONFIG(tooltip)
+        btnClearChain->setText(QCoreApplication::translate("Widget", "\346\270\205\347\251\272", nullptr));
         chainHintLabel->setText(QCoreApplication::translate("Widget", "\346\213\226\345\205\245\347\256\227\346\263\225", nullptr));
     } // retranslateUi
 

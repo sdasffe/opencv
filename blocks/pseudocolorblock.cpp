@@ -16,11 +16,13 @@
 #include "../utils/imageconverter.h"
 #include "../utils/roiprocess.h"
 
+#include <QJsonObject>
+
 PseudoColorBlock::PseudoColorBlock(QWidget *parent)
     : BaseBlock(parent)
 {
-    setupTitle(QStringLiteral("🌈"), AppConfig::BLOCK_NAME_PSEUDOCOLOR);
     setupUI();
+    retranslateUi();
 }
 
 /**
@@ -34,20 +36,35 @@ void PseudoColorBlock::setupUI()
     addSeparator();
 
     m_mapCombo = new QComboBox(this);
-    m_mapCombo->addItem(QStringLiteral("Jet"), int(PseudoColorAlgorithm::Map::Jet));
-    m_mapCombo->addItem(QStringLiteral("Hot"), int(PseudoColorAlgorithm::Map::Hot));
-    m_mapCombo->addItem(QStringLiteral("Cool"), int(PseudoColorAlgorithm::Map::Cool));
-    m_mapCombo->addItem(QStringLiteral("Rainbow"), int(PseudoColorAlgorithm::Map::Rainbow));
-    m_mapCombo->addItem(QStringLiteral("Ocean"), int(PseudoColorAlgorithm::Map::Ocean));
-    m_mapCombo->addItem(QStringLiteral("Summer"), int(PseudoColorAlgorithm::Map::Summer));
-    m_mapCombo->addItem(QStringLiteral("Winter"), int(PseudoColorAlgorithm::Map::Winter));
-    m_mapCombo->addItem(QStringLiteral("Autumn"), int(PseudoColorAlgorithm::Map::Autumn));
-    m_mapCombo->addItem(QStringLiteral("Bone"), int(PseudoColorAlgorithm::Map::Bone));
-    m_mapCombo->addItem(QStringLiteral("Pink"), int(PseudoColorAlgorithm::Map::Pink));
+    for (int m : {int(PseudoColorAlgorithm::Map::Jet), int(PseudoColorAlgorithm::Map::Hot),
+                  int(PseudoColorAlgorithm::Map::Cool), int(PseudoColorAlgorithm::Map::Rainbow),
+                  int(PseudoColorAlgorithm::Map::Ocean), int(PseudoColorAlgorithm::Map::Summer),
+                  int(PseudoColorAlgorithm::Map::Winter), int(PseudoColorAlgorithm::Map::Autumn),
+                  int(PseudoColorAlgorithm::Map::Bone), int(PseudoColorAlgorithm::Map::Pink)}) {
+        m_mapCombo->addItem(QString(), m);
+    }
     contentLayout()->addWidget(m_mapCombo);
 
     connect(m_mapCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, [this](int) { emit paramsChanged(); });
+}
+
+void PseudoColorBlock::retranslateUi()
+{
+    setupTitle(QStringLiteral("🌈"), tr("伪彩色处理"));
+    BaseBlock::retranslateUi();
+    if (!m_mapCombo || m_mapCombo->count() < 10)
+        return;
+    m_mapCombo->setItemText(0, tr("喷射色"));
+    m_mapCombo->setItemText(1, tr("热力色"));
+    m_mapCombo->setItemText(2, tr("冷色系"));
+    m_mapCombo->setItemText(3, tr("彩虹色"));
+    m_mapCombo->setItemText(4, tr("海洋色"));
+    m_mapCombo->setItemText(5, tr("夏日色"));
+    m_mapCombo->setItemText(6, tr("冬日色"));
+    m_mapCombo->setItemText(7, tr("秋日色"));
+    m_mapCombo->setItemText(8, tr("骨白色"));
+    m_mapCombo->setItemText(9, tr("粉红色"));
 }
 
 PseudoColorAlgorithm::Map PseudoColorBlock::currentMap() const
@@ -61,13 +78,33 @@ PseudoColorAlgorithm::Map PseudoColorBlock::currentMap() const
  * 谁调用：ImageProcessor::reprocess()
  * 注意：算法先转灰度再上色，彩色输入会先失去色相信息
  */
-QPixmap PseudoColorBlock::process(const QPixmap &input, const RoiInfo &roi)
+QPixmap PseudoColorBlock::process(const QPixmap &input, const QList<RoiInfo> &rois)
 {
     if (input.isNull()) return input;
     cv::Mat src = ImageConverter::pixmapToMatRGB(input);
     cv::cvtColor(src, src, cv::COLOR_RGB2BGR);
-    cv::Mat out = RoiProcess::apply(src, roi, [&](const cv::Mat &m) {
+    cv::Mat out = RoiProcess::apply(src, rois, [&](const cv::Mat &m) {
         return PseudoColorAlgorithm::apply(m, currentMap());
     });
     return ImageConverter::matToPixmap(out);
+}
+
+/** @brief 导出 colormap 枚举到 JSON */
+QJsonObject PseudoColorBlock::saveParams() const
+{
+    QJsonObject obj = BaseBlock::saveParams();
+    obj.insert(QStringLiteral("map"), m_mapCombo->currentData().toInt());
+    return obj;
+}
+
+/** @brief 从 JSON 恢复 colormap；blockSignals 避免恢复过程中触发重算 */
+void PseudoColorBlock::loadParams(const QJsonObject &obj)
+{
+    BaseBlock::loadParams(obj);
+    const int map = obj.value(QStringLiteral("map")).toInt(m_mapCombo->currentData().toInt());
+    const int idx = m_mapCombo->findData(map);
+    m_mapCombo->blockSignals(true);
+    if (idx >= 0)
+        m_mapCombo->setCurrentIndex(idx);
+    m_mapCombo->blockSignals(false);
 }

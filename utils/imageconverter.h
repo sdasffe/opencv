@@ -44,8 +44,10 @@ public:
     /**
      * @brief QImage 转 cv::Mat（深拷贝）
      * @param image 输入 Qt 图像
-     * @param format 目标格式（默认 RGB）
+     * @param rgb true → RGB888/CV_8UC3；false → 灰度/CV_8UC1
      * @return OpenCV Mat
+     *
+     * 已有 QImage 时用（如 QImageReader 解码）；已有 QPixmap 时优先 pixmapToMat*。
      */
     static cv::Mat imageToMat(const QImage &image, bool rgb = true);
 

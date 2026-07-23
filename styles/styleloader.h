@@ -5,30 +5,25 @@
 
 /**
  * @file styleloader.h
- * @brief 全局 QSS 样式加载 —— 应用启动时的视觉主题入口
+ * @brief 全局 QSS 主题加载（浅色 / 深色，IDEA 风格）
  *
- * 【在整条链路中的位置】
- *   main.cpp 或 Widget 构造早期：
- *     qApp->setStyleSheet(StyleLoader::loadAppStyle());
- *
- * 【职责】
- *   1. 优先从 Qt 资源 :/styles/app.qss 读取完整主题
- *   2. 资源缺失时返回内置兜底样式，保证界面仍可基本使用
- *
- * 【为什么不用 QWidget::setStyleSheet 分散设置】
- *   集中 QSS 便于统一暗色画布、按钮、处理块等风格，改一处全局生效
+ * main 启动或设置菜单切换时：
+ *   qApp->setStyleSheet(StyleLoader::loadTheme(themeId));
  */
 
 namespace StyleLoader {
 
+/** 主题 id：与资源文件名对应 */
+inline constexpr const char *ThemeLight = "light";
+inline constexpr const char *ThemeDark = "dark";
+
 /**
- * @brief 加载应用全局样式表
- *
- * 谁调用：main 或 Widget 初始化
- * 返回：完整 QSS 字符串，可直接传给 QApplication::setStyleSheet
- *
- * 失败策略：文件打不开时不抛异常，返回硬编码的最小样式（背景色、按钮色等）
+ * @brief 按主题加载 QSS
+ * @param themeId "light" 或 "dark"；其它值回退 light
  */
+QString loadTheme(const QString &themeId);
+
+/** @brief 兼容旧调用：默认浅色 */
 QString loadAppStyle();
 
 } // namespace StyleLoader

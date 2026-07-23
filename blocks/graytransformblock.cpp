@@ -16,11 +16,13 @@
 #include "../utils/imageconverter.h"
 #include "../utils/roiprocess.h"
 
+#include <QJsonObject>
+
 GrayTransformBlock::GrayTransformBlock(QWidget *parent)
     : BaseBlock(parent)
 {
-    setupTitle(QStringLiteral("🎚"), AppConfig::BLOCK_NAME_GRAYTRANSFORM);
     setupUI();
+    retranslateUi();
 }
 
 /**
@@ -36,61 +38,59 @@ void GrayTransformBlock::setupUI()
     addSeparator();
 
     m_typeCombo = new QComboBox(this);
-    m_typeCombo->addItem(QStringLiteral("转灰度"), int(GrayTransformAlgorithm::Type::ToGray));
-    m_typeCombo->addItem(QStringLiteral("亮度/对比度"), int(GrayTransformAlgorithm::Type::BrightContrast));
-    m_typeCombo->addItem(QStringLiteral("反转"), int(GrayTransformAlgorithm::Type::Invert));
-    m_typeCombo->addItem(QStringLiteral("对数变换"), int(GrayTransformAlgorithm::Type::Log));
-    m_typeCombo->addItem(QStringLiteral("伽马变换"), int(GrayTransformAlgorithm::Type::Gamma));
-    m_typeCombo->addItem(QStringLiteral("直方图均衡"), int(GrayTransformAlgorithm::Type::Equalize));
-    m_typeCombo->addItem(QStringLiteral("归一化"), int(GrayTransformAlgorithm::Type::Normalize));
+    for (int t : {int(GrayTransformAlgorithm::Type::ToGray),
+                  int(GrayTransformAlgorithm::Type::BrightContrast),
+                  int(GrayTransformAlgorithm::Type::Invert),
+                  int(GrayTransformAlgorithm::Type::Log),
+                  int(GrayTransformAlgorithm::Type::Gamma),
+                  int(GrayTransformAlgorithm::Type::Equalize),
+                  int(GrayTransformAlgorithm::Type::Normalize)}) {
+        m_typeCombo->addItem(QString(), t);
+    }
     contentLayout()->addWidget(m_typeCombo);
 
-    // ----- 亮度 -----
     auto *bRow = new QHBoxLayout();
-    auto *bLb = new QLabel(QStringLiteral("亮度"), this);
-    bLb->setObjectName(QStringLiteral("blockFieldLabel"));
-    bLb->setFixedWidth(40);
+    m_brightLabel = new QLabel(this);
+    m_brightLabel->setObjectName(QStringLiteral("blockFieldLabel"));
+    m_brightLabel->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
     m_brightSpin = new QSpinBox(this);
-    m_brightSpin->setRange(-100, 100); // 对应算法层 convertTo 的 beta 偏移
+    m_brightSpin->setRange(-100, 100);
     m_brightSpin->setValue(0);
-    m_brightSpin->setFixedWidth(64);
-    bRow->addWidget(bLb);
+    m_brightSpin->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
+    bRow->addWidget(m_brightLabel);
     bRow->addWidget(m_brightSpin);
     bRow->addStretch();
     contentLayout()->addLayout(bRow);
 
-    // ----- 对比度（100 = 原图，0 = 全灰，>100 增强）-----
     auto *cRow = new QHBoxLayout();
-    auto *cLb = new QLabel(QStringLiteral("对比度"), this);
-    cLb->setObjectName(QStringLiteral("blockFieldLabel"));
-    cLb->setFixedWidth(40);
+    m_contrastLabel = new QLabel(this);
+    m_contrastLabel->setObjectName(QStringLiteral("blockFieldLabel"));
+    m_contrastLabel->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
     m_contrastSpin = new QSpinBox(this);
     m_contrastSpin->setRange(0, 300);
     m_contrastSpin->setValue(100);
-    m_contrastSpin->setFixedWidth(64);
-    cRow->addWidget(cLb);
+    m_contrastSpin->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
+    cRow->addWidget(m_contrastLabel);
     cRow->addWidget(m_contrastSpin);
     cRow->addStretch();
     contentLayout()->addLayout(cRow);
 
-    // ----- 伽马（<1 提亮暗部，>1 压暗）-----
     auto *gRow = new QHBoxLayout();
-    auto *gLb = new QLabel(QStringLiteral("伽马"), this);
-    gLb->setObjectName(QStringLiteral("blockFieldLabel"));
-    gLb->setFixedWidth(40);
+    m_gammaLabel = new QLabel(this);
+    m_gammaLabel->setObjectName(QStringLiteral("blockFieldLabel"));
+    m_gammaLabel->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
     m_gammaSpin = new QDoubleSpinBox(this);
     m_gammaSpin->setRange(0.1, 5.0);
     m_gammaSpin->setSingleStep(0.1);
     m_gammaSpin->setValue(1.0);
-    m_gammaSpin->setFixedWidth(64);
-    gRow->addWidget(gLb);
+    m_gammaSpin->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
+    gRow->addWidget(m_gammaLabel);
     gRow->addWidget(m_gammaSpin);
     gRow->addStretch();
     contentLayout()->addLayout(gRow);
 
     auto emitChangeInt = [this](int) { emit paramsChanged(); };
     auto emitChangeD = [this](double) { emit paramsChanged(); };
-    // 切换类型时先更新控件可用性，再触发重算
     connect(m_typeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int) {
         updateParamEnabled();
         emit paramsChanged();
@@ -99,15 +99,31 @@ void GrayTransformBlock::setupUI()
     connect(m_contrastSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChangeInt);
     connect(m_gammaSpin, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, emitChangeD);
 
-    updateParamEnabled(); // 初始状态：仅启用当前类型需要的控件
+    updateParamEnabled();
 }
 
-/**
- * @brief 根据当前变换类型，启用/禁用对应参数控件
- *
- * 为什么需要：避免用户在「转灰度」模式下误调伽马却看不到效果（算法层会忽略）
- * 何时调用：构造末尾、切换 typeCombo 时
- */
+void GrayTransformBlock::retranslateUi()
+{
+    setupTitle(QStringLiteral("🎚"), tr("灰度变换"));
+    BaseBlock::retranslateUi();
+    if (!m_typeCombo || m_typeCombo->count() < 7)
+        return;
+    m_typeCombo->setItemText(0, tr("转灰度"));
+    m_typeCombo->setItemText(1, tr("亮度/对比度"));
+    m_typeCombo->setItemText(2, tr("反转"));
+    m_typeCombo->setItemText(3, tr("对数变换"));
+    m_typeCombo->setItemText(4, tr("伽马变换"));
+    m_typeCombo->setItemText(5, tr("直方图均衡"));
+    m_typeCombo->setItemText(6, tr("归一化"));
+    if (m_brightLabel)
+        m_brightLabel->setText(tr("亮度"));
+    if (m_contrastLabel)
+        m_contrastLabel->setText(tr("对比度"));
+    if (m_gammaLabel)
+        m_gammaLabel->setText(tr("伽马"));
+}
+
+/** @brief 按变换类型启用/禁用亮度、对比度、伽马控件 */
 void GrayTransformBlock::updateParamEnabled()
 {
     const auto t = currentType();
@@ -129,16 +145,49 @@ GrayTransformAlgorithm::Type GrayTransformBlock::currentType() const
  * 输入：QPixmap + RoiInfo
  * 输出：QPixmap（多数模式输出仍为 BGR 三通道，便于后续块统一处理）
  */
-QPixmap GrayTransformBlock::process(const QPixmap &input, const RoiInfo &roi)
+QPixmap GrayTransformBlock::process(const QPixmap &input, const QList<RoiInfo> &rois)
 {
     if (input.isNull()) return input;
     cv::Mat src = ImageConverter::pixmapToMatRGB(input);
     cv::cvtColor(src, src, cv::COLOR_RGB2BGR);
-    cv::Mat out = RoiProcess::apply(src, roi, [&](const cv::Mat &m) {
+    cv::Mat out = RoiProcess::apply(src, rois, [&](const cv::Mat &m) {
         return GrayTransformAlgorithm::apply(
             m, currentType(),
             m_brightSpin->value(), m_contrastSpin->value(),
             m_gammaSpin->value());
     });
     return ImageConverter::matToPixmap(out);
+}
+
+/** @brief 导出变换类型与附加参数到 JSON */
+QJsonObject GrayTransformBlock::saveParams() const
+{
+    QJsonObject obj = BaseBlock::saveParams();
+    obj.insert(QStringLiteral("type"), m_typeCombo->currentData().toInt());
+    obj.insert(QStringLiteral("brightness"), m_brightSpin->value());
+    obj.insert(QStringLiteral("contrast"), m_contrastSpin->value());
+    obj.insert(QStringLiteral("gamma"), m_gammaSpin->value());
+    return obj;
+}
+
+/** @brief 从 JSON 恢复参数；恢复后 updateParamEnabled 同步控件可用状态 */
+void GrayTransformBlock::loadParams(const QJsonObject &obj)
+{
+    BaseBlock::loadParams(obj);
+    const int type = obj.value(QStringLiteral("type")).toInt(m_typeCombo->currentData().toInt());
+    const int idx = m_typeCombo->findData(type);
+    m_typeCombo->blockSignals(true);
+    m_brightSpin->blockSignals(true);
+    m_contrastSpin->blockSignals(true);
+    m_gammaSpin->blockSignals(true);
+    if (idx >= 0)
+        m_typeCombo->setCurrentIndex(idx);
+    m_brightSpin->setValue(obj.value(QStringLiteral("brightness")).toInt(m_brightSpin->value()));
+    m_contrastSpin->setValue(obj.value(QStringLiteral("contrast")).toInt(m_contrastSpin->value()));
+    m_gammaSpin->setValue(obj.value(QStringLiteral("gamma")).toDouble(m_gammaSpin->value()));
+    m_typeCombo->blockSignals(false);
+    m_brightSpin->blockSignals(false);
+    m_contrastSpin->blockSignals(false);
+    m_gammaSpin->blockSignals(false);
+    updateParamEnabled();
 }

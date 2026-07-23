@@ -4,10 +4,18 @@
 #include "opencv2/opencv.hpp"
 
 /**
+ * @file binarization.h
  * @brief 二值化算法集合（纯算法，无 UI 依赖）
+ *
+ * 【在整条链路中的位置】
+ *   BinarizationBlock → applyRangeThreshold（经 RoiProcess::apply）
+ *   Widget「Otsu」按钮 → OtsuAlgorithm 算阈值 → 写回块参数后重算
+ *
+ * 新流水线优先 RoiProcess + applyRangeThreshold；本头文件仍保留带 mask 的 ROI 专用接口。
  */
 namespace BinarizationAlgorithm {
 
+/** 与 OpenCV cv::threshold 对应的阈值模式 */
 enum class ThresholdType {
     Binary,
     BinaryInv,
@@ -18,6 +26,7 @@ enum class ThresholdType {
 
 int toCvType(ThresholdType type);
 
+/** 单阈值二值化（cv::threshold 封装） */
 cv::Mat applyThreshold(const cv::Mat &src,
                        double thresh,
                        double maxValue = 255.0,

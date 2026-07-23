@@ -8,6 +8,16 @@
 #include <QPen>
 
 /**
+ * @file resizablerotatedrectitem.h
+ * @brief 可旋转矩形 ROI —— 对应 RoiInfo::RotatedRect（center + size + angleDeg）
+ *
+ * 局部 m_rect 以原点为中心；scene 位置 = center，rotation = angleDeg。
+ * Widget::getAllRoiInfo 读 mapToScene(localRect().center()) 与 rotation()。
+ *
+ * @see roi/roiinfo.h
+ */
+
+/**
  * @brief 可旋转、可缩放的矩形 ROI
  *
  * 局部坐标系：矩形以原点为中心；通过 setPos / setRotation 放到场景中。
@@ -30,7 +40,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
 
+    /** 局部坐标矩形（中心在原点），供 Widget 导出 size / 中心 */
     QRectF localRect() const { return m_rect; }
+    /** 改局部宽高并重设 transformOrigin 为矩形中心 */
     void setLocalSize(qreal width, qreal height);
 
 protected:

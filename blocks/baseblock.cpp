@@ -13,11 +13,23 @@
  *   1. 构造里 setupTitle + 往 contentLayout 加控件
  *   2. 实现 process() / blockName()
  *   3. 参数变了 emit paramsChanged()
+ *
+ * 标题栏图标/名称可拖动：发出 MIME_BLOCK_REORDER，由 Widget 换序。
  */
 
 #include "baseblock.h"
+#include "../config/appconfig.h"
 
+#include <QApplication>
+#include <QClipboard>
 #include <QCursor>
+#include <QDataStream>
+#include <QDrag>
+#include <QIODevice>
+#include <QJsonObject>
+#include <QMenu>
+#include <QMimeData>
+#include <QMouseEvent>
 #include <QSizePolicy>
 
 BaseBlock::BaseBlock(QWidget *parent)
@@ -35,20 +47,26 @@ BaseBlock::BaseBlock(QWidget *parent)
 
     m_iconLabel = new QLabel(this);
     m_iconLabel->setObjectName(QStringLiteral("blockIconLabel"));
+    m_iconLabel->setCursor(Qt::OpenHandCursor);
+    m_iconLabel->setToolTip(tr("拖动可调整处理顺序"));
+    m_iconLabel->installEventFilter(this);
 
     m_titleLabel = new QLabel(this);
     m_titleLabel->setObjectName(QStringLiteral("blockTitleLabel"));
+    m_titleLabel->setCursor(Qt::OpenHandCursor);
+    m_titleLabel->setToolTip(tr("拖动可调整处理顺序"));
+    m_titleLabel->installEventFilter(this);
 
     m_enableCheckBox = new QCheckBox(this);
     m_enableCheckBox->setChecked(true);  // 默认启用，参与处理链
-    m_enableCheckBox->setText(QStringLiteral("开"));
-    m_enableCheckBox->setToolTip(QStringLiteral("启用此处理块"));
+    m_enableCheckBox->setText(tr("开"));
+    m_enableCheckBox->setToolTip(tr("启用此处理块"));
 
     m_deleteBtn = new QPushButton(QStringLiteral("✕"), this);
     m_deleteBtn->setObjectName(QStringLiteral("blockDeleteBtn"));
     m_deleteBtn->setFixedSize(18, 18);
     m_deleteBtn->setCursor(Qt::PointingHandCursor);
-    m_deleteBtn->setToolTip(QStringLiteral("删除此处理块"));
+    m_deleteBtn->setToolTip(tr("删除此处理块"));
 
     m_titleLayout->addWidget(m_iconLabel);
     m_titleLayout->addWidget(m_titleLabel);
@@ -70,6 +88,8 @@ BaseBlock::BaseBlock(QWidget *parent)
     // 开关也算一种“参数变化”，直接触发重算
     connect(m_enableCheckBox, &QCheckBox::toggled, this, &BaseBlock::paramsChanged);
 
+    setContextMenuPolicy(Qt::DefaultContextMenu);
+    setToolTip(tr("右键可复制、粘贴或删除"));
     initStyle();
 }
 
@@ -77,7 +97,103 @@ void BaseBlock::setupTitle(const QString &icon, const QString &title)
 {
     m_iconLabel->setText(icon);
     m_titleLabel->setText(title);
-    m_enableCheckBox->setToolTip(QStringLiteral("启用%1").arg(title));
+    m_enableCheckBox->setToolTip(tr("启用%1").arg(title));
+}
+
+void BaseBlock::retranslateUi()
+{
+    m_iconLabel->setToolTip(tr("拖动可调整处理顺序"));
+    m_titleLabel->setToolTip(tr("拖动可调整处理顺序"));
+    m_enableCheckBox->setText(tr("开"));
+    m_enableCheckBox->setToolTip(tr("启用%1").arg(m_titleLabel->text()));
+    m_deleteBtn->setToolTip(tr("删除此处理块"));
+    setToolTip(tr("右键可复制、粘贴或删除"));
+}
+
+void BaseBlock::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu menu(this);
+    QAction *copyAct = menu.addAction(tr("复制"));
+    QAction *pasteAct = menu.addAction(tr("粘贴"));
+    menu.addSeparator();
+    QAction *delAct = menu.addAction(tr("删除"));
+
+    // 剪贴板须含 MIME_BLOCK_CLIPBOARD 或纯文本 JSON 才允许粘贴
+    const QMimeData *clip = QApplication::clipboard()->mimeData();
+    const bool canPaste = clip
+        && (clip->hasFormat(QLatin1String(AppConfig::MIME_BLOCK_CLIPBOARD))
+            || clip->hasText());
+    pasteAct->setEnabled(canPaste);
+
+    QAction *chosen = menu.exec(event->globalPos());
+    if (chosen == copyAct)
+        emit copyRequested();
+    else if (chosen == pasteAct)
+        emit pasteRequested();
+    else if (chosen == delAct)
+        emit removeRequested();
+}
+
+/** @brief 导出 name、enabled 到 JSON（子类 append 自己的字段） */
+QJsonObject BaseBlock::saveParams() const
+{
+    QJsonObject obj;
+    obj.insert(QStringLiteral("name"), blockName());
+    obj.insert(QStringLiteral("enabled"), isEnabled());
+    return obj;
+}
+
+/** @brief 从 JSON 恢复 enabled；子类 loadParams 应先读自己的字段再调基类 */
+void BaseBlock::loadParams(const QJsonObject &obj)
+{
+    if (obj.contains(QStringLiteral("enabled")))
+        setEnabledBlock(obj.value(QStringLiteral("enabled")).toBool(true));
+}
+
+bool BaseBlock::eventFilter(QObject *watched, QEvent *event)
+{
+    if (watched != m_iconLabel && watched != m_titleLabel)
+        return QWidget::eventFilter(watched, event);
+
+    switch (event->type()) {
+    case QEvent::MouseButtonPress: {
+        auto *e = static_cast<QMouseEvent *>(event);
+        if (e->button() == Qt::LeftButton)
+            m_dragStartPos = e->pos();
+        break;
+    }
+    case QEvent::MouseMove: {
+        auto *e = static_cast<QMouseEvent *>(event);
+        if (!(e->buttons() & Qt::LeftButton))
+            break;
+        if ((e->pos() - m_dragStartPos).manhattanLength()
+            < QApplication::startDragDistance())
+            break;
+        startBlockDrag();
+        return true;
+    }
+    default:
+        break;
+    }
+    return QWidget::eventFilter(watched, event);
+}
+
+void BaseBlock::startBlockDrag()
+{
+    auto *mime = new QMimeData;
+    QByteArray bytes;
+    QDataStream stream(&bytes, QIODevice::WriteOnly);
+    stream << quintptr(this);
+    mime->setData(QLatin1String(AppConfig::MIME_BLOCK_REORDER), bytes);
+
+    auto *drag = new QDrag(this);
+    drag->setMimeData(mime);
+    // 缩略预览，方便对准插入位置
+    const QPixmap preview = grab().scaled(160, 48, Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation);
+    drag->setPixmap(preview);
+    drag->setHotSpot(QPoint(preview.width() / 2, 8));
+    drag->exec(Qt::MoveAction);
 }
 
 void BaseBlock::addSeparator()
@@ -91,8 +207,9 @@ void BaseBlock::addSeparator()
 
 void BaseBlock::initStyle()
 {
-    // 样式由全局 app.qss 的 #BaseBlock 规则统一控制
+    // 样式由全局 theme_*.qss 的 #BaseBlock 规则统一控制
     setAttribute(Qt::WA_StyledBackground, true);
+    setAutoFillBackground(false);
     // Minimum：高度不低于内容 sizeHint，多块时由外层 QScrollArea 滚动，不被挤扁
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
 }

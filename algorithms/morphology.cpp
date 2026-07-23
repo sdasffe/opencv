@@ -73,6 +73,20 @@ cv::Mat apply(const cv::Mat &srcBgr, Op op, int kx, int ky, int iterations)
         cv::morphologyEx(srcBgr, dst, cv::MORPH_CLOSE, kernel,
                          cv::Point(-1, -1), iterations);
         break;
+    case Op::TopHat:
+        //顶帽=输入-开运算
+        cv::morphologyEx(srcBgr,dst,cv::MORPH_TOPHAT,kernel,
+                         cv::Point(-1,-1),iterations);
+        break;
+    case Op::ButtonHat:
+        //底帽=闭运算-输入
+        cv::morphologyEx(srcBgr,dst,cv::MORPH_BLACKHAT,kernel,
+                         cv::Point(-1,-1),iterations);
+        break;
+    case Op::MorphologicalGradient:
+        // 形态学梯度 = 膨胀 − 腐蚀，突出物体轮廓
+        cv::morphologyEx(srcBgr,dst,cv::MORPH_GRADIENT,kernel,
+                         cv::Point(-1,-1),iterations);
     }
     return dst;
 }

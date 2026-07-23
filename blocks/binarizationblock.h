@@ -21,12 +21,17 @@ public:
     explicit BinarizationBlock(QWidget *parent = nullptr);
 
     // ========== BaseBlock 接口 ==========
-    QPixmap process(const QPixmap &input, const RoiInfo &roi = RoiInfo()) override;
-    QString blockName() const override { return AppConfig::BLOCK_NAME_BINARIZATION; }
+    QPixmap process(const QPixmap &input, const QList<RoiInfo> &rois = {}) override;
+    QString blockName() const override { return QString::fromUtf8(AppConfig::BLOCK_NAME_BINARIZATION); }
 
     int lowerThreshold() const { return m_lowerSpin->value(); }
     int upperThreshold() const { return m_upperSpin->value(); }
+    /** @brief 外部设置阈值（Otsu 自动阈值完成后由 Widget 调用） */
     void setThresholds(int lower, int upper);
+
+    QJsonObject saveParams() const override;
+    void loadParams(const QJsonObject &obj) override;
+    void retranslateUi() override;
 
 signals:
     /** 请求用当前原图计算 Otsu（由主窗口响应） */
@@ -40,6 +45,8 @@ private slots:
 private:
     void setupUI();
 
+    QLabel *m_lowerLabel = nullptr;
+    QLabel *m_upperLabel = nullptr;
     QSpinBox *m_lowerSpin;
     QSpinBox *m_upperSpin;
     QPushButton *m_autoBtn;

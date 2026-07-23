@@ -1,17 +1,12 @@
 /**
  * @file styleloader.cpp
- * @brief 从 Qt 资源或内置字符串加载 QSS
- *
- * 【资源路径】
- *   :/styles/app.qss —— 在 .qrc 中注册，编译进可执行文件
- *
- * 【Qt5/Qt6 差异】
- *   QTextStream 编码：Qt5 用 setCodec("UTF-8")，Qt6 用 QStringConverter::Utf8
- *   保证中文 QSS 注释与选择器正常读取
+ * @brief 加载浅色/深色 QSS；优先读磁盘 styles/，避免未重编资源时看不到改动
  */
 
 #include "styleloader.h"
 
+#include <QCoreApplication>
+#include <QDir>
 #include <QFile>
 #include <QTextStream>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -20,38 +15,75 @@
 
 namespace StyleLoader {
 
-/**
- * @brief 加载全局 QSS
- *
- * 流程：
- *   1. 打开资源文件 ReadOnly | Text
- *   2. 设置 UTF-8，readAll 读入
- *   3. 失败则返回 QStringLiteral 内置兜底（主窗口、GraphicsView、按钮配色）
- */
+namespace {
+
+QString readFileUtf8(const QString &path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return QString();
+    QTextStream in(&file);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    in.setCodec("UTF-8");
+#else
+    in.setEncoding(QStringConverter::Utf8);
+#endif
+    return in.readAll();
+}
+
+/** 从 exe 向上找 styles/<fileName>，找不到再用 :/styles/ */
+QString resolveThemePath(const QString &fileName)
+{
+    QDir dir(QCoreApplication::applicationDirPath());
+    for (int i = 0; i < 8; ++i) {
+        const QString candidate = dir.filePath(QStringLiteral("styles/") + fileName);
+        if (QFile::exists(candidate))
+            return candidate;
+        if (!dir.cdUp())
+            break;
+    }
+    const QString cwd = QDir::current().filePath(QStringLiteral("styles/") + fileName);
+    if (QFile::exists(cwd))
+        return cwd;
+    return QStringLiteral(":/styles/") + fileName;
+}
+
+QString fallbackLight()
+{
+    return QStringLiteral(
+        "QWidget#Widget { background-color: #F0F0F0; color: #2B2B2B; }"
+        "QGraphicsView#graphicsView { background-color: #2B2B2B; }"
+        "QPushButton#btnApply { background-color: #3574F0; color: white; border: none; }");
+}
+
+QString fallbackDark()
+{
+    return QStringLiteral(
+        "QWidget#Widget { background-color: #1E1F22; color: #DFE1E5; }"
+        "QGraphicsView#graphicsView { background-color: #141517; }"
+        "QPushButton#btnApply { background-color: #3574F0; color: white; border: none; }");
+}
+
+} // namespace
+
+QString loadTheme(const QString &themeId)
+{
+    const bool dark = (themeId.compare(QLatin1String(ThemeDark), Qt::CaseInsensitive) == 0);
+    const QString fileName = dark ? QStringLiteral("theme_dark.qss")
+                                  : QStringLiteral("theme_light.qss");
+    const QString path = resolveThemePath(fileName);
+    const QString qss = readFileUtf8(path);
+    if (!qss.isEmpty())
+        return qss;
+    const QString legacy = readFileUtf8(QStringLiteral(":/styles/app.qss"));
+    if (!legacy.isEmpty())
+        return legacy;
+    return dark ? fallbackDark() : fallbackLight();
+}
+
 QString loadAppStyle()
 {
-    QFile file(QStringLiteral(":/styles/app.qss"));
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream in(&file);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        in.setCodec("UTF-8");
-#else
-        in.setEncoding(QStringConverter::Utf8);
-#endif
-        return in.readAll();
-    }
-
-    // 兜底：资源未打包或路径错误时仍能显示基本 UI
-    return QStringLiteral(
-        "QWidget#Widget { background-color: #E8ECF1; }"
-        "QGraphicsView#graphicsView { background-color: #1A1D23; border-radius: 10px; }"
-        "QPushButton#pushButton, QPushButton#pushButton_3 {"
-        "  background-color: #0F766E; color: white; border: none;"
-        "  border-radius: 8px; padding: 8px 14px; }"
-        "QPushButton#deltete {"
-        "  background-color: #DC2626; color: white; border: none;"
-        "  border-radius: 8px; padding: 8px 14px; }"
-        );
+    return loadTheme(QLatin1String(ThemeLight));
 }
 
 } // namespace StyleLoader

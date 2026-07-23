@@ -1,0 +1,19 @@
+{
+    "sessions": {
+        "C:/Users/Admin/Desktop/图片/input.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "iterations": 1,
+                    "kx": 3,
+                    "ky": 3,
+                    "name": "形态学处理",
+                    "op": 0
+                }
+            ],
+            "rois": [
+            ]
+        }
+    },
+    "version": 1
+}

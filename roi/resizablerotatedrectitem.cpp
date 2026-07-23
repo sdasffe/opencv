@@ -1,3 +1,11 @@
+/**
+ * @file resizablerotatedrectitem.cpp
+ * @brief 旋转矩形 ROI：局部居中几何 + scene 位姿
+ *
+ * 缩放时对角固定一点；旋转手柄用 scene 坐标 atan2 算角度。
+ * mouseRelease 后把 m_rect 重新居中到局部原点，pos 设为 scene 中心，便于与 RoiInfo 互转。
+ */
+
 #include "resizablerotatedrectitem.h"
 
 #include <QtMath>
@@ -23,6 +31,7 @@ void ResizableRotatedRectItem::setLocalSize(qreal width, qreal height)
     update();
 }
 
+/** 含旋转手柄与四角热区的包围盒，供 scene 脏区与命中范围 */
 QRectF ResizableRotatedRectItem::boundingRect() const
 {
     const qreal pad = HANDLE_SIZE + ROTATE_OFFSET + 4;
@@ -134,6 +143,7 @@ void ResizableRotatedRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         return;
     }
 
+    // 旋转：鼠标相对 scene 中心的方向角 +90° 使 0° 对应矩形「顶边朝上」
     if (m_handleType == Rotate) {
         const QPointF centerScene = mapToScene(m_rect.center());
         const QPointF v = event->scenePos() - centerScene;
@@ -144,6 +154,7 @@ void ResizableRotatedRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         return;
     }
 
+    // 拖角缩放：对角顶点 fixed 不动，当前鼠标位置为对角点
     QPointF fixed;
     switch (m_handleType) {
     case TopLeft:     fixed = m_originalRect.bottomRight(); break;

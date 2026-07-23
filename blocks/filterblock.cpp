@@ -17,6 +17,8 @@
 #include "../utils/imageconverter.h"
 #include "../utils/roiprocess.h"
 
+#include <QJsonObject>
+
 /**
  * @brief 构造函数
  * 谁调用：Widget::createBlockByName
@@ -24,8 +26,8 @@
 FilterBlock::FilterBlock(QWidget *parent)
     : BaseBlock(parent)
 {
-    setupTitle(QStringLiteral("🌀"), AppConfig::BLOCK_NAME_FILTER);
     setupUI();
+    retranslateUi();
 }
 
 /**
@@ -41,42 +43,62 @@ void FilterBlock::setupUI()
     addSeparator();
 
     m_typeCombo = new QComboBox(this);
-    m_typeCombo->addItem(QStringLiteral("均值滤波"), int(FilterAlgorithm::Type::Mean));
-    m_typeCombo->addItem(QStringLiteral("高斯滤波"), int(FilterAlgorithm::Type::Gaussian));
-    m_typeCombo->addItem(QStringLiteral("中值滤波"), int(FilterAlgorithm::Type::Median));
-    m_typeCombo->addItem(QStringLiteral("Sobel"), int(FilterAlgorithm::Type::Sobel));
-    m_typeCombo->addItem(QStringLiteral("Laplacian"), int(FilterAlgorithm::Type::Laplacian));
-    m_typeCombo->addItem(QStringLiteral("Prewitt"), int(FilterAlgorithm::Type::Prewitt));
-    m_typeCombo->addItem(QStringLiteral("Roberts"), int(FilterAlgorithm::Type::Roberts));
+    for (int t : {int(FilterAlgorithm::Type::Mean), int(FilterAlgorithm::Type::Gaussian),
+                  int(FilterAlgorithm::Type::Median), int(FilterAlgorithm::Type::Sobel),
+                  int(FilterAlgorithm::Type::Laplacian), int(FilterAlgorithm::Type::Prewitt),
+                  int(FilterAlgorithm::Type::Roberts)}) {
+        m_typeCombo->addItem(QString(), t);
+    }
     contentLayout()->addWidget(m_typeCombo);
 
-    // 简化版 Spin 行工厂（范围固定 1~31）
-    auto addSpin = [&](const QString &label, int def) {
+    auto addSpin = [&](QLabel *&labelOut, int def) {
         auto *row = new QHBoxLayout();
-        auto *lb = new QLabel(label, this);
-        lb->setObjectName(QStringLiteral("blockFieldLabel"));
-        lb->setFixedWidth(40);
+        labelOut = new QLabel(this);
+        labelOut->setObjectName(QStringLiteral("blockFieldLabel"));
+        labelOut->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
         auto *sp = new QSpinBox(this);
         sp->setRange(1, 31);
         sp->setValue(def);
-        sp->setFixedWidth(64);
-        row->addWidget(lb);
+        sp->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
+        sp->setSingleStep(2);
+        row->addWidget(labelOut);
         row->addWidget(sp);
         row->addStretch();
         contentLayout()->addLayout(row);
         return sp;
     };
 
-    m_kxSpin = addSpin(QStringLiteral("核 X"), 3);
-    m_kySpin = addSpin(QStringLiteral("核 Y"), 3);
-    m_iterSpin = addSpin(QStringLiteral("次数"), 1);
-    m_iterSpin->setRange(1, 20); // 迭代上限单独设置
+    m_kxSpin = addSpin(m_kxLabel, 3);
+    m_kySpin = addSpin(m_kyLabel, 3);
+    m_iterSpin = addSpin(m_iterLabel, 1);
+    m_iterSpin->setRange(1, 20);
 
     auto emitChange = [this](int) { emit paramsChanged(); };
     connect(m_typeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, emitChange);
     connect(m_kxSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_kySpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_iterSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
+}
+
+void FilterBlock::retranslateUi()
+{
+    setupTitle(QStringLiteral("🌀"), tr("滤波处理"));
+    BaseBlock::retranslateUi();
+    if (!m_typeCombo || m_typeCombo->count() < 7)
+        return;
+    m_typeCombo->setItemText(0, tr("均值滤波"));
+    m_typeCombo->setItemText(1, tr("高斯滤波"));
+    m_typeCombo->setItemText(2, tr("中值滤波"));
+    m_typeCombo->setItemText(3, QStringLiteral("Sobel"));
+    m_typeCombo->setItemText(4, QStringLiteral("Laplacian"));
+    m_typeCombo->setItemText(5, QStringLiteral("Prewitt"));
+    m_typeCombo->setItemText(6, QStringLiteral("Roberts"));
+    if (m_kxLabel)
+        m_kxLabel->setText(tr("核 X"));
+    if (m_kyLabel)
+        m_kyLabel->setText(tr("核 Y"));
+    if (m_iterLabel)
+        m_iterLabel->setText(tr("次数"));
 }
 
 /**
@@ -96,15 +118,47 @@ FilterAlgorithm::Type FilterBlock::currentType() const
  *
  * 与形态学块相同的转换套路：QPixmap↔Mat、RGB↔BGR、RoiProcess 包装
  */
-QPixmap FilterBlock::process(const QPixmap &input, const RoiInfo &roi)
+QPixmap FilterBlock::process(const QPixmap &input, const QList<RoiInfo> &rois)
 {
     if (input.isNull()) return input;
     cv::Mat src = ImageConverter::pixmapToMatRGB(input);
     cv::cvtColor(src, src, cv::COLOR_RGB2BGR);
-    cv::Mat out = RoiProcess::apply(src, roi, [&](const cv::Mat &m) {
+    cv::Mat out = RoiProcess::apply(src, rois, [&](const cv::Mat &m) {
         return FilterAlgorithm::apply(m, currentType(),
                                       m_kxSpin->value(), m_kySpin->value(),
                                       m_iterSpin->value());
     });
     return ImageConverter::matToPixmap(out);
+}
+
+/** @brief 导出滤波类型、核尺寸、迭代次数到 JSON */
+QJsonObject FilterBlock::saveParams() const
+{
+    QJsonObject obj = BaseBlock::saveParams();
+    obj.insert(QStringLiteral("type"), m_typeCombo->currentData().toInt());
+    obj.insert(QStringLiteral("kx"), m_kxSpin->value());
+    obj.insert(QStringLiteral("ky"), m_kySpin->value());
+    obj.insert(QStringLiteral("iterations"), m_iterSpin->value());
+    return obj;
+}
+
+/** @brief 从 JSON 恢复参数；blockSignals 避免恢复过程中触发重算 */
+void FilterBlock::loadParams(const QJsonObject &obj)
+{
+    BaseBlock::loadParams(obj);
+    const int type = obj.value(QStringLiteral("type")).toInt(m_typeCombo->currentData().toInt());
+    const int idx = m_typeCombo->findData(type);
+    m_typeCombo->blockSignals(true);
+    m_kxSpin->blockSignals(true);
+    m_kySpin->blockSignals(true);
+    m_iterSpin->blockSignals(true);
+    if (idx >= 0)
+        m_typeCombo->setCurrentIndex(idx);
+    m_kxSpin->setValue(obj.value(QStringLiteral("kx")).toInt(m_kxSpin->value()));
+    m_kySpin->setValue(obj.value(QStringLiteral("ky")).toInt(m_kySpin->value()));
+    m_iterSpin->setValue(obj.value(QStringLiteral("iterations")).toInt(m_iterSpin->value()));
+    m_typeCombo->blockSignals(false);
+    m_kxSpin->blockSignals(false);
+    m_kySpin->blockSignals(false);
+    m_iterSpin->blockSignals(false);
 }

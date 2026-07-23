@@ -35,16 +35,19 @@ TimeMeasurer::~TimeMeasurer()
     }
 }
 
+/** 重置起点；同作用域内测多段时先构造再多次 start() */
 void TimeMeasurer::start()
 {
     m_timer.start();
 }
 
+/** 毫秒，与析构日志及 QElapsedTimer::elapsed 一致 */
 qint64 TimeMeasurer::elapsedMs() const
 {
     return m_timer.elapsed();
 }
 
+/** 微秒，适合单次算法调用等短耗时细测 */
 qint64 TimeMeasurer::elapsedUs() const
 {
     return m_timer.nsecsElapsed() / 1000;

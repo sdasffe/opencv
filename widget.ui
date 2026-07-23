@@ -12,8 +12,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>960</width>
-    <height>560</height>
+    <width>800</width>
+    <height>520</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout" stretch="12,3,4">
    <property name="spacing">
-    <number>10</number>
+    <number>8</number>
    </property>
    <property name="leftMargin">
     <number>10</number>
@@ -59,80 +59,59 @@
          <number>8</number>
         </property>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QToolButton" name="btnMenuFile">
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="toolTip">
-           <string>打开图片</string>
+           <string>文件</string>
           </property>
           <property name="text">
-           <string>打开</string>
+           <string>文件</string>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::InstantPopup</enum>
+          </property>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonTextOnly</enum>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QToolButton" name="btnMenuRoi">
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="toolTip">
-           <string>打开文件夹</string>
+           <string>ROI 选区</string>
           </property>
-          <property name="text">
-           <string>文件夹</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
           <property name="text">
            <string>ROI</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
+          <property name="popupMode">
+           <enum>QToolButton::InstantPopup</enum>
           </property>
-          <item>
-           <property name="text">
-            <string>矩形</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>圆形</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>旋转矩形</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>添加</string>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonTextOnly</enum>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="deltete">
+         <widget class="QToolButton" name="btnMenuSettings">
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="toolTip">
-           <string>删除选中 ROI</string>
+           <string>设置</string>
           </property>
           <property name="text">
-           <string>删除</string>
+           <string>设置</string>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::InstantPopup</enum>
+          </property>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonTextOnly</enum>
           </property>
          </widget>
         </item>
@@ -185,19 +164,6 @@
           </property>
           <property name="text">
            <string>保存</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnClearChain">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="toolTip">
-           <string>清空处理链</string>
-          </property>
-          <property name="text">
-           <string>清空</string>
           </property>
          </widget>
         </item>
@@ -311,25 +277,25 @@
     <widget class="QWidget" name="widget_2" native="true">
      <property name="minimumSize">
       <size>
-       <width>160</width>
+       <width>100</width>
        <height>0</height>
       </size>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="leftMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <property name="topMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <property name="rightMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <property name="bottomMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <item>
        <widget class="QLabel" name="algoTitleLabel">
@@ -343,7 +309,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>250</height>
+          <height>120</height>
          </size>
         </property>
         <item>
@@ -351,7 +317,7 @@
           <string>二值化处理</string>
          </property>
          <property name="textAlignment">
-          <set>AlignCenter</set>
+          <set>AlignLeft|AlignVCenter</set>
          </property>
         </item>
         <item>
@@ -359,7 +325,7 @@
           <string>形态学处理</string>
          </property>
          <property name="textAlignment">
-          <set>AlignCenter</set>
+          <set>AlignLeft|AlignVCenter</set>
          </property>
         </item>
         <item>
@@ -367,7 +333,7 @@
           <string>滤波处理</string>
          </property>
          <property name="textAlignment">
-          <set>AlignCenter</set>
+          <set>AlignLeft|AlignVCenter</set>
          </property>
         </item>
         <item>
@@ -375,7 +341,7 @@
           <string>灰度变换</string>
          </property>
          <property name="textAlignment">
-          <set>AlignCenter</set>
+          <set>AlignLeft|AlignVCenter</set>
          </property>
         </item>
         <item>
@@ -383,7 +349,15 @@
           <string>伪彩色处理</string>
          </property>
          <property name="textAlignment">
-          <set>AlignCenter</set>
+          <set>AlignLeft|AlignVCenter</set>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>灰度共生矩阵</string>
+         </property>
+         <property name="textAlignment">
+          <set>AlignLeft|AlignVCenter</set>
          </property>
         </item>
        </widget>
@@ -408,32 +382,78 @@
     <widget class="QWidget" name="widget_3" native="true">
      <property name="minimumSize">
       <size>
-       <width>220</width>
+       <width>160</width>
        <height>0</height>
       </size>
      </property>
-     <layout class="QVBoxLayout" name="blockPanelOuterLayout" stretch="0,0,1">
+     <layout class="QVBoxLayout" name="blockPanelOuterLayout" stretch="0,0,0,1">
       <property name="spacing">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="leftMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <property name="topMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <property name="rightMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <property name="bottomMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <item>
        <widget class="QLabel" name="chainTitleLabel">
         <property name="text">
-         <string>处理链</string>
+         <string>图像处理工具箱</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="chainIoLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="btnExportChain">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="toolTip">
+           <string>导出当前处理链为 JSON</string>
+          </property>
+          <property name="text">
+           <string>导出</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnImportChain">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="toolTip">
+           <string>从 JSON 导入处理链</string>
+          </property>
+          <property name="text">
+           <string>导入</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnClearChain">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="toolTip">
+           <string>清空图像处理工具箱</string>
+          </property>
+          <property name="text">
+           <string>清空</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QLabel" name="chainHintLabel">
