@@ -1,14 +1,8 @@
 /**
  * @file main.cpp
- * @brief 程序入口
+ * @brief 程序入口：创建应用、日志、字体、主题，显示主窗口并进入事件循环
  *
- * 运行过程概览：
- *   1. 创建 QApplication（Qt 事件循环容器）
- *   2. 设置全局字体、加载 QSS 样式
- *   3. 创建并显示主窗口 Widget
- *   4. 进入事件循环，等待用户操作（打开图、拖算法、调参、画 ROI 等）
- *
- * 真正的业务逻辑都在 core/widget.cpp 与 core/imageprocessor.cpp 中。
+ * 业务逻辑在 core/widget.cpp 与 core/imageprocessor.cpp。
  */
 
 #include "core/widget.h"
@@ -23,49 +17,41 @@
 #include <QStyle>
 #include <QStyleFactory>
 
+/**
+ * @brief 程序入口
+ * @return 事件循环退出码（一般为 0）
+ */
 int main(int argc, char *argv[])
 {
-    // ---------- 1. 创建 Qt 应用对象 ----------
-    // 必须最先创建；之后所有界面控件都依赖它
-    QApplication a(argc, argv);
-    a.setApplicationName(QString::fromUtf8(AppConfig::APP_NAME_ZH));
-    a.setApplicationVersion(QString::fromUtf8(AppConfig::APP_VERSION));
-    a.setOrganizationName(QStringLiteral("Image Processing Toolbox"));
+    QApplication a(argc, argv);                                      // 必须最先创建；后续控件依赖它
+    a.setApplicationName(QString::fromUtf8(AppConfig::APP_NAME_ZH)); // 应用显示名（中文）
+    a.setApplicationVersion(QString::fromUtf8(AppConfig::APP_VERSION)); // 版本号
+    a.setOrganizationName(QStringLiteral("Image Processing Toolbox")); // QSettings 组织名
 
-    // Fusion：Windows 原生样式会吞掉大量 QSS，IDE 质感必须走 Fusion
     if (QStyle *fusion = QStyleFactory::create(QStringLiteral("Fusion")))
-        a.setStyle(fusion);
+        a.setStyle(fusion);                                          // Fusion 才能充分吃到 QSS
 
-    // ---------- 1b. 日志 ----------
-    // 写入 debug/logs/，便于排查处理链与 ROI 问题
-    AppLogger::init();
+    AppLogger::init();                                               // 创建 logs/ 并打开当日日志文件
     AppLogger::info(QStringLiteral("程序启动"));
     QObject::connect(&a, &QCoreApplication::aboutToQuit, []() {
-        AppLogger::info(QStringLiteral("程序退出"));
+        AppLogger::info(QStringLiteral("程序退出"));                 // 关窗退出前打一条尾日志
     });
 
-    // ---------- 2. 全局字体 ----------
-    // 优先微软雅黑 UI，没有则回退到微软雅黑，保证中文显示清晰
-    QFont appFont(QStringLiteral("Microsoft YaHei UI"), 10);
+    QFont appFont(QStringLiteral("Microsoft YaHei UI"), 10);         // 优先雅黑 UI
     if (appFont.exactMatch() == false)
-        appFont = QFont(QStringLiteral("Microsoft YaHei"), 10);
-    a.setFont(appFont);
+        appFont = QFont(QStringLiteral("Microsoft YaHei"), 10);      // 没有则回退普通雅黑
+    a.setFont(appFont);                                              // 全局默认字体
 
-    // ---------- 3. 全局样式表（浅色 / 深色，IDE 风） ----------
     {
         QSettings settings(QStringLiteral("OpenCVLab"), QStringLiteral("ImageTool"));
         const QString theme = settings.value(QStringLiteral("ui/theme"),
-                                             QLatin1String(StyleLoader::ThemeLight)).toString();
-        a.setStyleSheet(StyleLoader::loadTheme(theme));
+                                             QLatin1String(StyleLoader::ThemeLight)).toString(); // 读上次主题
+        a.setStyleSheet(StyleLoader::loadTheme(theme));              // 启动即套用浅色/深色 QSS
     }
 
-    // ---------- 4. 主窗口 ----------
-    // Widget 内部会：搭画布、侧栏、处理链面板，并创建 ImageProcessor
-    Widget w;
-    w.show();
+    Widget w;                                                        // 主窗口：画布、菜单、处理链、ROI
+    w.show();                                                        // 显示窗口
     AppLogger::info(QStringLiteral("主窗口已显示"));
 
-    // ---------- 5. 事件循环 ----------
-    // 阻塞在此，直到用户关闭窗口；期间所有点击/拖拽/信号槽都会在这里被分发
-    return QApplication::exec();
+    return QApplication::exec();                                     // 进入事件循环直到用户退出
 }

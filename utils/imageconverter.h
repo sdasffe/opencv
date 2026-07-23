@@ -6,50 +6,18 @@
 #include "opencv2/opencv.hpp"
 
 /**
+ * @file imageconverter.h
  * @brief QPixmap / QImage 与 cv::Mat 互转工具
  *
- * 纯静态工具类，统一处理图像格式转换，避免各模块重复写转换代码。
- * 所有转换都做深拷贝，返回独立内存，不依赖原对象生命周期。
+ * 纯静态工具类，统一处理图像格式转换；所有转换均深拷贝，返回独立内存。
  */
 class ImageConverter
 {
 public:
-    // ========== QPixmap → cv::Mat ==========
-
-    /**
-     * @brief QPixmap 转 RGB 格式 cv::Mat (CV_8UC3)
-     * @param pixmap 输入 Qt 像素图
-     * @return OpenCV Mat，RGB 三通道
-     */
-    static cv::Mat pixmapToMatRGB(const QPixmap &pixmap);
-
-    /**
-     * @brief QPixmap 转灰度格式 cv::Mat (CV_8UC1)
-     * @param pixmap 输入 Qt 像素图
-     * @return OpenCV Mat，单通道灰度
-     */
-    static cv::Mat pixmapToMatGray(const QPixmap &pixmap);
-
-    // ========== cv::Mat → QPixmap ==========
-
-    /**
-     * @brief cv::Mat 转 QPixmap
-     * @param mat 输入 OpenCV Mat（支持灰度、RGB、RGBA）
-     * @return Qt 像素图
-     */
-    static QPixmap matToPixmap(const cv::Mat &mat);
-
-    // ========== QImage → cv::Mat 辅助 ==========
-
-    /**
-     * @brief QImage 转 cv::Mat（深拷贝）
-     * @param image 输入 Qt 图像
-     * @param rgb true → RGB888/CV_8UC3；false → 灰度/CV_8UC1
-     * @return OpenCV Mat
-     *
-     * 已有 QImage 时用（如 QImageReader 解码）；已有 QPixmap 时优先 pixmapToMat*。
-     */
-    static cv::Mat imageToMat(const QImage &image, bool rgb = true);
+    static cv::Mat pixmapToMatRGB(const QPixmap &pixmap);  // QPixmap → RGB 格式 cv::Mat (CV_8UC3)
+    static cv::Mat pixmapToMatGray(const QPixmap &pixmap); // QPixmap → 灰度格式 cv::Mat (CV_8UC1)
+    static QPixmap matToPixmap(const cv::Mat &mat);        // cv::Mat → QPixmap（支持灰度/RGB/RGBA）
+    static cv::Mat imageToMat(const QImage &image, bool rgb = true); // QImage → cv::Mat 深拷贝；rgb=true 为 RGB888，false 为灰度
 
 private:
     ImageConverter() = delete; // 纯静态类，禁止实例化

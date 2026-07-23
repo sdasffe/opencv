@@ -207,38 +207,29 @@ QPushButton[role="danger"]:hover {
     color: #FFFFFF;
 }
 
-QToolButton#btnMenuFile,
-QToolButton#btnMenuRoi,
-QToolButton#btnMenuSettings {
-    background-color: #3C4043;
-    color: #E8EAED;
-    border: 1px solid transparent;
-    border-radius: 6px;
-    padding: 5px 12px;
+/* ---------- 菜单栏（经典 Qt：纯文字，底部分隔线） ---------- */
+QMenuBar#menuBar {
+    background-color: #2D2E32;
+    border: none;
+    border-bottom: 1px solid #5F6368;
+    padding: 2px 6px;
+    spacing: 0px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
-QToolButton#btnMenuFile:hover,
-QToolButton#btnMenuRoi:hover,
-QToolButton#btnMenuSettings:hover {
-    background-color: #4A4D51;
+QMenuBar#menuBar::item {
+    background: transparent;
+    color: #E8EAED;
+    padding: 4px 10px;
+    margin: 0px;
+    border-radius: 0px;
+}
+
+QMenuBar#menuBar::item:selected,
+QMenuBar#menuBar::item:pressed {
+    background-color: #3C4043;
     color: #FFFFFF;
-}
-
-QToolButton#btnMenuFile:pressed,
-QToolButton#btnMenuRoi:pressed,
-QToolButton#btnMenuSettings:pressed {
-    background-color: #1A2A40;
-    border-color: #2A4A70;
-    color: #AECBFA;
-}
-
-QToolButton#btnMenuFile::menu-indicator,
-QToolButton#btnMenuRoi::menu-indicator,
-QToolButton#btnMenuSettings::menu-indicator {
-    image: none;
-    width: 0;
 }
 
 QMenu {

@@ -78,6 +78,10 @@ void FilterBlock::setupUI()
     connect(m_kxSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_kySpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_iterSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
+    trackParamWidget(m_typeCombo);
+    trackParamWidget(m_kxSpin);
+    trackParamWidget(m_kySpin);
+    trackParamWidget(m_iterSpin);
 }
 
 void FilterBlock::retranslateUi()

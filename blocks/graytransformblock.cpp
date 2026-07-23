@@ -99,6 +99,11 @@ void GrayTransformBlock::setupUI()
     connect(m_contrastSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChangeInt);
     connect(m_gammaSpin, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, emitChangeD);
 
+    trackParamWidget(m_typeCombo);
+    trackParamWidget(m_brightSpin);
+    trackParamWidget(m_contrastSpin);
+    trackParamWidget(m_gammaSpin);
+
     updateParamEnabled();
 }
 

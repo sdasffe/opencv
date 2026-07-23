@@ -121,6 +121,9 @@ void BinarizationBlock::setupUI()
             this, &BinarizationBlock::onUpperChanged);
     connect(m_autoBtn, &QPushButton::clicked,
             this, &BinarizationBlock::onAutoThresholdClicked);
+    trackParamWidget(m_lowerSpin);
+    trackParamWidget(m_upperSpin);
+    trackParamWidget(m_autoBtn);
 }
 
 void BinarizationBlock::retranslateUi()
@@ -243,6 +246,7 @@ void BinarizationBlock::setThresholds(int lower, int upper)
  */
 void BinarizationBlock::onAutoThresholdClicked()
 {
+    notifyParamsAboutToChange();
     emit otsuRequested();
 }
 

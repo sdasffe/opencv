@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file widget.cpp
  * @brief 主窗口实现（本项目最核心的 UI 文件，建议精读）
  *
@@ -88,8 +88,9 @@
 #include <QFile>
 #include <QShortcut>
 #include <QKeySequence>
-#include <QToolButton>
+#include <QMenuBar>
 #include <QMenu>
+#include <QAction>
 #include <QWidgetAction>
 #include <QVBoxLayout>
 #include <QActionGroup>
@@ -664,12 +665,9 @@ bool Widget::loadImageFromPath(const QString &filePath)
 // ============================================================================
 
 /**
- * @brief 槽：点击“打开图片”按钮（pushButton）
- *
- * Qt 的自动连接约定：on_<objectName>_<signal>
- * 所以函数名必须叫 on_pushButton_clicked，才会在 setupUi 时自动接上。
+ * @brief 槽：文件 → 打开图片（setupMenus 中 connect actOpenImage）
  */
-void Widget::on_pushButton_clicked()
+void Widget::actOpenImage()
 {
     const QString filePath = QFileDialog::getOpenFileName(
         this, tr("选择图片"), QString(), tr(AppConfig::IMAGE_FILE_FILTER));
@@ -691,7 +689,7 @@ void Widget::on_pushButton_clicked()
  * 扫描文件夹图片 → 画布下方显示缩略图条 → 加载第一张。
  * 之后点击缩略图即可切换（on_folderImageList_itemClicked）。
  */
-void Widget::on_pushButton_2_clicked()
+void Widget::actOpenFolder()
 {
     const QString dir = QFileDialog::getExistingDirectory(
         this, tr("选择图片文件夹"));
@@ -808,7 +806,7 @@ void Widget::wheelEvent(QWheelEvent *event)
 void Widget::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Delete) {
-        on_deltete_clicked();
+        DelteteRoi();
         event->accept();
         return;
     }
@@ -833,27 +831,27 @@ void Widget::setupShortcuts()
     auto *delSc = new QShortcut(QKeySequence::Delete, this);
     delSc->setContext(Qt::WindowShortcut);
     delSc->setObjectName(QStringLiteral("shortcutDeleteRoi"));
-    connect(delSc, &QShortcut::activated, this, &Widget::on_deltete_clicked);
+    connect(delSc, &QShortcut::activated, this, &Widget::DelteteRoi);
 }
 
 void Widget::setupMenus()
 {
-    // ----- 文件 -----
-    auto *fileMenu = new QMenu(ui->btnMenuFile);
-    m_actOpenImage = fileMenu->addAction(tr("打开图片"), this, &Widget::on_pushButton_clicked);
-    m_actOpenFolder = fileMenu->addAction(tr("打开文件夹"), this, &Widget::on_pushButton_2_clicked);
-    fileMenu->addSeparator();
-    m_actUndo = fileMenu->addAction(tr("撤销"), this, &Widget::onUndo);
-    m_actUndo->setShortcut(QKeySequence::Undo);
-    m_actUndo->setShortcutContext(Qt::WindowShortcut);
-    addAction(m_actUndo); // 快捷键挂到主窗口，焦点在子控件时也能 Ctrl+Z
-    fileMenu->addSeparator();
-    m_actExit = fileMenu->addAction(tr("退出"), this, &Widget::onExitApp);
-    ui->btnMenuFile->setMenu(fileMenu);
+    if (!ui->menuBar)
+        return;
 
-    // ----- ROI：下拉面板 = 形状 + 添加 + 删除 -----
-    auto *roiMenu = new QMenu(ui->btnMenuRoi);
-    auto *roiPanel = new QWidget(roiMenu);
+    connect(ui->actOpenImage, &QAction::triggered, this, &Widget::actOpenImage);
+    connect(ui->actOpenFolder, &QAction::triggered, this, &Widget::actOpenFolder);
+    connect(ui->actExit, &QAction::triggered, this, &Widget::onExitApp);
+    connect(ui->actUndo, &QAction::triggered, this, &Widget::onUndo);
+    connect(ui->actHelp, &QAction::triggered, this, &Widget::onHelpShortcuts);
+    connect(ui->actAbout, &QAction::triggered, this, &Widget::onAboutApp);
+
+    ui->actUndo->setShortcut(QKeySequence::Undo);
+    ui->actUndo->setShortcutContext(Qt::WindowShortcut);
+    addAction(ui->actUndo);
+
+    m_menuRoi = ui->menuRoi;
+    auto *roiPanel = new QWidget(m_menuRoi);
     auto *roiLay = new QVBoxLayout(roiPanel);
     roiLay->setContentsMargins(10, 8, 10, 8);
     roiLay->setSpacing(6);
@@ -876,54 +874,35 @@ void Widget::setupMenus()
     roiLay->addWidget(m_roiAddBtn);
     roiLay->addWidget(m_roiDeleteBtn);
 
-    auto *roiAction = new QWidgetAction(roiMenu);
+    auto *roiAction = new QWidgetAction(m_menuRoi);
     roiAction->setDefaultWidget(roiPanel);
-    roiMenu->addAction(roiAction);
-    ui->btnMenuRoi->setMenu(roiMenu);
+    m_menuRoi->clear();
+    m_menuRoi->addAction(roiAction);
 
     connect(m_roiAddBtn, &QPushButton::clicked, this, [this]() {
-        on_pushButton_3_clicked();
-        if (ui->btnMenuRoi && ui->btnMenuRoi->menu())
-            ui->btnMenuRoi->menu()->close();
+        AddRoi();
+        if (m_menuRoi)
+            m_menuRoi->close();
     });
     connect(m_roiDeleteBtn, &QPushButton::clicked, this, [this]() {
-        on_deltete_clicked();
-        if (ui->btnMenuRoi && ui->btnMenuRoi->menu())
-            ui->btnMenuRoi->menu()->close();
+        DelteteRoi();
+        if (m_menuRoi)
+            m_menuRoi->close();
     });
 
-    // ----- 设置：语言 + 外观 + 关于 -----
-    auto *settingsMenu = new QMenu(ui->btnMenuSettings);
-    auto *langMenu = settingsMenu->addMenu(tr("语言"));
-    m_actLangMenu = langMenu->menuAction();
     auto *langGroup = new QActionGroup(this);
     langGroup->setExclusive(true);
-    m_actLangZh = langMenu->addAction(tr("中文"));
-    m_actLangEn = langMenu->addAction(QStringLiteral("English"));
-    m_actLangZh->setCheckable(true);
-    m_actLangEn->setCheckable(true);
-    langGroup->addAction(m_actLangZh);
-    langGroup->addAction(m_actLangEn);
-    connect(m_actLangZh, &QAction::triggered, this, &Widget::onLanguageChinese);
-    connect(m_actLangEn, &QAction::triggered, this, &Widget::onLanguageEnglish);
+    langGroup->addAction(ui->actLangZh);
+    langGroup->addAction(ui->actLangEn);
+    connect(ui->actLangZh, &QAction::triggered, this, &Widget::onLanguageChinese);
+    connect(ui->actLangEn, &QAction::triggered, this, &Widget::onLanguageEnglish);
 
-    auto *themeMenu = settingsMenu->addMenu(tr("外观"));
-    m_actThemeMenu = themeMenu->menuAction();
     auto *themeGroup = new QActionGroup(this);
     themeGroup->setExclusive(true);
-    m_actThemeLight = themeMenu->addAction(tr("浅色"));
-    m_actThemeDark = themeMenu->addAction(tr("深色"));
-    m_actThemeLight->setCheckable(true);
-    m_actThemeDark->setCheckable(true);
-    themeGroup->addAction(m_actThemeLight);
-    themeGroup->addAction(m_actThemeDark);
-    connect(m_actThemeLight, &QAction::triggered, this, &Widget::onThemeLight);
-    connect(m_actThemeDark, &QAction::triggered, this, &Widget::onThemeDark);
-
-    settingsMenu->addSeparator();
-    m_actHelp = settingsMenu->addAction(tr("帮助"), this, &Widget::onHelpShortcuts);
-    m_actAbout = settingsMenu->addAction(tr("关于"), this, &Widget::onAboutApp);
-    ui->btnMenuSettings->setMenu(settingsMenu);
+    themeGroup->addAction(ui->actThemeLight);
+    themeGroup->addAction(ui->actThemeDark);
+    connect(ui->actThemeLight, &QAction::triggered, this, &Widget::onThemeLight);
+    connect(ui->actThemeDark, &QAction::triggered, this, &Widget::onThemeDark);
 }
 
 void Widget::setupAlgoListIds()
@@ -1059,10 +1038,10 @@ void Widget::applyTheme()
     QSettings settings(QStringLiteral("OpenCVLab"), QStringLiteral("ImageTool"));
     settings.setValue(QStringLiteral("ui/theme"), m_themeId);
 
-    if (m_actThemeLight)
-        m_actThemeLight->setChecked(m_themeId == QLatin1String(StyleLoader::ThemeLight));
-    if (m_actThemeDark)
-        m_actThemeDark->setChecked(m_themeId == QLatin1String(StyleLoader::ThemeDark));
+    if (ui->actThemeLight)
+        ui->actThemeLight->setChecked(m_themeId == QLatin1String(StyleLoader::ThemeLight));
+    if (ui->actThemeDark)
+        ui->actThemeDark->setChecked(m_themeId == QLatin1String(StyleLoader::ThemeDark));
 
     AppLogger::info(QStringLiteral("切换主题"), m_themeId);
 }
@@ -1089,10 +1068,10 @@ void Widget::applyLanguage()
             block->retranslateUi();
     }
     setupAlgoListIds();
-    if (m_actLangZh)
-        m_actLangZh->setChecked(!m_englishUi);
-    if (m_actLangEn)
-        m_actLangEn->setChecked(m_englishUi);
+    if (ui->actLangZh)
+        ui->actLangZh->setChecked(!m_englishUi);
+    if (ui->actLangEn)
+        ui->actLangEn->setChecked(m_englishUi);
     refreshChainHint();
 }
 
@@ -1113,36 +1092,7 @@ void Widget::changeEvent(QEvent *event)
 
 void Widget::retranslateDynamicUi()
 {
-    if (ui->btnMenuFile)
-        ui->btnMenuFile->setText(tr("文件"));
-    if (ui->btnMenuRoi)
-        ui->btnMenuRoi->setText(tr("ROI"));
-    if (ui->btnMenuSettings)
-        ui->btnMenuSettings->setText(tr("设置"));
-
-    if (m_actOpenImage)
-        m_actOpenImage->setText(tr("打开图片"));
-    if (m_actOpenFolder)
-        m_actOpenFolder->setText(tr("打开文件夹"));
-    if (m_actUndo)
-        m_actUndo->setText(tr("撤销"));
-    if (m_actExit)
-        m_actExit->setText(tr("退出"));
-    if (m_actLangMenu)
-        m_actLangMenu->setText(tr("语言"));
-    if (m_actLangZh)
-        m_actLangZh->setText(tr("中文"));
-    if (m_actThemeMenu)
-        m_actThemeMenu->setText(tr("外观"));
-    if (m_actThemeLight)
-        m_actThemeLight->setText(tr("浅色"));
-    if (m_actThemeDark)
-        m_actThemeDark->setText(tr("深色"));
-    if (m_actHelp)
-        m_actHelp->setText(tr("帮助"));
-    if (m_actAbout)
-        m_actAbout->setText(tr("关于"));
-
+    // 菜单栏文案由 ui->retranslateUi 负责；这里只刷代码创建的 ROI 面板与算法列表
     if (m_roiTypeCombo && m_roiTypeCombo->count() >= 3) {
         const int idx = m_roiTypeCombo->currentIndex();
         m_roiTypeCombo->setItemText(0, tr("矩形"));
@@ -1337,7 +1287,7 @@ void Widget::applyRoiFromInfo(const RoiInfo &info)
  *
  * 按形状下拉当前项，在图像中心放一个 DEFAULT_ROI_SIZE 大小的选区。
  */
-void Widget::on_pushButton_3_clicked()
+void Widget::AddRoi()
 {
     if (!m_pixmapItem) {
         QMessageBox::information(this, tr("提示"), tr("请先打开一张图片"));
@@ -1365,7 +1315,7 @@ void Widget::on_pushButton_3_clicked()
  * 删掉后必须立刻重算：scene.changed 在无 ROI 时会直接 return，
  * 不能再指望定时器自动刷新。
  */
-void Widget::on_deltete_clicked()
+void Widget::DelteteRoi()
 {
     pushUndoSnapshot(QStringLiteral("删除ROI"));
     const auto selected = m_scene->selectedItems();
@@ -2360,6 +2310,10 @@ void Widget::addBlockToPanel(BaseBlock *block)
         pasteBlockFromClipboard(block);
         AppLogger::info(QStringLiteral("粘贴处理块"),
                         QStringLiteral("after=%1").arg(block->blockName()));
+    });
+    connect(block, &BaseBlock::paramsAboutToChange, this, [this]() {
+        if (!m_undoRestoring)
+            pushUndoSnapshot(QStringLiteral("修改处理块参数"));
     });
 
     m_processor->addBlock(block);

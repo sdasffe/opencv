@@ -37,8 +37,9 @@ namespace {
 struct qt_meta_stringdata_CLASSBaseBlockENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSBaseBlockENDCLASS = QtMocHelpers::stringData(
     "BaseBlock",
-    "paramsChanged",
+    "paramsAboutToChange",
     "",
+    "paramsChanged",
     "removeRequested",
     "copyRequested",
     "pasteRequested",
@@ -56,26 +57,28 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSBaseBlockENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       5,       // signalCount
+       6,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   44,    2, 0x06,    1 /* Public */,
-       3,    0,   45,    2, 0x06,    2 /* Public */,
-       4,    0,   46,    2, 0x06,    3 /* Public */,
-       5,    0,   47,    2, 0x06,    4 /* Public */,
-       6,    1,   48,    2, 0x06,    5 /* Public */,
+       1,    0,   50,    2, 0x06,    1 /* Public */,
+       3,    0,   51,    2, 0x06,    2 /* Public */,
+       4,    0,   52,    2, 0x06,    3 /* Public */,
+       5,    0,   53,    2, 0x06,    4 /* Public */,
+       6,    0,   54,    2, 0x06,    5 /* Public */,
+       7,    1,   55,    2, 0x06,    6 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,    7,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,    8,
 
        0        // eod
 };
@@ -89,6 +92,8 @@ Q_CONSTINIT const QMetaObject BaseBlock::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSBaseBlockENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<BaseBlock, std::true_type>,
+        // method 'paramsAboutToChange'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'paramsChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'removeRequested'
@@ -110,47 +115,55 @@ void BaseBlock::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         auto *_t = static_cast<BaseBlock *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->paramsChanged(); break;
-        case 1: _t->removeRequested(); break;
-        case 2: _t->copyRequested(); break;
-        case 3: _t->pasteRequested(); break;
-        case 4: _t->enabledChanged((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 0: _t->paramsAboutToChange(); break;
+        case 1: _t->paramsChanged(); break;
+        case 2: _t->removeRequested(); break;
+        case 3: _t->copyRequested(); break;
+        case 4: _t->pasteRequested(); break;
+        case 5: _t->enabledChanged((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (BaseBlock::*)();
-            if (_t _q_method = &BaseBlock::paramsChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &BaseBlock::paramsAboutToChange; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (BaseBlock::*)();
-            if (_t _q_method = &BaseBlock::removeRequested; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &BaseBlock::paramsChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
         }
         {
             using _t = void (BaseBlock::*)();
-            if (_t _q_method = &BaseBlock::copyRequested; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &BaseBlock::removeRequested; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 2;
                 return;
             }
         }
         {
             using _t = void (BaseBlock::*)();
-            if (_t _q_method = &BaseBlock::pasteRequested; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &BaseBlock::copyRequested; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 3;
+                return;
+            }
+        }
+        {
+            using _t = void (BaseBlock::*)();
+            if (_t _q_method = &BaseBlock::pasteRequested; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 4;
                 return;
             }
         }
         {
             using _t = void (BaseBlock::*)(bool );
             if (_t _q_method = &BaseBlock::enabledChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
-                *result = 4;
+                *result = 5;
                 return;
             }
         }
@@ -176,45 +189,51 @@ int BaseBlock::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }
 
 // SIGNAL 0
-void BaseBlock::paramsChanged()
+void BaseBlock::paramsAboutToChange()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void BaseBlock::removeRequested()
+void BaseBlock::paramsChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 
 // SIGNAL 2
-void BaseBlock::copyRequested()
+void BaseBlock::removeRequested()
 {
     QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 
 // SIGNAL 3
-void BaseBlock::pasteRequested()
+void BaseBlock::copyRequested()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
 }
 
 // SIGNAL 4
+void BaseBlock::pasteRequested()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
+}
+
+// SIGNAL 5
 void BaseBlock::enabledChanged(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
-    QMetaObject::activate(this, &staticMetaObject, 4, _a);
+    QMetaObject::activate(this, &staticMetaObject, 5, _a);
 }
 QT_WARNING_POP

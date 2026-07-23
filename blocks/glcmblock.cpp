@@ -116,6 +116,10 @@ void GlcmBlock::setupUI()
         emit paramsChanged();
     });
 
+    trackParamWidget(m_metricCombo);
+    trackParamWidget(m_levelsSpin);
+    trackParamWidget(m_distSpin);
+
     updateMetricVisible();
 }
 

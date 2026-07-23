@@ -47,6 +47,7 @@ void PseudoColorBlock::setupUI()
 
     connect(m_mapCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, [this](int) { emit paramsChanged(); });
+    trackParamWidget(m_mapCombo);
 }
 
 void PseudoColorBlock::retranslateUi()

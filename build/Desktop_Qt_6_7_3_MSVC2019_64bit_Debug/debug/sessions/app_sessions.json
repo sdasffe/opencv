@@ -4,12 +4,109 @@
             "blocks": [
                 {
                     "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 291.76462472406183,
+                    "shape": "rect",
+                    "w": 304.9392935982339,
+                    "x": 297.78148697366,
+                    "y": 403.84765070160745
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/result.png": {
+            "blocks": [
+            ],
+            "rois": [
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/result1.png": {
+            "blocks": [
+                {
+                    "enabled": true,
                     "iterations": 1,
                     "kx": 3,
                     "ky": 3,
                     "name": "形态学处理",
                     "op": 0
+                },
+                {
+                    "enabled": true,
+                    "map": 0,
+                    "name": "伪彩色处理"
                 }
+            ],
+            "rois": [
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/result2.png": {
+            "blocks": [
+                {
+                    "brightness": 0,
+                    "contrast": 100,
+                    "enabled": true,
+                    "gamma": 1,
+                    "name": "灰度变换",
+                    "type": 0
+                },
+                {
+                    "enabled": true,
+                    "iterations": 1,
+                    "kx": 3,
+                    "ky": 3,
+                    "name": "形态学处理",
+                    "op": 0
+                },
+                {
+                    "brightness": 0,
+                    "contrast": 100,
+                    "enabled": true,
+                    "gamma": 1,
+                    "name": "灰度变换",
+                    "type": 0
+                }
+            ],
+            "rois": [
+                {
+                    "h": 487.72691292875993,
+                    "shape": "rect",
+                    "w": 445.73482849604227,
+                    "x": 222.64907651715043,
+                    "y": 371.320580474934
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/壁纸.png": {
+            "blocks": [
+            ],
+            "rois": [
+            ]
+        },
+        "E:/腾讯电脑管家截图文件/input.png": {
+            "blocks": [
+            ],
+            "rois": [
+            ]
+        },
+        "E:/腾讯电脑管家截图文件/局部截取_20260710_151835.png": {
+            "blocks": [
+            ],
+            "rois": [
+            ]
+        },
+        "E:/腾讯电脑管家截图文件/局部截取_20260711_110255.png": {
+            "blocks": [
+            ],
+            "rois": [
+            ]
+        },
+        "E:/腾讯电脑管家截图文件/局部截取_20260711_112157.png": {
+            "blocks": [
             ],
             "rois": [
             ]

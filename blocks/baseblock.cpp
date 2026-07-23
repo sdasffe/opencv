@@ -27,6 +27,8 @@
 #include <QDrag>
 #include <QIODevice>
 #include <QJsonObject>
+#include <QLineEdit>
+#include <QAbstractSpinBox>
 #include <QMenu>
 #include <QMimeData>
 #include <QMouseEvent>
@@ -87,6 +89,7 @@ BaseBlock::BaseBlock(QWidget *parent)
     connect(m_enableCheckBox, &QCheckBox::toggled, this, &BaseBlock::enabledChanged);
     // 开关也算一种“参数变化”，直接触发重算
     connect(m_enableCheckBox, &QCheckBox::toggled, this, &BaseBlock::paramsChanged);
+    trackParamWidget(m_enableCheckBox);
 
     setContextMenuPolicy(Qt::DefaultContextMenu);
     setToolTip(tr("右键可复制、粘贴或删除"));
@@ -150,8 +153,48 @@ void BaseBlock::loadParams(const QJsonObject &obj)
         setEnabledBlock(obj.value(QStringLiteral("enabled")).toBool(true));
 }
 
+void BaseBlock::trackParamWidget(QWidget *w)
+{
+    if (!w)
+        return;
+    w->installEventFilter(this);
+    m_trackedParamWidgets.insert(w);
+    // SpinBox 实际焦点常在内部 QLineEdit；lineEdit() 是 protected，用 findChild 取
+    if (qobject_cast<QAbstractSpinBox *>(w)) {
+        if (QLineEdit *le = w->findChild<QLineEdit *>()) {
+            le->installEventFilter(this);
+            m_trackedParamWidgets.insert(le);
+        }
+    }
+}
+
+void BaseBlock::notifyParamsAboutToChange()
+{
+    if (m_paramEditArmed)
+        return;
+    m_paramEditArmed = true;
+    emit paramsAboutToChange();
+}
+
 bool BaseBlock::eventFilter(QObject *watched, QEvent *event)
 {
+    auto *w = qobject_cast<QWidget *>(watched);
+    if (w && m_trackedParamWidgets.contains(w)) {
+        switch (event->type()) {
+        case QEvent::FocusIn:
+        case QEvent::MouseButtonPress:
+        case QEvent::Wheel:
+            notifyParamsAboutToChange();
+            break;
+        case QEvent::FocusOut:
+            m_paramEditArmed = false;
+            break;
+        default:
+            break;
+        }
+        return QWidget::eventFilter(watched, event);
+    }
+
     if (watched != m_iconLabel && watched != m_titleLabel)
         return QWidget::eventFilter(watched, event);
 

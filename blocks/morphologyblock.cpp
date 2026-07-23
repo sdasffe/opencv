@@ -85,6 +85,10 @@ void MorphologyBlock::setupUI()
     connect(m_kxSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_kySpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_iterSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
+    trackParamWidget(m_opCombo);
+    trackParamWidget(m_kxSpin);
+    trackParamWidget(m_kySpin);
+    trackParamWidget(m_iterSpin);
 }
 
 void MorphologyBlock::retranslateUi()

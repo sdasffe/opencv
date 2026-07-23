@@ -78,8 +78,8 @@ def make_block_diagram():
             d.text((x + 12, y + 36 + i * 18), line, font=small, fill=(45, 45, 45))
 
     box(40, 55, 540, 165, "主界面模块 Widget", [
-        "打开图/文件夹 · 画布缩放平移 · 多 ROI 图元",
-        "拖入算法块 · 撤销 · 会话落盘 · 对比/保存/链 JSON",
+        "菜单栏(menuBar)：文件/编辑/设置/帮助/关于",
+        "打开图/文件夹 · 画布 · 多 ROI · 撤销 · 会话落盘",
         "接口：createBlockByName / getAllRoiInfo / onApplyProcessing",
         "       pushUndoSnapshot / saveSessionsToDisk",
     ], "#E3F2FD", "#1565C0")

@@ -11,36 +11,29 @@
  * @brief 统一 ROI 描述（图像像素坐标系，与场景坐标一致）
  *
  * shape == None 表示无效项；空列表表示全图处理。
- *
- * 谁产生：Widget::getAllRoiInfo() 从场景图元读取。
- * 谁消费：ImageProcessor::setRois → 各 Block::process → RoiProcess::makeMask/apply。
- *
- * 三种形状用不同字段：
- *   - Rect / Ellipse → rect（轴对齐外接矩形）
- *   - RotatedRect    → center + size + angleDeg
+ * 产生：Widget::getAllRoiInfo()；消费：ImageProcessor::setRois → Block → RoiProcess。
+ * Rect/Ellipse 用 rect；RotatedRect 用 center + size + angleDeg。
  */
 struct RoiInfo
 {
     enum class Shape {
-        None,
-        Rect,
-        Ellipse,
-        RotatedRect
+        None,                                                          // 无效 / 占位
+        Rect,                                                          // 轴对齐矩形
+        Ellipse,                                                       // 椭圆（存外接矩形）
+        RotatedRect                                                    // 旋转矩形
     };
 
-    Shape shape = Shape::None;
+    Shape shape = Shape::None;                                         // 当前形状类型
 
-    /** 轴对齐矩形 / 椭圆外接矩形（图像坐标） */
-    QRectF rect;
+    QRectF rect;                                                       // Rect/Ellipse：轴对齐外接矩形（图像坐标）
 
-    /** 旋转矩形：中心、宽高、角度（度，逆时针，与 Qt rotation 一致） */
-    QPointF center;
-    QSizeF size;
-    qreal angleDeg = 0.0;
+    QPointF center;                                                    // RotatedRect：中心点
+    QSizeF size;                                                       // RotatedRect：宽高
+    qreal angleDeg = 0.0;                                              // RotatedRect：角度（度，逆时针，同 Qt）
 
-    bool isEmpty() const { return shape == Shape::None; }
+    bool isEmpty() const { return shape == Shape::None; }              // 是否无效项
 
-    bool operator==(const RoiInfo &o) const
+    bool operator==(const RoiInfo &o) const                            // 形状与几何全等（角度模糊比较）
     {
         if (shape != o.shape)
             return false;
@@ -52,19 +45,19 @@ struct RoiInfo
             return rect == o.rect;
         case Shape::RotatedRect:
             return center == o.center && size == o.size
-                && qFuzzyCompare(angleDeg + 1.0, o.angleDeg + 1.0);
+                && qFuzzyCompare(angleDeg + 1.0, o.angleDeg + 1.0);    // 避免 -0/0 浮点问题
         }
         return false;
     }
     bool operator!=(const RoiInfo &o) const { return !(*this == o); }
 
-    /** 外包络矩形，便于裁剪到图像范围 */
+    /** @brief 外包络轴对齐矩形，便于裁剪到图像范围 */
     QRectF boundingRect() const
     {
         switch (shape) {
         case Shape::Rect:
         case Shape::Ellipse:
-            return rect.normalized();
+            return rect.normalized();                                  // 直接用外接矩形
         case Shape::RotatedRect: {
             const qreal rad = qDegreesToRadians(angleDeg);
             const qreal c = qCos(rad);
@@ -77,21 +70,21 @@ struct RoiInfo
             };
             qreal minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
             for (const QPointF &p : corners) {
-                const QPointF r(p.x() * c - p.y() * s, p.x() * s + p.y() * c);
-                const QPointF w = center + r;
+                const QPointF r(p.x() * c - p.y() * s, p.x() * s + p.y() * c); // 旋转
+                const QPointF w = center + r;                          // 平移到世界坐标
                 minX = qMin(minX, w.x());
                 minY = qMin(minY, w.y());
                 maxX = qMax(maxX, w.x());
                 maxY = qMax(maxY, w.y());
             }
-            return QRectF(QPointF(minX, minY), QPointF(maxX, maxY));
+            return QRectF(QPointF(minX, minY), QPointF(maxX, maxY));   // AABB
         }
         default:
             return QRectF();
         }
     }
 
-    /** 序列化为 JSON，供会话落盘 / 处理链导出（字段见各 shape 分支） */
+    /** @brief 序列化为 JSON，供会话落盘 / 处理链导出 */
     QJsonObject toJson() const
     {
         QJsonObject o;
@@ -125,7 +118,7 @@ struct RoiInfo
         return o;
     }
 
-    /** 从 JSON 反序列化；未知 shape 或 "none" 时返回无效项（shape == None） */
+    /** @brief 从 JSON 反序列化；未知 shape 返回 None */
     static RoiInfo fromJson(const QJsonObject &o)
     {
         RoiInfo info;

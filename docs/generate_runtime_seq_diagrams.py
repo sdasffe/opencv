@@ -220,7 +220,7 @@ def make_func_order_with_fork(filename, title, before, fork_label, yes_steps, no
 
 
 def main():
-    # 删掉之前误画的 UML 时序图
+    # 仅输出 PNG 到 figures/，不写任何 docx
     for old in [
         "11_seq_boot.png", "12_seq_open_image.png", "13_seq_add_block.png",
         "14_seq_reprocess.png", "14b_seq_reprocess_triggers.png",
@@ -235,40 +235,45 @@ def main():
         "11_func_boot.png",
         "函数顺序①：程序启动",
         [
+            "main()：QApplication + StyleLoader::loadTheme",
             "Widget::Widget()",
-            "ui->setupUi(this)",
+            "ui->setupUi(this)（QWidget + menuBar）",
             "adaptWindowToScreen()",
             "setupGraphicsView()",
             "setupDragDrop()",
             "setupBlockPanel()",
             "setupFolderBrowser()",
-            "setupMenus()",
+            "setupMenus()  // 接线；菜单在 .ui",
             "setupAlgoListIds()",
             "setupShortcuts()",
-            "applyLanguage()",
+            "loadSessionsFromDisk()",
+            "applyLanguage() + applyTheme()",
             "connect(timer / processingFinished / requestReprocess)",
         ],
-        note="构造函数内自上而下依次调用",
+        note="构造函数内自上而下依次调用；菜单栏在 widget.ui",
         fill="#E3F2FD", border="#1565C0",
+        box_w=480, width=620,
     )
 
-    # ② 打开图片（带分叉）
+    # ② 打开图片
     make_func_order_with_fork(
         "12_func_open_image.png",
-        "函数顺序②：打开图片",
+        "函数顺序②：打开图片 / 文件夹切换",
         before=[
-            "on_pushButton_clicked() / on_pushButton_2_clicked()",
-            "clearFolderBrowser()（仅单张）",
+            "菜单：打开图片/文件夹 / 缩略图点击",
             "loadImageFromPath()",
-            "clearAllRoi()",
+            "saveCurrentSession()（离开旧图）",
             "ImageProcessor::setOriginalImage()",
             "scene->addPixmap / fitInView",
         ],
-        fork_label="链非空？",
-        yes_steps=["onApplyProcessing()"],
-        no_steps=["refreshDisplay()"],
-        after=["updateInfoLabel()"],
-        note="开图后有块则重算，无块则直接显示原图",
+        fork_label="该路径有会话？",
+        yes_steps=["restoreSession(chain+rois)"],
+        no_steps=["clearAllBlocks(false)", "clearAllRoi()"],
+        after=[
+            "链非空？→ onApplyProcessing() : refreshDisplay()",
+            "updateInfoLabel()",
+        ],
+        note="换图先落会话；有记忆则恢复链+多 ROI，再决定是否重算",
     )
 
     # ③ 拖入算法块
@@ -280,19 +285,20 @@ def main():
             "createBlockByName()",
             "wireBinarizationOtsu()（仅二值化）",
             "addBlockToPanel()",
+            "pushUndoSnapshot(\"添加处理块\")",
             "ImageProcessor::addBlock()",
             "emit requestReprocess",
             "onApplyProcessing()",
-            "getCurrentRoiInfo() → setRoi() → reprocess()",
+            "getAllRoiInfo() → setRois() → reprocess()",
             "onProcessingFinished()",
             "refreshDisplay() → updatePixmapItem()",
         ],
-        note="Drop 之后一路向下，最终汇入重算",
+        note="Drop 之后一路向下，最终汇入统一重算入口",
         fill="#FFF3E0", border="#EF6C00",
-        box_w=460, width=600,
+        box_w=480, width=620,
     )
 
-    # ④ 重算核心（调参）
+    # ④ 重算核心
     make_func_order(
         "14_func_reprocess.png",
         "函数顺序④：重算核心（调参触发）",
@@ -302,18 +308,18 @@ def main():
             "ImageProcessor::onBlockParamsChanged()",
             "emit requestReprocess",
             "Widget::onApplyProcessing()",
-            "getCurrentRoiInfo()",
-            "ImageProcessor::setRoi()",
+            "getAllRoiInfo()",
+            "ImageProcessor::setRois(list)",
             "ImageProcessor::reprocess()",
-            "block->process()（逐启用块）",
+            "block->process(input, rois)（逐启用块）",
             "emit processingFinished",
             "onProcessingFinished()",
             "refreshDisplay() → updatePixmapItem()",
             "updateInfoLabel()",
         ],
-        note="所有重算路径最终都走 onApplyProcessing",
+        note="所有重算路径最终都走 onApplyProcessing（先同步多 ROI）",
         fill="#F3E5F5", border="#7B1FA2",
-        box_w=460, width=600,
+        box_w=480, width=620,
     )
 
     # ④b 其它触发
@@ -324,52 +330,56 @@ def main():
             ("点「应用」", [
                 "on_btnApply_clicked()",
                 "onApplyProcessing()",
-                "getCurrentRoiInfo()",
-                "setRoi() + reprocess()",
+                "getAllRoiInfo()",
+                "setRois() + reprocess()",
                 "onProcessingFinished()",
             ], "#E1BEE7", "#7B1FA2"),
             ("拖 ROI 停手", [
                 "scene.changed",
                 "m_roiUpdateTimer->start()",
                 "timeout → onApplyProcessing()",
-                "getCurrentRoiInfo()",
-                "setRoi() + reprocess()",
+                "getAllRoiInfo()",
+                "setRois() + reprocess()",
             ], "#CE93D8", "#6A1B9A"),
-            ("开图且有链", [
-                "loadImageFromPath()",
+            ("开图/撤销/导入后", [
+                "loadImage / onUndo / 导入链",
+                "（可能）restoreSession()",
                 "onApplyProcessing()",
-                "getCurrentRoiInfo()",
-                "setRoi() + reprocess()",
-                "onProcessingFinished()",
+                "getAllRoiInfo()",
+                "setRois() + reprocess()",
             ], "#BA68C8", "#4A148C"),
         ],
-        note="三条支路函数不同，但都汇入 onApplyProcessing",
+        note="支路入口不同，全部汇入 onApplyProcessing",
         width=1080,
     )
 
     # ⑤ ROI
     make_func_order_branch(
         "15_func_roi.png",
-        "函数顺序⑤：ROI",
+        "函数顺序⑤：多 ROI",
         [
             ("添加", [
-                "on_pushButton_3_clicked()",
-                "addRectItem() / addEllipseItem()",
-                "  或 addRotatedRectItem()",
+                "编辑→ROI / on_pushButton_3",
+                "addRect/Ellipse/RotatedRect",
+                "pushUndoSnapshot()",
+                "（不立即重算）",
             ], "#C8E6C9", "#2E7D32"),
             ("删除", [
                 "on_deltete_clicked()",
                 "  或 keyPressEvent(Delete)",
-                "clearAllRoi()",
+                "pushUndoSnapshot()",
+                "清选中或 clearAllRoi()",
+                "onApplyProcessing()",
             ], "#FFCDD2", "#C62828"),
             ("拖动改几何", [
                 "ROI 图元几何变化",
                 "scene.changed",
                 "m_roiUpdateTimer 60ms",
                 "onApplyProcessing()",
+                "getAllRoiInfo → 并集蒙版",
             ], "#BBDEFB", "#1565C0"),
         ],
-        note="添加/删除改图元；拖动才会触发重算",
+        note="可同时多个 ROI；拖动防抖重算；增减会压撤销栈",
         width=1080,
     )
 
@@ -398,10 +408,10 @@ def main():
         width=1080,
     )
 
-    # ⑦ 对比 / 保存 / 链
+    # ⑦ 对比 / 保存 / 链 / 撤销
     make_func_order_branch(
         "17_func_compare_save_chain.png",
-        "函数顺序⑦：对比 / 保存 / 链管理",
+        "函数顺序⑦：对比 / 保存 / 链 / 撤销",
         [
             ("对比（不重算）", [
                 "on_btnCompare_pressed()",
@@ -410,18 +420,21 @@ def main():
                 "on_btnCompare_released()",
                 "refreshDisplay()",
             ], "#FFF9C4", "#F9A825"),
-            ("保存", [
+            ("保存 / 链 JSON", [
                 "on_btnSave_clicked()",
                 "resultImage().save()",
-            ], "#C8E6C9", "#2E7D32"),
-            ("清空 / 导入导出", [
-                "clearAllBlocks()",
-                "  或 createBlockByName()",
-                "JSON saveParams/loadParams",
+                "清空/导入/导出链",
+                "pushUndoSnapshot（结构变）",
                 "（导入后）onApplyProcessing()",
+            ], "#C8E6C9", "#2E7D32"),
+            ("撤销 Ctrl+Z", [
+                "onUndo() / 编辑→撤销",
+                "弹出 m_undoStack",
+                "restoreSession(snap)",
+                "onApplyProcessing()",
             ], "#FFE0B2", "#EF6C00"),
         ],
-        note="对比只切换显示；清空/导入可能触发重算",
+        note="对比只切换显示；结构变更可撤销；导入/撤销后重算",
         width=1080,
     )
 

@@ -104,11 +104,11 @@ namespace {
 struct qt_meta_stringdata_CLASSWidgetENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSWidgetENDCLASS = QtMocHelpers::stringData(
     "Widget",
-    "on_pushButton_clicked",
+    "actOpenImage",
     "",
-    "on_pushButton_2_clicked",
-    "on_pushButton_3_clicked",
-    "on_deltete_clicked",
+    "actOpenFolder",
+    "AddRoi",
+    "DelteteRoi",
     "onExitApp",
     "onAboutApp",
     "onHelpShortcuts",
@@ -212,13 +212,13 @@ Q_CONSTINIT const QMetaObject Widget::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSWidgetENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<Widget, std::true_type>,
-        // method 'on_pushButton_clicked'
+        // method 'actOpenImage'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_pushButton_2_clicked'
+        // method 'actOpenFolder'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_pushButton_3_clicked'
+        // method 'AddRoi'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_deltete_clicked'
+        // method 'DelteteRoi'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'onExitApp'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
@@ -270,10 +270,10 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         auto *_t = static_cast<Widget *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->on_pushButton_clicked(); break;
-        case 1: _t->on_pushButton_2_clicked(); break;
-        case 2: _t->on_pushButton_3_clicked(); break;
-        case 3: _t->on_deltete_clicked(); break;
+        case 0: _t->actOpenImage(); break;
+        case 1: _t->actOpenFolder(); break;
+        case 2: _t->AddRoi(); break;
+        case 3: _t->DelteteRoi(); break;
         case 4: _t->onExitApp(); break;
         case 5: _t->onAboutApp(); break;
         case 6: _t->onHelpShortcuts(); break;

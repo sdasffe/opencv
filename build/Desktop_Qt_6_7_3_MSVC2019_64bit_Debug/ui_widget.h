@@ -10,15 +10,17 @@
 #define UI_WIDGET_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <widget.h>
@@ -28,17 +30,32 @@ QT_BEGIN_NAMESPACE
 class Ui_Widget
 {
 public:
+    QAction *actOpenImage;
+    QAction *actOpenFolder;
+    QAction *actExit;
+    QAction *actUndo;
+    QAction *actLangZh;
+    QAction *actLangEn;
+    QAction *actThemeLight;
+    QAction *actThemeDark;
+    QAction *actHelp;
+    QAction *actAbout;
+    QVBoxLayout *rootLayout;
+    QMenuBar *menuBar;
+    QMenu *menuFile;
+    QMenu *menuEdit;
+    QMenu *menuRoi;
+    QMenu *menuSettings;
+    QMenu *menuLanguage;
+    QMenu *menuTheme;
     QHBoxLayout *horizontalLayout;
     QWidget *widget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
-    QToolButton *btnMenuFile;
-    QToolButton *btnMenuRoi;
-    QToolButton *btnMenuSettings;
-    QSpacerItem *horizontalSpacer;
     QPushButton *btnApply;
     QPushButton *btnCompare;
     QPushButton *btnSave;
+    QSpacerItem *horizontalSpacer;
     QLabel *labelInfo;
     QLabel *label_2;
     QLabel *label_3;
@@ -70,10 +87,57 @@ public:
             Widget->setObjectName("Widget");
         Widget->resize(1200, 720);
         Widget->setMinimumSize(QSize(800, 520));
-        horizontalLayout = new QHBoxLayout(Widget);
+        actOpenImage = new QAction(Widget);
+        actOpenImage->setObjectName("actOpenImage");
+        actOpenFolder = new QAction(Widget);
+        actOpenFolder->setObjectName("actOpenFolder");
+        actExit = new QAction(Widget);
+        actExit->setObjectName("actExit");
+        actUndo = new QAction(Widget);
+        actUndo->setObjectName("actUndo");
+        actUndo->setShortcutContext(Qt::ShortcutContext::WindowShortcut);
+        actLangZh = new QAction(Widget);
+        actLangZh->setObjectName("actLangZh");
+        actLangZh->setCheckable(true);
+        actLangEn = new QAction(Widget);
+        actLangEn->setObjectName("actLangEn");
+        actLangEn->setCheckable(true);
+        actThemeLight = new QAction(Widget);
+        actThemeLight->setObjectName("actThemeLight");
+        actThemeLight->setCheckable(true);
+        actThemeDark = new QAction(Widget);
+        actThemeDark->setObjectName("actThemeDark");
+        actThemeDark->setCheckable(true);
+        actHelp = new QAction(Widget);
+        actHelp->setObjectName("actHelp");
+        actAbout = new QAction(Widget);
+        actAbout->setObjectName("actAbout");
+        rootLayout = new QVBoxLayout(Widget);
+        rootLayout->setSpacing(0);
+        rootLayout->setObjectName("rootLayout");
+        rootLayout->setContentsMargins(0, 0, 0, 0);
+        menuBar = new QMenuBar(Widget);
+        menuBar->setObjectName("menuBar");
+        menuBar->setNativeMenuBar(false);
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName("menuFile");
+        menuEdit = new QMenu(menuBar);
+        menuEdit->setObjectName("menuEdit");
+        menuRoi = new QMenu(menuEdit);
+        menuRoi->setObjectName("menuRoi");
+        menuSettings = new QMenu(menuBar);
+        menuSettings->setObjectName("menuSettings");
+        menuLanguage = new QMenu(menuSettings);
+        menuLanguage->setObjectName("menuLanguage");
+        menuTheme = new QMenu(menuSettings);
+        menuTheme->setObjectName("menuTheme");
+
+        rootLayout->addWidget(menuBar);
+
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(8);
         horizontalLayout->setObjectName("horizontalLayout");
-        horizontalLayout->setContentsMargins(10, 10, 10, 10);
+        horizontalLayout->setContentsMargins(10, 8, 10, 10);
         widget = new QWidget(Widget);
         widget->setObjectName("widget");
         verticalLayout = new QVBoxLayout(widget);
@@ -83,34 +147,6 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(8);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        btnMenuFile = new QToolButton(widget);
-        btnMenuFile->setObjectName("btnMenuFile");
-        btnMenuFile->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        btnMenuFile->setPopupMode(QToolButton::InstantPopup);
-        btnMenuFile->setToolButtonStyle(Qt::ToolButtonTextOnly);
-
-        horizontalLayout_2->addWidget(btnMenuFile);
-
-        btnMenuRoi = new QToolButton(widget);
-        btnMenuRoi->setObjectName("btnMenuRoi");
-        btnMenuRoi->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        btnMenuRoi->setPopupMode(QToolButton::InstantPopup);
-        btnMenuRoi->setToolButtonStyle(Qt::ToolButtonTextOnly);
-
-        horizontalLayout_2->addWidget(btnMenuRoi);
-
-        btnMenuSettings = new QToolButton(widget);
-        btnMenuSettings->setObjectName("btnMenuSettings");
-        btnMenuSettings->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        btnMenuSettings->setPopupMode(QToolButton::InstantPopup);
-        btnMenuSettings->setToolButtonStyle(Qt::ToolButtonTextOnly);
-
-        horizontalLayout_2->addWidget(btnMenuSettings);
-
-        horizontalSpacer = new QSpacerItem(20, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer);
-
         btnApply = new QPushButton(widget);
         btnApply->setObjectName("btnApply");
         btnApply->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
@@ -128,6 +164,10 @@ public:
         btnSave->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
 
         horizontalLayout_2->addWidget(btnSave);
+
+        horizontalSpacer = new QSpacerItem(20, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
 
         labelInfo = new QLabel(widget);
         labelInfo->setObjectName("labelInfo");
@@ -198,18 +238,12 @@ public:
         verticalLayout_3->addWidget(algoTitleLabel);
 
         listWidget = new MyListWidget(widget_2);
-        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget);
-        __qlistwidgetitem->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-        QListWidgetItem *__qlistwidgetitem1 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem1->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-        QListWidgetItem *__qlistwidgetitem2 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem2->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-        QListWidgetItem *__qlistwidgetitem3 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem3->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-        QListWidgetItem *__qlistwidgetitem4 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem4->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-        QListWidgetItem *__qlistwidgetitem5 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem5->setTextAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
+        new QListWidgetItem(listWidget);
         listWidget->setObjectName("listWidget");
         listWidget->setMinimumSize(QSize(0, 120));
 
@@ -273,7 +307,7 @@ public:
         blockScrollArea->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
         blockListContainer = new QWidget();
         blockListContainer->setObjectName("blockListContainer");
-        blockListContainer->setGeometry(QRect(0, 0, 200, 638));
+        blockListContainer->setGeometry(QRect(0, 0, 229, 599));
         blockListLayout = new QVBoxLayout(blockListContainer);
         blockListLayout->setSpacing(8);
         blockListLayout->setObjectName("blockListLayout");
@@ -290,6 +324,28 @@ public:
         horizontalLayout->setStretch(1, 3);
         horizontalLayout->setStretch(2, 4);
 
+        rootLayout->addLayout(horizontalLayout);
+
+
+        menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuEdit->menuAction());
+        menuBar->addAction(menuSettings->menuAction());
+        menuBar->addAction(actHelp);
+        menuBar->addAction(actAbout);
+        menuFile->addAction(actOpenImage);
+        menuFile->addAction(actOpenFolder);
+        menuFile->addSeparator();
+        menuFile->addAction(actExit);
+        menuEdit->addAction(actUndo);
+        menuEdit->addSeparator();
+        menuEdit->addAction(menuRoi->menuAction());
+        menuSettings->addAction(menuLanguage->menuAction());
+        menuSettings->addAction(menuTheme->menuAction());
+        menuLanguage->addAction(actLangZh);
+        menuLanguage->addAction(actLangEn);
+        menuTheme->addAction(actThemeLight);
+        menuTheme->addAction(actThemeDark);
+
         retranslateUi(Widget);
 
         QMetaObject::connectSlotsByName(Widget);
@@ -298,18 +354,25 @@ public:
     void retranslateUi(QWidget *Widget)
     {
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "\345\233\276\345\203\217\345\244\204\347\220\206\345\267\245\345\205\267", nullptr));
-#if QT_CONFIG(tooltip)
-        btnMenuFile->setToolTip(QCoreApplication::translate("Widget", "\346\226\207\344\273\266", nullptr));
-#endif // QT_CONFIG(tooltip)
-        btnMenuFile->setText(QCoreApplication::translate("Widget", "\346\226\207\344\273\266", nullptr));
-#if QT_CONFIG(tooltip)
-        btnMenuRoi->setToolTip(QCoreApplication::translate("Widget", "ROI \351\200\211\345\214\272", nullptr));
-#endif // QT_CONFIG(tooltip)
-        btnMenuRoi->setText(QCoreApplication::translate("Widget", "ROI", nullptr));
-#if QT_CONFIG(tooltip)
-        btnMenuSettings->setToolTip(QCoreApplication::translate("Widget", "\350\256\276\347\275\256", nullptr));
-#endif // QT_CONFIG(tooltip)
-        btnMenuSettings->setText(QCoreApplication::translate("Widget", "\350\256\276\347\275\256", nullptr));
+        actOpenImage->setText(QCoreApplication::translate("Widget", "\346\211\223\345\274\200\345\233\276\347\211\207", nullptr));
+        actOpenFolder->setText(QCoreApplication::translate("Widget", "\346\211\223\345\274\200\346\226\207\344\273\266\345\244\271", nullptr));
+        actExit->setText(QCoreApplication::translate("Widget", "\351\200\200\345\207\272", nullptr));
+        actUndo->setText(QCoreApplication::translate("Widget", "\346\222\244\351\224\200", nullptr));
+#if QT_CONFIG(shortcut)
+        actUndo->setShortcut(QCoreApplication::translate("Widget", "Ctrl+Z", nullptr));
+#endif // QT_CONFIG(shortcut)
+        actLangZh->setText(QCoreApplication::translate("Widget", "\344\270\255\346\226\207", nullptr));
+        actLangEn->setText(QCoreApplication::translate("Widget", "English", nullptr));
+        actThemeLight->setText(QCoreApplication::translate("Widget", "\346\265\205\350\211\262", nullptr));
+        actThemeDark->setText(QCoreApplication::translate("Widget", "\346\267\261\350\211\262", nullptr));
+        actHelp->setText(QCoreApplication::translate("Widget", "\345\270\256\345\212\251(&H)", nullptr));
+        actAbout->setText(QCoreApplication::translate("Widget", "\345\205\263\344\272\216(&A)", nullptr));
+        menuFile->setTitle(QCoreApplication::translate("Widget", "\346\226\207\344\273\266(&F)", nullptr));
+        menuEdit->setTitle(QCoreApplication::translate("Widget", "\347\274\226\350\276\221(&E)", nullptr));
+        menuRoi->setTitle(QCoreApplication::translate("Widget", "ROI", nullptr));
+        menuSettings->setTitle(QCoreApplication::translate("Widget", "\350\256\276\347\275\256(&S)", nullptr));
+        menuLanguage->setTitle(QCoreApplication::translate("Widget", "\350\257\255\350\250\200", nullptr));
+        menuTheme->setTitle(QCoreApplication::translate("Widget", "\345\244\226\350\247\202", nullptr));
 #if QT_CONFIG(tooltip)
         btnApply->setToolTip(QCoreApplication::translate("Widget", "\346\214\211\345\275\223\345\211\215 ROI \344\270\216\345\244\204\347\220\206\351\223\276\351\207\215\346\226\260\350\256\241\347\256\227", nullptr));
 #endif // QT_CONFIG(tooltip)

@@ -12,6 +12,7 @@
 #include <QPoint>
 #include <QJsonObject>
 #include <QList>
+#include <QSet>
 #include <QContextMenuEvent>
 #include "../roi/roiinfo.h"
 
@@ -73,6 +74,8 @@ public:
     virtual void retranslateUi();
 
 signals:
+    /** @brief 用户即将改参（值仍旧）；Widget 据此 pushUndoSnapshot */
+    void paramsAboutToChange();
     /** @brief 参数发生变化，需要重新处理图像 */
     void paramsChanged();
 
@@ -88,7 +91,7 @@ signals:
     void enabledChanged(bool enabled);
 
 protected:
-    /** 图标/标题上的拖拽：发起换序 DnD */
+    /** 图标/标题拖拽 + 已 track 的参数控件 */
     bool eventFilter(QObject *watched, QEvent *event) override;
     /** 右键：复制 / 粘贴 / 删除 */
     void contextMenuEvent(QContextMenuEvent *event) override;
@@ -106,6 +109,11 @@ protected:
     /** @brief 添加分隔线 */
     void addSeparator();
 
+    /** 子类对每个会改参的控件调用；FocusIn/按下/滚轮时发 paramsAboutToChange */
+    void trackParamWidget(QWidget *w);
+    /** 程序改参前也可手动调用（如 Otsu）；同一次编辑只发一次 */
+    void notifyParamsAboutToChange();
+
 private:
     void initStyle();
     /** 从标题栏拖出：mime 带本块指针，Widget 负责插入新位置 */
@@ -119,6 +127,8 @@ private:
     QLabel *m_iconLabel;
     QLabel *m_titleLabel;
     QPoint m_dragStartPos;  ///< 标题栏拖拽起点，超过 startDragDistance 才发起换序
+    QSet<QWidget *> m_trackedParamWidgets;
+    bool m_paramEditArmed = false;
 };
 
 #endif // BASEBLOCK_H
