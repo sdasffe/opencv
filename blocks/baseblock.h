@@ -74,61 +74,38 @@ public:
     virtual void retranslateUi();
 
 signals:
-    /** @brief 用户即将改参（值仍旧）；Widget 据此 pushUndoSnapshot */
-    void paramsAboutToChange();
-    /** @brief 参数发生变化，需要重新处理图像 */
-    void paramsChanged();
-
-    /** @brief 用户点击删除按钮 */
-    void removeRequested();
-
-    /** @brief 右键菜单：复制本块参数到剪贴板（JSON） */
-    void copyRequested();
-    /** @brief 右键菜单：在本块之后粘贴剪贴板中的块 */
-    void pasteRequested();
-
-    /** @brief 使能状态变化 */
-    void enabledChanged(bool enabled);
+    void paramsAboutToChange();                                    // 即将改参（值仍旧）；Widget 据此压撤销栈
+    void paramsChanged();                                          // 参数已变，请求引擎重算图像
+    void removeRequested();                                        // 用户点 ✕，请求 Widget 移除本块
+    void copyRequested();                                          // 右键：复制本块参数 JSON
+    void pasteRequested();                                         // 右键：在本块之后粘贴
+    void enabledChanged(bool enabled);                             // 使能勾选变化
 
 protected:
-    /** 图标/标题拖拽 + 已 track 的参数控件 */
-    bool eventFilter(QObject *watched, QEvent *event) override;
-    /** 右键：复制 / 粘贴 / 删除 */
-    void contextMenuEvent(QContextMenuEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;    // 标题栏拖拽 + 已 track 参数控件
+    void contextMenuEvent(QContextMenuEvent *event) override;      // 右键复制/粘贴/删除
 
-    /**
-     * @brief 初始化标题栏（子类构造中调用）
-     * @param icon 图标文字（emoji或字符）
-     * @param title 处理块名称
-     */
-    void setupTitle(const QString &icon, const QString &title);
+    void setupTitle(const QString &icon, const QString &title);     // 子类构造中设标题栏图标与名称
+    QVBoxLayout *contentLayout() { return m_contentLayout; }       // 子类往此布局加参数控件
+    void addSeparator();                                           // 标题下加水平分隔线
 
-    /** @brief 获取内容布局，子类往里面加参数控件 */
-    QVBoxLayout *contentLayout() { return m_contentLayout; }
-
-    /** @brief 添加分隔线 */
-    void addSeparator();
-
-    /** 子类对每个会改参的控件调用；FocusIn/按下/滚轮时发 paramsAboutToChange */
-    void trackParamWidget(QWidget *w);
-    /** 程序改参前也可手动调用（如 Otsu）；同一次编辑只发一次 */
-    void notifyParamsAboutToChange();
+    void trackParamWidget(QWidget *w);                             // 登记改参控件；开始编辑发 aboutToChange
+    void notifyParamsAboutToChange();                              // 即将改参；同一次编辑只发一次防刷栈
 
 private:
-    void initStyle();
-    /** 从标题栏拖出：mime 带本块指针，Widget 负责插入新位置 */
-    void startBlockDrag();
+    void initStyle();                                              // WA_StyledBackground + sizePolicy
+    void startBlockDrag();                                         // 标题栏 DnD 换序
 
-    QVBoxLayout *m_mainLayout;
-    QHBoxLayout *m_titleLayout;
-    QVBoxLayout *m_contentLayout;
-    QCheckBox *m_enableCheckBox;
-    QPushButton *m_deleteBtn;
-    QLabel *m_iconLabel;
-    QLabel *m_titleLabel;
-    QPoint m_dragStartPos;  ///< 标题栏拖拽起点，超过 startDragDistance 才发起换序
-    QSet<QWidget *> m_trackedParamWidgets;
-    bool m_paramEditArmed = false;
+    QVBoxLayout *m_mainLayout;                                     // 块面板主布局
+    QHBoxLayout *m_titleLayout;                                    // 标题栏：图标|名称|开|✕
+    QVBoxLayout *m_contentLayout;                                  // 参数区容器
+    QCheckBox *m_enableCheckBox;                                   // 是否参与处理链
+    QPushButton *m_deleteBtn;                                      // 删除本块
+    QLabel *m_iconLabel;                                           // 可拖拽换序
+    QLabel *m_titleLabel;                                          // 可拖拽换序
+    QPoint m_dragStartPos;                                         // 标题栏拖拽起点
+    QSet<QWidget *> m_trackedParamWidgets;                         // trackParamWidget 登记的控件
+    bool m_paramEditArmed = false;                                 // 本次编辑已发过 aboutToChange
 };
 
 #endif // BASEBLOCK_H

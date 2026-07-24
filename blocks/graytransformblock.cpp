@@ -35,7 +35,7 @@ GrayTransformBlock::GrayTransformBlock(QWidget *parent)
  */
 void GrayTransformBlock::setupUI()
 {
-    addSeparator();
+    addSeparator();                                                  // 标题栏与参数区细线
 
     m_typeCombo = new QComboBox(this);
     for (int t : {int(GrayTransformAlgorithm::Type::ToGray),
@@ -45,7 +45,7 @@ void GrayTransformBlock::setupUI()
                   int(GrayTransformAlgorithm::Type::Gamma),
                   int(GrayTransformAlgorithm::Type::Equalize),
                   int(GrayTransformAlgorithm::Type::Normalize)}) {
-        m_typeCombo->addItem(QString(), t);
+        m_typeCombo->addItem(QString(), t);                          // userData 存 Type 枚举
     }
     contentLayout()->addWidget(m_typeCombo);
 
@@ -60,7 +60,7 @@ void GrayTransformBlock::setupUI()
     bRow->addWidget(m_brightLabel);
     bRow->addWidget(m_brightSpin);
     bRow->addStretch();
-    contentLayout()->addLayout(bRow);
+    contentLayout()->addLayout(bRow);                                // 亮度（BrightContrast 用）
 
     auto *cRow = new QHBoxLayout();
     m_contrastLabel = new QLabel(this);
@@ -73,7 +73,7 @@ void GrayTransformBlock::setupUI()
     cRow->addWidget(m_contrastLabel);
     cRow->addWidget(m_contrastSpin);
     cRow->addStretch();
-    contentLayout()->addLayout(cRow);
+    contentLayout()->addLayout(cRow);                                // 对比度（BrightContrast 用）
 
     auto *gRow = new QHBoxLayout();
     m_gammaLabel = new QLabel(this);
@@ -87,24 +87,24 @@ void GrayTransformBlock::setupUI()
     gRow->addWidget(m_gammaLabel);
     gRow->addWidget(m_gammaSpin);
     gRow->addStretch();
-    contentLayout()->addLayout(gRow);
+    contentLayout()->addLayout(gRow);                                // 伽马（Gamma 模式用）
 
     auto emitChangeInt = [this](int) { emit paramsChanged(); };
     auto emitChangeD = [this](double) { emit paramsChanged(); };
     connect(m_typeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int) {
-        updateParamEnabled();
+        updateParamEnabled();                                        // 按类型启用/禁用无关 Spin
         emit paramsChanged();
     });
     connect(m_brightSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChangeInt);
     connect(m_contrastSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChangeInt);
     connect(m_gammaSpin, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, emitChangeD);
 
-    trackParamWidget(m_typeCombo);
-    trackParamWidget(m_brightSpin);
-    trackParamWidget(m_contrastSpin);
-    trackParamWidget(m_gammaSpin);
+    trackParamWidget(m_typeCombo);                                   // 换变换类型前压撤销
+    trackParamWidget(m_brightSpin);                                  // 改亮度前压撤销
+    trackParamWidget(m_contrastSpin);                                // 改对比度前压撤销
+    trackParamWidget(m_gammaSpin);                                   // 改伽马前压撤销
 
-    updateParamEnabled();
+    updateParamEnabled();                                            // 初始按默认类型禁用无关参数
 }
 
 void GrayTransformBlock::retranslateUi()

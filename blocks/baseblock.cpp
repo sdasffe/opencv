@@ -89,7 +89,7 @@ BaseBlock::BaseBlock(QWidget *parent)
     connect(m_enableCheckBox, &QCheckBox::toggled, this, &BaseBlock::enabledChanged);
     // 开关也算一种“参数变化”，直接触发重算
     connect(m_enableCheckBox, &QCheckBox::toggled, this, &BaseBlock::paramsChanged);
-    trackParamWidget(m_enableCheckBox);
+    trackParamWidget(m_enableCheckBox);                              // 勾选前压撤销（值仍旧）
 
     setContextMenuPolicy(Qt::DefaultContextMenu);
     setToolTip(tr("右键可复制、粘贴或删除"));
@@ -153,56 +153,66 @@ void BaseBlock::loadParams(const QJsonObject &obj)
         setEnabledBlock(obj.value(QStringLiteral("enabled")).toBool(true));
 }
 
+/**
+ * @brief 登记会改参的控件，开始编辑时通过 eventFilter 发 paramsAboutToChange
+ *
+ * SpinBox 焦点常在内部 QLineEdit，故对 SpinBox 再 findChild 登记一行编辑框。
+ */
 void BaseBlock::trackParamWidget(QWidget *w)
 {
     if (!w)
-        return;
-    w->installEventFilter(this);
-    m_trackedParamWidgets.insert(w);
-    // SpinBox 实际焦点常在内部 QLineEdit；lineEdit() 是 protected，用 findChild 取
-    if (qobject_cast<QAbstractSpinBox *>(w)) {
-        if (QLineEdit *le = w->findChild<QLineEdit *>()) {
-            le->installEventFilter(this);
+        return;                                                      // 空指针防护
+    w->installEventFilter(this);                                     // 由本类 eventFilter 收开始编辑事件
+    m_trackedParamWidgets.insert(w);                                 // 加入已登记集合
+    if (qobject_cast<QAbstractSpinBox *>(w)) {                       // Spin/DoubleSpin
+        if (QLineEdit *le = w->findChild<QLineEdit *>()) {           // lineEdit() 为 protected，用 findChild
+            le->installEventFilter(this);                            // 内部编辑框获焦也能压栈
             m_trackedParamWidgets.insert(le);
         }
     }
 }
 
+/**
+ * @brief 发出 paramsAboutToChange；同一次编辑只发一次，防止拖动刷栈
+ */
 void BaseBlock::notifyParamsAboutToChange()
 {
     if (m_paramEditArmed)
-        return;
-    m_paramEditArmed = true;
-    emit paramsAboutToChange();
+        return;                                                      // 本次编辑已通知过
+    m_paramEditArmed = true;                                         // 标记：FocusOut 前不再发
+    emit paramsAboutToChange();                                      // Widget 据此 pushUndoSnapshot
 }
 
+/**
+ * @brief 事件过滤：已 track 控件开始编辑 → 即将改参；标题栏拖拽换序
+ */
 bool BaseBlock::eventFilter(QObject *watched, QEvent *event)
 {
     auto *w = qobject_cast<QWidget *>(watched);
-    if (w && m_trackedParamWidgets.contains(w)) {
+    if (w && m_trackedParamWidgets.contains(w)) {                    // 参数控件路径
         switch (event->type()) {
         case QEvent::FocusIn:
         case QEvent::MouseButtonPress:
         case QEvent::Wheel:
-            notifyParamsAboutToChange();
+            notifyParamsAboutToChange();                             // 值尚未变时通知压栈
             break;
         case QEvent::FocusOut:
-            m_paramEditArmed = false;
+            m_paramEditArmed = false;                                // 下次再改可再压一层
             break;
         default:
             break;
         }
-        return QWidget::eventFilter(watched, event);
+        return QWidget::eventFilter(watched, event);                 // 不吞事件，控件照常改值
     }
 
     if (watched != m_iconLabel && watched != m_titleLabel)
-        return QWidget::eventFilter(watched, event);
+        return QWidget::eventFilter(watched, event);                 // 非标题栏：交给基类
 
     switch (event->type()) {
     case QEvent::MouseButtonPress: {
         auto *e = static_cast<QMouseEvent *>(event);
         if (e->button() == Qt::LeftButton)
-            m_dragStartPos = e->pos();
+            m_dragStartPos = e->pos();                               // 记录拖拽起点
         break;
     }
     case QEvent::MouseMove: {
@@ -211,8 +221,8 @@ bool BaseBlock::eventFilter(QObject *watched, QEvent *event)
             break;
         if ((e->pos() - m_dragStartPos).manhattanLength()
             < QApplication::startDragDistance())
-            break;
-        startBlockDrag();
+            break;                                                   // 未超过系统拖拽阈值
+        startBlockDrag();                                            // 发起块换序 DnD
         return true;
     }
     default:

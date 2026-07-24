@@ -51,7 +51,7 @@ QWidget *GlcmBlock::addMetricRow(const char * /*objectTag*/, QLabel **nameOut, Q
     *nameOut = new QLabel(row);
     (*nameOut)->setObjectName(QStringLiteral("blockFieldLabel"));
     (*nameOut)->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
-    *valueOut = new QLabel(QStringLiteral("—"), row);
+    *valueOut = new QLabel(QStringLiteral("—"), row);                // 未计算前占位
     (*valueOut)->setObjectName(QStringLiteral("glcmValueLabel"));
     (*valueOut)->setTextInteractionFlags(Qt::TextSelectableByMouse);
     lay->addWidget(*nameOut);
@@ -63,11 +63,11 @@ QWidget *GlcmBlock::addMetricRow(const char * /*objectTag*/, QLabel **nameOut, Q
 /** @brief 构建指标下拉、量化级/距离 SpinBox 及六行特征数值 */
 void GlcmBlock::setupUI()
 {
-    addSeparator();
+    addSeparator();                                                  // 标题栏与参数区细线
 
     m_metricCombo = new QComboBox(this);
     for (int i = 0; i < 6; ++i)
-        m_metricCombo->addItem(QString(), i);
+        m_metricCombo->addItem(QString(), i);                        // 0~5 对应六种纹理指标
     contentLayout()->addWidget(m_metricCombo);
 
     auto *lvRow = new QHBoxLayout();
@@ -82,7 +82,7 @@ void GlcmBlock::setupUI()
     lvRow->addWidget(m_levelsLabel);
     lvRow->addWidget(m_levelsSpin);
     lvRow->addStretch();
-    contentLayout()->addLayout(lvRow);
+    contentLayout()->addLayout(lvRow);                               // 灰度量化级数
 
     auto *dRow = new QHBoxLayout();
     m_distLabel = new QLabel(this);
@@ -95,9 +95,9 @@ void GlcmBlock::setupUI()
     dRow->addWidget(m_distLabel);
     dRow->addWidget(m_distSpin);
     dRow->addStretch();
-    contentLayout()->addLayout(dRow);
+    contentLayout()->addLayout(dRow);                                // 像素对距离
 
-    addSeparator();
+    addSeparator();                                                  // 参数与特征数值区分隔
 
     m_rowContrast = addMetricRow("contrast", &m_nameContrast, &m_valContrast);
     m_rowCorrelation = addMetricRow("corr", &m_nameCorrelation, &m_valCorrelation);
@@ -107,20 +107,20 @@ void GlcmBlock::setupUI()
     m_rowDissimilarity = addMetricRow("diss", &m_nameDissimilarity, &m_valDissimilarity);
 
     connect(m_metricCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int) {
-        updateMetricVisible();
+        updateMetricVisible();                                       // 只显示当前选中的一行
     });
     connect(m_levelsSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int) {
-        emit paramsChanged();
+        emit paramsChanged();                                        // 量化级变 → 重算特征
     });
     connect(m_distSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int) {
-        emit paramsChanged();
+        emit paramsChanged();                                        // 距离变 → 重算特征
     });
 
-    trackParamWidget(m_metricCombo);
-    trackParamWidget(m_levelsSpin);
-    trackParamWidget(m_distSpin);
+    trackParamWidget(m_metricCombo);                                 // 切换查看指标前压撤销
+    trackParamWidget(m_levelsSpin);                                  // 改量化级前压撤销
+    trackParamWidget(m_distSpin);                                    // 改距离前压撤销
 
-    updateMetricVisible();
+    updateMetricVisible();                                           // 初始只显示默认指标行
 }
 
 void GlcmBlock::retranslateUi()

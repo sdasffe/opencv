@@ -68,62 +68,52 @@ BinarizationBlock::BinarizationBlock(QWidget *parent)
  */
 void BinarizationBlock::setupUI()
 {
-    addSeparator();  // 标题栏和参数区之间的细线
+    addSeparator();                                                  // 标题栏与参数区细线
 
-    // ========== 下限阈值行 ==========
     auto *lowerLayout = new QHBoxLayout();
     m_lowerLabel = new QLabel(this);
     m_lowerLabel->setObjectName(QStringLiteral("blockFieldLabel"));  // 供 QSS 美化
     m_lowerLabel->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
-
     m_lowerSpin = new QSpinBox(this);
-    m_lowerSpin->setRange(0, 255);  // 灰度范围
-    m_lowerSpin->setValue(AppConfig::DEFAULT_BINARY_LOWER);  // 默认 127
+    m_lowerSpin->setRange(0, 255);                                   // 灰度范围
+    m_lowerSpin->setValue(AppConfig::DEFAULT_BINARY_LOWER);          // 默认 127
     m_lowerSpin->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
-
     lowerLayout->addWidget(m_lowerLabel);
     lowerLayout->addWidget(m_lowerSpin);
-    lowerLayout->addStretch();  // 右侧留白，控件靠左
+    lowerLayout->addStretch();                                        // 右侧留白，控件靠左
     contentLayout()->addLayout(lowerLayout);
 
-    // ========== 上限阈值行 ==========
     auto *upperLayout = new QHBoxLayout();
     m_upperLabel = new QLabel(this);
     m_upperLabel->setObjectName(QStringLiteral("blockFieldLabel"));
     m_upperLabel->setFixedWidth(AppConfig::BLOCK_FIELD_LABEL_WIDTH);
-
     m_upperSpin = new QSpinBox(this);
     m_upperSpin->setRange(0, 255);
-    m_upperSpin->setValue(AppConfig::DEFAULT_BINARY_UPPER);  // 默认 255
+    m_upperSpin->setValue(AppConfig::DEFAULT_BINARY_UPPER);          // 默认 255
     m_upperSpin->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
-
     upperLayout->addWidget(m_upperLabel);
     upperLayout->addWidget(m_upperSpin);
     upperLayout->addStretch();
     contentLayout()->addLayout(upperLayout);
 
-    // ========== Otsu 自动阈值按钮 ==========
-    // role=accent 让 app.qss 把它画成强调色按钮
     m_autoBtn = new QPushButton(QStringLiteral("Otsu"), this);
-    m_autoBtn->setProperty("role", QVariant(QStringLiteral("accent")));
+    m_autoBtn->setProperty("role", QVariant(QStringLiteral("accent"))); // theme QSS 强调色
     m_autoBtn->setCursor(Qt::PointingHandCursor);
     contentLayout()->addWidget(m_autoBtn);
-    // 动态属性改完后强制刷新样式，否则 accent 可能不生效
-    if (m_autoBtn->style()) {
+    if (m_autoBtn->style()) {                                        // 动态属性后强制刷样式
         m_autoBtn->style()->unpolish(m_autoBtn);
         m_autoBtn->style()->polish(m_autoBtn);
     }
 
-    // SpinBox::valueChanged 有重载，必须用 QOverload<int> 指明是 int 版本
-    connect(m_lowerSpin, QOverload<int>::of(&QSpinBox::valueChanged),
+    connect(m_lowerSpin, QOverload<int>::of(&QSpinBox::valueChanged), // valueChanged 有重载，指明 int
             this, &BinarizationBlock::onLowerChanged);
     connect(m_upperSpin, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &BinarizationBlock::onUpperChanged);
     connect(m_autoBtn, &QPushButton::clicked,
             this, &BinarizationBlock::onAutoThresholdClicked);
-    trackParamWidget(m_lowerSpin);
-    trackParamWidget(m_upperSpin);
-    trackParamWidget(m_autoBtn);
+    trackParamWidget(m_lowerSpin);                                   // 改下限前压撤销
+    trackParamWidget(m_upperSpin);                                   // 改上限前压撤销
+    trackParamWidget(m_autoBtn);                                     // 点 Otsu 前压撤销
 }
 
 void BinarizationBlock::retranslateUi()
@@ -225,29 +215,25 @@ void BinarizationBlock::setThresholds(int lower, int upper)
     lower = qBound(0, lower, 255);
     upper = qBound(0, upper, 255);
     if (lower > upper)
-        std::swap(lower, upper);
+        std::swap(lower, upper);                                     // 保证 lower ≤ upper
 
-    m_lowerSpin->blockSignals(true);
+    m_lowerSpin->blockSignals(true);                                 // 避免 setValue 连触发两次重算
     m_upperSpin->blockSignals(true);
     m_lowerSpin->setValue(lower);
     m_upperSpin->setValue(upper);
     m_lowerSpin->blockSignals(false);
     m_upperSpin->blockSignals(false);
 
-    // 通知 ImageProcessor：参数变了，请请求 Widget 重算
-    emit paramsChanged();
+    emit paramsChanged();                                            // 统一通知引擎重算一次
 }
 
 /**
- * @brief Otsu 按钮点击：自己不算，把请求抛给主窗口
- *
- * 主窗口有原图和 ROI，算完再回调 setThresholds。
- * 这种“UI 块发请求、主窗口供数据”的拆分，避免 Block 依赖 Widget 头文件。
+ * @brief Otsu 按钮：先通知即将改参（压栈），再请求主窗口算阈值
  */
 void BinarizationBlock::onAutoThresholdClicked()
 {
-    notifyParamsAboutToChange();
-    emit otsuRequested();
+    notifyParamsAboutToChange();                                     // 阈值尚未写回，先压旧快照
+    emit otsuRequested();                                            // Widget 算 T 后 setThresholds
 }
 
 /**

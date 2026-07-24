@@ -40,14 +40,14 @@ FilterBlock::FilterBlock(QWidget *parent)
  */
 void FilterBlock::setupUI()
 {
-    addSeparator();
+    addSeparator();                                                  // 标题栏与参数区细线
 
     m_typeCombo = new QComboBox(this);
     for (int t : {int(FilterAlgorithm::Type::Mean), int(FilterAlgorithm::Type::Gaussian),
                   int(FilterAlgorithm::Type::Median), int(FilterAlgorithm::Type::Sobel),
                   int(FilterAlgorithm::Type::Laplacian), int(FilterAlgorithm::Type::Prewitt),
                   int(FilterAlgorithm::Type::Roberts)}) {
-        m_typeCombo->addItem(QString(), t);
+        m_typeCombo->addItem(QString(), t);                          // userData 存 Type 枚举
     }
     contentLayout()->addWidget(m_typeCombo);
 
@@ -60,7 +60,7 @@ void FilterBlock::setupUI()
         sp->setRange(1, 31);
         sp->setValue(def);
         sp->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
-        sp->setSingleStep(2);
+        sp->setSingleStep(2);                                        // 核尺寸保持奇数步进
         row->addWidget(labelOut);
         row->addWidget(sp);
         row->addStretch();
@@ -68,9 +68,9 @@ void FilterBlock::setupUI()
         return sp;
     };
 
-    m_kxSpin = addSpin(m_kxLabel, 3);
-    m_kySpin = addSpin(m_kyLabel, 3);
-    m_iterSpin = addSpin(m_iterLabel, 1);
+    m_kxSpin = addSpin(m_kxLabel, 3);                                // 核宽
+    m_kySpin = addSpin(m_kyLabel, 3);                                // 核高
+    m_iterSpin = addSpin(m_iterLabel, 1);                            // 平滑迭代次数
     m_iterSpin->setRange(1, 20);
 
     auto emitChange = [this](int) { emit paramsChanged(); };
@@ -78,10 +78,10 @@ void FilterBlock::setupUI()
     connect(m_kxSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_kySpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_iterSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
-    trackParamWidget(m_typeCombo);
-    trackParamWidget(m_kxSpin);
-    trackParamWidget(m_kySpin);
-    trackParamWidget(m_iterSpin);
+    trackParamWidget(m_typeCombo);                                   // 换滤波类型前压撤销
+    trackParamWidget(m_kxSpin);                                      // 改核宽前压撤销
+    trackParamWidget(m_kySpin);                                      // 改核高前压撤销
+    trackParamWidget(m_iterSpin);                                    // 改次数前压撤销
 }
 
 void FilterBlock::retranslateUi()

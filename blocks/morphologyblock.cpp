@@ -48,14 +48,14 @@ MorphologyBlock::MorphologyBlock(QWidget *parent)
  */
 void MorphologyBlock::setupUI()
 {
-    addSeparator();
+    addSeparator();                                                  // 标题栏与参数区细线
 
     m_opCombo = new QComboBox(this);
     for (int op : {int(MorphologyAlgorithm::Op::Dilate), int(MorphologyAlgorithm::Op::Erode),
                    int(MorphologyAlgorithm::Op::Open), int(MorphologyAlgorithm::Op::Close),
                    int(MorphologyAlgorithm::Op::TopHat), int(MorphologyAlgorithm::Op::ButtonHat),
                    int(MorphologyAlgorithm::Op::MorphologicalGradient)}) {
-        m_opCombo->addItem(QString(), op);
+        m_opCombo->addItem(QString(), op);                           // userData 存 Op 枚举
     }
     contentLayout()->addWidget(m_opCombo);
 
@@ -68,7 +68,7 @@ void MorphologyBlock::setupUI()
         sp->setRange(minV, maxV);
         sp->setValue(def);
         sp->setFixedWidth(AppConfig::BLOCK_SPIN_WIDTH);
-        sp->setSingleStep(2);
+        sp->setSingleStep(2);                                        // 结构元尺寸保持奇数步进
         row->addWidget(labelOut);
         row->addWidget(sp);
         row->addStretch();
@@ -76,19 +76,19 @@ void MorphologyBlock::setupUI()
         return sp;
     };
 
-    m_kxSpin = addSpin(m_kxLabel, 1, 31, 3);
-    m_kySpin = addSpin(m_kyLabel, 1, 31, 3);
-    m_iterSpin = addSpin(m_iterLabel, 1, 20, 1);
+    m_kxSpin = addSpin(m_kxLabel, 1, 31, 3);                         // 结构元宽
+    m_kySpin = addSpin(m_kyLabel, 1, 31, 3);                         // 结构元高
+    m_iterSpin = addSpin(m_iterLabel, 1, 20, 1);                     // 迭代次数
 
     auto emitChange = [this](int) { emit paramsChanged(); };
     connect(m_opCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, emitChange);
     connect(m_kxSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_kySpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
     connect(m_iterSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, emitChange);
-    trackParamWidget(m_opCombo);
-    trackParamWidget(m_kxSpin);
-    trackParamWidget(m_kySpin);
-    trackParamWidget(m_iterSpin);
+    trackParamWidget(m_opCombo);                                     // 换算子前压撤销
+    trackParamWidget(m_kxSpin);                                      // 改结构元宽前压撤销
+    trackParamWidget(m_kySpin);                                      // 改结构元高前压撤销
+    trackParamWidget(m_iterSpin);                                    // 改次数前压撤销
 }
 
 void MorphologyBlock::retranslateUi()

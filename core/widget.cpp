@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file widget.cpp
  * @brief 主窗口实现（本项目最核心的 UI 文件，建议精读）
  *
@@ -665,18 +665,17 @@ bool Widget::loadImageFromPath(const QString &filePath)
 // ============================================================================
 
 /**
- * @brief 槽：文件 → 打开图片（setupMenus 中 connect actOpenImage）
+ * @brief 文件→打开图片：选单张图，收起文件夹条后 loadImageFromPath
  */
 void Widget::actOpenImage()
 {
     const QString filePath = QFileDialog::getOpenFileName(
         this, tr("选择图片"), QString(), tr(AppConfig::IMAGE_FILE_FILTER));
-    if (filePath.isEmpty()) return;  // 用户点了取消
+    if (filePath.isEmpty())
+        return;                                                      // 用户取消
 
     AppLogger::info(QStringLiteral("打开单张图片"), filePath);
-
-    // 单张打开时收起文件夹缩略图条
-    clearFolderBrowser();
+    clearFolderBrowser();                                            // 单张模式不显示缩略图条
 
     if (!loadImageFromPath(filePath))
         QMessageBox::warning(this, tr("错误"),
@@ -684,24 +683,22 @@ void Widget::actOpenImage()
 }
 
 /**
- * @brief 槽：点击“打开文件夹”（pushButton_2）
- *
- * 扫描文件夹图片 → 画布下方显示缩略图条 → 加载第一张。
- * 之后点击缩略图即可切换（on_folderImageList_itemClicked）。
+ * @brief 文件→打开文件夹：扫图片 → 填缩略图条 → 加载第一张
  */
 void Widget::actOpenFolder()
 {
     const QString dir = QFileDialog::getExistingDirectory(
         this, tr("选择图片文件夹"));
-    if (dir.isEmpty()) return;
+    if (dir.isEmpty())
+        return;                                                      // 用户取消
 
-    const QStringList filters = {
+    const QStringList filters = {                                    // 支持的图片后缀
         QStringLiteral("*.png"), QStringLiteral("*.jpg"), QStringLiteral("*.jpeg"),
         QStringLiteral("*.bmp"), QStringLiteral("*.gif"), QStringLiteral("*.tif"),
         QStringLiteral("*.tiff")
     };
     QDir d(dir);
-    const QFileInfoList files = d.entryInfoList(filters, QDir::Files, QDir::Name);
+    const QFileInfoList files = d.entryInfoList(filters, QDir::Files, QDir::Name); // 按文件名排序
     if (files.isEmpty()) {
         AppLogger::warn(QStringLiteral("打开文件夹无图片"), dir);
         QMessageBox::information(this, tr("提示"),
@@ -712,15 +709,15 @@ void Widget::actOpenFolder()
     AppLogger::info(QStringLiteral("打开文件夹"),
                     QStringLiteral("dir=%1 count=%2").arg(dir).arg(files.size()));
 
-    fillFolderBrowser(dir, files);
+    fillFolderBrowser(dir, files);                                   // 底部显示缩略图条
 
     const QString firstPath = files.first().absoluteFilePath();
-    if (!loadImageFromPath(firstPath)) {
+    if (!loadImageFromPath(firstPath)) {                             // 默认加载第一张
         QMessageBox::warning(this, tr("错误"),
                              tr("无法加载图片"));
         return;
     }
-    selectFolderThumbnail(firstPath);
+    selectFolderThumbnail(firstPath);                                // 高亮当前缩略图
 }
 
 /**
@@ -799,64 +796,71 @@ void Widget::wheelEvent(QWheelEvent *event)
 }
 
 /**
- * @brief 键盘：Delete 删 ROI；Ctrl+0 适应窗口
+ * @brief 键盘：Delete 删 ROI；Ctrl+0 画布适应窗口
  *
- * 另有 QShortcut 兜底（子控件抢焦点时 keyPressEvent 可能收不到）。
+ * 另有 setupShortcuts 的 QShortcut 兜底（子控件抢焦点时本函数可能收不到）。
  */
 void Widget::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Delete) {
-        DelteteRoi();
-        event->accept();
+        DelteteRoi();                                                // 删选中 ROI，无选中则清空全部
+        event->accept();                                             // 标记已处理，不再往下传
         return;
     }
     if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_0) {
-        fitViewToImage();
+        fitViewToImage();                                            // 重置缩放铺满视口
         event->accept();
         return;
     }
-    QWidget::keyPressEvent(event);
+    QWidget::keyPressEvent(event);                                   // 其余键交给基类
 }
 
+/**
+ * @brief 注册窗口级快捷键：Ctrl+0 适应窗口、Delete 删 ROI
+ *
+ * Ctrl+Z 只挂在 actUndo 上，此处不再 new QShortcut，避免 Ambiguous shortcut。
+ */
 void Widget::setupShortcuts()
 {
-    // WindowShortcut：窗口激活即可用，不要求焦点一定在主 Widget 上
     auto *fitSc = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_0), this);
-    fitSc->setContext(Qt::WindowShortcut);
+    fitSc->setContext(Qt::WindowShortcut);                           // 窗口激活即可用，不要求焦点在主窗
     fitSc->setObjectName(QStringLiteral("shortcutFitView"));
     connect(fitSc, &QShortcut::activated, this, &Widget::fitViewToImage);
 
-    // Ctrl+Z 只挂在 QAction 上（见 setupMenus），不要再 new QShortcut，否则 Ambiguous shortcut
-
     auto *delSc = new QShortcut(QKeySequence::Delete, this);
-    delSc->setContext(Qt::WindowShortcut);
+    delSc->setContext(Qt::WindowShortcut);                           // 同上：子控件有焦点也能删 ROI
     delSc->setObjectName(QStringLiteral("shortcutDeleteRoi"));
     connect(delSc, &QShortcut::activated, this, &Widget::DelteteRoi);
 }
 
+/**
+ * @brief 连接 .ui 菜单栏动作，并为「编辑→ROI」挂入形状下拉 + 添加/删除面板
+ *
+ * 菜单结构在 widget.ui；此处只接线与动态 ROI 子面板。
+ */
 void Widget::setupMenus()
 {
     if (!ui->menuBar)
-        return;
+        return;                                                      // .ui 未定义菜单栏则跳过
 
-    connect(ui->actOpenImage, &QAction::triggered, this, &Widget::actOpenImage);
-    connect(ui->actOpenFolder, &QAction::triggered, this, &Widget::actOpenFolder);
-    connect(ui->actExit, &QAction::triggered, this, &Widget::onExitApp);
-    connect(ui->actUndo, &QAction::triggered, this, &Widget::onUndo);
-    connect(ui->actHelp, &QAction::triggered, this, &Widget::onHelpShortcuts);
-    connect(ui->actAbout, &QAction::triggered, this, &Widget::onAboutApp);
+    connect(ui->actOpenImage, &QAction::triggered, this, &Widget::actOpenImage);   // 文件→打开图片
+    connect(ui->actOpenFolder, &QAction::triggered, this, &Widget::actOpenFolder); // 文件→打开文件夹
+    connect(ui->actExit, &QAction::triggered, this, &Widget::onExitApp);           // 文件→退出
+    connect(ui->actUndo, &QAction::triggered, this, &Widget::onUndo);              // 编辑→撤销
+    connect(ui->actHelp, &QAction::triggered, this, &Widget::onHelpShortcuts);     // 帮助
+    connect(ui->actAbout, &QAction::triggered, this, &Widget::onAboutApp);         // 关于
 
-    ui->actUndo->setShortcut(QKeySequence::Undo);
-    ui->actUndo->setShortcutContext(Qt::WindowShortcut);
-    addAction(ui->actUndo);
+    ui->actUndo->setShortcut(QKeySequence::Undo);                    // Ctrl+Z
+    ui->actUndo->setShortcutContext(Qt::WindowShortcut);             // 子控件有焦点也能撤销
+    addAction(ui->actUndo);                                          // 挂到主窗口，避免被焦点抢走
 
-    m_menuRoi = ui->menuRoi;
-    auto *roiPanel = new QWidget(m_menuRoi);
+    m_menuRoi = ui->menuRoi;                                         // 编辑→ROI 子菜单
+    auto *roiPanel = new QWidget(m_menuRoi);                         // 内嵌面板：形状 + 按钮
     auto *roiLay = new QVBoxLayout(roiPanel);
     roiLay->setContentsMargins(10, 8, 10, 8);
     roiLay->setSpacing(6);
 
-    m_roiTypeCombo = new QComboBox(roiPanel);
+    m_roiTypeCombo = new QComboBox(roiPanel);                        // 矩形 / 圆形 / 旋转矩形
     m_roiTypeCombo->setObjectName(QStringLiteral("comboBox"));
     m_roiTypeCombo->addItem(tr("矩形"));
     m_roiTypeCombo->addItem(tr("圆形"));
@@ -867,37 +871,37 @@ void Widget::setupMenus()
     m_roiAddBtn->setObjectName(QStringLiteral("pushButton_3"));
     m_roiAddBtn->setCursor(Qt::PointingHandCursor);
     m_roiDeleteBtn = new QPushButton(tr("删除"), roiPanel);
-    m_roiDeleteBtn->setObjectName(QStringLiteral("deltete"));
+    m_roiDeleteBtn->setObjectName(QStringLiteral("deltete"));        // 历史 objectName，供 QSS 匹配
     m_roiDeleteBtn->setCursor(Qt::PointingHandCursor);
 
     roiLay->addWidget(m_roiTypeCombo);
     roiLay->addWidget(m_roiAddBtn);
     roiLay->addWidget(m_roiDeleteBtn);
 
-    auto *roiAction = new QWidgetAction(m_menuRoi);
+    auto *roiAction = new QWidgetAction(m_menuRoi);                  // 把 QWidget 塞进 QMenu
     roiAction->setDefaultWidget(roiPanel);
-    m_menuRoi->clear();
-    m_menuRoi->addAction(roiAction);
+    m_menuRoi->clear();                                              // 清掉 .ui 占位项
+    m_menuRoi->addAction(roiAction);                                 // 只保留内嵌面板
 
     connect(m_roiAddBtn, &QPushButton::clicked, this, [this]() {
-        AddRoi();
+        AddRoi();                                                    // 按当前形状在图中心加 ROI
         if (m_menuRoi)
-            m_menuRoi->close();
+            m_menuRoi->close();                                      // 操作完收起菜单
     });
     connect(m_roiDeleteBtn, &QPushButton::clicked, this, [this]() {
-        DelteteRoi();
+        DelteteRoi();                                                // 删选中或清空全部 ROI
         if (m_menuRoi)
             m_menuRoi->close();
     });
 
-    auto *langGroup = new QActionGroup(this);
+    auto *langGroup = new QActionGroup(this);                        // 语言互斥：中/英只能选一个
     langGroup->setExclusive(true);
     langGroup->addAction(ui->actLangZh);
     langGroup->addAction(ui->actLangEn);
     connect(ui->actLangZh, &QAction::triggered, this, &Widget::onLanguageChinese);
     connect(ui->actLangEn, &QAction::triggered, this, &Widget::onLanguageEnglish);
 
-    auto *themeGroup = new QActionGroup(this);
+    auto *themeGroup = new QActionGroup(this);                       // 外观互斥：浅色/深色
     themeGroup->setExclusive(true);
     themeGroup->addAction(ui->actThemeLight);
     themeGroup->addAction(ui->actThemeDark);
@@ -1281,56 +1285,50 @@ void Widget::applyRoiFromInfo(const RoiInfo &info)
     }
 }
 
-/** comboBox 切换时目前无额外逻辑（类型在点“添加 ROI”时才读取） */
 /**
- * @brief 槽：ROI 菜单内「添加」
- *
- * 按形状下拉当前项，在图像中心放一个 DEFAULT_ROI_SIZE 大小的选区。
+ * @brief ROI 菜单「添加」：按形状下拉，在图像中心放 DEFAULT_ROI_SIZE 选区
  */
 void Widget::AddRoi()
 {
-    if (!m_pixmapItem) {
+    if (!m_pixmapItem) {                                             // 还没打开图，场景无 pixmap
         QMessageBox::information(this, tr("提示"), tr("请先打开一张图片"));
         return;
     }
 
-    const QPointF c = imageCenterInScene();
-    const qreal size = AppConfig::DEFAULT_ROI_SIZE;
-    const int type = m_roiTypeCombo ? m_roiTypeCombo->currentIndex() : 0;
+    const QPointF c = imageCenterInScene();                          // 图像中心（场景坐标）
+    const qreal size = AppConfig::DEFAULT_ROI_SIZE;                  // 默认边长/直径
+    const int type = m_roiTypeCombo ? m_roiTypeCombo->currentIndex() : 0; // 0矩 1圆 2旋转矩
 
     if (type == 0)
-        addRectItem(c.x(), c.y(), size, size);
+        addRectItem(c.x(), c.y(), size, size);                       // 矩形（内部会 push 撤销）
     else if (type == 1)
-        addEllipseItem(c.x(), c.y(), size, size);
+        addEllipseItem(c.x(), c.y(), size, size);                    // 椭圆
     else
-        addRotatedRectItem(c.x(), c.y(), size * 1.4, size);
+        addRotatedRectItem(c.x(), c.y(), size * 1.4, size);          // 旋转矩形略扁长
 }
 
 /**
- * @brief 槽：删除 ROI（按钮 deltete 或键盘 Delete）
+ * @brief 删 ROI（菜单删除 / Delete）：有选中只删选中，无选中则清空全部
  *
- * 若有选中项：只删选中的；
- * 若无选中：清掉全部 ROI（方便一键清空）。
- *
- * 删掉后必须立刻重算：scene.changed 在无 ROI 时会直接 return，
- * 不能再指望定时器自动刷新。
+ * 删完后若已有图且处理链非空须立刻 onApplyProcessing：
+ * scene.changed 在 ROI 为空时会直接 return，不能再靠防抖定时器刷新。
  */
 void Widget::DelteteRoi()
 {
-    pushUndoSnapshot(QStringLiteral("删除ROI"));
-    const auto selected = m_scene->selectedItems();
+    pushUndoSnapshot(QStringLiteral("删除ROI"));                     // 先记整份会话（块+ROI）
+    const auto selected = m_scene->selectedItems();                  // 当前选中的场景图元
     const int before = m_rectItems.size() + m_ellipseItems.size() + m_rotatedRectItems.size();
     if (selected.isEmpty()) {
-        clearAllRoi();
+        clearAllRoi();                                               // 无选中 → 清空三类 ROI 列表
         AppLogger::info(QStringLiteral("删除ROI"),
                         QStringLiteral("mode=全部 before=%1").arg(before));
     } else {
         int removed = 0;
-        for (QGraphicsItem *item : selected) {
+        for (QGraphicsItem *item : selected) {                       // 只处理我们自己的 ROI 类型
             if (auto *r = dynamic_cast<ResizableRectItem *>(item)) {
-                m_rectItems.removeOne(r);
-                m_scene->removeItem(r);
-                delete r;
+                m_rectItems.removeOne(r);                            // 从跟踪列表摘掉
+                m_scene->removeItem(r);                              // 从场景移除
+                delete r;                                            // 释放图元
                 ++removed;
             } else if (auto *e = dynamic_cast<ResizableEllipseItem *>(item)) {
                 m_ellipseItems.removeOne(e);
@@ -1344,7 +1342,7 @@ void Widget::DelteteRoi()
                 ++removed;
             }
         }
-        m_lastRoisForDebounce.clear();
+        m_lastRoisForDebounce.clear();                               // 强制下次防抖视为「ROI 变了」
         AppLogger::info(QStringLiteral("删除ROI"),
                         QStringLiteral("mode=选中 removed=%1 remain=%2")
                             .arg(removed)
@@ -1353,7 +1351,7 @@ void Widget::DelteteRoi()
     }
 
     if (m_processor->hasImage() && !m_blockList.isEmpty())
-        onApplyProcessing();
+        onApplyProcessing();                                         // 立刻按剩余 ROI 重跑处理链
 }
 
 /**
@@ -1413,51 +1411,55 @@ void Widget::saveCurrentSession()
     saveSessionsToDisk();
 }
 
-/** @brief 采集当前 UI 状态快照（块参数 JSON 链 + getAllRoiInfo） */
+/**
+ * @brief 采集当前 UI 快照：处理块 saveParams 链 + 全部 ROI
+ *
+ * 不写磁盘；供撤销栈与会话内存缓存共用同一数据结构 ImageSession。
+ */
 ImageSession Widget::captureSessionSnapshot() const
 {
     ImageSession session;
     for (BaseBlock *block : m_blockList) {
         if (block)
-            session.chain.append(block->saveParams());
+            session.chain.append(block->saveParams());               // 每块类型+参数打成 JSON
     }
-    session.rois = getAllRoiInfo();
+    session.rois = getAllRoiInfo();                                  // 场景图元 → 纯数据 RoiInfo
     return session;
 }
 
 /**
- * @brief 用户可撤销操作前压栈一份会话快照
+ * @brief 可撤销操作前压栈一份「改之前」的会话快照
  *
- * m_undoRestoring 为 true 时不记录（恢复/导入链过程中避免递归入栈）。
- * 栈深超过 MAX_UNDO 时丢弃最旧项。
+ * m_undoRestoring=true 时跳过（撤销/导入恢复链时内部 clear/add 不再递归入栈）。
+ * 超过 MAX_UNDO 丢最旧。reason 仅打日志，不进快照内容。
  */
 void Widget::pushUndoSnapshot(const QString &reason)
 {
     if (m_undoRestoring)
-        return;
-    m_undoStack.append(captureSessionSnapshot());
+        return;                                                      // 恢复过程中禁止再压栈
+    m_undoStack.append(captureSessionSnapshot());                    // 记下当前块链+ROI
     while (m_undoStack.size() > MAX_UNDO)
-        m_undoStack.removeFirst();
+        m_undoStack.removeFirst();                                   // 超限丢队首（最旧）
     AppLogger::info(QStringLiteral("撤销快照"),
                     QStringLiteral("reason=%1 depth=%2").arg(reason).arg(m_undoStack.size()));
 }
 
 /**
- * @brief 撤销：弹出栈顶快照并 restoreSession，再 onApplyProcessing 重算
+ * @brief 编辑→撤销 / Ctrl+Z：弹出栈顶 → restoreSession → 重算画面
  *
- * 恢复期间 m_undoRestoring=true，避免 restore 内部的 clear/add 再次 push 快照。
+ * 一次撤销整份会话（所有块参数 + 所有 ROI），不是单控件逐步回退。
  */
 void Widget::onUndo()
 {
     if (m_undoStack.isEmpty()) {
         AppLogger::info(QStringLiteral("撤销"), QStringLiteral("栈空"));
-        return;
+        return;                                                      // 无可撤
     }
-    const ImageSession snap = m_undoStack.takeLast();
-    m_undoRestoring = true;
-    restoreSession(snap);
+    const ImageSession snap = m_undoStack.takeLast();                 // 取出最近一次操作前状态
+    m_undoRestoring = true;                                          // 恢复期：add/clear 不 push
+    restoreSession(snap);                                            // 清块重建 + 重建 ROI
     m_undoRestoring = false;
-    onApplyProcessing();
+    onApplyProcessing();                                             // 按恢复后的链/ROI 刷新结果图
     AppLogger::info(QStringLiteral("撤销"),
                     QStringLiteral("remain=%1 blocks=%2 rois=%3")
                         .arg(m_undoStack.size())
@@ -2267,66 +2269,56 @@ BaseBlock *Widget::createBlockByName(const QString &name)
 /**
  * @brief 把已创建的块挂到右侧面板，并注册到处理引擎
  *
- * 做了三件事：
- *   1. UI：addWidget 到可滚动的 blockListLayout，加入 m_blockList
- *   2. 信号：块点 ✕ → 从布局/列表/processor 移除并 deleteLater
- *   3. 引擎：m_processor->addBlock
- *        - 内部会监听 paramsChanged / enabledChanged
- *        - 若已有图，立刻 requestReprocess → onApplyProcessing
- *
- * 注意 m_blockList 与 processor.blocks() 顺序应保持一致，
- * 因为 reprocess 按 processor 里的顺序执行，面板显示按 m_blockList 顺序。
+ * 顺序：撤销快照 → 布局/列表 → 信号（删/复制粘贴/参数将改）→ processor.addBlock。
+ * m_blockList 与 processor.blocks() 须同序（reprocess 跟引擎序，面板跟 m_blockList）。
  */
 void Widget::addBlockToPanel(BaseBlock *block)
 {
-    if (!block || !m_blockLayout) return;
+    if (!block || !m_blockLayout) return;                             // 空块或布局未就绪
 
     if (!m_undoRestoring)
-        pushUndoSnapshot(QStringLiteral("添加处理块"));
+        pushUndoSnapshot(QStringLiteral("添加处理块"));              // 添加前记快照（恢复建块跳过）
 
-    // 纵向：不小于自身内容高度，避免被外层布局挤扁
-    block->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+    block->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum); // 纵向不被外层挤扁
 
-    m_blockLayout->addWidget(block);
-    m_blockList.append(block);
+    m_blockLayout->addWidget(block);                                 // 挂到右侧滚动区布局
+    m_blockList.append(block);                                       // 同步 UI 侧顺序列表
 
-    // 用户点块标题栏的 ✕ / 右键删除
     connect(block, &BaseBlock::removeRequested, this, [this, block]() {
-        pushUndoSnapshot(QStringLiteral("删除处理块"));
+        pushUndoSnapshot(QStringLiteral("删除处理块"));              // 删前记快照
         const QString name = block->blockName();
-        m_blockLayout->removeWidget(block);
-        m_blockList.removeOne(block);
-        m_processor->removeBlock(block);  // 会 requestReprocess（剩余块重算）
-        block->deleteLater();
-        refreshChainHint();
+        m_blockLayout->removeWidget(block);                          // 从布局摘掉
+        m_blockList.removeOne(block);                                // 从跟踪列表摘掉
+        m_processor->removeBlock(block);                             // 引擎移除并 requestReprocess
+        block->deleteLater();                                        // 延迟销毁控件
+        refreshChainHint();                                          // 更新链提示文案
         AppLogger::info(QStringLiteral("删除处理块"),
                         QStringLiteral("name=%1 remain=%2").arg(name).arg(m_blockList.size()));
     });
     connect(block, &BaseBlock::copyRequested, this, [this, block]() {
-        copyBlockToClipboard(block);
+        copyBlockToClipboard(block);                                 // 类型+参数进剪贴板
         AppLogger::info(QStringLiteral("复制处理块"), block->blockName());
     });
     connect(block, &BaseBlock::pasteRequested, this, [this, block]() {
-        pasteBlockFromClipboard(block);
+        pasteBlockFromClipboard(block);                              // 在该块后插入剪贴板块
         AppLogger::info(QStringLiteral("粘贴处理块"),
                         QStringLiteral("after=%1").arg(block->blockName()));
     });
     connect(block, &BaseBlock::paramsAboutToChange, this, [this]() {
-        if (!m_undoRestoring)
-            pushUndoSnapshot(QStringLiteral("修改处理块参数"));
+        if (!m_undoRestoring)                                        // 撤销恢复期不再压栈
+            pushUndoSnapshot(QStringLiteral("修改处理块参数"));      // 旋钮动手前记整份会话
     });
 
-    m_processor->addBlock(block);
-    block->show();
-    refreshChainHint();
+    m_processor->addBlock(block);                                    // 入引擎；有图则触发重算
+    block->show();                                                   // 确保可见
+    refreshChainHint();                                              // 刷新「当前链」提示
     AppLogger::info(QStringLiteral("添加处理块"),
                     QStringLiteral("name=%1 index=%2")
                         .arg(block->blockName())
                         .arg(m_blockList.size() - 1));
 
-    // 新块滚进可视区
     if (ui->blockScrollArea)
-        ui->blockScrollArea->ensureWidgetVisible(block);
+        ui->blockScrollArea->ensureWidgetVisible(block);             // 新块滚进可视区
 }
 
 int Widget::blockInsertIndexAtY(int yInContainer) const
@@ -2341,33 +2333,30 @@ int Widget::blockInsertIndexAtY(int yInContainer) const
 }
 
 /**
- * @brief 把已有块挪到新位置，并同步处理链顺序
- *
- * insertBefore：落点「插到该下标之前」（基于拖放前的列表）。
- * 从原位置取出后若目标在后方，下标需减 1。
+ * @brief 拖放改序：把块挪到 insertBefore，并同步 processor 顺序后重算
  */
 void Widget::reorderBlock(BaseBlock *block, int insertBefore)
 {
     if (!block || !m_blockLayout) return;
 
-    const int from = m_blockList.indexOf(block);
+    const int from = m_blockList.indexOf(block);                     // 拖放前下标
     if (from < 0) return;
 
-    int to = insertBefore;
+    int to = insertBefore;                                           // 「插到该下标之前」
     if (to > from)
-        --to;  // 先移除后再插入，后方下标左移
+        --to;                                                        // 先移除后再插，后方下标左移
     to = qBound(0, to, m_blockList.size() - 1);
     if (to == from)
-        return;
+        return;                                                      // 位置没变
 
-    pushUndoSnapshot(QStringLiteral("调整处理块顺序"));
+    pushUndoSnapshot(QStringLiteral("调整处理块顺序"));              // 改序前记快照
 
-    m_blockList.move(from, to);
+    m_blockList.move(from, to);                                      // UI 列表重排
     m_blockLayout->removeWidget(block);
-    m_blockLayout->insertWidget(to, block);
+    m_blockLayout->insertWidget(to, block);                          // 布局同步
     block->show();
 
-    m_processor->moveBlock(block, to);  // 内部 requestReprocess
+    m_processor->moveBlock(block, to);                               // 引擎同序并 requestReprocess
     AppLogger::info(QStringLiteral("调整处理块顺序"),
                     QStringLiteral("name=%1 from=%2 to=%3")
                         .arg(block->blockName()).arg(from).arg(to));

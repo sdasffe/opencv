@@ -33,7 +33,7 @@ PseudoColorBlock::PseudoColorBlock(QWidget *parent)
  */
 void PseudoColorBlock::setupUI()
 {
-    addSeparator();
+    addSeparator();                                                  // 标题栏与参数区细线
 
     m_mapCombo = new QComboBox(this);
     for (int m : {int(PseudoColorAlgorithm::Map::Jet), int(PseudoColorAlgorithm::Map::Hot),
@@ -41,13 +41,13 @@ void PseudoColorBlock::setupUI()
                   int(PseudoColorAlgorithm::Map::Ocean), int(PseudoColorAlgorithm::Map::Summer),
                   int(PseudoColorAlgorithm::Map::Winter), int(PseudoColorAlgorithm::Map::Autumn),
                   int(PseudoColorAlgorithm::Map::Bone), int(PseudoColorAlgorithm::Map::Pink)}) {
-        m_mapCombo->addItem(QString(), m);
+        m_mapCombo->addItem(QString(), m);                           // userData 存 Map，算法层映射 COLORMAP_*
     }
     contentLayout()->addWidget(m_mapCombo);
 
     connect(m_mapCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int) { emit paramsChanged(); });
-    trackParamWidget(m_mapCombo);
+            this, [this](int) { emit paramsChanged(); });            // 换色图 → 整链重算
+    trackParamWidget(m_mapCombo);                                    // 换色图前压撤销
 }
 
 void PseudoColorBlock::retranslateUi()
