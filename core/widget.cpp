@@ -153,7 +153,7 @@ Widget::Widget(QWidget *parent)
     // 允许用样式表画背景（否则有些平台背景色不生效）
     setAttribute(Qt::WA_StyledBackground, true);
 
-    setWindowTitle(QStringLiteral("图像处理工具"));
+    setWindowTitle(tr("图像处理工具"));
 
     // 即使没按下鼠标也追踪移动（方便以后扩展悬停提示等）
     setMouseTracking(true);
@@ -659,7 +659,7 @@ bool Widget::loadImageFromPath(const QString &filePath)
         refreshDisplay();  // 没有块：显示原图即可
 
     updateInfoLabel();
-    setWindowTitle(QStringLiteral("图像处理工具 — %1  (%2 × %3)")
+    setWindowTitle(tr("图像处理工具 — %1  (%2 × %3)")
                        .arg(QFileInfo(filePath).fileName())
                        .arg(pixmap.width())
                        .arg(pixmap.height()));
@@ -687,7 +687,8 @@ bool Widget::loadImageFromPath(const QString &filePath)
 void Widget::actOpenImage()
 {
     const QString filePath = QFileDialog::getOpenFileName(
-        this, tr("选择图片"), QString(), tr(AppConfig::IMAGE_FILE_FILTER));
+        this, tr("选择图片"), QString(),
+        tr("图片文件 (*.png *.jpg *.jpeg *.bmp *.gif *.tiff);;所有文件 (*.*)"));
     if (filePath.isEmpty())
         return;                                                      // 用户取消
 
@@ -1805,7 +1806,7 @@ void Widget::on_btnExportChain_clicked()
 
     const QString path = QFileDialog::getSaveFileName(
         this, tr("导出处理链"), QStringLiteral("chain.json"),
-        tr(AppConfig::CHAIN_FILE_FILTER));
+        tr("处理链 (*.json);;所有文件 (*.*)"));
     if (path.isEmpty())
         return;
 
@@ -1842,7 +1843,7 @@ void Widget::on_btnImportChain_clicked()
 {
     const QString path = QFileDialog::getOpenFileName(
         this, tr("导入处理链"), QString(),
-        tr(AppConfig::CHAIN_FILE_FILTER));
+        tr("处理链 (*.json);;所有文件 (*.*)"));
     if (path.isEmpty())
         return;
 

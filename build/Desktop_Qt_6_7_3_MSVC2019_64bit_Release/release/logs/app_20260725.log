@@ -18,3 +18,26 @@ INFO | 应用 | 图像处理工具 1.0.0
 14:42:25.806 | INFO | 主窗口已显示
 14:42:45.300 | INFO | 程序退出
 14:42:45.301 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+========== 会话开始 2026-07-25 17:44:59.497 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260725.log
+INFO | 应用 | 图像处理工具 1.0.0
+17:44:59.498 | INFO | 程序启动
+17:44:59.498 | INFO | 图像内存上限 | 不限制
+17:44:59.532 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+17:44:59.726 | INFO | 切换主题 | light
+17:44:59.801 | INFO | 主窗口已显示
+17:45:15.638 | INFO | 切换语言 | en
+17:45:18.911 | INFO | 切换语言 | zh
+17:45:21.038 | INFO | 程序退出
+17:45:21.041 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+========== 会话开始 2026-07-25 17:47:45.719 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260725.log
+INFO | 应用 | 图像处理工具 1.0.0
+17:47:45.719 | INFO | 程序启动
+17:47:45.719 | INFO | 图像内存上限 | 不限制
+17:47:45.741 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+17:47:46.087 | INFO | 切换主题 | light
+17:47:46.144 | INFO | 主窗口已显示
+17:48:07.404 | INFO | 切换语言 | en
+17:48:09.713 | INFO | 程序退出
+17:48:09.715 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2

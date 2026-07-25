@@ -315,7 +315,7 @@
         <item>
          <widget class="QLabel" name="algoTitleLabel">
           <property name="text">
-           <string>算法</string>
+           <string>图像处理工具箱</string>
           </property>
          </widget>
         </item>
@@ -402,7 +402,7 @@
         <item>
          <widget class="QLabel" name="chainTitleLabel">
           <property name="text">
-           <string>图像处理工具箱</string>
+           <string>任务列表</string>
           </property>
          </widget>
         </item>
