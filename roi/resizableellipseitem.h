@@ -1,6 +1,7 @@
 #ifndef RESIZABLEELLIPSEITEM_H
 #define RESIZABLEELLIPSEITEM_H
 
+#include <QObject>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
@@ -12,10 +13,12 @@
  * @brief 可调大小的椭圆 ROI；几何写入 RoiInfo::rect（外接矩形）
  *
  * 交互：内部拖移、四边手柄调宽高；命中用椭圆方程。坐标系=图像像素。
+ * 开始拖动/缩放时 emit geometryAboutToChange，供 Widget 压撤销栈。
  */
 
-class ResizableEllipseItem : public QGraphicsEllipseItem
+class ResizableEllipseItem : public QObject, public QGraphicsEllipseItem
 {
+    Q_OBJECT
 public:
     /** 四边缩放手柄 + 内部 Move（无角手柄） */
     enum HandleType {
@@ -27,6 +30,10 @@ public:
     /** @param x,y,w,h item 本地外接矩形 */
     explicit ResizableEllipseItem(qreal x, qreal y, qreal width, qreal height,
                                   QGraphicsItem *parent = nullptr);    // 创建可选中、可悬停的椭圆
+
+signals:
+    /** 用户即将拖移/缩放（mousePress 命中有效热区时），Widget 据此压「改之前」快照 */
+    void geometryAboutToChange();
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

@@ -1,0 +1,23 @@
+{
+    "sessions": {
+        "C:/Users/Admin/Desktop/图片/big_10000.png": {
+            "blocks": [
+            ],
+            "rois": [
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/input.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        }
+    },
+    "version": 1
+}

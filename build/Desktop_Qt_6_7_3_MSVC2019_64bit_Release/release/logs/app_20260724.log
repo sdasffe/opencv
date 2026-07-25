@@ -1,0 +1,393 @@
+========== 会话开始 2026-07-24 11:48:30.281 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260724.log
+INFO | 应用 | 图像处理工具 1.0.0
+11:48:30.281 | INFO | 程序启动
+11:48:30.743 | INFO | 切换主题 | light
+11:48:30.805 | INFO | 主窗口已显示
+11:49:19.468 | INFO | 撤销快照 | reason=添加处理块 depth=1
+11:49:19.486 | INFO | 添加处理块 | name=二值化处理 index=0
+11:49:20.871 | INFO | 撤销快照 | reason=添加处理块 depth=2
+11:49:20.877 | INFO | 添加处理块 | name=形态学处理 index=1
+11:49:21.480 | INFO | 撤销快照 | reason=添加处理块 depth=3
+11:49:21.484 | INFO | 添加处理块 | name=滤波处理 index=2
+11:49:22.224 | INFO | 撤销快照 | reason=添加处理块 depth=4
+11:49:22.229 | INFO | 添加处理块 | name=灰度变换 index=3
+11:49:23.327 | INFO | 撤销快照 | reason=添加处理块 depth=5
+11:49:23.331 | INFO | 添加处理块 | name=伪彩色处理 index=4
+11:49:23.871 | INFO | 撤销快照 | reason=添加处理块 depth=6
+11:49:23.878 | INFO | 添加处理块 | name=灰度共生矩阵 index=5
+11:49:30.134 | INFO | 打开单张图片 | C:/Users/Admin/Desktop/图片/input.png
+11:49:30.156 | INFO | 撤销快照 | reason=清空处理链 depth=7
+11:49:30.157 | INFO | 清空处理链 | removed=6 reprocessAfter=否
+11:49:30.157 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/input.png size=1066x1061 prev=(无) session=新建空会话 blocks=0 rois=0
+11:49:32.785 | INFO | 撤销快照 | reason=添加处理块 depth=1
+11:49:32.786 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:49:32.800 | INFO | 执行处理块 | name=二值化处理 elapsed=14 ms rois=0
+11:49:32.801 | INFO | 流水线结束 | total=15 ms steps=[二值化处理(14ms)]
+11:49:32.801 | INFO | 处理完成 | elapsed=15 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+11:49:32.803 | INFO | 添加处理块 | name=二值化处理 index=0
+11:49:33.339 | INFO | 撤销快照 | reason=添加处理块 depth=2
+11:49:33.339 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=2 enabled=2 rois=0 chain=[二值化处理 -> 形态学处理]
+11:49:33.348 | INFO | 执行处理块 | name=二值化处理 elapsed=8 ms rois=0
+11:49:33.360 | INFO | 执行处理块 | name=形态学处理 elapsed=10 ms rois=0
+11:49:33.360 | INFO | 流水线结束 | total=20 ms steps=[二值化处理(8ms) -> 形态学处理(10ms)]
+11:49:33.360 | INFO | 处理完成 | elapsed=20 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+11:49:33.363 | INFO | 添加处理块 | name=形态学处理 index=1
+11:49:33.774 | INFO | 撤销快照 | reason=添加处理块 depth=3
+11:49:33.775 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=3 enabled=3 rois=0 chain=[二值化处理 -> 形态学处理 -> 灰度变换]
+11:49:33.784 | INFO | 执行处理块 | name=二值化处理 elapsed=9 ms rois=0
+11:49:33.794 | INFO | 执行处理块 | name=形态学处理 elapsed=9 ms rois=0
+11:49:33.804 | INFO | 执行处理块 | name=灰度变换 elapsed=9 ms rois=0
+11:49:33.805 | INFO | 流水线结束 | total=30 ms steps=[二值化处理(9ms) -> 形态学处理(9ms) -> 灰度变换(9ms)]
+11:49:33.805 | INFO | 处理完成 | elapsed=30 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+11:49:33.808 | INFO | 添加处理块 | name=灰度变换 index=2
+11:49:34.471 | INFO | 撤销快照 | reason=添加处理块 depth=4
+11:49:34.471 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=4 enabled=4 rois=0 chain=[二值化处理 -> 形态学处理 -> 灰度变换 -> 伪彩色处理]
+11:49:34.482 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+11:49:34.493 | INFO | 执行处理块 | name=形态学处理 elapsed=9 ms rois=0
+11:49:34.503 | INFO | 执行处理块 | name=灰度变换 elapsed=9 ms rois=0
+11:49:34.514 | INFO | 执行处理块 | name=伪彩色处理 elapsed=10 ms rois=0
+11:49:34.515 | INFO | 流水线结束 | total=43 ms steps=[二值化处理(10ms) -> 形态学处理(9ms) -> 灰度变换(9ms) -> 伪彩色处理(10ms)]
+11:49:34.515 | INFO | 处理完成 | elapsed=43 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+11:49:34.517 | INFO | 添加处理块 | name=伪彩色处理 index=3
+11:49:39.535 | INFO | 程序退出
+11:49:39.536 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/input.png blocks=4 rois=0
+11:49:39.538 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+11:49:39.539 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+========== 会话开始 2026-07-24 11:54:01.843 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260724.log
+INFO | 应用 | 图像处理工具 1.0.0
+11:54:01.844 | INFO | 程序启动
+11:54:01.881 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+11:54:02.086 | INFO | 切换主题 | light
+11:54:02.171 | INFO | 主窗口已显示
+11:54:03.621 | INFO | 程序退出
+11:54:03.623 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+========== 会话开始 2026-07-24 16:54:44.481 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260724.log
+INFO | 应用 | 图像处理工具 1.0.0
+16:54:44.482 | INFO | 程序启动
+16:54:44.482 | INFO | 图像内存上限 | 不限制
+16:54:44.596 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+16:54:45.135 | INFO | 切换主题 | light
+16:54:45.196 | INFO | 主窗口已显示
+16:55:18.652 | INFO | 撤销快照 | reason=添加处理块 depth=1
+16:55:18.683 | INFO | 添加处理块 | name=二值化处理 index=0
+16:55:23.990 | INFO | 撤销快照 | reason=修改处理块参数 depth=2
+16:55:30.518 | INFO | 撤销快照 | reason=修改处理块参数 depth=3
+16:55:32.897 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+16:55:32.900 | INFO | 添加处理块 | name=二值化处理 index=0
+16:55:32.900 | INFO | 恢复会话 | blocks=1 rois=0
+16:55:32.900 | INFO | 撤销 | remain=2 blocks=1 rois=0
+16:55:33.609 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+16:55:33.611 | INFO | 添加处理块 | name=二值化处理 index=0
+16:55:33.612 | INFO | 恢复会话 | blocks=1 rois=0
+16:55:33.612 | INFO | 撤销 | remain=1 blocks=1 rois=0
+16:55:34.201 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+16:55:34.202 | INFO | 恢复会话 | blocks=0 rois=0
+16:55:34.202 | INFO | 撤销 | remain=0 blocks=0 rois=0
+16:56:17.961 | INFO | 程序退出
+16:56:17.962 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+========== 会话开始 2026-07-24 17:27:10.163 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260724.log
+INFO | 应用 | 图像处理工具 1.0.0
+17:27:10.163 | INFO | 程序启动
+17:27:10.164 | INFO | 图像内存上限 | 不限制
+17:27:10.186 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+17:27:10.357 | INFO | 切换主题 | light
+17:27:10.410 | INFO | 主窗口已显示
+17:27:21.958 | INFO | 程序退出
+17:27:21.959 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+========== 会话开始 2026-07-24 17:32:53.774 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260724.log
+INFO | 应用 | 图像处理工具 1.0.0
+17:32:53.775 | INFO | 程序启动
+17:32:53.775 | INFO | 图像内存上限 | 不限制
+17:32:53.800 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+17:32:53.977 | INFO | 切换主题 | light
+17:32:54.034 | INFO | 主窗口已显示
+17:32:56.972 | INFO | 撤销快照 | reason=添加处理块 depth=1
+17:32:56.989 | INFO | 添加处理块 | name=二值化处理 index=0
+17:32:58.549 | INFO | 撤销快照 | reason=修改处理块参数 depth=2
+17:33:05.975 | INFO | 撤销快照 | reason=修改处理块参数 depth=3
+17:33:07.939 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:07.941 | INFO | 添加处理块 | name=二值化处理 index=0
+17:33:07.941 | INFO | 恢复会话 | blocks=1 rois=0
+17:33:07.942 | INFO | 撤销 | remain=2 blocks=1 rois=0
+17:33:08.754 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:08.757 | INFO | 添加处理块 | name=二值化处理 index=0
+17:33:08.757 | INFO | 恢复会话 | blocks=1 rois=0
+17:33:08.757 | INFO | 撤销 | remain=1 blocks=1 rois=0
+17:33:09.483 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:09.484 | INFO | 恢复会话 | blocks=0 rois=0
+17:33:09.484 | INFO | 撤销 | remain=0 blocks=0 rois=0
+17:33:11.478 | INFO | 撤销快照 | reason=添加处理块 depth=1
+17:33:11.479 | INFO | 添加处理块 | name=二值化处理 index=0
+17:33:12.192 | INFO | 撤销快照 | reason=修改处理块参数 depth=2
+17:33:17.193 | INFO | 撤销快照 | reason=修改处理块参数 depth=3
+17:33:18.601 | INFO | 撤销快照 | reason=修改处理块参数 depth=4
+17:33:19.991 | INFO | 撤销快照 | reason=修改处理块参数 depth=5
+17:33:21.507 | INFO | 撤销快照 | reason=修改处理块参数 depth=6
+17:33:22.451 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:22.452 | INFO | 添加处理块 | name=二值化处理 index=0
+17:33:22.453 | INFO | 恢复会话 | blocks=1 rois=0
+17:33:22.453 | INFO | 撤销 | remain=5 blocks=1 rois=0
+17:33:22.788 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:22.789 | INFO | 添加处理块 | name=二值化处理 index=0
+17:33:22.790 | INFO | 恢复会话 | blocks=1 rois=0
+17:33:22.790 | INFO | 撤销 | remain=4 blocks=1 rois=0
+17:33:23.059 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:23.061 | INFO | 添加处理块 | name=二值化处理 index=0
+17:33:23.062 | INFO | 恢复会话 | blocks=1 rois=0
+17:33:23.062 | INFO | 撤销 | remain=3 blocks=1 rois=0
+17:33:23.395 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:23.398 | INFO | 添加处理块 | name=二值化处理 index=0
+17:33:23.399 | INFO | 恢复会话 | blocks=1 rois=0
+17:33:23.399 | INFO | 撤销 | remain=2 blocks=1 rois=0
+17:33:23.731 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:23.733 | INFO | 添加处理块 | name=二值化处理 index=0
+17:33:23.734 | INFO | 恢复会话 | blocks=1 rois=0
+17:33:23.734 | INFO | 撤销 | remain=1 blocks=1 rois=0
+17:33:24.339 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+17:33:24.339 | INFO | 恢复会话 | blocks=0 rois=0
+17:33:24.339 | INFO | 撤销 | remain=0 blocks=0 rois=0
+17:33:26.519 | INFO | 程序退出
+17:33:26.520 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+========== 会话开始 2026-07-24 19:03:30.845 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260724.log
+INFO | 应用 | 图像处理工具 1.0.0
+19:03:30.846 | INFO | 程序启动
+19:03:30.846 | INFO | 图像内存上限 | 不限制
+19:03:30.871 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=1
+19:03:31.212 | INFO | 切换主题 | light
+19:03:31.268 | INFO | 主窗口已显示
+19:03:48.074 | INFO | 打开单张图片 | C:/Users/Admin/Desktop/图片/big_10000.png
+19:03:48.795 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:03:48.796 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/big_10000.png size=10000x10000 prev=(无) session=新建空会话 blocks=0 rois=0
+19:03:52.214 | INFO | 撤销快照 | reason=添加处理块 depth=1
+19:03:52.214 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/big_10000.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+19:03:53.236 | INFO | 执行处理块 | name=二值化处理 elapsed=1021 ms rois=0
+19:03:53.236 | INFO | 流水线结束 | total=1021 ms steps=[二值化处理(1021ms)]
+19:03:53.237 | INFO | 处理完成 | elapsed=1021 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+19:03:53.248 | INFO | 添加处理块 | name=二值化处理 index=0
+19:04:02.955 | INFO | 撤销快照 | reason=删除处理块 depth=2
+19:04:02.955 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/big_10000.png
+19:04:02.956 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:02.979 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+19:04:02.979 | INFO | 删除处理块 | name=二值化处理 remain=0
+19:04:09.003 | INFO | 撤销快照 | reason=添加矩形ROI depth=3
+19:04:09.003 | INFO | 添加ROI | type=rect center=(5000,5000) size=100x100 total=1
+19:04:15.390 | INFO | 撤销快照 | reason=修改ROI depth=4
+19:04:19.131 | INFO | 撤销快照 | reason=修改ROI depth=5
+19:04:20.487 | INFO | 撤销快照 | reason=修改ROI depth=6
+19:04:21.080 | INFO | 撤销快照 | reason=修改ROI depth=7
+19:04:24.713 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:24.713 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:24.714 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/big_10000.png
+19:04:24.714 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:24.714 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+19:04:24.714 | INFO | 撤销 | remain=6 blocks=0 rois=1
+19:04:25.736 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:25.737 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:25.737 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/big_10000.png
+19:04:25.737 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:25.738 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+19:04:25.738 | INFO | 撤销 | remain=5 blocks=0 rois=1
+19:04:26.161 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:26.161 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:26.161 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/big_10000.png
+19:04:26.162 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:26.162 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+19:04:26.162 | INFO | 撤销 | remain=4 blocks=0 rois=1
+19:04:26.793 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:26.793 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:26.794 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/big_10000.png
+19:04:26.794 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:26.794 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+19:04:26.794 | INFO | 撤销 | remain=3 blocks=0 rois=1
+19:04:27.240 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:27.240 | INFO | 恢复会话 | blocks=0 rois=0
+19:04:27.241 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/big_10000.png
+19:04:27.241 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:27.241 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+19:04:27.241 | INFO | 撤销 | remain=2 blocks=0 rois=0
+19:04:31.859 | INFO | 打开单张图片 | C:/Users/Admin/Desktop/图片/input.png
+19:04:31.882 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/big_10000.png blocks=0 rois=0
+19:04:31.883 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+19:04:31.906 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:31.913 | INFO | 添加处理块 | name=二值化处理 index=0
+19:04:31.923 | INFO | 添加处理块 | name=形态学处理 index=1
+19:04:31.929 | INFO | 添加处理块 | name=灰度变换 index=2
+19:04:31.934 | INFO | 添加处理块 | name=伪彩色处理 index=3
+19:04:31.935 | INFO | 恢复会话 | blocks=4 rois=0
+19:04:31.935 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=4 enabled=4 rois=0 chain=[二值化处理 -> 形态学处理 -> 灰度变换 -> 伪彩色处理]
+19:04:31.945 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+19:04:31.959 | INFO | 执行处理块 | name=形态学处理 elapsed=12 ms rois=0
+19:04:31.972 | INFO | 执行处理块 | name=灰度变换 elapsed=11 ms rois=0
+19:04:31.983 | INFO | 执行处理块 | name=伪彩色处理 elapsed=10 ms rois=0
+19:04:31.983 | INFO | 流水线结束 | total=47 ms steps=[二值化处理(10ms) -> 形态学处理(12ms) -> 灰度变换(11ms) -> 伪彩色处理(10ms)]
+19:04:31.984 | INFO | 处理完成 | elapsed=47 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:31.984 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/input.png size=1066x1061 prev=C:/Users/Admin/Desktop/图片/big_10000.png session=恢复 blocks=4 rois=0
+19:04:33.777 | INFO | 撤销快照 | reason=删除处理块 depth=1
+19:04:33.777 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=3 enabled=3 rois=0 chain=[形态学处理 -> 灰度变换 -> 伪彩色处理]
+19:04:33.788 | INFO | 执行处理块 | name=形态学处理 elapsed=10 ms rois=0
+19:04:33.797 | INFO | 执行处理块 | name=灰度变换 elapsed=8 ms rois=0
+19:04:33.809 | INFO | 执行处理块 | name=伪彩色处理 elapsed=10 ms rois=0
+19:04:33.809 | INFO | 流水线结束 | total=31 ms steps=[形态学处理(10ms) -> 灰度变换(8ms) -> 伪彩色处理(10ms)]
+19:04:33.809 | INFO | 处理完成 | elapsed=31 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:33.810 | INFO | 删除处理块 | name=二值化处理 remain=3
+19:04:33.962 | INFO | 撤销快照 | reason=删除处理块 depth=2
+19:04:33.963 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=2 enabled=2 rois=0 chain=[灰度变换 -> 伪彩色处理]
+19:04:33.974 | INFO | 执行处理块 | name=灰度变换 elapsed=10 ms rois=0
+19:04:33.984 | INFO | 执行处理块 | name=伪彩色处理 elapsed=8 ms rois=0
+19:04:33.984 | INFO | 流水线结束 | total=20 ms steps=[灰度变换(10ms) -> 伪彩色处理(8ms)]
+19:04:33.985 | INFO | 处理完成 | elapsed=20 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:33.985 | INFO | 删除处理块 | name=形态学处理 remain=2
+19:04:34.147 | INFO | 撤销快照 | reason=删除处理块 depth=3
+19:04:34.147 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=0 chain=[伪彩色处理]
+19:04:34.157 | INFO | 执行处理块 | name=伪彩色处理 elapsed=9 ms rois=0
+19:04:34.157 | INFO | 流水线结束 | total=10 ms steps=[伪彩色处理(9ms)]
+19:04:34.159 | INFO | 处理完成 | elapsed=10 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:34.159 | INFO | 删除处理块 | name=灰度变换 remain=1
+19:04:34.355 | INFO | 撤销快照 | reason=删除处理块 depth=4
+19:04:34.355 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+19:04:34.356 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:34.356 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:34.357 | INFO | 删除处理块 | name=伪彩色处理 remain=0
+19:04:37.535 | INFO | 撤销快照 | reason=添加矩形ROI depth=5
+19:04:37.535 | INFO | 添加ROI | type=rect center=(533,530.5) size=100x100 total=1
+19:04:40.009 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:40.010 | INFO | 恢复会话 | blocks=0 rois=0
+19:04:40.010 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+19:04:40.010 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:40.010 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:40.010 | INFO | 撤销 | remain=4 blocks=0 rois=0
+19:04:42.955 | INFO | 撤销快照 | reason=添加矩形ROI depth=5
+19:04:42.956 | INFO | 添加ROI | type=rect center=(533,530.5) size=100x100 total=1
+19:04:44.096 | INFO | 撤销快照 | reason=修改ROI depth=6
+19:04:44.528 | INFO | 撤销快照 | reason=修改ROI depth=7
+19:04:45.090 | INFO | 撤销快照 | reason=修改ROI depth=8
+19:04:45.725 | INFO | 撤销快照 | reason=修改ROI depth=9
+19:04:46.633 | INFO | 撤销快照 | reason=修改ROI depth=10
+19:04:47.384 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:47.385 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:47.385 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+19:04:47.385 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:47.386 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:47.386 | INFO | 撤销 | remain=9 blocks=0 rois=1
+19:04:48.025 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:48.025 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:48.026 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+19:04:48.026 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:48.026 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:48.026 | INFO | 撤销 | remain=8 blocks=0 rois=1
+19:04:48.497 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:48.497 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:48.497 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+19:04:48.497 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:48.498 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:48.498 | INFO | 撤销 | remain=7 blocks=0 rois=1
+19:04:48.905 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:48.905 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:48.906 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+19:04:48.906 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:48.906 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:48.906 | INFO | 撤销 | remain=6 blocks=0 rois=1
+19:04:49.569 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:49.570 | INFO | 恢复会话 | blocks=0 rois=1
+19:04:49.570 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+19:04:49.570 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:49.570 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:49.571 | INFO | 撤销 | remain=5 blocks=0 rois=1
+19:04:50.082 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+19:04:50.083 | INFO | 恢复会话 | blocks=0 rois=0
+19:04:50.083 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+19:04:50.083 | INFO | 流水线结束 | total=0 ms steps=[]
+19:04:50.083 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+19:04:50.083 | INFO | 撤销 | remain=4 blocks=0 rois=0
+19:18:37.137 | INFO | 程序退出
+19:18:37.137 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/input.png blocks=0 rois=0
+19:18:37.140 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+19:18:37.141 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+========== 会话开始 2026-07-24 20:19:28.994 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260724.log
+INFO | 应用 | 图像处理工具 1.0.0
+20:19:28.995 | INFO | 程序启动
+20:19:28.995 | INFO | 图像内存上限 | 不限制
+20:19:29.023 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+20:19:29.210 | INFO | 切换主题 | light
+20:19:29.265 | INFO | 主窗口已显示
+20:19:36.417 | INFO | 打开单张图片 | C:/Users/Admin/Desktop/图片/input.png
+20:19:36.444 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+20:19:36.445 | INFO | 恢复会话 | blocks=0 rois=0
+20:19:36.445 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/input.png size=1066x1061 prev=(无) session=恢复 blocks=0 rois=0
+20:19:39.706 | INFO | 撤销快照 | reason=添加矩形ROI depth=1
+20:19:39.706 | INFO | 添加ROI | type=rect center=(533,530.5) size=100x100 total=1
+20:19:41.318 | INFO | 撤销快照 | reason=修改ROI depth=2
+20:19:41.868 | INFO | 撤销快照 | reason=修改ROI depth=3
+20:19:43.066 | INFO | 撤销快照 | reason=添加处理块 depth=4
+20:19:43.066 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+20:19:43.084 | INFO | 执行处理块 | name=二值化处理 elapsed=16 ms rois=1
+20:19:43.084 | INFO | 流水线结束 | total=17 ms steps=[二值化处理(16ms)]
+20:19:43.084 | INFO | 处理完成 | elapsed=17 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:43.094 | INFO | 添加处理块 | name=二值化处理 index=0
+20:19:44.104 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+20:19:44.104 | INFO | 恢复会话 | blocks=0 rois=1
+20:19:44.105 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+20:19:44.105 | INFO | 流水线结束 | total=0 ms steps=[]
+20:19:44.105 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:44.107 | INFO | 撤销 | remain=3 blocks=0 rois=1
+20:19:46.518 | INFO | 撤销快照 | reason=添加处理块 depth=4
+20:19:46.519 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+20:19:46.530 | INFO | 执行处理块 | name=二值化处理 elapsed=11 ms rois=1
+20:19:46.530 | INFO | 流水线结束 | total=11 ms steps=[二值化处理(11ms)]
+20:19:46.530 | INFO | 处理完成 | elapsed=11 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:46.531 | INFO | 添加处理块 | name=二值化处理 index=0
+20:19:47.424 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+20:19:47.424 | INFO | 恢复会话 | blocks=0 rois=1
+20:19:47.424 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+20:19:47.426 | INFO | 流水线结束 | total=0 ms steps=[]
+20:19:47.426 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:47.427 | INFO | 撤销 | remain=3 blocks=0 rois=1
+20:19:51.529 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+20:19:51.529 | INFO | 恢复会话 | blocks=0 rois=1
+20:19:51.530 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+20:19:51.530 | INFO | 流水线结束 | total=0 ms steps=[]
+20:19:51.530 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:51.530 | INFO | 撤销 | remain=2 blocks=0 rois=1
+20:19:52.232 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+20:19:52.233 | INFO | 恢复会话 | blocks=0 rois=1
+20:19:52.233 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+20:19:52.233 | INFO | 流水线结束 | total=0 ms steps=[]
+20:19:52.233 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:52.234 | INFO | 撤销 | remain=1 blocks=0 rois=1
+20:19:52.768 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+20:19:52.769 | INFO | 恢复会话 | blocks=0 rois=0
+20:19:52.769 | INFO | 应用处理 | 空链，结果重置为原图 path=C:/Users/Admin/Desktop/图片/input.png
+20:19:52.769 | INFO | 流水线结束 | total=0 ms steps=[]
+20:19:52.770 | INFO | 处理完成 | elapsed=0 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:52.770 | INFO | 撤销 | remain=0 blocks=0 rois=0
+20:19:53.481 | INFO | 撤销快照 | reason=添加处理块 depth=1
+20:19:53.482 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+20:19:53.492 | INFO | 执行处理块 | name=二值化处理 elapsed=8 ms rois=0
+20:19:53.492 | INFO | 流水线结束 | total=9 ms steps=[二值化处理(8ms)]
+20:19:53.493 | INFO | 处理完成 | elapsed=9 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:53.495 | INFO | 添加处理块 | name=二值化处理 index=0
+20:19:56.679 | INFO | 撤销快照 | reason=添加矩形ROI depth=2
+20:19:56.679 | INFO | 添加ROI | type=rect center=(533,530.5) size=100x100 total=1
+20:19:56.743 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+20:19:56.754 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=1
+20:19:56.754 | INFO | 流水线结束 | total=10 ms steps=[二值化处理(10ms)]
+20:19:56.755 | INFO | 处理完成 | elapsed=10 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:58.344 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+20:19:58.347 | INFO | 添加处理块 | name=二值化处理 index=0
+20:19:58.347 | INFO | 恢复会话 | blocks=1 rois=0
+20:19:58.347 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+20:19:58.359 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+20:19:58.360 | INFO | 流水线结束 | total=11 ms steps=[二值化处理(10ms)]
+20:19:58.360 | INFO | 处理完成 | elapsed=11 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+20:19:58.361 | INFO | 撤销 | remain=1 blocks=1 rois=0
+20:20:11.850 | INFO | 程序退出
+20:20:11.851 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 rois=0
+20:20:11.852 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+20:20:11.853 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2

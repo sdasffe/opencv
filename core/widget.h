@@ -161,6 +161,10 @@ private:
     void addRotatedRectItem(qreal x, qreal y, qreal w, qreal h); // 初始 angle=0
     /** 按 RoiInfo.shape 重建对应 Resizable*Item（会话恢复/撤销，不压栈） */
     void applyRoiFromInfo(const RoiInfo &info);            // 恢复期间应先 disconnect 防抖
+    /** ROI 图元 geometryAboutToChange → pushUndoSnapshot（与处理块 paramsAboutToChange 同套路） */
+    void connectRoiGeometryUndo(ResizableRectItem *item);
+    void connectRoiGeometryUndo(ResizableEllipseItem *item);
+    void connectRoiGeometryUndo(ResizableRotatedRectItem *item);
     /** 判断 item 是否在 m_rect/ellipse/rotated 三个列表中 */
     bool isRoiItem(QGraphicsItem *item) const;             // 平移手势用来区分点空白还是点 ROI
     /** 遍历三类 ROI，全部 setSelected(false) */

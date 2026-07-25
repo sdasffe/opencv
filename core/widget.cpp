@@ -86,6 +86,8 @@
 #include <QJsonObject>
 #include <QJsonParseError>
 #include <QFile>
+#include <QImage>
+#include <QImageReader>
 #include <QShortcut>
 #include <QKeySequence>
 #include <QMenuBar>
@@ -501,10 +503,16 @@ void Widget::fillFolderBrowser(const QString &dirPath, const QFileInfoList &file
 
     for (const QFileInfo &fi : files) {
         const QString path = fi.absoluteFilePath();
-        QPixmap thumb(path);
-        if (thumb.isNull())
+        // 用 QImageReader + setScaledSize：大图不必整图解码，避免 10000² 级文件卡顿/拒载
+        QImageReader reader(path);
+        reader.setAutoTransform(true);
+        const QSize orig = reader.size();
+        if (orig.isValid())
+            reader.setScaledSize(orig.scaled(64, 64, Qt::KeepAspectRatio));
+        const QImage img = reader.read();
+        if (img.isNull())
             continue;
-        thumb = thumb.scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        const QPixmap thumb = QPixmap::fromImage(img);
 
         auto *item = new QListWidgetItem(QIcon(thumb), fi.fileName(), ui->folderImageList);
         item->setData(Qt::UserRole, path);
@@ -575,7 +583,7 @@ void Widget::refreshChainHint()
  *   - on_pushButton_2_clicked（打开文件夹后取第一张）
  *
  * 步骤拆解：
- *   1. QPixmap 读文件；失败返回 false
+ *   1. QImageReader 读文件（支持大图；失败返回 false）
  *   2. 清掉旧 ROI、退出对比模式（新图不应沿用旧选区）
  *   3. processor 记住原图（结果先等于原图）
  *   4. 场景里换一张底图，fitInView 适配窗口
@@ -586,10 +594,19 @@ void Widget::refreshChainHint()
  */
 bool Widget::loadImageFromPath(const QString &filePath)
 {
-    // QPixmap 构造函数会按后缀解码；失败时 isNull()==true
-    QPixmap pixmap(filePath);
+    // QImageReader：比 QPixmap(path) 更能给出错误原因，且受 setAllocationLimit 控制
+    QImageReader reader(filePath);
+    reader.setAutoTransform(true); // 按 EXIF 方向纠正
+    const QImage image = reader.read();
+    if (image.isNull()) {
+        AppLogger::error(QStringLiteral("加载图片失败"),
+                         QStringLiteral("%1 | %2").arg(filePath, reader.errorString()));
+        return false;
+    }
+    const QPixmap pixmap = QPixmap::fromImage(image);
     if (pixmap.isNull()) {
-        AppLogger::error(QStringLiteral("加载图片失败"), filePath);
+        AppLogger::error(QStringLiteral("加载图片失败"),
+                         QStringLiteral("%1 | QPixmap 转换失败（可能显存/内存不足）").arg(filePath));
         return false;
     }
 
@@ -679,7 +696,7 @@ void Widget::actOpenImage()
 
     if (!loadImageFromPath(filePath))
         QMessageBox::warning(this, tr("错误"),
-                             tr("无法加载图片，文件可能已损坏"));
+                             tr("无法加载图片。\n文件可能已损坏，或分辨率过大导致内存不足。"));
 }
 
 /**
@@ -952,7 +969,7 @@ void Widget::onHelpShortcuts()
         tr("帮助"),
         tr("快捷键\n"
            "• Delete — 删除选中的 ROI（无选中则清空全部）\n"
-           "• Ctrl+Z — 撤销（处理链 / ROI 结构变更）\n"
+           "• Ctrl+Z — 撤销（处理链 / ROI 增删与拖动缩放）\n"
            "• Ctrl+0 — 画布适应窗口\n"
            "• 滚轮 — 缩放画布（以鼠标为中心）\n"
            "• 中键 / 左键空白处拖动 — 平移画布\n"
@@ -960,7 +977,7 @@ void Widget::onHelpShortcuts()
            "\n"
            "ROI\n"
            "• 可添加多个选区，算法在并集区域内生效\n"
-           "• 打开文件夹后，每张图各自记住处理链与 ROI（可落盘）\n"
+           "• 打开文件夹后，每张图各自记住处理链与 ROI\n"
            "\n"
            "处理链\n"
            "• 从左侧拖入算法到右侧工具箱\n"
@@ -971,10 +988,10 @@ void Widget::onHelpShortcuts()
            "\n"
            "日志\n"
            "• 操作记录写入程序目录下 logs/app_日期.log\n"
-           "• 路径见「设置 → 关于」\n"
+           "• 路径见关于\n"
            "\n"
            "外观\n"
-           "• 设置 → 外观 → 浅色 / 深色（IDEA 风格）"));
+           "• 设置 → 外观 → 浅色 / 深色 "));
 }
 
 void Widget::onLanguageChinese()
@@ -1206,6 +1223,7 @@ void Widget::addRectItem(qreal x, qreal y, qreal width, qreal height)
     auto *item = new ResizableRectItem(x - width / 2, y - height / 2, width, height);
     m_scene->addItem(item);
     m_rectItems.append(item);
+    connectRoiGeometryUndo(item);
     item->setSelected(true);
     AppLogger::info(QStringLiteral("添加ROI"),
                     QStringLiteral("type=rect center=(%1,%2) size=%3x%4 total=%5")
@@ -1221,6 +1239,7 @@ void Widget::addEllipseItem(qreal x, qreal y, qreal w, qreal h)
     auto *item = new ResizableEllipseItem(x - w / 2, y - h / 2, w, h);
     m_scene->addItem(item);
     m_ellipseItems.append(item);
+    connectRoiGeometryUndo(item);
     item->setSelected(true);
     AppLogger::info(QStringLiteral("添加ROI"),
                     QStringLiteral("type=ellipse center=(%1,%2) size=%3x%4 total=%5")
@@ -1240,6 +1259,7 @@ void Widget::addRotatedRectItem(qreal x, qreal y, qreal w, qreal h)
     item->setRotation(0);
     m_scene->addItem(item);
     m_rotatedRectItems.append(item);
+    connectRoiGeometryUndo(item);
     item->setSelected(true);
     AppLogger::info(QStringLiteral("添加ROI"),
                     QStringLiteral("type=rotatedRect center=(%1,%2) size=%3x%4 total=%5")
@@ -1263,6 +1283,7 @@ void Widget::applyRoiFromInfo(const RoiInfo &info)
         auto *item = new ResizableRectItem(r.x(), r.y(), r.width(), r.height());
         m_scene->addItem(item);
         m_rectItems.append(item);
+        connectRoiGeometryUndo(item);
         break;
     }
     case RoiInfo::Shape::Ellipse: {
@@ -1270,6 +1291,7 @@ void Widget::applyRoiFromInfo(const RoiInfo &info)
         auto *item = new ResizableEllipseItem(r.x(), r.y(), r.width(), r.height());
         m_scene->addItem(item);
         m_ellipseItems.append(item);
+        connectRoiGeometryUndo(item);
         break;
     }
     case RoiInfo::Shape::RotatedRect: {
@@ -1278,11 +1300,40 @@ void Widget::applyRoiFromInfo(const RoiInfo &info)
         item->setRotation(info.angleDeg);
         m_scene->addItem(item);
         m_rotatedRectItems.append(item);
+        connectRoiGeometryUndo(item);
         break;
     }
     default:
         break;
     }
+}
+
+/** @brief ROI 即将改几何 → 压「修改ROI」快照（撤销恢复中跳过） */
+void Widget::connectRoiGeometryUndo(ResizableRectItem *item)
+{
+    if (!item) return;
+    connect(item, &ResizableRectItem::geometryAboutToChange, this, [this]() {
+        if (!m_undoRestoring)
+            pushUndoSnapshot(QStringLiteral("修改ROI"));
+    });
+}
+
+void Widget::connectRoiGeometryUndo(ResizableEllipseItem *item)
+{
+    if (!item) return;
+    connect(item, &ResizableEllipseItem::geometryAboutToChange, this, [this]() {
+        if (!m_undoRestoring)
+            pushUndoSnapshot(QStringLiteral("修改ROI"));
+    });
+}
+
+void Widget::connectRoiGeometryUndo(ResizableRotatedRectItem *item)
+{
+    if (!item) return;
+    connect(item, &ResizableRotatedRectItem::geometryAboutToChange, this, [this]() {
+        if (!m_undoRestoring)
+            pushUndoSnapshot(QStringLiteral("修改ROI"));
+    });
 }
 
 /**
@@ -2246,7 +2297,7 @@ BaseBlock *Widget::createBlockByName(const QString &name)
     if (name == AppConfig::BLOCK_NAME_BINARIZATION) {
         auto *bin = new BinarizationBlock(parent);
         wireBinarizationOtsu(bin);
-        block = bin;
+        block = bin;//连接好ostu按钮
     } else if (name == AppConfig::BLOCK_NAME_MORPHOLOGY) {
         block = new MorphologyBlock(parent);
     } else if (name == AppConfig::BLOCK_NAME_FILTER) {

@@ -14,7 +14,8 @@
 /** @brief 创建可选中、可悬停的虚线红矩形 */
 ResizableRectItem::ResizableRectItem(qreal x, qreal y, qreal width, qreal height,
                                      QGraphicsItem *parent)
-    : QGraphicsRectItem(x, y, width, height, parent)
+    : QObject(nullptr)
+    , QGraphicsRectItem(x, y, width, height, parent)
     , m_handleType(None)
     , m_resizing(false)
 {
@@ -108,6 +109,7 @@ void ResizableRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         m_handleType = getHandleAtPos(event->pos());
         if (m_handleType != None) {
+            emit geometryAboutToChange();                            // 改几何前通知 Widget 压栈
             m_resizing = true;
             m_mousePressPos = event->scenePos();                     // scene 基准，move 用 delta
             m_originalRect = rect();                                 // 缩放基准

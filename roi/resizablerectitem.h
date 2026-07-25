@@ -1,6 +1,7 @@
 #ifndef RESIZABLERECTITEM_H
 #define RESIZABLERECTITEM_H
 
+#include <QObject>
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
@@ -12,10 +13,12 @@
  * @brief 可调大小的轴对齐矩形 ROI；几何写入 RoiInfo::rect
  *
  * 交互：内部拖移、8 手柄缩放。Widget → RoiInfo → RoiProcess::makeMask。
+ * 开始拖动/缩放时 emit geometryAboutToChange，供 Widget 压撤销栈。
  */
 
-class ResizableRectItem : public QGraphicsRectItem
+class ResizableRectItem : public QObject, public QGraphicsRectItem
 {
+    Q_OBJECT
 public:
     /** 四角 + 四边缩放手柄 + 内部 Move */
     enum HandleType {
@@ -28,6 +31,10 @@ public:
     /** @param x,y,w,h item 本地矩形 */
     explicit ResizableRectItem(qreal x, qreal y, qreal width, qreal height,
                                QGraphicsItem *parent = nullptr);       // 创建可选中、可悬停的虚线红矩形
+
+signals:
+    /** 用户即将拖移/缩放（mousePress 命中有效热区时），Widget 据此压「改之前」快照 */
+    void geometryAboutToChange();
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

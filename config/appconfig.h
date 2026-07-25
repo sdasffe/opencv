@@ -25,6 +25,10 @@ constexpr double MIN_SCALE_FACTOR = 0.1;    // 画布最小缩放比例
 constexpr double MAX_SCALE_FACTOR = 5.0;    // 画布最大缩放比例
 constexpr double SCROLL_SCALE_STEP = 1.25;  // 滚轮缩放步长倍数
 
+// Qt6 QImageReader 默认分配上限仅 256MB；10000×10000×4 ≈ 381MB 会被拒载。
+// 0 = 不限制（图像处理工具需要支持大图；仍受系统可用内存约束）。
+constexpr int IMAGE_ALLOCATION_LIMIT_MB = 0;
+
 // ========== ROI 默认值 ==========
 constexpr int DEFAULT_ROI_SIZE = 100; // ROI 默认尺寸（像素）
 

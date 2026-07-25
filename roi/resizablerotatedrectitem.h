@@ -13,10 +13,12 @@
  *
  * 局部 m_rect 以原点为中心；scene 位置 = center，rotation = angleDeg。
  * Widget::getAllRoiInfo 读 mapToScene(localRect().center()) 与 rotation()。
+ * 开始拖动/缩放/旋转时 emit geometryAboutToChange，供 Widget 压撤销栈。
  */
 
 class ResizableRotatedRectItem : public QGraphicsObject
 {
+    Q_OBJECT
 public:
     /** 四角缩放 + 顶部旋转 + 内部平移 */
     enum HandleType {
@@ -37,6 +39,10 @@ public:
 
     QRectF localRect() const { return m_rect; }                        // 局部居中矩形，供导出 size
     void setLocalSize(qreal width, qreal height);                      // 改宽高并重设旋转原点
+
+signals:
+    /** 用户即将拖移/缩放/旋转（mousePress 命中有效热区时），Widget 据此压「改之前」快照 */
+    void geometryAboutToChange();
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;    // 记录手柄与原始几何

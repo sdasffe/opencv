@@ -14,7 +14,8 @@
 /** @brief 创建可选中、可悬停的虚线蓝椭圆 */
 ResizableEllipseItem::ResizableEllipseItem(qreal x, qreal y, qreal width, qreal height,
                                            QGraphicsItem *parent)
-    : QGraphicsEllipseItem(x, y, width, height, parent)
+    : QObject(nullptr)
+    , QGraphicsEllipseItem(x, y, width, height, parent)
     , m_handleType(None)
     , m_resizing(false)
 {
@@ -98,6 +99,7 @@ void ResizableEllipseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         m_handleType = getHandleAtPos(event->pos());                 // 判定当前热区
         if (m_handleType != None) {
+            emit geometryAboutToChange();                            // 改几何前通知 Widget 压栈
             m_resizing = true;                                       // 进入拖动手柄态
             m_mousePressPos = event->scenePos();                     // 场景坐标基准
             m_originalRect = rect();                                 // 按下时外接矩形快照

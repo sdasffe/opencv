@@ -126,6 +126,7 @@ void ResizableRotatedRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         m_handleType = getHandleAtPos(event->pos());
         if (m_handleType != None) {
+            emit geometryAboutToChange();                            // 改几何前通知 Widget 压栈
             m_resizing = true;
             m_mousePressScenePos = event->scenePos();                // 场景按下点
             m_mousePressItemPos = event->pos();                      // 局部按下点

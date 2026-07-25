@@ -13,6 +13,7 @@
 #include <QApplication>
 #include <QCoreApplication>
 #include <QFont>
+#include <QImageReader>
 #include <QSettings>
 #include <QStyle>
 #include <QStyleFactory>
@@ -23,6 +24,9 @@
  */
 int main(int argc, char *argv[])
 {
+    // 须在任何读图之前设置：否则超大图（如 10000×10000）会被 Qt6 默认 256MB 上限拒载
+    QImageReader::setAllocationLimit(AppConfig::IMAGE_ALLOCATION_LIMIT_MB);
+
     QApplication a(argc, argv);                                      // 必须最先创建；后续控件依赖它
     a.setApplicationName(QString::fromUtf8(AppConfig::APP_NAME_ZH)); // 应用显示名（中文）
     a.setApplicationVersion(QString::fromUtf8(AppConfig::APP_VERSION)); // 版本号
@@ -33,6 +37,10 @@ int main(int argc, char *argv[])
 
     AppLogger::init();                                               // 创建 logs/ 并打开当日日志文件
     AppLogger::info(QStringLiteral("程序启动"));
+    AppLogger::info(QStringLiteral("图像内存上限"),
+                    AppConfig::IMAGE_ALLOCATION_LIMIT_MB == 0
+                        ? QStringLiteral("不限制")
+                        : QStringLiteral("%1 MB").arg(AppConfig::IMAGE_ALLOCATION_LIMIT_MB));
     QObject::connect(&a, &QCoreApplication::aboutToQuit, []() {
         AppLogger::info(QStringLiteral("程序退出"));                 // 关窗退出前打一条尾日志
     });

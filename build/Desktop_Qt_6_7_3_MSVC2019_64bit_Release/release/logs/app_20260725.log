@@ -1,0 +1,10 @@
+========== 会话开始 2026-07-25 12:01:16.182 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\build\Desktop_Qt_6_7_3_MSVC2019_64bit_Release\release\logs\app_20260725.log
+INFO | 应用 | 图像处理工具 1.0.0
+12:01:16.182 | INFO | 程序启动
+12:01:16.182 | INFO | 图像内存上限 | 不限制
+12:01:16.237 | INFO | 会话已加载 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2
+12:01:16.727 | INFO | 切换主题 | light
+12:01:16.796 | INFO | 主窗口已显示
+12:10:16.553 | INFO | 程序退出
+12:10:16.555 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/build/Desktop_Qt_6_7_3_MSVC2019_64bit_Release/release/sessions/app_sessions.json count=2

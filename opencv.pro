@@ -10,9 +10,14 @@ win32-msvc*|win32-clang-msvc*|msvc {
 }
 
 # ========== OpenCV 配置 ==========
+# Debug 链 opencv_world*d，Release 链无 d 后缀；写死 d 会导致 Release 链接/运行失败
 INCLUDEPATH += D:/opencv/opencv/build/include
 LIBS += -LD:/opencv/opencv/build/x64/vc16/lib
-LIBS += -lopencv_world4120d
+CONFIG(debug, debug|release) {
+    LIBS += -lopencv_world4120d
+} else {
+    LIBS += -lopencv_world4120
+}
 
 # ========== 头文件搜索路径 ==========
 INCLUDEPATH += $$PWD/core
