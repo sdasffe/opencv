@@ -238,12 +238,6 @@ public:
         verticalLayout_3->addWidget(algoTitleLabel);
 
         listWidget = new MyListWidget(widget_2);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
-        new QListWidgetItem(listWidget);
         listWidget->setObjectName("listWidget");
         listWidget->setMinimumSize(QSize(0, 120));
 
@@ -396,23 +390,6 @@ public:
         folderImageList->setToolTip(QCoreApplication::translate("Widget", "\347\202\271\345\207\273\347\274\251\347\225\245\345\233\276\345\210\207\346\215\242\345\275\223\345\211\215\345\233\276\347\211\207", nullptr));
 #endif // QT_CONFIG(tooltip)
         algoTitleLabel->setText(QCoreApplication::translate("Widget", "\345\233\276\345\203\217\345\244\204\347\220\206\345\267\245\345\205\267\347\256\261", nullptr));
-
-        const bool __sortingEnabled = listWidget->isSortingEnabled();
-        listWidget->setSortingEnabled(false);
-        QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
-        ___qlistwidgetitem->setText(QCoreApplication::translate("Widget", "\344\272\214\345\200\274\345\214\226\345\244\204\347\220\206", nullptr));
-        QListWidgetItem *___qlistwidgetitem1 = listWidget->item(1);
-        ___qlistwidgetitem1->setText(QCoreApplication::translate("Widget", "\345\275\242\346\200\201\345\255\246\345\244\204\347\220\206", nullptr));
-        QListWidgetItem *___qlistwidgetitem2 = listWidget->item(2);
-        ___qlistwidgetitem2->setText(QCoreApplication::translate("Widget", "\346\273\244\346\263\242\345\244\204\347\220\206", nullptr));
-        QListWidgetItem *___qlistwidgetitem3 = listWidget->item(3);
-        ___qlistwidgetitem3->setText(QCoreApplication::translate("Widget", "\347\201\260\345\272\246\345\217\230\346\215\242", nullptr));
-        QListWidgetItem *___qlistwidgetitem4 = listWidget->item(4);
-        ___qlistwidgetitem4->setText(QCoreApplication::translate("Widget", "\344\274\252\345\275\251\350\211\262\345\244\204\347\220\206", nullptr));
-        QListWidgetItem *___qlistwidgetitem5 = listWidget->item(5);
-        ___qlistwidgetitem5->setText(QCoreApplication::translate("Widget", "\347\201\260\345\272\246\345\205\261\347\224\237\347\237\251\351\230\265", nullptr));
-        listWidget->setSortingEnabled(__sortingEnabled);
-
         chainTitleLabel->setText(QCoreApplication::translate("Widget", "\344\273\273\345\212\241\345\210\227\350\241\250", nullptr));
 #if QT_CONFIG(tooltip)
         btnExportChain->setToolTip(QCoreApplication::translate("Widget", "\345\257\274\345\207\272\345\275\223\345\211\215\345\244\204\347\220\206\351\223\276\344\270\272 JSON", nullptr));

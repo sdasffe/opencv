@@ -1,6 +1,9 @@
 #ifndef BASEBLOCK_H
 #define BASEBLOCK_H
 
+#include "../blocksdk/blocksdk_global.h"
+#include "../blocksdk/iblockhost.h"
+
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -19,30 +22,18 @@
 /**
  * @brief 处理块基类
  *
- * 所有图像处理块的父类，提供统一的：
- * - 标题栏（图标、名称、使能复选框、删除按钮）
- * - 内容容器（子类填充具体参数控件）
- * - 信号：参数变化、删除请求、使能变化
- * - 纯虚接口：process() 子类实现具体算法
- *
- * 【在整条链路中的位置】
- *   左侧拖入名字 → Widget::createBlockByName 创建子类
- *   → ImageProcessor::addBlock 监听 paramsChanged
- *   → reprocess() 时按顺序调用 process(current, rois)
- *
- * 【写一个新算法块的步骤】
- *   1. 子类构造中调用 setupTitle() 设置标题
- *   2. 子类将自定义参数控件加入 contentLayout()
- *   3. 子类重写 process() 实现图像处理逻辑（可参考 BinarizationBlock）
- *   4. 参数变化时 emit paramsChanged() 触发重算
- *   5. 在 Widget::createBlockByName 和 AppConfig 里登记名字
+ * 左侧拖入 → PluginManager::createBlock → ImageProcessor::addBlock
+ * 新算法：实现 BaseBlock + 在 builtinplugins 注册，或做成外部 DLL 插件。
  */
-class BaseBlock : public QWidget
+class BLOCKSDK_EXPORT BaseBlock : public QWidget
 {
     Q_OBJECT
 public:
     explicit BaseBlock(QWidget *parent = nullptr);
     ~BaseBlock() override = default;
+
+    void setHost(IBlockHost *host) { m_host = host; }
+    IBlockHost *host() const { return m_host; }
 
     /**
      * @brief 处理图像（纯虚函数，子类必须实现）
@@ -106,6 +97,7 @@ private:
     QPoint m_dragStartPos;                                         // 标题栏拖拽起点
     QSet<QWidget *> m_trackedParamWidgets;                         // trackParamWidget 登记的控件
     bool m_paramEditArmed = false;                                 // 本次编辑已发过 aboutToChange
+    IBlockHost *m_host = nullptr;
 };
 
 #endif // BASEBLOCK_H

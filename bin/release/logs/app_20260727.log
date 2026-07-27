@@ -1,0 +1,77 @@
+========== 会话开始 2026-07-27 11:12:26.324 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\bin\release\logs\app_20260727.log
+INFO | 应用 | 图像处理工具 1.0.0
+11:12:26.324 | INFO | 程序启动
+11:12:26.325 | INFO | 图像内存上限 | 不限制
+11:12:26.731 | INFO | 切换主题 | light
+11:12:26.813 | INFO | 主窗口已显示
+11:12:37.645 | INFO | 切换语言 | zh
+11:12:39.452 | INFO | 撤销快照 | reason=添加处理块 depth=1
+11:12:39.493 | INFO | 添加处理块 | name=形态学处理 index=0
+11:12:40.118 | INFO | 撤销快照 | reason=添加处理块 depth=2
+11:12:40.120 | INFO | 添加处理块 | name=二值化处理 index=1
+11:12:40.634 | INFO | 撤销快照 | reason=添加处理块 depth=3
+11:12:40.637 | INFO | 添加处理块 | name=灰度变换 index=2
+11:12:41.119 | INFO | 撤销快照 | reason=添加处理块 depth=4
+11:12:41.123 | INFO | 添加处理块 | name=伪彩色处理 index=3
+11:12:41.598 | INFO | 撤销快照 | reason=添加处理块 depth=5
+11:12:41.604 | INFO | 添加处理块 | name=灰度共生矩阵 index=4
+11:12:43.831 | INFO | 撤销快照 | reason=添加处理块 depth=6
+11:12:43.834 | INFO | 添加处理块 | name=伪彩色处理 index=5
+11:12:44.325 | INFO | 撤销快照 | reason=添加处理块 depth=7
+11:12:44.329 | INFO | 添加处理块 | name=灰度变换 index=6
+11:12:45.522 | INFO | 程序退出
+11:12:45.524 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/release/sessions/app_sessions.json count=0
+========== 会话开始 2026-07-27 16:32:40.790 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\bin\release\logs\app_20260727.log
+INFO | 应用 | 图像处理工具 1.0.0
+16:32:40.791 | INFO | 程序启动
+16:32:40.791 | INFO | 图像内存上限 | 不限制
+16:32:40.791 | INFO | 算法插件 | 目录=D:/Qt/project/opencv/bin/release/plugins 加载=0
+16:32:46.421 | INFO | 会话已加载 | path=D:/Qt/project/opencv/bin/release/sessions/app_sessions.json count=0
+16:32:46.626 | INFO | 切换主题 | light
+16:32:46.836 | INFO | 主窗口已显示
+16:32:50.118 | INFO | 程序退出
+16:32:50.120 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/release/sessions/app_sessions.json count=0
+========== 会话开始 2026-07-27 17:00:27.233 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\bin\release\logs\app_20260727.log
+INFO | 应用 | 图像处理工具 1.0.0
+17:00:27.233 | INFO | 程序启动
+17:00:27.233 | INFO | 可执行文件 | D:/Qt/project/opencv/bin/release/opencv.exe
+17:00:27.233 | INFO | 图像内存上限 | 不限制
+17:00:27.235 | INFO | 尝试插件目录 | D:/Qt/project/opencv/bin/release/plugins → 0
+17:00:27.236 | WARN | 插件加载失败 | block_binarization.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_binarization.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:00:27.236 | WARN | 插件加载失败 | block_filter.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_filter.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:00:27.236 | WARN | 插件加载失败 | block_glcm.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_glcm.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:00:27.237 | WARN | 插件加载失败 | block_graytransform.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_graytransform.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:00:27.237 | WARN | 插件加载失败 | block_morphology.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_morphology.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:00:27.238 | WARN | 插件加载失败 | block_pseudocolor.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_pseudocolor.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:00:27.238 | INFO | 尝试插件目录 | D:/Qt/project/opencv/bin/debug/plugins → 0
+17:00:27.239 | INFO | 尝试插件目录 | D:/Qt/project/opencv/plugins → 0
+17:00:27.239 | WARN | 算法插件 | 加载失败
+17:00:30.818 | INFO | 会话已加载 | path=D:/Qt/project/opencv/bin/release/sessions/app_sessions.json count=0
+17:00:31.000 | INFO | 切换主题 | light
+17:00:31.196 | INFO | 主窗口已显示
+17:00:33.007 | INFO | 程序退出
+17:00:33.009 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/release/sessions/app_sessions.json count=0
+========== 会话开始 2026-07-27 17:06:52.131 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\bin\release\logs\app_20260727.log
+INFO | 应用 | 图像处理工具 1.0.0
+17:06:52.132 | INFO | 程序启动
+17:06:52.132 | INFO | 可执行文件 | D:/Qt/project/opencv/bin/release/opencv.exe
+17:06:52.133 | INFO | 图像内存上限 | 不限制
+17:06:52.136 | INFO | 尝试插件目录 | D:/Qt/project/opencv/bin/release/plugins → 0
+17:06:52.138 | WARN | 插件加载失败 | block_binarization.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_binarization.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:06:52.139 | WARN | 插件加载失败 | block_filter.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_filter.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:06:52.140 | WARN | 插件加载失败 | block_glcm.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_glcm.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:06:52.141 | WARN | 插件加载失败 | block_graytransform.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_graytransform.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:06:52.143 | WARN | 插件加载失败 | block_morphology.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_morphology.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:06:52.144 | WARN | 插件加载失败 | block_pseudocolor.dll | The plugin 'D:/Qt/project/opencv/bin/debug/plugins/block_pseudocolor.dll' uses incompatible Qt library. (Cannot mix debug and release libraries.)
+17:06:52.144 | INFO | 尝试插件目录 | D:/Qt/project/opencv/bin/debug/plugins → 0
+17:06:52.147 | INFO | 尝试插件目录 | D:/Qt/project/opencv/plugins → 0
+17:06:52.148 | WARN | 算法插件 | 加载失败
+17:06:53.673 | INFO | 会话已加载 | path=D:/Qt/project/opencv/bin/release/sessions/app_sessions.json count=0
+17:06:54.071 | INFO | 切换主题 | light
+17:06:54.732 | INFO | 主窗口已显示
+17:06:56.196 | INFO | 程序退出
+17:06:56.197 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/release/sessions/app_sessions.json count=0

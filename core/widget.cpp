@@ -62,14 +62,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "../config/appconfig.h"
-#include "../blocks/binarizationblock.h"
-#include "../blocks/morphologyblock.h"
-#include "../blocks/filterblock.h"
-#include "../blocks/graytransformblock.h"
-#include "../blocks/pseudocolorblock.h"
-#include "../blocks/glcmblock.h"
-#include "../algorithms/otsu.h"
-#include "../utils/imageconverter.h"
+#include "../blocksdk/pluginmanager.h"
 #include "../utils/applogger.h"
 #include "../styles/styleloader.h"
 
@@ -216,9 +209,10 @@ Widget::Widget(QWidget *parent)
     setupDragDrop();      // 左拖右放：算法名字的拖放通道
     setupBlockPanel();    // 右侧：用来垂直排列各个 BaseBlock 的布局
     setupFolderBrowser(); // 画布下方文件夹缩略图（默认隐藏）
-    setupMenus();         // 文件 / ROI / 设置
-    setupAlgoListIds();   // 算法列表稳定 id（与语言无关）
-    setupShortcuts();     // Delete / Ctrl+0 / Ctrl+Z
+    setupMenus();
+    PluginManager::instance().setHost(this);
+    rebuildAlgoList();
+    setupShortcuts();
 
     loadSessionsFromDisk();
     connect(qApp, &QCoreApplication::aboutToQuit, this, [this]() {
@@ -925,24 +919,20 @@ void Widget::setupMenus()
     themeGroup->addAction(ui->actThemeDark);
     connect(ui->actThemeLight, &QAction::triggered, this, &Widget::onThemeLight);
     connect(ui->actThemeDark, &QAction::triggered, this, &Widget::onThemeDark);
+    if (ui->actAddPlugin)
+        connect(ui->actAddPlugin, &QAction::triggered, this, &Widget::onAddPlugin);
 }
 
-void Widget::setupAlgoListIds()
+void Widget::rebuildAlgoList()
 {
     if (!ui->listWidget)
         return;
-    // 显示名走 .ui / tr；UserRole 固定中文 id，拖放与 JSON 不随语言变
-    const QStringList ids = {
-        QString::fromUtf8(AppConfig::BLOCK_NAME_BINARIZATION),
-        QString::fromUtf8(AppConfig::BLOCK_NAME_MORPHOLOGY),
-        QString::fromUtf8(AppConfig::BLOCK_NAME_FILTER),
-        QString::fromUtf8(AppConfig::BLOCK_NAME_GRAYTRANSFORM),
-        QString::fromUtf8(AppConfig::BLOCK_NAME_PSEUDOCOLOR),
-        QString::fromUtf8(AppConfig::BLOCK_NAME_GLCM)
-    };
-    for (int i = 0; i < ui->listWidget->count() && i < ids.size(); ++i) {
-        if (auto *item = ui->listWidget->item(i))
-            item->setData(Qt::UserRole, ids.at(i));
+    ui->listWidget->clear();
+    for (const BlockPluginInfo &info : PluginManager::instance().infos()) {
+        auto *item = new QListWidgetItem(
+            QCoreApplication::translate("Widget", info.id.toUtf8().constData()),
+            ui->listWidget);
+        item->setData(Qt::UserRole, info.id);
     }
 }
 
@@ -1025,6 +1015,72 @@ void Widget::onThemeDark()
     applyTheme();
 }
 
+void Widget::onAddPlugin()
+{
+    const QString filter = tr("算法插件 (*.dll);;所有文件 (*.*)");
+    const QString srcDll = QFileDialog::getOpenFileName(
+        this, tr("添加算法插件"), QString(), filter);
+    if (srcDll.isEmpty())
+        return;
+
+    const QFileInfo srcInfo(srcDll);
+    const QString destDir = PluginManager::defaultPluginDirectory();
+    const QString destDll = QDir(destDir).filePath(srcInfo.fileName());
+
+    if (QFileInfo::exists(destDll)
+        && QFileInfo(destDll).absoluteFilePath()
+               .compare(srcInfo.absoluteFilePath(), Qt::CaseInsensitive) != 0) {
+        const auto reply = QMessageBox::question(
+            this, tr("添加插件"),
+            tr("插件目录已存在同名文件：\n%1\n\n是否覆盖？").arg(destDll));
+        if (reply != QMessageBox::Yes)
+            return;
+        if (!QFile::remove(destDll)) {
+            QMessageBox::warning(this, tr("添加插件"),
+                                 tr("无法覆盖已有文件：\n%1").arg(destDll));
+            return;
+        }
+    }
+
+    if (QFileInfo(destDll).absoluteFilePath()
+            .compare(srcInfo.absoluteFilePath(), Qt::CaseInsensitive) != 0) {
+        if (QFile::exists(destDll))
+            QFile::remove(destDll);
+        if (!QFile::copy(srcDll, destDll)) {
+            QMessageBox::warning(this, tr("添加插件"),
+                                 tr("复制插件失败：\n%1 → %2").arg(srcDll, destDll));
+            return;
+        }
+    }
+
+    // 同目录可选英文翻译：block_xxx_en.qm
+    const QString qmName = srcInfo.completeBaseName() + QStringLiteral("_en.qm");
+    const QString srcQm = srcInfo.absolutePath() + QLatin1Char('/') + qmName;
+    const QString destQm = QDir(destDir).filePath(qmName);
+    if (QFileInfo::exists(srcQm)
+        && QFileInfo(destQm).absoluteFilePath()
+               .compare(QFileInfo(srcQm).absoluteFilePath(), Qt::CaseInsensitive) != 0) {
+        if (QFile::exists(destQm))
+            QFile::remove(destQm);
+        if (!QFile::copy(srcQm, destQm))
+            AppLogger::warn(QStringLiteral("复制插件翻译失败"), srcQm);
+    }
+
+    const QString id = PluginManager::instance().loadPluginFile(destDll);
+    if (id.isEmpty()) {
+        QMessageBox::warning(
+            this, tr("添加插件"),
+            tr("加载失败：\n%1").arg(PluginManager::instance().lastError()));
+        return;
+    }
+
+    rebuildAlgoList();
+    AppLogger::info(QStringLiteral("用户添加插件"), id);
+    QMessageBox::information(
+        this, tr("添加插件"),
+        tr("已添加插件：%1\n目录：%2").arg(id, destDir));
+}
+
 void Widget::applyTheme()
 {
     if (m_themeId.compare(QLatin1String(StyleLoader::ThemeDark), Qt::CaseInsensitive) != 0)
@@ -1081,6 +1137,9 @@ void Widget::applyLanguage()
             m_translatorLoaded = true;
         }
     }
+    // 各插件自带 *_en.qm（与 DLL 同目录）
+    PluginManager::instance().setEnglishUi(m_englishUi);
+
     // install/removeTranslator 会给各窗口发 LanguageChange；
     // 这里再显式刷一次，保证启动时与动态菜单也更新
     ui->retranslateUi(this);
@@ -1089,7 +1148,6 @@ void Widget::applyLanguage()
         if (block)
             block->retranslateUi();
     }
-    setupAlgoListIds();
     if (ui->actLangZh)
         ui->actLangZh->setChecked(!m_englishUi);
     if (ui->actLangEn)
@@ -1106,7 +1164,6 @@ void Widget::changeEvent(QEvent *event)
             if (block)
                 block->retranslateUi();
         }
-        setupAlgoListIds();
         refreshChainHint();
     }
     QWidget::changeEvent(event);
@@ -1114,7 +1171,6 @@ void Widget::changeEvent(QEvent *event)
 
 void Widget::retranslateDynamicUi()
 {
-    // 菜单栏文案由 ui->retranslateUi 负责；这里只刷代码创建的 ROI 面板与算法列表
     if (m_roiTypeCombo && m_roiTypeCombo->count() >= 3) {
         const int idx = m_roiTypeCombo->currentIndex();
         m_roiTypeCombo->setItemText(0, tr("矩形"));
@@ -1127,15 +1183,7 @@ void Widget::retranslateDynamicUi()
     if (m_roiDeleteBtn)
         m_roiDeleteBtn->setText(tr("删除"));
 
-    // 左侧算法显示名（UserRole 仍是中文 id，由 setupAlgoListIds 维护）
-    if (ui->listWidget && ui->listWidget->count() >= 6) {
-        ui->listWidget->item(0)->setText(tr("二值化处理"));
-        ui->listWidget->item(1)->setText(tr("形态学处理"));
-        ui->listWidget->item(2)->setText(tr("滤波处理"));
-        ui->listWidget->item(3)->setText(tr("灰度变换"));
-        ui->listWidget->item(4)->setText(tr("伪彩色处理"));
-        ui->listWidget->item(5)->setText(tr("灰度共生矩阵"));
-    }
+    rebuildAlgoList();
 }
 
 /**
@@ -2218,111 +2266,39 @@ bool Widget::eventFilter(QObject *obj, QEvent *event)
 }
 
 // ============================================================================
-// 处理块：创建 / 注册 / Otsu 特殊接线
+// 处理块：插件注册表建块
 // ============================================================================
 
-/**
- * @brief 给二值化块的「Otsu」按钮接线
- *
- * 为什么放在 Widget 而不在 BinarizationBlock 里算？
- *   - Otsu 需要“当前原图 + 当前 ROI”，这些数据在 Widget / Processor
- *   - Block 只应管自己的控件参数，不应直接摸主窗口状态
- *
- * 流程：
- *   用户点 Otsu
- *     → BinarizationBlock::otsuRequested
- *     → 本 lambda：
- *          原图转 Mat →（有 ROI 则裁外包络）→ 算阈值 t
- *          → block->setThresholds(t, 255)
- *          → 内部 emit paramsChanged → 自动重算整条链
- */
-void Widget::wireBinarizationOtsu(BinarizationBlock *block)
+bool Widget::hostHasImage() const
 {
-    if (!block) return;
-    connect(block, &BinarizationBlock::otsuRequested, this, [this, block]() {
-        if (!m_processor->hasImage()) {
-            QMessageBox::information(this, tr("提示"),
-                                     tr("请先打开图片"));
-            return;
-        }
-
-        // 与各 Block::process 相同的颜色约定：先 RGB Mat，再转 BGR 给 OpenCV
-        cv::Mat src = ImageConverter::pixmapToMatRGB(m_processor->originalImage());
-        cv::cvtColor(src, src, cv::COLOR_RGB2BGR);
-
-        // 有 ROI 时只在并集外包络矩形内统计直方图，减少背景干扰
-        const QList<RoiInfo> rois = getAllRoiInfo();
-        if (!rois.isEmpty()) {
-            QRectF br;
-            for (const RoiInfo &roi : rois) {
-                if (roi.isEmpty())
-                    continue;
-                const QRectF b = roi.boundingRect();
-                br = br.isNull() ? b : br.united(b);
-            }
-            if (!br.isNull()) {
-                cv::Rect rr(qRound(br.x()), qRound(br.y()),
-                            qRound(br.width()), qRound(br.height()));
-                rr &= cv::Rect(0, 0, src.cols, src.rows);
-                if (!rr.empty())
-                    src = src(rr).clone();
-            }
-        }
-
-        const int t = OtsuAlgorithm::calculateThresholdFromBGR(src);
-        // 下限=Otsu 阈值，上限=255：常见“大于阈值变白”的设定
-        block->setThresholds(t, 255);
-        AppLogger::info(QStringLiteral("Otsu自动阈值"),
-                        QStringLiteral("t=%1 rois=%2").arg(t).arg(rois.size()));
-    });
+    return m_processor && m_processor->hasImage();
 }
 
-/**
- * @brief 根据拖入的算法名字，new 出对应的 Block 子类
- *
- * 名字必须与下列两者一致：
- *   - 左侧 listWidget 里显示的文字
- *   - AppConfig::BLOCK_NAME_* 常量
- *
- * 二值化要额外 wireBinarizationOtsu；其它块构造完即可。
- * 最后统一 addBlockToPanel 挂到 UI + Processor。
- * @return 新建的块；名字无法识别时返回 nullptr
- */
+QPixmap Widget::hostOriginalImage() const
+{
+    return m_processor ? m_processor->originalImage() : QPixmap();
+}
+
+QList<RoiInfo> Widget::hostCurrentRois() const
+{
+    return getAllRoiInfo();
+}
+
 BaseBlock *Widget::createBlockByName(const QString &name)
 {
-    // 块的父控件挂在滚动容器上，随列表一起滚
     QWidget *parent = ui->blockListContainer ? ui->blockListContainer
                                              : static_cast<QWidget *>(ui->widget_3);
-    BaseBlock *block = nullptr;
-
-    if (name == AppConfig::BLOCK_NAME_BINARIZATION) {
-        auto *bin = new BinarizationBlock(parent);
-        wireBinarizationOtsu(bin);
-        block = bin;//连接好ostu按钮
-    } else if (name == AppConfig::BLOCK_NAME_MORPHOLOGY) {
-        block = new MorphologyBlock(parent);
-    } else if (name == AppConfig::BLOCK_NAME_FILTER) {
-        block = new FilterBlock(parent);
-    } else if (name == AppConfig::BLOCK_NAME_GRAYTRANSFORM) {
-        block = new GrayTransformBlock(parent);
-    } else if (name == QString::fromUtf8(AppConfig::BLOCK_NAME_PSEUDOCOLOR)
-               || name == AppConfig::BLOCK_NAME_PSEUDOCOLOR) {
-        block = new PseudoColorBlock(parent);
-    } else if (name == QString::fromUtf8(AppConfig::BLOCK_NAME_GLCM)
-               || name == AppConfig::BLOCK_NAME_GLCM) {
-        block = new GlcmBlock(parent);
+    BaseBlock *block = PluginManager::instance().createBlock(name, parent);
+    if (!block) {
+        AppLogger::warn(QStringLiteral("未识别的算法块"), name);
+        return nullptr;
     }
-
-    if (block)
-        addBlockToPanel(block);
+    addBlockToPanel(block);
     return block;
 }
 
 /**
  * @brief 把已创建的块挂到右侧面板，并注册到处理引擎
- *
- * 顺序：撤销快照 → 布局/列表 → 信号（删/复制粘贴/参数将改）→ processor.addBlock。
- * m_blockList 与 processor.blocks() 须同序（reprocess 跟引擎序，面板跟 m_blockList）。
  */
 void Widget::addBlockToPanel(BaseBlock *block)
 {

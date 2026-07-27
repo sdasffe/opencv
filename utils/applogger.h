@@ -1,21 +1,14 @@
 #ifndef APPLOGGER_H
 #define APPLOGGER_H
 
+#include "../blocksdk/blocksdk_global.h"
 #include <QString>
 
 /**
  * @file applogger.h
  * @brief 简易文件日志（无 UI，横切基础设施）
- *
- * 【在整条链路中的位置】
- *   main 启动 → AppLogger::init()
- *   Widget / ImageProcessor 等各处 → info/warn/error 记录用户操作与异常
- *   不参与图像处理，仅作运行期诊断与行为审计
- *
- * 日志目录：可执行文件旁 logs/
- * 文件名：app_yyyyMMdd.log（按天滚动）
  */
-class AppLogger
+class BLOCKSDK_EXPORT AppLogger
 {
 public:
     enum class Level { Info, Warn, Error };

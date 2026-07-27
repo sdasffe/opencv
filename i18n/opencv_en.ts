@@ -918,5 +918,59 @@ Appearance
         <source>剪贴板中没有有效的处理块</source>
         <translation>Clipboard has no valid processing block</translation>
     </message>
+    <message>
+        <source>添加插件...</source>
+        <translation>Add Plugin...</translation>
+    </message>
+    <message>
+        <source>选择算法插件 DLL，复制到程序 plugins 目录并加载</source>
+        <translation>Choose an algorithm plugin DLL, copy it into the app plugins folder and load it</translation>
+    </message>
+    <message>
+        <source>添加算法插件</source>
+        <translation>Add Algorithm Plugin</translation>
+    </message>
+    <message>
+        <source>算法插件 (*.dll);;所有文件 (*.*)</source>
+        <translation>Algorithm Plugin (*.dll);;All Files (*.*)</translation>
+    </message>
+    <message>
+        <source>添加插件</source>
+        <translation>Add Plugin</translation>
+    </message>
+    <message>
+        <source>插件目录已存在同名文件：
+%1
+
+是否覆盖？</source>
+        <translation>A file with the same name already exists in the plugins folder:
+%1
+
+Overwrite it?</translation>
+    </message>
+    <message>
+        <source>无法覆盖已有文件：
+%1</source>
+        <translation>Cannot overwrite existing file:
+%1</translation>
+    </message>
+    <message>
+        <source>复制插件失败：
+%1 → %2</source>
+        <translation>Failed to copy plugin:
+%1 → %2</translation>
+    </message>
+    <message>
+        <source>加载失败：
+%1</source>
+        <translation>Failed to load:
+%1</translation>
+    </message>
+    <message>
+        <source>已添加插件：%1
+目录：%2</source>
+        <translation>Plugin added: %1
+Folder: %2</translation>
+    </message>
 </context>
 </TS>

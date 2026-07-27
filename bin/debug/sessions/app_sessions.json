@@ -1,0 +1,17 @@
+{
+    "sessions": {
+        "C:/Users/Admin/Desktop/图片/input.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 147,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        }
+    },
+    "version": 1
+}

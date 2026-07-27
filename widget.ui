@@ -82,6 +82,8 @@
       </widget>
       <addaction name="menuLanguage"/>
       <addaction name="menuTheme"/>
+      <addaction name="separator"/>
+      <addaction name="actAddPlugin"/>
      </widget>
      <addaction name="menuFile"/>
      <addaction name="menuEdit"/>
@@ -327,36 +329,6 @@
             <height>120</height>
            </size>
           </property>
-          <item>
-           <property name="text">
-            <string>二值化处理</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>形态学处理</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>滤波处理</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>灰度变换</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>伪彩色处理</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>灰度共生矩阵</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item>
@@ -570,6 +542,14 @@
    </property>
    <property name="text">
     <string>深色</string>
+   </property>
+  </action>
+  <action name="actAddPlugin">
+   <property name="text">
+    <string>添加插件...</string>
+   </property>
+   <property name="toolTip">
+    <string>选择算法插件 DLL，复制到程序 plugins 目录并加载</string>
    </property>
   </action>
   <action name="actHelp">

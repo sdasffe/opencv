@@ -28,6 +28,7 @@
 #include "../roi/resizablerotatedrectitem.h"
 #include "../roi/roiinfo.h"
 #include "../blocks/baseblock.h"
+#include "../blocksdk/iblockhost.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -44,47 +45,36 @@ class MyListWidget : public QListWidget
     Q_OBJECT
 public:
     explicit MyListWidget(QWidget *parent = nullptr) {
-        setDragEnabled(true);                              // 允许鼠标按住列表项向外拖出
-        setDragDropMode(QAbstractItemView::DragOnly);      // 只允许拖出，不接受外部 drop 进来
+        setDragEnabled(true);
+        setDragDropMode(QAbstractItemView::DragOnly);
+        Q_UNUSED(parent);
     }
 protected:
-    /** 生成拖拽 MIME：优先 UserRole 稳定 id，保证中英切换后仍能匹配块工厂 */
     QMimeData *mimeData(const QList<QListWidgetItem *> &items) const override {
-        if (items.isEmpty()) return nullptr;               // 无选中项则不启动拖拽
+        if (items.isEmpty()) return nullptr;
         auto *mimeData = new QMimeData;
-        QString id = items.first()->data(Qt::UserRole).toString(); // 稳定块 id（如「二值化处理」）
+        QString id = items.first()->data(Qt::UserRole).toString();
         if (id.isEmpty())
-            id = items.first()->text();                    // 兼容：无 UserRole 时退回显示文字
-        mimeData->setText(id);                             // Drop 侧用 mimeData->text() 取名建块
+            id = items.first()->text();
+        mimeData->setText(id);
         return mimeData;
     }
 };
 
 /**
  * @brief 主窗口：图像显示 + ROI + 处理链 UI
- *
- * 【界面分区】（见 widget.ui）
- *   - 菜单栏：文件 / 编辑 / 设置 / 帮助 / 关于；工具条：应用、对比、保存、耗时
- *   - 左侧：算法列表 listWidget，可拖出算法名
- *   - 中间：graphicsView 画布；下方 folderBrowserPanel 显示文件夹缩略图
- *   - 右侧：图像处理工具箱 widget_3，放置 BaseBlock 子控件
- *
- * 【典型用户路径】
- *   打开图片 / 打开文件夹（点缩略图切换）→（可选）ROI → 拖入算法 → 调参 → 对比/保存
- *
- * 【与 ImageProcessor 的关系】
- *   Widget 管 UI 与 ROI；ImageProcessor 管“按块顺序算图”。
- *   重算统一走 onApplyProcessing()：先 getAllRoiInfo() → setRois → reprocess。
  */
-class Widget : public QWidget
+class Widget : public QWidget, public IBlockHost
 {
     Q_OBJECT
 
 public:
-    /** 构造：加载 .ui、搭场景/菜单/拖放/会话，并接好重算相关信号槽 */
-    explicit Widget(QWidget *parent = nullptr);             // parent 一般为 nullptr；子对象随 this 销毁
-    /** 析构：只 delete ui；scene/processor/timer 有 parent 由 Qt 自动释放 */
-    ~Widget() override;                                    // 勿在此手动 delete m_scene / m_processor
+    explicit Widget(QWidget *parent = nullptr);
+    ~Widget() override;
+
+    bool hostHasImage() const override;
+    QPixmap hostOriginalImage() const override;
+    QList<RoiInfo> hostCurrentRois() const override;
 
 protected:
     /** 滚轮缩放：以鼠标下场景点为锚，限制缩放范围，刷新信息栏 */
@@ -123,6 +113,8 @@ private slots:
     void onThemeLight();                                   // m_themeId="light"
     /** 设置→外观→深色：StyleLoader 加载 dark QSS 并 polish */
     void onThemeDark();                                    // m_themeId="dark"
+    /** 设置→添加插件：选 DLL 复制到 plugins 并热加载 */
+    void onAddPlugin();
 
     /** 引擎 processingFinished：刷画布、写耗时 label、updateInfoLabel */
     void onProcessingFinished(qint64 elapsedMs);           // elapsedMs 为本次 reprocess 毫秒
@@ -171,24 +163,15 @@ private:
     void deselectAllRoiItems();                            // 添加新 ROI 前可先取消旧选中
 
     // ----- 处理块管理 -----
-    /** 工厂：按 AppConfig 块名 / UserRole id 创建具体 BaseBlock 子类 */
-    BaseBlock *createBlockByName(const QString &name);     // 未知名返回 nullptr 并打 warn 日志
-    /** 把块加入右侧布局与 m_blockList，processor->addBlock，接线删除/复制/粘贴 */
-    void addBlockToPanel(BaseBlock *block);                // 非撤销恢复时压「添加处理块」并可 requestReprocess
-    /** 拖拽换序：insertBefore 为目标下标，同步 layout / m_blockList / processor */
-    void reorderBlock(BaseBlock *block, int insertBefore); // 会 pushUndoSnapshot 并重算
-    /** 根据容器内 Y 坐标，返回应插入的下标（插到该块之前） */
-    int blockInsertIndexAtY(int yInContainer) const;       // 落在空白底部则返回 count()
-    /** 清空全部处理块；reprocessAfter=false 用于导入前静默清理 */
-    void clearAllBlocks(bool reprocessAfter);              // true 时 disconnect/reconnect 防抖并重算
-    /** 二值化块「Otsu」按钮：用原图（或 ROI 并集外接框）算阈值写回 spin */
-    void wireBinarizationOtsu(class BinarizationBlock *block); // 无图时提示；算完触发 paramsChanged
-    /** 将 block->saveParams() 包成 JSON 放入系统剪贴板 */
-    void copyBlockToClipboard(BaseBlock *block);           // 供右键「复制」
-    /** 从剪贴板解析块 JSON，createBlockByName + loadParams，插到 after 后或末尾 */
-    void pasteBlockFromClipboard(BaseBlock *afterBlock);   // afterBlock 为空则追加；失败弹提示
-    /** 探测剪贴板是否含本工具可识别的单块 JSON */
-    bool clipboardHasBlock() const;                        // 空白处右键「粘贴」使能判断
+    /** 工厂：按 PluginManager 注册的 id 创建 BaseBlock */
+    BaseBlock *createBlockByName(const QString &name);
+    void addBlockToPanel(BaseBlock *block);
+    void reorderBlock(BaseBlock *block, int insertBefore);
+    int blockInsertIndexAtY(int yInContainer) const;
+    void clearAllBlocks(bool reprocessAfter);
+    void copyBlockToClipboard(BaseBlock *block);
+    void pasteBlockFromClipboard(BaseBlock *afterBlock);
+    bool clipboardHasBlock() const;
 
     // ----- 显示 -----
     /** 替换场景中的底图 pixmap（临时挂起 scene.changed，避免误触发重算） */
@@ -244,19 +227,14 @@ private:
     /** 注册 Ctrl+0、Delete 快捷键（Ctrl+Z 在菜单 QAction 上） */
     void setupShortcuts();                                 // WindowShortcut，窗口激活即有效
     /** 连接 .ui 菜单动作；为 ROI 子菜单挂 ComboBox+添加/删除面板 */
-    void setupMenus();                                     // 语言/外观用 QActionGroup 互斥
-    /** 给 listWidget 每项 setData(UserRole, 稳定中文块 id) */
-    void setupAlgoListIds();                               // 显示名仍可由 tr/retranslate 改变
-    /** 按 m_englishUi 装/卸翻译器，retranslateUi，同步菜单勾选 */
-    void applyLanguage();                                  // 偏好写入 QSettings ui/english
-    /** 按 m_themeId 加载 QSS，unpolish/polish，写 ui/theme */
-    void applyTheme();                                     // light / dark
-    /** 刷新代码创建的 ROI 下拉/按钮文案与左侧算法显示名 */
-    void retranslateDynamicUi();                           // 菜单等 .ui 文案由 retranslateUi 负责
-    /** 按当前屏幕 availableGeometry 限制最小尺寸并缩小窗口 */
-    void adaptWindowToScreen();                            // 避免笔记本小屏启动被裁切
-    /** 拖拽进入/离开右侧时切换属性，驱动 QSS 高亮 */
-    void setDropPanelHighlight(bool on);                   // on=true 表示可放置
+    void setupMenus();
+    /** 按 PluginManager 已注册块重建左侧列表 */
+    void rebuildAlgoList();
+    void applyLanguage();
+    void applyTheme();
+    void retranslateDynamicUi();
+    void adaptWindowToScreen();
+    void setDropPanelHighlight(bool on);
     /** 处理链为空时显示「拖入算法」，有块则隐藏提示标签 */
     void refreshChainHint();                               // 增删块后调用
     /** 三类 ROI 列表是否至少有一个图元 */

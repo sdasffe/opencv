@@ -44,13 +44,14 @@ void AppLogger::init()
     // 日志与 exe 同目录，便于打包后用户直接找到
     const QString dir = QCoreApplication::applicationDirPath() + QStringLiteral("/logs");
     QDir().mkpath(dir);
+    // 每次启动一个新文件：app_yyyyMMdd_hhmmss.log
     const QString name = QStringLiteral("app_%1.log")
-                             .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd")));
+                             .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
     g_logPath = dir + QLatin1Char('/') + name;
     g_inited = true;
 
     QFile f(g_logPath);
-    if (!f.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Text))
         return;
 
     QTextStream out(&f);
