@@ -1,0 +1,366 @@
+========== 会话开始 2026-08-03 11:35:06.087 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\bin\debug\logs\app_20260803_113506.log
+INFO | 应用 | 图像处理工具 1.0.0
+11:35:06.088 | INFO | 程序启动
+11:35:06.088 | INFO | 可执行文件 | D:/Qt/project/opencv/bin/debug/opencv.exe
+11:35:06.088 | INFO | 图像内存上限 | 不限制
+11:35:06.094 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_binarization_en.qm
+11:35:06.095 | INFO | 已加载外部插件 | block_binarization.dll → 二值化处理
+11:35:06.099 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_filter_en.qm
+11:35:06.100 | INFO | 已加载外部插件 | block_filter.dll → 滤波处理
+11:35:06.103 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_glcm_en.qm
+11:35:06.104 | INFO | 已加载外部插件 | block_glcm.dll → 灰度共生矩阵
+11:35:06.106 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_graytransform_en.qm
+11:35:06.108 | INFO | 已加载外部插件 | block_graytransform.dll → 灰度变换
+11:35:06.111 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_morphology_en.qm
+11:35:06.112 | INFO | 已加载外部插件 | block_morphology.dll → 形态学处理
+11:35:06.114 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_pseudocolor_en.qm
+11:35:06.115 | INFO | 已加载外部插件 | block_pseudocolor.dll → 伪彩色处理
+11:35:06.115 | INFO | 尝试插件目录 | D:/Qt/project/opencv/bin/debug/plugins → 6
+11:35:06.116 | INFO | 算法插件 | 目录=D:/Qt/project/opencv/bin/debug/plugins 加载=6
+11:35:06.222 | INFO | 会话已加载 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=1
+11:35:06.791 | INFO | 切换主题 | light
+11:35:06.896 | INFO | 主窗口已显示
+11:36:31.860 | INFO | 打开文件夹 | dir=C:/Users/Admin/Desktop/图片 count=32
+11:36:38.482 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+11:36:38.483 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/big_10000.png size=10000x10000 prev=(无) session=新建空会话 blocks=0 rois=0
+11:36:46.658 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/big_10000.png blocks=0 rois=0
+11:36:46.659 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=2
+11:36:46.714 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+11:36:46.715 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/result.png size=1066x1061 prev=C:/Users/Admin/Desktop/图片/big_10000.png session=新建空会话 blocks=0 rois=0
+11:36:47.072 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/result.png blocks=0 rois=0
+11:36:47.073 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=3
+11:36:47.075 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+11:36:47.122 | INFO | 添加处理块 | name=二值化处理 index=0
+11:36:47.150 | INFO | 添加处理块 | name=形态学处理 index=1
+11:36:47.178 | INFO | 添加处理块 | name=滤波处理 index=2
+11:36:47.207 | INFO | 添加处理块 | name=灰度变换 index=3
+11:36:47.227 | INFO | 添加处理块 | name=伪彩色处理 index=4
+11:36:47.269 | INFO | 添加处理块 | name=灰度共生矩阵 index=5
+11:36:47.270 | INFO | 恢复会话 | blocks=6 rois=1
+11:36:47.270 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=6 enabled=6 rois=1 chain=[二值化处理 -> 形态学处理 -> 滤波处理 -> 灰度变换 -> 伪彩色处理 -> 灰度共生矩阵]
+11:36:47.302 | INFO | 执行处理块 | name=二值化处理 elapsed=29 ms rois=1
+11:36:47.329 | INFO | 执行处理块 | name=形态学处理 elapsed=26 ms rois=1
+11:36:47.375 | INFO | 执行处理块 | name=滤波处理 elapsed=44 ms rois=1
+11:36:47.401 | INFO | 执行处理块 | name=灰度变换 elapsed=25 ms rois=1
+11:36:47.431 | INFO | 执行处理块 | name=伪彩色处理 elapsed=27 ms rois=1
+11:36:47.495 | INFO | 执行处理块 | name=灰度共生矩阵 elapsed=63 ms rois=1
+11:36:47.496 | INFO | 流水线结束 | total=224 ms steps=[二值化处理(29ms) -> 形态学处理(26ms) -> 滤波处理(44ms) -> 灰度变换(25ms) -> 伪彩色处理(27ms) -> 灰度共生矩阵(63ms)]
+11:36:47.496 | INFO | 处理完成 | elapsed=224 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+11:36:47.497 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/input.png size=1066x1061 prev=C:/Users/Admin/Desktop/图片/result.png session=恢复 blocks=6 rois=1
+11:36:49.609 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/input.png blocks=6 rois=1
+11:36:49.611 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=3
+11:36:49.613 | INFO | 清空处理链 | removed=6 reprocessAfter=否
+11:36:49.614 | INFO | 恢复会话 | blocks=0 rois=0
+11:36:49.615 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/big_10000.png size=10000x10000 prev=C:/Users/Admin/Desktop/图片/input.png session=恢复 blocks=0 rois=0
+11:36:49.692 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/big_10000.png blocks=0 rois=0
+11:36:49.694 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=3
+11:36:49.753 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+11:36:49.754 | INFO | 恢复会话 | blocks=0 rois=0
+11:36:49.754 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/result.png size=1066x1061 prev=C:/Users/Admin/Desktop/图片/big_10000.png session=恢复 blocks=0 rois=0
+11:36:52.622 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/result.png blocks=0 rois=0
+11:36:52.624 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=3
+11:36:52.625 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+11:36:52.626 | INFO | 恢复会话 | blocks=0 rois=0
+11:36:52.626 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/big_10000.png size=10000x10000 prev=C:/Users/Admin/Desktop/图片/result.png session=恢复 blocks=0 rois=0
+11:36:53.842 | INFO | 撤销快照 | reason=添加处理块 depth=1
+11:36:53.842 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/big_10000.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:36:56.313 | INFO | 执行处理块 | name=二值化处理 elapsed=2469 ms rois=0
+11:36:56.313 | INFO | 流水线结束 | total=2470 ms steps=[二值化处理(2469ms)]
+11:36:56.314 | INFO | 处理完成 | elapsed=2470 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+11:36:56.327 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:05.464 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/big_10000.png blocks=1 rois=0
+11:37:05.584 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:05.604 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:05.605 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:05.606 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/big_10000.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:07.762 | INFO | 执行处理块 | name=二值化处理 elapsed=2155 ms rois=0
+11:37:07.763 | INFO | 流水线结束 | total=2156 ms steps=[二值化处理(2155ms)]
+11:37:07.763 | INFO | 处理完成 | elapsed=2156 ms path=C:/Users/Admin/Desktop/图片/big_10000.png result=10000x10000
+11:37:07.764 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/big_10000.png size=10000x10000 prev=C:/Users/Admin/Desktop/图片/big_10000.png session=强制模板 blocks=1 rois=0
+11:37:08.328 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/big_10000.png blocks=1 rois=0
+11:37:08.441 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:08.461 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:08.462 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:08.462 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:08.491 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=0
+11:37:08.491 | INFO | 流水线结束 | total=28 ms steps=[二值化处理(26ms)]
+11:37:08.492 | INFO | 处理完成 | elapsed=28 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+11:37:08.493 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/input.png size=1066x1061 prev=C:/Users/Admin/Desktop/图片/big_10000.png session=强制模板 blocks=1 rois=0
+11:37:09.050 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 rois=0
+11:37:09.053 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:09.073 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:09.074 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:09.074 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/result.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:09.101 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=0
+11:37:09.101 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+11:37:09.102 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/result.png result=1066x1061
+11:37:09.103 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/result.png size=1066x1061 prev=C:/Users/Admin/Desktop/图片/input.png session=强制模板 blocks=1 rois=0
+11:37:09.659 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/result.png blocks=1 rois=0
+11:37:09.667 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:09.688 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:09.688 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:09.690 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/result1.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:09.715 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=0
+11:37:09.716 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+11:37:09.718 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/result1.png result=1066x1061
+11:37:09.719 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/result1.png size=1066x1061 prev=C:/Users/Admin/Desktop/图片/result.png session=强制模板 blocks=1 rois=0
+11:37:10.249 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/result1.png blocks=1 rois=0
+11:37:10.252 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:10.268 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:10.269 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:10.269 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/result2.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:10.292 | INFO | 执行处理块 | name=二值化处理 elapsed=21 ms rois=0
+11:37:10.293 | INFO | 流水线结束 | total=22 ms steps=[二值化处理(21ms)]
+11:37:10.293 | INFO | 处理完成 | elapsed=22 ms path=C:/Users/Admin/Desktop/图片/result2.png result=1066x1061
+11:37:10.294 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/result2.png size=1066x1061 prev=C:/Users/Admin/Desktop/图片/result1.png session=强制模板 blocks=1 rois=0
+11:37:10.897 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/result2.png blocks=1 rois=0
+11:37:10.900 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:10.916 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:10.917 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:10.917 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/壁纸.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:10.952 | INFO | 执行处理块 | name=二值化处理 elapsed=33 ms rois=0
+11:37:10.953 | INFO | 流水线结束 | total=34 ms steps=[二值化处理(33ms)]
+11:37:10.953 | INFO | 处理完成 | elapsed=34 ms path=C:/Users/Admin/Desktop/图片/壁纸.png result=1672x942
+11:37:10.954 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/壁纸.png size=1672x942 prev=C:/Users/Admin/Desktop/图片/result2.png session=强制模板 blocks=1 rois=0
+11:37:11.743 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/壁纸.png blocks=1 rois=0
+11:37:11.746 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:11.764 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:11.764 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:11.765 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102112_51_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:12.044 | INFO | 执行处理块 | name=二值化处理 elapsed=277 ms rois=0
+11:37:12.045 | INFO | 流水线结束 | total=280 ms steps=[二值化处理(277ms)]
+11:37:12.045 | INFO | 处理完成 | elapsed=280 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102112_51_4.jpg result=4096x3072
+11:37:12.046 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102112_51_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/壁纸.png session=强制模板 blocks=1 rois=0
+11:37:12.914 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102112_51_4.jpg blocks=1 rois=0
+11:37:12.929 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:12.947 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:12.947 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:12.948 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102115_52_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:13.214 | INFO | 执行处理块 | name=二值化处理 elapsed=264 ms rois=0
+11:37:13.214 | INFO | 流水线结束 | total=266 ms steps=[二值化处理(264ms)]
+11:37:13.215 | INFO | 处理完成 | elapsed=266 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102115_52_4.jpg result=4096x3072
+11:37:13.216 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102115_52_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102112_51_4.jpg session=强制模板 blocks=1 rois=0
+11:37:13.985 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102115_52_4.jpg blocks=1 rois=0
+11:37:14.001 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:14.017 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:14.017 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:14.018 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102116_53_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:14.283 | INFO | 执行处理块 | name=二值化处理 elapsed=262 ms rois=0
+11:37:14.284 | INFO | 流水线结束 | total=264 ms steps=[二值化处理(262ms)]
+11:37:14.284 | INFO | 处理完成 | elapsed=264 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102116_53_4.jpg result=4096x3072
+11:37:14.285 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102116_53_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102115_52_4.jpg session=强制模板 blocks=1 rois=0
+11:37:15.064 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102116_53_4.jpg blocks=1 rois=0
+11:37:15.080 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:15.098 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:15.099 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:15.099 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102117_54_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:15.353 | INFO | 执行处理块 | name=二值化处理 elapsed=252 ms rois=0
+11:37:15.354 | INFO | 流水线结束 | total=253 ms steps=[二值化处理(252ms)]
+11:37:15.355 | INFO | 处理完成 | elapsed=253 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102117_54_4.jpg result=4096x3072
+11:37:15.356 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102117_54_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102116_53_4.jpg session=强制模板 blocks=1 rois=0
+11:37:16.133 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102117_54_4.jpg blocks=1 rois=0
+11:37:16.147 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:16.165 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:16.165 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:16.166 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_55_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:16.420 | INFO | 执行处理块 | name=二值化处理 elapsed=253 ms rois=0
+11:37:16.422 | INFO | 流水线结束 | total=255 ms steps=[二值化处理(253ms)]
+11:37:16.422 | INFO | 处理完成 | elapsed=255 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_55_4.jpg result=4096x3072
+11:37:16.423 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_55_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102117_54_4.jpg session=强制模板 blocks=1 rois=0
+11:37:17.197 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_55_4.jpg blocks=1 rois=0
+11:37:17.212 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:17.228 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:17.228 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:17.230 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_56_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:17.493 | INFO | 执行处理块 | name=二值化处理 elapsed=261 ms rois=0
+11:37:17.494 | INFO | 流水线结束 | total=263 ms steps=[二值化处理(261ms)]
+11:37:17.495 | INFO | 处理完成 | elapsed=263 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_56_4.jpg result=4096x3072
+11:37:17.496 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_56_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_55_4.jpg session=强制模板 blocks=1 rois=0
+11:37:18.267 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_56_4.jpg blocks=1 rois=0
+11:37:18.282 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:18.299 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:18.299 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:18.300 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102119_57_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:18.572 | INFO | 执行处理块 | name=二值化处理 elapsed=270 ms rois=0
+11:37:18.574 | INFO | 流水线结束 | total=272 ms steps=[二值化处理(270ms)]
+11:37:18.574 | INFO | 处理完成 | elapsed=272 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102119_57_4.jpg result=4096x3072
+11:37:18.575 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102119_57_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102118_56_4.jpg session=强制模板 blocks=1 rois=0
+11:37:19.362 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102119_57_4.jpg blocks=1 rois=0
+11:37:19.377 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:19.396 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:19.397 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:19.397 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102120_58_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:19.661 | INFO | 执行处理块 | name=二值化处理 elapsed=263 ms rois=0
+11:37:19.663 | INFO | 流水线结束 | total=265 ms steps=[二值化处理(263ms)]
+11:37:19.663 | INFO | 处理完成 | elapsed=265 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102120_58_4.jpg result=4096x3072
+11:37:19.664 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102120_58_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102119_57_4.jpg session=强制模板 blocks=1 rois=0
+11:37:20.434 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102120_58_4.jpg blocks=1 rois=0
+11:37:20.451 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:20.469 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:20.470 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:20.471 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102121_59_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:20.733 | INFO | 执行处理块 | name=二值化处理 elapsed=261 ms rois=0
+11:37:20.734 | INFO | 流水线结束 | total=263 ms steps=[二值化处理(261ms)]
+11:37:20.735 | INFO | 处理完成 | elapsed=263 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102121_59_4.jpg result=4096x3072
+11:37:20.735 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102121_59_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102120_58_4.jpg session=强制模板 blocks=1 rois=0
+11:37:21.509 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102121_59_4.jpg blocks=1 rois=0
+11:37:21.523 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:21.539 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:21.541 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:21.541 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102122_60_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:21.803 | INFO | 执行处理块 | name=二值化处理 elapsed=260 ms rois=0
+11:37:21.804 | INFO | 流水线结束 | total=262 ms steps=[二值化处理(260ms)]
+11:37:21.805 | INFO | 处理完成 | elapsed=262 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102122_60_4.jpg result=4096x3072
+11:37:21.806 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102122_60_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102121_59_4.jpg session=强制模板 blocks=1 rois=0
+11:37:22.576 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102122_60_4.jpg blocks=1 rois=0
+11:37:22.591 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:22.608 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:22.609 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:22.609 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102123_61_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:22.873 | INFO | 执行处理块 | name=二值化处理 elapsed=262 ms rois=0
+11:37:22.873 | INFO | 流水线结束 | total=264 ms steps=[二值化处理(262ms)]
+11:37:22.874 | INFO | 处理完成 | elapsed=264 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102123_61_4.jpg result=4096x3072
+11:37:22.875 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102123_61_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102122_60_4.jpg session=强制模板 blocks=1 rois=0
+11:37:23.677 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102123_61_4.jpg blocks=1 rois=0
+11:37:23.692 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:23.708 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:23.709 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:23.709 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102124_62_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:24.039 | INFO | 执行处理块 | name=二值化处理 elapsed=328 ms rois=0
+11:37:24.040 | INFO | 流水线结束 | total=329 ms steps=[二值化处理(328ms)]
+11:37:24.042 | INFO | 处理完成 | elapsed=329 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102124_62_4.jpg result=4096x3072
+11:37:24.042 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102124_62_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102123_61_4.jpg session=强制模板 blocks=1 rois=0
+11:37:24.820 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102124_62_4.jpg blocks=1 rois=0
+11:37:24.835 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:24.852 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:24.853 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:24.853 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_63_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:25.109 | INFO | 执行处理块 | name=二值化处理 elapsed=254 ms rois=0
+11:37:25.110 | INFO | 流水线结束 | total=256 ms steps=[二值化处理(254ms)]
+11:37:25.110 | INFO | 处理完成 | elapsed=256 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_63_4.jpg result=4096x3072
+11:37:25.112 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_63_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102124_62_4.jpg session=强制模板 blocks=1 rois=0
+11:37:25.891 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_63_4.jpg blocks=1 rois=0
+11:37:25.905 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:25.922 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:25.923 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:25.923 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_64_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:26.183 | INFO | 执行处理块 | name=二值化处理 elapsed=258 ms rois=0
+11:37:26.185 | INFO | 流水线结束 | total=260 ms steps=[二值化处理(258ms)]
+11:37:26.185 | INFO | 处理完成 | elapsed=260 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_64_4.jpg result=4096x3072
+11:37:26.186 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_64_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_63_4.jpg session=强制模板 blocks=1 rois=0
+11:37:26.967 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_64_4.jpg blocks=1 rois=0
+11:37:26.981 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:26.998 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:26.999 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:26.999 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102126_65_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:27.259 | INFO | 执行处理块 | name=二值化处理 elapsed=258 ms rois=0
+11:37:27.260 | INFO | 流水线结束 | total=260 ms steps=[二值化处理(258ms)]
+11:37:27.261 | INFO | 处理完成 | elapsed=260 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102126_65_4.jpg result=4096x3072
+11:37:27.262 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102126_65_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102125_64_4.jpg session=强制模板 blocks=1 rois=0
+11:37:28.043 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102126_65_4.jpg blocks=1 rois=0
+11:37:28.057 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:28.075 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:28.075 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:28.076 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102127_66_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:28.335 | INFO | 执行处理块 | name=二值化处理 elapsed=257 ms rois=0
+11:37:28.336 | INFO | 流水线结束 | total=259 ms steps=[二值化处理(257ms)]
+11:37:28.336 | INFO | 处理完成 | elapsed=259 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102127_66_4.jpg result=4096x3072
+11:37:28.337 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102127_66_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102126_65_4.jpg session=强制模板 blocks=1 rois=0
+11:37:29.112 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102127_66_4.jpg blocks=1 rois=0
+11:37:29.126 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:29.143 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:29.144 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:29.144 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102128_67_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:29.415 | INFO | 执行处理块 | name=二值化处理 elapsed=269 ms rois=0
+11:37:29.416 | INFO | 流水线结束 | total=271 ms steps=[二值化处理(269ms)]
+11:37:29.417 | INFO | 处理完成 | elapsed=271 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102128_67_4.jpg result=4096x3072
+11:37:29.418 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102128_67_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102127_66_4.jpg session=强制模板 blocks=1 rois=0
+11:37:30.184 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102128_67_4.jpg blocks=1 rois=0
+11:37:30.198 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:30.215 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:30.216 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:30.216 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102130_68_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:30.476 | INFO | 执行处理块 | name=二值化处理 elapsed=258 ms rois=0
+11:37:30.476 | INFO | 流水线结束 | total=260 ms steps=[二值化处理(258ms)]
+11:37:30.478 | INFO | 处理完成 | elapsed=260 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102130_68_4.jpg result=4096x3072
+11:37:30.479 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102130_68_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102128_67_4.jpg session=强制模板 blocks=1 rois=0
+11:37:31.254 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102130_68_4.jpg blocks=1 rois=0
+11:37:31.270 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:31.289 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:31.290 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:31.290 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102131_69_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:31.572 | INFO | 执行处理块 | name=二值化处理 elapsed=281 ms rois=0
+11:37:31.573 | INFO | 流水线结束 | total=283 ms steps=[二值化处理(281ms)]
+11:37:31.574 | INFO | 处理完成 | elapsed=283 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102131_69_4.jpg result=4096x3072
+11:37:31.575 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102131_69_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102130_68_4.jpg session=强制模板 blocks=1 rois=0
+11:37:32.340 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102131_69_4.jpg blocks=1 rois=0
+11:37:32.354 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:32.372 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:32.372 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:32.373 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102132_70_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:32.631 | INFO | 执行处理块 | name=二值化处理 elapsed=257 ms rois=0
+11:37:32.633 | INFO | 流水线结束 | total=259 ms steps=[二值化处理(257ms)]
+11:37:32.634 | INFO | 处理完成 | elapsed=259 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102132_70_4.jpg result=4096x3072
+11:37:32.634 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102132_70_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102131_69_4.jpg session=强制模板 blocks=1 rois=0
+11:37:33.406 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102132_70_4.jpg blocks=1 rois=0
+11:37:33.421 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:33.440 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:33.441 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:33.441 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102133_71_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:33.709 | INFO | 执行处理块 | name=二值化处理 elapsed=266 ms rois=0
+11:37:33.710 | INFO | 流水线结束 | total=267 ms steps=[二值化处理(266ms)]
+11:37:33.710 | INFO | 处理完成 | elapsed=267 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102133_71_4.jpg result=4096x3072
+11:37:33.711 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102133_71_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102132_70_4.jpg session=强制模板 blocks=1 rois=0
+11:37:34.501 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102133_71_4.jpg blocks=1 rois=0
+11:37:34.516 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:34.537 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:34.537 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:34.539 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102134_72_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:34.811 | INFO | 执行处理块 | name=二值化处理 elapsed=270 ms rois=0
+11:37:34.812 | INFO | 流水线结束 | total=272 ms steps=[二值化处理(270ms)]
+11:37:34.812 | INFO | 处理完成 | elapsed=272 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102134_72_4.jpg result=4096x3072
+11:37:34.813 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102134_72_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102133_71_4.jpg session=强制模板 blocks=1 rois=0
+11:37:35.584 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102134_72_4.jpg blocks=1 rois=0
+11:37:35.598 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:35.615 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:35.616 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:35.617 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102135_73_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:35.887 | INFO | 执行处理块 | name=二值化处理 elapsed=269 ms rois=0
+11:37:35.888 | INFO | 流水线结束 | total=271 ms steps=[二值化处理(269ms)]
+11:37:35.888 | INFO | 处理完成 | elapsed=271 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102135_73_4.jpg result=4096x3072
+11:37:35.889 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102135_73_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102134_72_4.jpg session=强制模板 blocks=1 rois=0
+11:37:36.660 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102135_73_4.jpg blocks=1 rois=0
+11:37:36.675 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:36.693 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:36.693 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:36.694 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102136_74_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:36.952 | INFO | 执行处理块 | name=二值化处理 elapsed=255 ms rois=0
+11:37:36.953 | INFO | 流水线结束 | total=257 ms steps=[二值化处理(255ms)]
+11:37:36.953 | INFO | 处理完成 | elapsed=257 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102136_74_4.jpg result=4096x3072
+11:37:36.954 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102136_74_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102135_73_4.jpg session=强制模板 blocks=1 rois=0
+11:37:37.728 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102136_74_4.jpg blocks=1 rois=0
+11:37:37.743 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:37.759 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:37.760 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:37.761 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102137_75_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:38.025 | INFO | 执行处理块 | name=二值化处理 elapsed=262 ms rois=0
+11:37:38.026 | INFO | 流水线结束 | total=264 ms steps=[二值化处理(262ms)]
+11:37:38.026 | INFO | 处理完成 | elapsed=264 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102137_75_4.jpg result=4096x3072
+11:37:38.027 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102137_75_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102136_74_4.jpg session=强制模板 blocks=1 rois=0
+11:37:38.783 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102137_75_4.jpg blocks=1 rois=0
+11:37:38.803 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:37:38.820 | INFO | 添加处理块 | name=二值化处理 index=0
+11:37:38.821 | INFO | 恢复会话 | blocks=1 rois=0
+11:37:38.821 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102138_76_4.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:37:39.075 | INFO | 执行处理块 | name=二值化处理 elapsed=252 ms rois=0
+11:37:39.076 | INFO | 流水线结束 | total=254 ms steps=[二值化处理(252ms)]
+11:37:39.077 | INFO | 处理完成 | elapsed=254 ms path=C:/Users/Admin/Desktop/图片/微信图片_20260730102138_76_4.jpg result=4096x3072
+11:37:39.077 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102138_76_4.jpg size=4096x3072 prev=C:/Users/Admin/Desktop/图片/微信图片_20260730102137_75_4.jpg session=强制模板 blocks=1 rois=0
+11:37:39.585 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102138_76_4.jpg blocks=1 rois=0
+11:37:39.588 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=32
+11:37:39.589 | INFO | 全部执行结束 | dir=C:/Users/Admin/Desktop/图片 ok=32 fail=0 canceled=否 templateBlocks=1 templateRois=0
+11:37:55.579 | INFO | 程序退出
+11:37:55.580 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/微信图片_20260730102138_76_4.jpg blocks=1 rois=0
+11:37:55.584 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=32
+11:37:55.587 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=32

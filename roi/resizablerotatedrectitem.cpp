@@ -2,8 +2,9 @@
  * @file resizablerotatedrectitem.cpp
  * @brief 旋转矩形 ROI：局部居中几何 + scene 位姿
  *
- * 缩放时对角固定一点；旋转手柄用 scene 坐标 atan2 算角度。
- * mouseRelease 后把 m_rect 重新居中到局部原点，pos 设为 scene 中心，便于与 RoiInfo 互转。
+ * 缩放时对角用场景坐标钉住（避免改 transformOrigin 导致对角漂移）；
+ * 旋转手柄用 scene 坐标 atan2 算角度。
+ * 缩放过程中始终保持 m_rect 居中于原点，pos = scene 中心。
  */
 
 #include "resizablerotatedrectitem.h"
@@ -11,6 +12,26 @@
 #include <QtMath>
 #include <QStyle>
 #include <QStyleOptionGraphicsItem>
+
+namespace {
+
+/** @brief 将局部向量按角度（度）旋到场景增量 */
+QPointF rotateLocalToScene(const QPointF &local, qreal angleDeg)
+{
+    const qreal rad = qDegreesToRadians(angleDeg);
+    const qreal c = qCos(rad);
+    const qreal s = qSin(rad);
+    return QPointF(c * local.x() - s * local.y(),
+                   s * local.x() + c * local.y());
+}
+
+/** @brief 将场景增量按角度（度）旋回局部 */
+QPointF rotateSceneToLocal(const QPointF &scene, qreal angleDeg)
+{
+    return rotateLocalToScene(scene, -angleDeg);
+}
+
+} // namespace
 
 /** @brief 按宽高创建局部居中矩形，开启可选中/可悬停 */
 ResizableRotatedRectItem::ResizableRotatedRectItem(qreal width, qreal height,
@@ -120,7 +141,7 @@ void ResizableRotatedRectItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     QGraphicsObject::hoverLeaveEvent(event);
 }
 
-/** @brief 按下记录手柄、原始 rect/角度；Move 交给基类 */
+/** @brief 按下记录手柄；角缩放钉住对角场景点；Move 交给基类 */
 void ResizableRotatedRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
@@ -128,10 +149,14 @@ void ResizableRotatedRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if (m_handleType != None) {
             emit geometryAboutToChange();                            // 改几何前通知 Widget 压栈
             m_resizing = true;
-            m_mousePressScenePos = event->scenePos();                // 场景按下点
-            m_mousePressItemPos = event->pos();                      // 局部按下点
-            m_originalRect = m_rect;                                 // 缩放基准
-            m_originalRotation = rotation();                         // 旋转基准（当前未用差分）
+            // 角缩放：对角用场景坐标钉住，避免仅改局部 rect / transformOrigin 时对角漂移
+            switch (m_handleType) {
+            case TopLeft:     m_fixedCornerScene = mapToScene(m_rect.bottomRight()); break;
+            case TopRight:    m_fixedCornerScene = mapToScene(m_rect.bottomLeft()); break;
+            case BottomLeft:  m_fixedCornerScene = mapToScene(m_rect.topRight()); break;
+            case BottomRight: m_fixedCornerScene = mapToScene(m_rect.topLeft()); break;
+            default:          m_fixedCornerScene = QPointF(); break;
+            }
             if (m_handleType == Move)
                 QGraphicsObject::mousePressEvent(event);             // 平移走基类
             event->accept();
@@ -141,7 +166,7 @@ void ResizableRotatedRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsObject::mousePressEvent(event);
 }
 
-/** @brief 旋转用 atan2；角缩放固定对角点，最小 MIN_SIZE */
+/** @brief 旋转用 atan2；角缩放钉住对角场景点并保持局部居中，最小 MIN_SIZE */
 void ResizableRotatedRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     if (!m_resizing || m_handleType == None || m_handleType == Move) {
@@ -159,49 +184,37 @@ void ResizableRotatedRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         return;
     }
 
-    QPointF fixed;                                                   // 对角固定点
-    switch (m_handleType) {
-    case TopLeft:     fixed = m_originalRect.bottomRight(); break;
-    case TopRight:    fixed = m_originalRect.bottomLeft(); break;
-    case BottomLeft:  fixed = m_originalRect.topRight(); break;
-    case BottomRight: fixed = m_originalRect.topLeft(); break;
-    default: break;
-    }
+    // 对角 → 鼠标：先旋到局部轴，再定宽高（允许越过对角翻转）
+    const QPointF deltaLocal = rotateSceneToLocal(
+        event->scenePos() - m_fixedCornerScene, rotation());
 
-    QRectF newRect = QRectF(fixed, event->pos()).normalized();       // 固定点↔鼠标构成新矩形
-    if (newRect.width() < MIN_SIZE) {
-        if (event->pos().x() < fixed.x())
-            newRect.setLeft(fixed.x() - MIN_SIZE);
-        else
-            newRect.setRight(fixed.x() + MIN_SIZE);
-    }
-    if (newRect.height() < MIN_SIZE) {
-        if (event->pos().y() < fixed.y())
-            newRect.setTop(fixed.y() - MIN_SIZE);
-        else
-            newRect.setBottom(fixed.y() + MIN_SIZE);
-    }
+    auto clampAxis = [](qreal v) -> qreal {
+        if (qAbs(v) < MIN_SIZE)
+            return (v < 0.0) ? -MIN_SIZE : MIN_SIZE;
+        return v;
+    };
+    const QPointF movingRel(clampAxis(deltaLocal.x()), clampAxis(deltaLocal.y()));
+    const qreal w = qAbs(movingRel.x());
+    const qreal h = qAbs(movingRel.y());
+
+    // 中心 = 钉住点与拖动角的中点（场景）
+    const QPointF centerScene =
+        m_fixedCornerScene + rotateLocalToScene(movingRel * 0.5, rotation());
 
     prepareGeometryChange();
-    m_rect = newRect;
-    setTransformOriginPoint(m_rect.center());                        // 缩放后仍绕中心转
+    m_rect = QRectF(-w / 2.0, -h / 2.0, w, h);                       // 始终局部居中
+    setTransformOriginPoint(m_rect.center());
+    setPos(centerScene);                                             // 钉住对角的场景位置
     update();
     event->accept();
 }
 
-/** @brief 松手：局部矩形重新居中，pos 对齐 scene 中心 */
+/** @brief 松手：结束缩放/旋转状态（几何已在 move 中保持居中） */
 void ResizableRotatedRectItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (m_resizing) {
         m_resizing = false;
         m_handleType = None;
-        const QPointF centerScene = mapToScene(m_rect.center());     // 缩放后可能偏移的中心
-        const qreal w = m_rect.width();
-        const qreal h = m_rect.height();
-        prepareGeometryChange();
-        m_rect = QRectF(-w / 2.0, -h / 2.0, w, h);                   // 拉回原点居中
-        setTransformOriginPoint(m_rect.center());
-        setPos(centerScene);                                         // scene pos = 中心，对齐 RoiInfo
         update();
     }
     QGraphicsObject::mouseReleaseEvent(event);

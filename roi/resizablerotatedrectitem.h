@@ -13,7 +13,7 @@
  *
  * 局部 m_rect 以原点为中心；scene 位置 = center，rotation = angleDeg。
  * Widget::getAllRoiInfo 读 mapToScene(localRect().center()) 与 rotation()。
- * 开始拖动/缩放/旋转时 emit geometryAboutToChange，供 Widget 压撤销栈。
+ * 角缩放时对角用场景坐标钉住；开始拖动/缩放/旋转时 emit geometryAboutToChange。
  */
 
 class ResizableRotatedRectItem : public QGraphicsObject
@@ -45,9 +45,9 @@ signals:
     void geometryAboutToChange();
 
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;    // 记录手柄与原始几何
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;    // 记录手柄与钉住点
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;     // 旋转或对角缩放
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;  // 松手后重新居中 m_rect
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;  // 结束拖动手柄状态
     void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;     // 悬停换光标
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;    // 离开恢复箭头
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override; // 选中刷新
@@ -60,10 +60,7 @@ private:
 
     QRectF m_rect;                                                     // 以原点为中心的局部矩形
     HandleType m_handleType = None;                                    // 当前拖动模式
-    QPointF m_mousePressScenePos;                                      // 按下时场景坐标
-    QPointF m_mousePressItemPos;                                       // 按下时局部坐标
-    QRectF m_originalRect;                                             // 按下时局部矩形快照
-    qreal m_originalRotation = 0.0;                                    // 按下时旋转角（度）
+    QPointF m_fixedCornerScene;                                        // 对角缩放时钉住的场景点
     bool m_resizing = false;                                           // 是否正在拖动手柄
 
     static constexpr qreal HANDLE_SIZE = 8.0;                          // 缩放手柄边长

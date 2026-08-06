@@ -1,0 +1,25 @@
+========== 会话开始 2026-08-03 15:58:58.756 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\bin\debug\logs\app_20260803_155858.log
+INFO | 应用 | 图像处理工具 1.0.0
+15:58:58.757 | INFO | 程序启动
+15:58:58.757 | INFO | 可执行文件 | D:/Qt/project/opencv/bin/debug/opencv.exe
+15:58:58.757 | INFO | 图像内存上限 | 不限制
+15:58:58.894 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_binarization_en.qm
+15:58:58.895 | INFO | 已加载外部插件 | block_binarization.dll → 二值化处理
+15:58:59.034 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_filter_en.qm
+15:58:59.034 | INFO | 已加载外部插件 | block_filter.dll → 滤波处理
+15:58:59.185 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_glcm_en.qm
+15:58:59.185 | INFO | 已加载外部插件 | block_glcm.dll → 灰度共生矩阵
+15:58:59.318 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_graytransform_en.qm
+15:58:59.319 | INFO | 已加载外部插件 | block_graytransform.dll → 灰度变换
+15:58:59.452 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_morphology_en.qm
+15:58:59.452 | INFO | 已加载外部插件 | block_morphology.dll → 形态学处理
+15:58:59.580 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_pseudocolor_en.qm
+15:58:59.581 | INFO | 已加载外部插件 | block_pseudocolor.dll → 伪彩色处理
+15:58:59.581 | INFO | 尝试插件目录 | D:/Qt/project/opencv/bin/debug/plugins → 6
+15:58:59.582 | INFO | 算法插件 | 目录=D:/Qt/project/opencv/bin/debug/plugins 加载=6
+15:59:00.766 | INFO | 会话已加载 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+15:59:01.358 | INFO | 切换主题 | light
+15:59:02.758 | INFO | 主窗口已显示
+15:59:40.851 | INFO | 程序退出
+15:59:40.861 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125

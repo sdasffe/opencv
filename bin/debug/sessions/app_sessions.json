@@ -1,10 +1,1715 @@
 {
     "sessions": {
+        "C:/Users/Admin/Desktop/图片/big_10000.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
         "C:/Users/Admin/Desktop/图片/input.png": {
             "blocks": [
                 {
                     "enabled": true,
-                    "lower": 147,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/result.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/result1.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/result2.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/壁纸.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102112_51_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102115_52_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102116_53_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102117_54_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102118_55_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102118_56_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102119_57_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102120_58_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102121_59_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102122_60_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102123_61_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102124_62_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102125_63_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102125_64_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102126_65_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102127_66_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102128_67_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102130_68_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102131_69_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102132_70_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102133_71_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102134_72_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102135_73_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102136_74_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102137_75_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 153,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 400.88059701492534,
+                    "shape": "rect",
+                    "w": 468.7484008528785,
+                    "x": 326.9040511727079,
+                    "y": 328.92857142857144
+                }
+            ]
+        },
+        "C:/Users/Admin/Desktop/图片/微信图片_20260730102138_76_4.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 124,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+                {
+                    "h": 1023.1407249466947,
+                    "shape": "rect",
+                    "w": 1326.81236673774,
+                    "x": 1622.414528955224,
+                    "y": 758.0957485714282
+                }
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 97,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 97,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/HappyFish.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 97,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 97,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 97,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/aero1.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 97,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/aero3.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 97,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/aloeGT.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/aloeL.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/aloeR.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/apple.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/baboon.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/basketball1.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/basketball2.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/blox.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/board.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/box.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/box_in_scene.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/building.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/butterfly.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/cards.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/chessboard.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/chicky_512.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/detect_blob.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/digits.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/ela_modified.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/ela_original.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/ellipses.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/fruits.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/gradient.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/graf1.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/graf3.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/home.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/imageTextN.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/imageTextR.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left01.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left02.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left03.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left04.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left05.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left06.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left07.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left08.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left09.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left11.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left12.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left13.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/left14.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/lena.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/lena_tmpl.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/leuvenA.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/leuvenB.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/licenseplate_motion.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/mask.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/messi5.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/ml.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/notes.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/opencv-logo-white.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/opencv-logo.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/orange.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/pca_test1.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/pic1.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/pic2.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/pic3.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/pic4.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/pic5.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/pic6.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right01.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right02.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right03.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right04.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right05.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right06.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right07.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right08.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right09.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right11.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right12.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right13.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/right14.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/rubberwhale1.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/rubberwhale2.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/smarties.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/squirrel_cls.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/starry_night.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/stuff.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/sudoku.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 97,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/templ.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/text_defocus.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/text_motion.jpg": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
+                    "name": "二值化处理",
+                    "upper": 255
+                }
+            ],
+            "rois": [
+            ]
+        },
+        "D:/opencv/opencv/sources/samples/data/tmpl.png": {
+            "blocks": [
+                {
+                    "enabled": true,
+                    "lower": 127,
                     "name": "二值化处理",
                     "upper": 255
                 }

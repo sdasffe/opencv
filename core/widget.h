@@ -124,6 +124,8 @@ private slots:
     void onRoiGeometryChanged();                           // 内部仍转到防抖重算逻辑
     /** 工具条「应用」：用户手动请求按当前链与 ROI 重算 */
     void on_btnApply_clicked();                            // 直接调用 onApplyProcessing()
+    /** 「全部执行」：用当前图链+ROI，按文件名顺序播放当前文件夹全部图片（不保存结果图） */
+    void on_btnRunAll_clicked();
     /** 「对比」按下：m_showOriginal=true，只改显示不重算 */
     void on_btnCompare_pressed();                          // 显示 processor->originalImage()
     /** 「对比」松开：恢复显示结果图 */
@@ -188,12 +190,15 @@ private:
     QPointF imageCenterInScene() const;                    // 无图时退回 (0,0) 或视口中心策略
     /**
      * 从路径加载图片：存旧会话 → setOriginalImage → 换底图 fitInView
-     * → 有会话则 restore，否则清空链与 ROI → 有块则重算
+     * → forceSession 非空则强制恢复该快照；否则有会话则 restore，否则清空链与 ROI → 有块则重算
      */
-    bool loadImageFromPath(const QString &filePath);       // 失败返回 false（坏图/读失败）
+    bool loadImageFromPath(const QString &filePath,
+                           const ImageSession *forceSession = nullptr); // 失败返回 false
+    /** 列出目录下常见图片后缀文件（按文件名排序） */
+    static QFileInfoList listImagesInFolder(const QString &dirPath);
 
     /** 若当前有路径：captureSessionSnapshot 写入 m_sessions[path] */
-    void saveCurrentSession();                             // 换图/退出前调用
+    void saveCurrentSession();                             // 换图/退出前调用；批量播放时可挂起落盘
     /** 按快照重建块列表与 ROI（挂起防抖）；不自动 reprocess */
     void restoreSession(const ImageSession &session);      // 调用方负责随后 onApplyProcessing
     /** 采集当前链 JSON 数组 + getAllRoiInfo() 成 ImageSession */
@@ -278,6 +283,8 @@ private:
     bool m_suspendSceneReprocess = false;                  // 换底图时禁止 changed→重算
     bool m_panning = false;                                // 正在平移画布
     bool m_loadingFromFolderList = false;                  // 缩略图点击加载中
+    bool m_batchPlaying = false;                           // 全部执行播放中
+    bool m_suspendSessionDiskSave = false;                 // 批量时只改内存会话，结束再落盘
     QList<RoiInfo> m_lastRoisForDebounce;                  // 上次已处理的 ROI，防重复重算
     QPoint m_panLastPos;                                   // 平移上一帧光标位置
     QString m_currentImagePath;                            // 当前图路径；空表示未打开

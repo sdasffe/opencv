@@ -172,6 +172,7 @@ QPushButton[role="accent"]:pressed {
 }
 
 QPushButton#btnCompare,
+QPushButton#btnRunAll,
 QPushButton#btnSave,
 QPushButton#btnExportChain,
 QPushButton#btnImportChain,
@@ -182,6 +183,7 @@ QPushButton[role="secondary"] {
 }
 
 QPushButton#btnCompare:hover,
+QPushButton#btnRunAll:hover,
 QPushButton#btnSave:hover,
 QPushButton#btnExportChain:hover,
 QPushButton#btnImportChain:hover,

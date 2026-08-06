@@ -52,6 +52,7 @@
  *   btnMenuFile/Roi/Settings  顶栏：文件 / ROI / 设置
  *   pushButton 系列槽：由菜单触发（打开图、文件夹、添加 ROI、删 ROI）
  *   btnApply       手动应用处理
+ *   btnRunAll      全部执行（当前链+ROI 播放文件夹）
  *   btnCompare     按住看原图，松开看结果
  *   btnSave        保存结果
  *   btnClearChain  清空工具箱（右侧）
@@ -113,6 +114,9 @@
 #include <QScreen>
 #include <QGuiApplication>
 #include <QtGlobal>
+#include <QProgressDialog>
+#include <QElapsedTimer>
+#include <QEventLoop>
 
 // ============================================================================
 // 构造 / 析构 / 初始化
@@ -572,21 +576,10 @@ void Widget::refreshChainHint()
 /**
  * @brief 从磁盘路径加载一张图，送入 processor + 画布
  *
- * 调用时机：
- *   - on_pushButton_clicked（打开文件）
- *   - on_pushButton_2_clicked（打开文件夹后取第一张）
- *
- * 步骤拆解：
- *   1. QImageReader 读文件（支持大图；失败返回 false）
- *   2. 清掉旧 ROI、退出对比模式（新图不应沿用旧选区）
- *   3. processor 记住原图（结果先等于原图）
- *   4. 场景里换一张底图，fitInView 适配窗口
- *   5. 若已有处理块 → 立刻按当前参数重跑；否则只刷新显示
- *   6. 更新信息栏和窗口标题
- *
+ * @param forceSession 非空时忽略该路径已有会话，强制恢复此快照（全部执行播放用）
  * @return true=加载成功；false=文件坏了或不是图
  */
-bool Widget::loadImageFromPath(const QString &filePath)
+bool Widget::loadImageFromPath(const QString &filePath, const ImageSession *forceSession)
 {
     // QImageReader：比 QPixmap(path) 更能给出错误原因，且受 setAllocationLimit 控制
     QImageReader reader(filePath);
@@ -635,17 +628,26 @@ bool Widget::loadImageFromPath(const QString &filePath)
     // m11() 是变换矩阵的 X 缩放分量；fitInView 后通常 < 1（缩略显示）
     m_viewScale = ui->graphicsView->transform().m11();
 
-    // ----- 按路径恢复或清空（新图 = 空链 + 无 ROI） -----
-    const bool restored = m_sessions.contains(filePath);
-    if (restored)
+    // ----- 按路径恢复 / 强制模板 / 清空 -----
+    bool restored = false;
+    if (forceSession) {
+        restoreSession(*forceSession);
+        restored = true;
+    } else if (m_sessions.contains(filePath)) {
         restoreSession(m_sessions.value(filePath));
-    else {
+        restored = true;
+    } else {
         clearAllBlocks(false);
         clearAllRoi();
     }
 
     m_currentImagePath = filePath;
-    m_undoStack.clear(); // 换图后撤销针对当前图
+    if (!m_batchPlaying)
+        m_undoStack.clear(); // 换图后撤销针对当前图；批量播放不打乱栈语义也可清空
+
+    // 强制模板时写入该路径会话，实现「链+ROI 铺到文件夹」
+    if (forceSession)
+        m_sessions.insert(filePath, *forceSession);
 
     if (!m_blockList.isEmpty())
         onApplyProcessing();
@@ -665,10 +667,22 @@ bool Widget::loadImageFromPath(const QString &filePath)
             .arg(pixmap.width())
             .arg(pixmap.height())
             .arg(prevPath.isEmpty() ? QStringLiteral("(无)") : prevPath)
-            .arg(restored ? QStringLiteral("恢复") : QStringLiteral("新建空会话"))
+            .arg(forceSession ? QStringLiteral("强制模板")
+                              : (restored ? QStringLiteral("恢复") : QStringLiteral("新建空会话")))
             .arg(m_blockList.size())
             .arg(getAllRoiInfo().size()));
     return true;
+}
+
+/** @brief 目录下常见图片后缀，按文件名排序 */
+QFileInfoList Widget::listImagesInFolder(const QString &dirPath)
+{
+    const QStringList filters = {
+        QStringLiteral("*.png"), QStringLiteral("*.jpg"), QStringLiteral("*.jpeg"),
+        QStringLiteral("*.bmp"), QStringLiteral("*.gif"), QStringLiteral("*.tif"),
+        QStringLiteral("*.tiff")
+    };
+    return QDir(dirPath).entryInfoList(filters, QDir::Files, QDir::Name);
 }
 
 // ============================================================================
@@ -704,13 +718,7 @@ void Widget::actOpenFolder()
     if (dir.isEmpty())
         return;                                                      // 用户取消
 
-    const QStringList filters = {                                    // 支持的图片后缀
-        QStringLiteral("*.png"), QStringLiteral("*.jpg"), QStringLiteral("*.jpeg"),
-        QStringLiteral("*.bmp"), QStringLiteral("*.gif"), QStringLiteral("*.tif"),
-        QStringLiteral("*.tiff")
-    };
-    QDir d(dir);
-    const QFileInfoList files = d.entryInfoList(filters, QDir::Files, QDir::Name); // 按文件名排序
+    const QFileInfoList files = listImagesInFolder(dir);
     if (files.isEmpty()) {
         AppLogger::warn(QStringLiteral("打开文件夹无图片"), dir);
         QMessageBox::information(this, tr("提示"),
@@ -740,7 +748,7 @@ void Widget::actOpenFolder()
  */
 void Widget::on_folderImageList_itemClicked(QListWidgetItem *item)
 {
-    if (!item || m_loadingFromFolderList)
+    if (!item || m_loadingFromFolderList || m_batchPlaying)
         return;
 
     const QString path = item->data(Qt::UserRole).toString();
@@ -965,10 +973,12 @@ void Widget::onHelpShortcuts()
            "• 滚轮 — 缩放画布（以鼠标为中心）\n"
            "• 中键 / 左键空白处拖动 — 平移画布\n"
            "• 按住「对比」— 查看原图，松开恢复结果\n"
+           "• 「全部执行」— 用当前图的链与 ROI，按文件名顺序播放本文件夹全部图片\n"
            "\n"
            "ROI\n"
            "• 可添加多个选区，算法在并集区域内生效\n"
            "• 打开文件夹后，每张图各自记住处理链与 ROI\n"
+           "• 「全部执行」会把当前链与 ROI 铺到文件夹内各图会话（不保存结果图）\n"
            "\n"
            "处理链\n"
            "• 从左侧拖入算法到右侧工具箱\n"
@@ -1508,7 +1518,8 @@ void Widget::saveCurrentSession()
                         .arg(m_currentImagePath)
                         .arg(session.chain.size())
                         .arg(session.rois.size()));
-    saveSessionsToDisk();
+    if (!m_suspendSessionDiskSave)
+        saveSessionsToDisk();
 }
 
 /**
@@ -1741,6 +1752,104 @@ void Widget::onApplyProcessing()
 void Widget::on_btnApply_clicked()
 {
     onApplyProcessing();
+}
+
+/**
+ * @brief 全部执行：用当前图的处理链+ROI，按文件名顺序播放当前文件夹全部图片
+ *
+ * 结果图不落盘；链与 ROI 写入各图会话（相当于铺到整个文件夹）。
+ * 播放间隔约 500ms，可取消；结束后弹成功/失败统计。
+ */
+void Widget::on_btnRunAll_clicked()
+{
+    if (m_batchPlaying)
+        return;
+    if (m_currentImagePath.isEmpty() || !m_processor->hasImage()) {
+        QMessageBox::information(this, tr("提示"),
+                                 tr("请先打开一张图片"));
+        return;
+    }
+
+    const ImageSession templateSession = captureSessionSnapshot();
+    const QString dirPath = QFileInfo(m_currentImagePath).absolutePath();
+    const QFileInfoList files = listImagesInFolder(dirPath);
+    if (files.isEmpty()) {
+        QMessageBox::information(this, tr("提示"),
+                                 tr("当前图片所在文件夹下没有找到图片文件"));
+        return;
+    }
+
+    fillFolderBrowser(dirPath, files);
+
+    QProgressDialog progress(tr("正在全部执行…"), tr("取消"), 0, files.size(), this);
+    progress.setWindowTitle(tr("全部执行"));
+    progress.setWindowModality(Qt::WindowModal);
+    progress.setMinimumDuration(0);
+    progress.setValue(0);
+
+    m_batchPlaying = true;
+    m_suspendSessionDiskSave = true;
+    m_undoStack.clear();
+
+    int okCount = 0;
+    int failCount = 0;
+    bool canceled = false;
+    static constexpr int kDwellMs = 500;
+
+    for (int i = 0; i < files.size(); ++i) {
+        progress.setValue(i);
+        progress.setLabelText(tr("正在处理 %1 / %2\n%3")
+                                  .arg(i + 1)
+                                  .arg(files.size())
+                                  .arg(files.at(i).fileName()));
+        QApplication::processEvents();
+        if (progress.wasCanceled()) {
+            canceled = true;
+            break;
+        }
+
+        const QString path = files.at(i).absoluteFilePath();
+        if (!loadImageFromPath(path, &templateSession)) {
+            ++failCount;
+            AppLogger::warn(QStringLiteral("全部执行跳过"), path);
+            continue;
+        }
+        ++okCount;
+        selectFolderThumbnail(path);
+
+        // 停留片刻以便「播放」观感；期间仍可点取消
+        QElapsedTimer dwell;
+        dwell.start();
+        while (dwell.elapsed() < kDwellMs) {
+            QApplication::processEvents(QEventLoop::AllEvents, 50);
+            if (progress.wasCanceled()) {
+                canceled = true;
+                break;
+            }
+        }
+        if (canceled)
+            break;
+    }
+
+    progress.setValue(canceled ? progress.value() : files.size());
+    saveCurrentSession();
+    m_suspendSessionDiskSave = false;
+    saveSessionsToDisk();
+    m_batchPlaying = false;
+
+    AppLogger::info(QStringLiteral("全部执行结束"),
+                    QStringLiteral("dir=%1 ok=%2 fail=%3 canceled=%4 templateBlocks=%5 templateRois=%6")
+                        .arg(dirPath)
+                        .arg(okCount)
+                        .arg(failCount)
+                        .arg(canceled ? QStringLiteral("是") : QStringLiteral("否"))
+                        .arg(templateSession.chain.size())
+                        .arg(templateSession.rois.size()));
+
+    QString msg = tr("完成：成功 %1 张，失败 %2 张。").arg(okCount).arg(failCount);
+    if (canceled)
+        msg += tr("\n（已取消，停留在当前张）");
+    QMessageBox::information(this, tr("全部执行"), msg);
 }
 
 /**

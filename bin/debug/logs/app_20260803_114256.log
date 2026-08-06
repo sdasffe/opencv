@@ -1,0 +1,1059 @@
+========== 会话开始 2026-08-03 11:42:56.040 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\bin\debug\logs\app_20260803_114256.log
+INFO | 应用 | 图像处理工具 1.0.0
+11:42:56.040 | INFO | 程序启动
+11:42:56.040 | INFO | 可执行文件 | D:/Qt/project/opencv/bin/debug/opencv.exe
+11:42:56.040 | INFO | 图像内存上限 | 不限制
+11:42:56.047 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_binarization_en.qm
+11:42:56.047 | INFO | 已加载外部插件 | block_binarization.dll → 二值化处理
+11:42:56.049 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_filter_en.qm
+11:42:56.050 | INFO | 已加载外部插件 | block_filter.dll → 滤波处理
+11:42:56.053 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_glcm_en.qm
+11:42:56.053 | INFO | 已加载外部插件 | block_glcm.dll → 灰度共生矩阵
+11:42:56.056 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_graytransform_en.qm
+11:42:56.056 | INFO | 已加载外部插件 | block_graytransform.dll → 灰度变换
+11:42:56.059 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_morphology_en.qm
+11:42:56.060 | INFO | 已加载外部插件 | block_morphology.dll → 形态学处理
+11:42:56.062 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_pseudocolor_en.qm
+11:42:56.062 | INFO | 已加载外部插件 | block_pseudocolor.dll → 伪彩色处理
+11:42:56.063 | INFO | 尝试插件目录 | D:/Qt/project/opencv/bin/debug/plugins → 6
+11:42:56.063 | INFO | 算法插件 | 目录=D:/Qt/project/opencv/bin/debug/plugins 加载=6
+11:42:56.142 | INFO | 会话已加载 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=32
+11:42:56.600 | INFO | 切换主题 | light
+11:42:56.682 | INFO | 主窗口已显示
+11:43:21.877 | INFO | 打开文件夹 | dir=D:/opencv/opencv/sources/samples/data count=93
+11:43:22.451 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+11:43:22.452 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg size=640x480 prev=(无) session=新建空会话 blocks=0 rois=0
+11:43:27.636 | INFO | 撤销快照 | reason=添加处理块 depth=1
+11:43:27.636 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:27.647 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+11:43:27.648 | INFO | 流水线结束 | total=10 ms steps=[二值化处理(10ms)]
+11:43:27.648 | INFO | 处理完成 | elapsed=10 ms path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg result=640x480
+11:43:27.683 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:29.935 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg blocks=1 rois=0
+11:43:29.937 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:29.952 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:29.953 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:29.953 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:29.960 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:29.961 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:43:29.962 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg result=640x480
+11:43:29.962 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg session=强制模板 blocks=1 rois=0
+11:43:30.475 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg blocks=1 rois=0
+11:43:30.478 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:30.493 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:30.493 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:30.494 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:30.501 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:30.501 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:30.502 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg result=640x480
+11:43:30.502 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg session=强制模板 blocks=1 rois=0
+11:43:31.008 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg blocks=1 rois=0
+11:43:31.010 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:31.025 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:31.026 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:31.026 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/HappyFish.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:31.029 | INFO | 执行处理块 | name=二值化处理 elapsed=2 ms rois=0
+11:43:31.029 | INFO | 流水线结束 | total=2 ms steps=[二值化处理(2ms)]
+11:43:31.030 | INFO | 处理完成 | elapsed=2 ms path=D:/opencv/opencv/sources/samples/data/HappyFish.jpg result=259x194
+11:43:31.031 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/HappyFish.jpg size=259x194 prev=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg session=强制模板 blocks=1 rois=0
+11:43:31.536 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/HappyFish.jpg blocks=1 rois=0
+11:43:31.537 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:31.554 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:31.555 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:31.556 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:31.560 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:43:31.560 | INFO | 流水线结束 | total=3 ms steps=[二值化处理(3ms)]
+11:43:31.561 | INFO | 处理完成 | elapsed=3 ms path=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg result=320x240
+11:43:31.562 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg size=320x240 prev=D:/opencv/opencv/sources/samples/data/HappyFish.jpg session=强制模板 blocks=1 rois=0
+11:43:32.067 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg blocks=1 rois=0
+11:43:32.069 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:32.085 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:32.085 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:32.086 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:32.089 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:43:32.090 | INFO | 流水线结束 | total=3 ms steps=[二值化处理(3ms)]
+11:43:32.090 | INFO | 处理完成 | elapsed=3 ms path=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg result=320x240
+11:43:32.091 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg size=320x240 prev=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg session=强制模板 blocks=1 rois=0
+11:43:32.601 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg blocks=1 rois=0
+11:43:32.602 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:32.618 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:32.619 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:32.619 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aero1.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:32.627 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:32.627 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:43:32.628 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/aero1.jpg result=640x480
+11:43:32.629 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aero1.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg session=强制模板 blocks=1 rois=0
+11:43:33.139 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aero1.jpg blocks=1 rois=0
+11:43:33.140 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:33.156 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:33.157 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:33.157 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:33.163 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:33.164 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:33.164 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/aero3.jpg result=640x480
+11:43:33.165 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/aero1.jpg session=强制模板 blocks=1 rois=0
+11:43:33.680 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg blocks=1 rois=0
+11:43:33.683 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:33.698 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:33.699 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:33.699 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:33.727 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=0
+11:43:33.728 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+11:43:33.728 | INFO | 处理完成 | elapsed=27 ms path=D:/opencv/opencv/sources/samples/data/aloeGT.png result=1282x1110
+11:43:33.729 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png size=1282x1110 prev=D:/opencv/opencv/sources/samples/data/aero3.jpg session=强制模板 blocks=1 rois=0
+11:43:34.259 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png blocks=1 rois=0
+11:43:34.262 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:34.278 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:34.279 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:34.279 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:34.309 | INFO | 执行处理块 | name=二值化处理 elapsed=28 ms rois=0
+11:43:34.309 | INFO | 流水线结束 | total=29 ms steps=[二值化处理(28ms)]
+11:43:34.309 | INFO | 处理完成 | elapsed=29 ms path=D:/opencv/opencv/sources/samples/data/aloeL.jpg result=1282x1110
+11:43:34.310 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg size=1282x1110 prev=D:/opencv/opencv/sources/samples/data/aloeGT.png session=强制模板 blocks=1 rois=0
+11:43:34.842 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg blocks=1 rois=0
+11:43:34.845 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:34.862 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:34.862 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:34.863 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aloeR.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:34.890 | INFO | 执行处理块 | name=二值化处理 elapsed=27 ms rois=0
+11:43:34.891 | INFO | 流水线结束 | total=28 ms steps=[二值化处理(27ms)]
+11:43:34.892 | INFO | 处理完成 | elapsed=28 ms path=D:/opencv/opencv/sources/samples/data/aloeR.jpg result=1282x1110
+11:43:34.892 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aloeR.jpg size=1282x1110 prev=D:/opencv/opencv/sources/samples/data/aloeL.jpg session=强制模板 blocks=1 rois=0
+11:43:35.402 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aloeR.jpg blocks=1 rois=0
+11:43:35.406 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:35.421 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:35.422 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:35.422 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/apple.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:35.428 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:43:35.428 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(4ms)]
+11:43:35.429 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/apple.jpg result=512x512
+11:43:35.429 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/apple.jpg size=512x512 prev=D:/opencv/opencv/sources/samples/data/aloeR.jpg session=强制模板 blocks=1 rois=0
+11:43:35.942 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/apple.jpg blocks=1 rois=0
+11:43:35.944 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:35.959 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:35.959 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:35.960 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/baboon.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:35.966 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:35.966 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:35.967 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/baboon.jpg result=512x512
+11:43:35.967 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/baboon.jpg size=512x512 prev=D:/opencv/opencv/sources/samples/data/apple.jpg session=强制模板 blocks=1 rois=0
+11:43:36.479 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/baboon.jpg blocks=1 rois=0
+11:43:36.481 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:36.496 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:36.497 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:36.497 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/basketball1.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:36.503 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:36.504 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:36.504 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/basketball1.png result=640x480
+11:43:36.505 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/basketball1.png size=640x480 prev=D:/opencv/opencv/sources/samples/data/baboon.jpg session=强制模板 blocks=1 rois=0
+11:43:37.016 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/basketball1.png blocks=1 rois=0
+11:43:37.019 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:37.035 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:37.036 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:37.036 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/basketball2.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:37.043 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:37.044 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(6ms)]
+11:43:37.044 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/basketball2.png result=640x480
+11:43:37.045 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/basketball2.png size=640x480 prev=D:/opencv/opencv/sources/samples/data/basketball1.png session=强制模板 blocks=1 rois=0
+11:43:37.550 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/basketball2.png blocks=1 rois=0
+11:43:37.551 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:37.568 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:37.568 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:37.569 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/blox.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:37.573 | INFO | 执行处理块 | name=二值化处理 elapsed=2 ms rois=0
+11:43:37.573 | INFO | 流水线结束 | total=3 ms steps=[二值化处理(2ms)]
+11:43:37.573 | INFO | 处理完成 | elapsed=3 ms path=D:/opencv/opencv/sources/samples/data/blox.jpg result=256x256
+11:43:37.574 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/blox.jpg size=256x256 prev=D:/opencv/opencv/sources/samples/data/basketball2.png session=强制模板 blocks=1 rois=0
+11:43:38.086 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/blox.jpg blocks=1 rois=0
+11:43:38.087 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:38.103 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:38.103 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:38.104 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/board.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:38.111 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:38.111 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:38.112 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/board.jpg result=640x480
+11:43:38.113 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/board.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/blox.jpg session=强制模板 blocks=1 rois=0
+11:43:38.619 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/board.jpg blocks=1 rois=0
+11:43:38.620 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:38.636 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:38.637 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:38.637 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/box.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:38.640 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:43:38.641 | INFO | 流水线结束 | total=3 ms steps=[二值化处理(3ms)]
+11:43:38.641 | INFO | 处理完成 | elapsed=3 ms path=D:/opencv/opencv/sources/samples/data/box.png result=324x223
+11:43:38.642 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/box.png size=324x223 prev=D:/opencv/opencv/sources/samples/data/board.jpg session=强制模板 blocks=1 rois=0
+11:43:39.150 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/box.png blocks=1 rois=0
+11:43:39.152 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:39.169 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:39.169 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:39.170 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/box_in_scene.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:39.174 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:43:39.174 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(4ms)]
+11:43:39.175 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/box_in_scene.png result=512x384
+11:43:39.176 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/box_in_scene.png size=512x384 prev=D:/opencv/opencv/sources/samples/data/box.png session=强制模板 blocks=1 rois=0
+11:43:39.689 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/box_in_scene.png blocks=1 rois=0
+11:43:39.692 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:39.707 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:39.708 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:39.708 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/building.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:39.719 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+11:43:39.719 | INFO | 流水线结束 | total=11 ms steps=[二值化处理(10ms)]
+11:43:39.720 | INFO | 处理完成 | elapsed=11 ms path=D:/opencv/opencv/sources/samples/data/building.jpg result=868x600
+11:43:39.721 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/building.jpg size=868x600 prev=D:/opencv/opencv/sources/samples/data/box_in_scene.png session=强制模板 blocks=1 rois=0
+11:43:40.229 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/building.jpg blocks=1 rois=0
+11:43:40.232 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:40.247 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:40.247 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:40.248 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/butterfly.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:40.253 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:43:40.253 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(4ms)]
+11:43:40.254 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/butterfly.jpg result=493x356
+11:43:40.254 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/butterfly.jpg size=493x356 prev=D:/opencv/opencv/sources/samples/data/building.jpg session=强制模板 blocks=1 rois=0
+11:43:40.768 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/butterfly.jpg blocks=1 rois=0
+11:43:40.770 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:40.787 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:40.787 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:40.788 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/cards.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:40.794 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:40.794 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:40.795 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/cards.png result=640x480
+11:43:40.796 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/cards.png size=640x480 prev=D:/opencv/opencv/sources/samples/data/butterfly.jpg session=强制模板 blocks=1 rois=0
+11:43:41.348 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/cards.png blocks=1 rois=0
+11:43:41.349 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:41.365 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:41.366 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:41.366 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/chessboard.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:41.411 | INFO | 执行处理块 | name=二值化处理 elapsed=43 ms rois=0
+11:43:41.412 | INFO | 流水线结束 | total=44 ms steps=[二值化处理(43ms)]
+11:43:41.412 | INFO | 处理完成 | elapsed=44 ms path=D:/opencv/opencv/sources/samples/data/chessboard.png result=1754x1240
+11:43:41.413 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/chessboard.png size=1754x1240 prev=D:/opencv/opencv/sources/samples/data/cards.png session=强制模板 blocks=1 rois=0
+11:43:41.933 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/chessboard.png blocks=1 rois=0
+11:43:41.938 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:41.954 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:41.955 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:41.955 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/chicky_512.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:41.962 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:41.962 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(5ms)]
+11:43:41.963 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/chicky_512.png result=512x512
+11:43:41.964 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/chicky_512.png size=512x512 prev=D:/opencv/opencv/sources/samples/data/chessboard.png session=强制模板 blocks=1 rois=0
+11:43:42.475 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/chicky_512.png blocks=1 rois=0
+11:43:42.477 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:42.492 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:42.493 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:42.493 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/detect_blob.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:42.503 | INFO | 执行处理块 | name=二值化处理 elapsed=8 ms rois=0
+11:43:42.504 | INFO | 流水线结束 | total=9 ms steps=[二值化处理(8ms)]
+11:43:42.504 | INFO | 处理完成 | elapsed=9 ms path=D:/opencv/opencv/sources/samples/data/detect_blob.png result=541x760
+11:43:42.505 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/detect_blob.png size=541x760 prev=D:/opencv/opencv/sources/samples/data/chicky_512.png session=强制模板 blocks=1 rois=0
+11:43:43.027 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/detect_blob.png blocks=1 rois=0
+11:43:43.030 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:43.046 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:43.047 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:43.047 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/digits.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:43.086 | INFO | 执行处理块 | name=二值化处理 elapsed=37 ms rois=0
+11:43:43.087 | INFO | 流水线结束 | total=38 ms steps=[二值化处理(37ms)]
+11:43:43.087 | INFO | 处理完成 | elapsed=38 ms path=D:/opencv/opencv/sources/samples/data/digits.png result=2000x1000
+11:43:43.088 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/digits.png size=2000x1000 prev=D:/opencv/opencv/sources/samples/data/detect_blob.png session=强制模板 blocks=1 rois=0
+11:43:43.620 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/digits.png blocks=1 rois=0
+11:43:43.623 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:43.639 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:43.640 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:43.640 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/ela_modified.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:43.653 | INFO | 执行处理块 | name=二值化处理 elapsed=11 ms rois=0
+11:43:43.654 | INFO | 流水线结束 | total=12 ms steps=[二值化处理(11ms)]
+11:43:43.655 | INFO | 处理完成 | elapsed=12 ms path=D:/opencv/opencv/sources/samples/data/ela_modified.jpg result=897x708
+11:43:43.655 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/ela_modified.jpg size=897x708 prev=D:/opencv/opencv/sources/samples/data/digits.png session=强制模板 blocks=1 rois=0
+11:43:44.189 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/ela_modified.jpg blocks=1 rois=0
+11:43:44.192 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:44.208 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:44.208 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:44.209 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/ela_original.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:44.223 | INFO | 执行处理块 | name=二值化处理 elapsed=13 ms rois=0
+11:43:44.224 | INFO | 流水线结束 | total=14 ms steps=[二值化处理(13ms)]
+11:43:44.225 | INFO | 处理完成 | elapsed=14 ms path=D:/opencv/opencv/sources/samples/data/ela_original.jpg result=902x770
+11:43:44.225 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/ela_original.jpg size=902x770 prev=D:/opencv/opencv/sources/samples/data/ela_modified.jpg session=强制模板 blocks=1 rois=0
+11:43:44.733 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/ela_original.jpg blocks=1 rois=0
+11:43:44.736 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:44.752 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:44.753 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:44.753 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/ellipses.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:44.758 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:43:44.759 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(4ms)]
+11:43:44.759 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/ellipses.jpg result=400x533
+11:43:44.760 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/ellipses.jpg size=400x533 prev=D:/opencv/opencv/sources/samples/data/ela_original.jpg session=强制模板 blocks=1 rois=0
+11:43:45.270 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/ellipses.jpg blocks=1 rois=0
+11:43:45.273 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:45.289 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:45.291 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:45.291 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/fruits.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:45.296 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:45.297 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(5ms)]
+11:43:45.297 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/fruits.jpg result=512x480
+11:43:45.298 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/fruits.jpg size=512x480 prev=D:/opencv/opencv/sources/samples/data/ellipses.jpg session=强制模板 blocks=1 rois=0
+11:43:45.806 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/fruits.jpg blocks=1 rois=0
+11:43:45.807 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:45.824 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:45.825 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:45.825 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/gradient.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:45.830 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:43:45.830 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(3ms)]
+11:43:45.831 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/gradient.png result=300x300
+11:43:45.832 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/gradient.png size=300x300 prev=D:/opencv/opencv/sources/samples/data/fruits.jpg session=强制模板 blocks=1 rois=0
+11:43:46.367 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/gradient.png blocks=1 rois=0
+11:43:46.369 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:46.385 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:46.386 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:46.386 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/graf1.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:46.397 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+11:43:46.397 | INFO | 流水线结束 | total=11 ms steps=[二值化处理(10ms)]
+11:43:46.398 | INFO | 处理完成 | elapsed=11 ms path=D:/opencv/opencv/sources/samples/data/graf1.png result=800x640
+11:43:46.399 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/graf1.png size=800x640 prev=D:/opencv/opencv/sources/samples/data/gradient.png session=强制模板 blocks=1 rois=0
+11:43:46.937 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/graf1.png blocks=1 rois=0
+11:43:46.940 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:46.956 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:46.957 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:46.957 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/graf3.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:46.968 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+11:43:46.969 | INFO | 流水线结束 | total=11 ms steps=[二值化处理(10ms)]
+11:43:46.969 | INFO | 处理完成 | elapsed=11 ms path=D:/opencv/opencv/sources/samples/data/graf3.png result=800x640
+11:43:46.970 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/graf3.png size=800x640 prev=D:/opencv/opencv/sources/samples/data/graf1.png session=强制模板 blocks=1 rois=0
+11:43:47.478 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/graf3.png blocks=1 rois=0
+11:43:47.481 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:47.499 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:47.499 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:47.499 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/home.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:47.505 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:47.506 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:47.506 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/home.jpg result=512x384
+11:43:47.508 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/home.jpg size=512x384 prev=D:/opencv/opencv/sources/samples/data/graf3.png session=强制模板 blocks=1 rois=0
+11:43:48.014 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/home.jpg blocks=1 rois=0
+11:43:48.016 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:48.033 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:48.033 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:48.034 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/imageTextN.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:48.038 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:43:48.038 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(4ms)]
+11:43:48.039 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/imageTextN.png result=556x257
+11:43:48.039 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/imageTextN.png size=556x257 prev=D:/opencv/opencv/sources/samples/data/home.jpg session=强制模板 blocks=1 rois=0
+11:43:48.546 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/imageTextN.png blocks=1 rois=0
+11:43:48.547 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:48.564 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:48.564 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:48.565 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/imageTextR.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:48.571 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:43:48.571 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(4ms)]
+11:43:48.572 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/imageTextR.png result=556x323
+11:43:48.572 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/imageTextR.png size=556x323 prev=D:/opencv/opencv/sources/samples/data/imageTextN.png session=强制模板 blocks=1 rois=0
+11:43:49.082 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/imageTextR.png blocks=1 rois=0
+11:43:49.084 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:49.100 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:49.101 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:49.101 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:49.108 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:49.108 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:49.109 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left.jpg result=612x459
+11:43:49.109 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left.jpg size=612x459 prev=D:/opencv/opencv/sources/samples/data/imageTextR.png session=强制模板 blocks=1 rois=0
+11:43:49.617 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left.jpg blocks=1 rois=0
+11:43:49.619 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:49.635 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:49.635 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:49.636 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left01.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:49.643 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:49.644 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:43:49.645 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/left01.jpg result=640x480
+11:43:49.645 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left01.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left.jpg session=强制模板 blocks=1 rois=0
+11:43:50.153 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left01.jpg blocks=1 rois=0
+11:43:50.155 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:50.171 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:50.172 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:50.172 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left02.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:50.179 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:50.179 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:50.179 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left02.jpg result=640x480
+11:43:50.180 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left02.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left01.jpg session=强制模板 blocks=1 rois=0
+11:43:50.688 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left02.jpg blocks=1 rois=0
+11:43:50.689 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:50.706 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:50.707 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:50.707 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left03.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:50.714 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:50.714 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:50.715 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left03.jpg result=640x480
+11:43:50.716 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left03.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left02.jpg session=强制模板 blocks=1 rois=0
+11:43:51.223 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left03.jpg blocks=1 rois=0
+11:43:51.224 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:51.241 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:51.242 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:51.242 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left04.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:51.249 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:51.250 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(6ms)]
+11:43:51.250 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left04.jpg result=640x480
+11:43:51.251 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left04.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left03.jpg session=强制模板 blocks=1 rois=0
+11:43:51.758 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left04.jpg blocks=1 rois=0
+11:43:51.760 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:51.778 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:51.778 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:51.779 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left05.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:51.784 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:51.785 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:51.785 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left05.jpg result=640x480
+11:43:51.786 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left05.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left04.jpg session=强制模板 blocks=1 rois=0
+11:43:52.294 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left05.jpg blocks=1 rois=0
+11:43:52.297 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:52.313 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:52.314 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:52.314 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left06.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:52.320 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:52.320 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:52.321 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left06.jpg result=640x480
+11:43:52.322 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left06.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left05.jpg session=强制模板 blocks=1 rois=0
+11:43:52.829 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left06.jpg blocks=1 rois=0
+11:43:52.831 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:52.847 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:52.848 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:52.848 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left07.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:52.856 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:52.856 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(6ms)]
+11:43:52.856 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left07.jpg result=640x480
+11:43:52.857 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left07.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left06.jpg session=强制模板 blocks=1 rois=0
+11:43:53.365 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left07.jpg blocks=1 rois=0
+11:43:53.367 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:53.383 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:53.384 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:53.384 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left08.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:53.391 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:53.392 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:53.392 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left08.jpg result=640x480
+11:43:53.393 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left08.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left07.jpg session=强制模板 blocks=1 rois=0
+11:43:53.900 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left08.jpg blocks=1 rois=0
+11:43:53.901 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:53.918 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:53.919 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:53.919 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left09.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:53.926 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:53.926 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(6ms)]
+11:43:53.927 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left09.jpg result=640x480
+11:43:53.928 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left09.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left08.jpg session=强制模板 blocks=1 rois=0
+11:43:54.435 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left09.jpg blocks=1 rois=0
+11:43:54.437 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:54.453 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:54.453 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:54.454 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left11.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:54.460 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:54.461 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:54.461 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left11.jpg result=640x480
+11:43:54.462 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left11.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left09.jpg session=强制模板 blocks=1 rois=0
+11:43:54.969 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left11.jpg blocks=1 rois=0
+11:43:54.971 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:54.988 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:54.989 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:54.989 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left12.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:54.996 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:54.996 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:43:54.997 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/left12.jpg result=640x480
+11:43:54.998 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left12.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left11.jpg session=强制模板 blocks=1 rois=0
+11:43:55.505 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left12.jpg blocks=1 rois=0
+11:43:55.507 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:55.524 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:55.526 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:55.526 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left13.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:55.534 | INFO | 执行处理块 | name=二值化处理 elapsed=7 ms rois=0
+11:43:55.534 | INFO | 流水线结束 | total=8 ms steps=[二值化处理(7ms)]
+11:43:55.535 | INFO | 处理完成 | elapsed=8 ms path=D:/opencv/opencv/sources/samples/data/left13.jpg result=640x480
+11:43:55.536 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left13.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left12.jpg session=强制模板 blocks=1 rois=0
+11:43:56.043 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left13.jpg blocks=1 rois=0
+11:43:56.045 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:56.061 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:56.062 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:56.062 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/left14.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:56.068 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:56.070 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:56.070 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/left14.jpg result=640x480
+11:43:56.071 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/left14.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/left13.jpg session=强制模板 blocks=1 rois=0
+11:43:56.582 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/left14.jpg blocks=1 rois=0
+11:43:56.584 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:56.601 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:56.602 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:56.602 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/lena.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:56.609 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:56.609 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:56.609 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/lena.jpg result=512x512
+11:43:56.610 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/lena.jpg size=512x512 prev=D:/opencv/opencv/sources/samples/data/left14.jpg session=强制模板 blocks=1 rois=0
+11:43:57.125 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/lena.jpg blocks=1 rois=0
+11:43:57.128 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:57.143 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:57.144 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:57.144 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/lena_tmpl.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:57.151 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:57.151 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(5ms)]
+11:43:57.151 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/lena_tmpl.jpg result=512x512
+11:43:57.152 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/lena_tmpl.jpg size=512x512 prev=D:/opencv/opencv/sources/samples/data/lena.jpg session=强制模板 blocks=1 rois=0
+11:43:57.669 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/lena_tmpl.jpg blocks=1 rois=0
+11:43:57.671 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:57.687 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:57.688 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:57.688 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/leuvenA.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:57.698 | INFO | 执行处理块 | name=二值化处理 elapsed=9 ms rois=0
+11:43:57.699 | INFO | 流水线结束 | total=10 ms steps=[二值化处理(9ms)]
+11:43:57.699 | INFO | 处理完成 | elapsed=10 ms path=D:/opencv/opencv/sources/samples/data/leuvenA.jpg result=751x563
+11:43:57.700 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/leuvenA.jpg size=751x563 prev=D:/opencv/opencv/sources/samples/data/lena_tmpl.jpg session=强制模板 blocks=1 rois=0
+11:43:58.216 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/leuvenA.jpg blocks=1 rois=0
+11:43:58.220 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:58.236 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:58.236 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:58.237 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/leuvenB.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:58.246 | INFO | 执行处理块 | name=二值化处理 elapsed=8 ms rois=0
+11:43:58.247 | INFO | 流水线结束 | total=9 ms steps=[二值化处理(8ms)]
+11:43:58.247 | INFO | 处理完成 | elapsed=9 ms path=D:/opencv/opencv/sources/samples/data/leuvenB.jpg result=751x563
+11:43:58.248 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/leuvenB.jpg size=751x563 prev=D:/opencv/opencv/sources/samples/data/leuvenA.jpg session=强制模板 blocks=1 rois=0
+11:43:58.758 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/leuvenB.jpg blocks=1 rois=0
+11:43:58.760 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:58.777 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:58.778 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:58.778 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/licenseplate_motion.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:58.785 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:43:58.786 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:43:58.786 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/licenseplate_motion.jpg result=600x482
+11:43:58.787 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/licenseplate_motion.jpg size=600x482 prev=D:/opencv/opencv/sources/samples/data/leuvenB.jpg session=强制模板 blocks=1 rois=0
+11:43:59.293 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/licenseplate_motion.jpg blocks=1 rois=0
+11:43:59.295 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:59.311 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:59.311 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:59.312 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/mask.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:59.313 | INFO | 执行处理块 | name=二值化处理 elapsed=0 ms rois=0
+11:43:59.314 | INFO | 流水线结束 | total=1 ms steps=[二值化处理(0ms)]
+11:43:59.314 | INFO | 处理完成 | elapsed=1 ms path=D:/opencv/opencv/sources/samples/data/mask.png result=128x128
+11:43:59.315 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/mask.png size=128x128 prev=D:/opencv/opencv/sources/samples/data/licenseplate_motion.jpg session=强制模板 blocks=1 rois=0
+11:43:59.827 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/mask.png blocks=1 rois=0
+11:43:59.829 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:43:59.846 | INFO | 添加处理块 | name=二值化处理 index=0
+11:43:59.847 | INFO | 恢复会话 | blocks=1 rois=0
+11:43:59.848 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/messi5.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:43:59.854 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:43:59.855 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:43:59.855 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/messi5.jpg result=548x342
+11:43:59.856 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/messi5.jpg size=548x342 prev=D:/opencv/opencv/sources/samples/data/mask.png session=强制模板 blocks=1 rois=0
+11:44:00.366 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/messi5.jpg blocks=1 rois=0
+11:44:00.367 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:00.384 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:00.384 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:00.385 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/ml.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:00.389 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:44:00.389 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(3ms)]
+11:44:00.390 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/ml.png result=308x380
+11:44:00.390 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/ml.png size=308x380 prev=D:/opencv/opencv/sources/samples/data/messi5.jpg session=强制模板 blocks=1 rois=0
+11:44:00.898 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/ml.png blocks=1 rois=0
+11:44:00.899 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:00.916 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:00.917 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:00.917 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/notes.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:00.920 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:44:00.922 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(3ms)]
+11:44:00.922 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/notes.png result=1024x134
+11:44:00.923 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/notes.png size=1024x134 prev=D:/opencv/opencv/sources/samples/data/ml.png session=强制模板 blocks=1 rois=0
+11:44:01.429 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/notes.png blocks=1 rois=0
+11:44:01.431 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:01.447 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:01.448 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:01.448 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/opencv-logo-white.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:01.451 | INFO | 执行处理块 | name=二值化处理 elapsed=2 ms rois=0
+11:44:01.451 | INFO | 流水线结束 | total=2 ms steps=[二值化处理(2ms)]
+11:44:01.451 | INFO | 处理完成 | elapsed=2 ms path=D:/opencv/opencv/sources/samples/data/opencv-logo-white.png result=180x238
+11:44:01.452 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/opencv-logo-white.png size=180x238 prev=D:/opencv/opencv/sources/samples/data/notes.png session=强制模板 blocks=1 rois=0
+11:44:01.964 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/opencv-logo-white.png blocks=1 rois=0
+11:44:01.965 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:01.982 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:01.982 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:01.983 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/opencv-logo.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:01.994 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+11:44:01.995 | INFO | 流水线结束 | total=11 ms steps=[二值化处理(10ms)]
+11:44:01.995 | INFO | 处理完成 | elapsed=11 ms path=D:/opencv/opencv/sources/samples/data/opencv-logo.png result=600x794
+11:44:01.996 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/opencv-logo.png size=600x794 prev=D:/opencv/opencv/sources/samples/data/opencv-logo-white.png session=强制模板 blocks=1 rois=0
+11:44:02.506 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/opencv-logo.png blocks=1 rois=0
+11:44:02.508 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:02.525 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:02.525 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:02.526 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/orange.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:02.532 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:02.532 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:02.533 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/orange.jpg result=512x512
+11:44:02.534 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/orange.jpg size=512x512 prev=D:/opencv/opencv/sources/samples/data/opencv-logo.png session=强制模板 blocks=1 rois=0
+11:44:03.046 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/orange.jpg blocks=1 rois=0
+11:44:03.048 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:03.065 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:03.065 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:03.066 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/pca_test1.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:03.077 | INFO | 执行处理块 | name=二值化处理 elapsed=10 ms rois=0
+11:44:03.077 | INFO | 流水线结束 | total=11 ms steps=[二值化处理(10ms)]
+11:44:03.078 | INFO | 处理完成 | elapsed=11 ms path=D:/opencv/opencv/sources/samples/data/pca_test1.jpg result=800x600
+11:44:03.079 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/pca_test1.jpg size=800x600 prev=D:/opencv/opencv/sources/samples/data/orange.jpg session=强制模板 blocks=1 rois=0
+11:44:03.587 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/pca_test1.jpg blocks=1 rois=0
+11:44:03.589 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:03.606 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:03.606 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:03.607 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/pic1.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:03.612 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:03.613 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(4ms)]
+11:44:03.613 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/pic1.png result=400x300
+11:44:03.614 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/pic1.png size=400x300 prev=D:/opencv/opencv/sources/samples/data/pca_test1.jpg session=强制模板 blocks=1 rois=0
+11:44:04.123 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/pic1.png blocks=1 rois=0
+11:44:04.125 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:04.141 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:04.142 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:04.142 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/pic2.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:04.147 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:04.147 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(4ms)]
+11:44:04.148 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/pic2.png result=400x300
+11:44:04.148 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/pic2.png size=400x300 prev=D:/opencv/opencv/sources/samples/data/pic1.png session=强制模板 blocks=1 rois=0
+11:44:04.656 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/pic2.png blocks=1 rois=0
+11:44:04.658 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:04.675 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:04.676 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:04.677 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/pic3.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:04.681 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:04.681 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(4ms)]
+11:44:04.682 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/pic3.png result=400x300
+11:44:04.682 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/pic3.png size=400x300 prev=D:/opencv/opencv/sources/samples/data/pic2.png session=强制模板 blocks=1 rois=0
+11:44:05.193 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/pic3.png blocks=1 rois=0
+11:44:05.194 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:05.211 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:05.211 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:05.212 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/pic4.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:05.216 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:05.217 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(4ms)]
+11:44:05.217 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/pic4.png result=400x300
+11:44:05.218 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/pic4.png size=400x300 prev=D:/opencv/opencv/sources/samples/data/pic3.png session=强制模板 blocks=1 rois=0
+11:44:05.725 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/pic4.png blocks=1 rois=0
+11:44:05.726 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:05.744 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:05.744 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:05.745 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/pic5.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:05.749 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:05.749 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(4ms)]
+11:44:05.750 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/pic5.png result=400x300
+11:44:05.750 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/pic5.png size=400x300 prev=D:/opencv/opencv/sources/samples/data/pic4.png session=强制模板 blocks=1 rois=0
+11:44:06.258 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/pic5.png blocks=1 rois=0
+11:44:06.259 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:06.276 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:06.277 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:06.278 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/pic6.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:06.282 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:06.282 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(4ms)]
+11:44:06.284 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/pic6.png result=400x300
+11:44:06.284 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/pic6.png size=400x300 prev=D:/opencv/opencv/sources/samples/data/pic5.png session=强制模板 blocks=1 rois=0
+11:44:06.794 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/pic6.png blocks=1 rois=0
+11:44:06.796 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:06.813 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:06.814 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:06.814 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:06.820 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:06.820 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:06.822 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right.jpg result=612x459
+11:44:06.822 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right.jpg size=612x459 prev=D:/opencv/opencv/sources/samples/data/pic6.png session=强制模板 blocks=1 rois=0
+11:44:07.329 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right.jpg blocks=1 rois=0
+11:44:07.331 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:07.348 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:07.348 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:07.349 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right01.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:07.357 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:07.357 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:44:07.358 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/right01.jpg result=640x480
+11:44:07.358 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right01.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right.jpg session=强制模板 blocks=1 rois=0
+11:44:07.865 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right01.jpg blocks=1 rois=0
+11:44:07.867 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:07.884 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:07.885 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:07.885 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right02.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:07.891 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:07.892 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:07.892 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right02.jpg result=640x480
+11:44:07.893 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right02.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right01.jpg session=强制模板 blocks=1 rois=0
+11:44:08.401 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right02.jpg blocks=1 rois=0
+11:44:08.402 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:08.419 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:08.420 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:08.420 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right03.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:08.426 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:08.427 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:08.428 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right03.jpg result=640x480
+11:44:08.428 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right03.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right02.jpg session=强制模板 blocks=1 rois=0
+11:44:08.937 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right03.jpg blocks=1 rois=0
+11:44:08.938 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:08.955 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:08.956 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:08.956 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right04.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:08.962 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:08.963 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:08.963 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right04.jpg result=640x480
+11:44:08.964 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right04.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right03.jpg session=强制模板 blocks=1 rois=0
+11:44:09.472 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right04.jpg blocks=1 rois=0
+11:44:09.473 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:09.490 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:09.491 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:09.491 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right05.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:09.498 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:09.499 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(6ms)]
+11:44:09.499 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right05.jpg result=640x480
+11:44:09.499 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right05.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right04.jpg session=强制模板 blocks=1 rois=0
+11:44:10.007 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right05.jpg blocks=1 rois=0
+11:44:10.009 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:10.026 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:10.027 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:10.027 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right06.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:10.034 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:10.035 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:44:10.035 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/right06.jpg result=640x480
+11:44:10.036 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right06.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right05.jpg session=强制模板 blocks=1 rois=0
+11:44:10.543 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right06.jpg blocks=1 rois=0
+11:44:10.545 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:10.562 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:10.563 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:10.563 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right07.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:10.570 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:10.570 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(6ms)]
+11:44:10.571 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right07.jpg result=640x480
+11:44:10.571 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right07.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right06.jpg session=强制模板 blocks=1 rois=0
+11:44:11.079 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right07.jpg blocks=1 rois=0
+11:44:11.082 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:11.097 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:11.098 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:11.098 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right08.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:11.106 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:11.106 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:11.107 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right08.jpg result=640x480
+11:44:11.107 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right08.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right07.jpg session=强制模板 blocks=1 rois=0
+11:44:11.616 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right08.jpg blocks=1 rois=0
+11:44:11.617 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:11.634 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:11.635 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:11.635 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right09.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:11.642 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:11.642 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:11.643 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right09.jpg result=640x480
+11:44:11.643 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right09.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right08.jpg session=强制模板 blocks=1 rois=0
+11:44:12.151 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right09.jpg blocks=1 rois=0
+11:44:12.153 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:12.169 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:12.171 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:12.171 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right11.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:12.177 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:12.179 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(6ms)]
+11:44:12.179 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/right11.jpg result=640x480
+11:44:12.180 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right11.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right09.jpg session=强制模板 blocks=1 rois=0
+11:44:12.688 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right11.jpg blocks=1 rois=0
+11:44:12.690 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:12.705 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:12.706 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:12.706 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right12.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:12.714 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:12.715 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:44:12.715 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/right12.jpg result=640x480
+11:44:12.716 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right12.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right11.jpg session=强制模板 blocks=1 rois=0
+11:44:13.224 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right12.jpg blocks=1 rois=0
+11:44:13.225 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:13.241 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:13.242 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:13.242 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right13.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:13.250 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:13.250 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:44:13.251 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/right13.jpg result=640x480
+11:44:13.251 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right13.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right12.jpg session=强制模板 blocks=1 rois=0
+11:44:13.759 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right13.jpg blocks=1 rois=0
+11:44:13.761 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:13.778 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:13.778 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:13.779 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/right14.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:13.786 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:13.787 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:44:13.787 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/right14.jpg result=640x480
+11:44:13.789 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/right14.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/right13.jpg session=强制模板 blocks=1 rois=0
+11:44:14.306 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/right14.jpg blocks=1 rois=0
+11:44:14.308 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:14.325 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:14.325 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:14.326 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/rubberwhale1.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:14.331 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:14.332 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(5ms)]
+11:44:14.332 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/rubberwhale1.png result=584x388
+11:44:14.333 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/rubberwhale1.png size=584x388 prev=D:/opencv/opencv/sources/samples/data/right14.jpg session=强制模板 blocks=1 rois=0
+11:44:14.851 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/rubberwhale1.png blocks=1 rois=0
+11:44:14.853 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:14.873 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:14.873 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:14.874 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/rubberwhale2.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:14.879 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:14.880 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:14.881 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/rubberwhale2.png result=584x388
+11:44:14.881 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/rubberwhale2.png size=584x388 prev=D:/opencv/opencv/sources/samples/data/rubberwhale1.png session=强制模板 blocks=1 rois=0
+11:44:15.393 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/rubberwhale2.png blocks=1 rois=0
+11:44:15.394 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:15.410 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:15.410 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:15.411 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/smarties.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:15.416 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:44:15.416 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(3ms)]
+11:44:15.417 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/smarties.png result=413x356
+11:44:15.418 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/smarties.png size=413x356 prev=D:/opencv/opencv/sources/samples/data/rubberwhale2.png session=强制模板 blocks=1 rois=0
+11:44:15.927 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/smarties.png blocks=1 rois=0
+11:44:15.929 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:15.945 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:15.946 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:15.946 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/squirrel_cls.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:15.950 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:15.952 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(4ms)]
+11:44:15.952 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/squirrel_cls.jpg result=535x426
+11:44:15.953 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/squirrel_cls.jpg size=535x426 prev=D:/opencv/opencv/sources/samples/data/smarties.png session=强制模板 blocks=1 rois=0
+11:44:16.473 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/squirrel_cls.jpg blocks=1 rois=0
+11:44:16.475 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:16.492 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:16.492 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:16.493 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/starry_night.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:16.503 | INFO | 执行处理块 | name=二值化处理 elapsed=9 ms rois=0
+11:44:16.503 | INFO | 流水线结束 | total=10 ms steps=[二值化处理(9ms)]
+11:44:16.504 | INFO | 处理完成 | elapsed=10 ms path=D:/opencv/opencv/sources/samples/data/starry_night.jpg result=752x600
+11:44:16.505 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/starry_night.jpg size=752x600 prev=D:/opencv/opencv/sources/samples/data/squirrel_cls.jpg session=强制模板 blocks=1 rois=0
+11:44:17.015 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/starry_night.jpg blocks=1 rois=0
+11:44:17.017 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:17.033 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:17.033 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:17.034 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/stuff.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:17.040 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:17.041 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:17.041 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/stuff.jpg result=640x480
+11:44:17.042 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/stuff.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/starry_night.jpg session=强制模板 blocks=1 rois=0
+11:44:17.563 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/stuff.jpg blocks=1 rois=0
+11:44:17.565 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:17.581 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:17.581 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:17.582 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/sudoku.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:17.589 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:17.590 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:44:17.590 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/sudoku.png result=558x563
+11:44:17.591 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/sudoku.png size=558x563 prev=D:/opencv/opencv/sources/samples/data/stuff.jpg session=强制模板 blocks=1 rois=0
+11:44:18.096 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/sudoku.png blocks=1 rois=0
+11:44:18.098 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:18.114 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:18.115 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:18.115 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/templ.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:18.117 | INFO | 执行处理块 | name=二值化处理 elapsed=0 ms rois=0
+11:44:18.117 | INFO | 流水线结束 | total=1 ms steps=[二值化处理(0ms)]
+11:44:18.117 | INFO | 处理完成 | elapsed=1 ms path=D:/opencv/opencv/sources/samples/data/templ.png result=100x130
+11:44:18.118 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/templ.png size=100x130 prev=D:/opencv/opencv/sources/samples/data/sudoku.png session=强制模板 blocks=1 rois=0
+11:44:18.629 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/templ.png blocks=1 rois=0
+11:44:18.630 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:18.647 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:18.647 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:18.648 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/text_defocus.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:18.655 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:18.655 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:44:18.656 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/text_defocus.jpg result=697x472
+11:44:18.656 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/text_defocus.jpg size=697x472 prev=D:/opencv/opencv/sources/samples/data/templ.png session=强制模板 blocks=1 rois=0
+11:44:19.165 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/text_defocus.jpg blocks=1 rois=0
+11:44:19.166 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:19.183 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:19.183 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:19.184 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/text_motion.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:19.189 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:19.190 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(4ms)]
+11:44:19.191 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/text_motion.jpg result=588x365
+11:44:19.191 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/text_motion.jpg size=588x365 prev=D:/opencv/opencv/sources/samples/data/text_defocus.jpg session=强制模板 blocks=1 rois=0
+11:44:19.696 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/text_motion.jpg blocks=1 rois=0
+11:44:19.698 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:19.715 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:19.716 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:19.716 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/tmpl.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:19.718 | INFO | 执行处理块 | name=二值化处理 elapsed=0 ms rois=0
+11:44:19.718 | INFO | 流水线结束 | total=1 ms steps=[二值化处理(0ms)]
+11:44:19.718 | INFO | 处理完成 | elapsed=1 ms path=D:/opencv/opencv/sources/samples/data/tmpl.png result=128x128
+11:44:19.719 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/tmpl.png size=128x128 prev=D:/opencv/opencv/sources/samples/data/text_motion.jpg session=强制模板 blocks=1 rois=0
+11:44:20.234 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/tmpl.png blocks=1 rois=0
+11:44:20.243 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:20.244 | INFO | 全部执行结束 | dir=D:/opencv/opencv/sources/samples/data ok=93 fail=0 canceled=否 templateBlocks=1 templateRois=0
+11:44:23.744 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/tmpl.png blocks=1 rois=0
+11:44:23.752 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:23.754 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:23.769 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:23.770 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:23.770 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/text_motion.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:23.775 | INFO | 执行处理块 | name=二值化处理 elapsed=4 ms rois=0
+11:44:23.776 | INFO | 流水线结束 | total=5 ms steps=[二值化处理(4ms)]
+11:44:23.776 | INFO | 处理完成 | elapsed=5 ms path=D:/opencv/opencv/sources/samples/data/text_motion.jpg result=588x365
+11:44:23.777 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/text_motion.jpg size=588x365 prev=D:/opencv/opencv/sources/samples/data/tmpl.png session=恢复 blocks=1 rois=0
+11:44:24.208 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/text_motion.jpg blocks=1 rois=0
+11:44:24.215 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:24.217 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:24.232 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:24.233 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:24.233 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/text_defocus.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:24.241 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:24.241 | INFO | 流水线结束 | total=7 ms steps=[二值化处理(6ms)]
+11:44:24.242 | INFO | 处理完成 | elapsed=7 ms path=D:/opencv/opencv/sources/samples/data/text_defocus.jpg result=697x472
+11:44:24.242 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/text_defocus.jpg size=697x472 prev=D:/opencv/opencv/sources/samples/data/text_motion.jpg session=恢复 blocks=1 rois=0
+11:44:24.569 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/text_defocus.jpg blocks=1 rois=0
+11:44:24.579 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:24.583 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:24.602 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:24.603 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:24.603 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/templ.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:24.606 | INFO | 执行处理块 | name=二值化处理 elapsed=1 ms rois=0
+11:44:24.607 | INFO | 流水线结束 | total=2 ms steps=[二值化处理(1ms)]
+11:44:24.608 | INFO | 处理完成 | elapsed=2 ms path=D:/opencv/opencv/sources/samples/data/templ.png result=100x130
+11:44:24.609 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/templ.png size=100x130 prev=D:/opencv/opencv/sources/samples/data/text_defocus.jpg session=恢复 blocks=1 rois=0
+11:44:25.051 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/templ.png blocks=1 rois=0
+11:44:25.066 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:25.067 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:25.092 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:25.093 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:25.094 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/sudoku.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:25.105 | INFO | 执行处理块 | name=二值化处理 elapsed=9 ms rois=0
+11:44:25.106 | INFO | 流水线结束 | total=10 ms steps=[二值化处理(9ms)]
+11:44:25.106 | INFO | 处理完成 | elapsed=10 ms path=D:/opencv/opencv/sources/samples/data/sudoku.png result=558x563
+11:44:25.107 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/sudoku.png size=558x563 prev=D:/opencv/opencv/sources/samples/data/templ.png session=恢复 blocks=1 rois=0
+11:44:28.216 | INFO | 撤销快照 | reason=修改处理块参数 depth=1
+11:44:28.339 | INFO | 块参数变化 | 二值化处理
+11:44:28.339 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/sudoku.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:28.347 | INFO | 执行处理块 | name=二值化处理 elapsed=7 ms rois=0
+11:44:28.348 | INFO | 流水线结束 | total=8 ms steps=[二值化处理(7ms)]
+11:44:28.349 | INFO | 处理完成 | elapsed=8 ms path=D:/opencv/opencv/sources/samples/data/sudoku.png result=558x563
+11:44:28.350 | INFO | Otsu自动阈值 | t=97 rois=0
+11:44:30.698 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/sudoku.png blocks=1 rois=0
+11:44:30.701 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:30.719 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:30.719 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:30.720 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:30.728 | INFO | 执行处理块 | name=二值化处理 elapsed=6 ms rois=0
+11:44:30.729 | INFO | 流水线结束 | total=8 ms steps=[二值化处理(6ms)]
+11:44:30.729 | INFO | 处理完成 | elapsed=8 ms path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg result=640x480
+11:44:30.730 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/sudoku.png session=强制模板 blocks=1 rois=0
+11:44:31.244 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg blocks=1 rois=0
+11:44:31.246 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:31.262 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:31.263 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:31.263 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:31.272 | INFO | 执行处理块 | name=二值化处理 elapsed=7 ms rois=0
+11:44:31.272 | INFO | 流水线结束 | total=8 ms steps=[二值化处理(7ms)]
+11:44:31.273 | INFO | 处理完成 | elapsed=8 ms path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg result=640x480
+11:44:31.273 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/Blender_Suzanne1.jpg session=强制模板 blocks=1 rois=0
+11:44:31.779 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg blocks=1 rois=0
+11:44:31.781 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:31.797 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:31.798 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:31.798 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/HappyFish.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:31.802 | INFO | 执行处理块 | name=二值化处理 elapsed=2 ms rois=0
+11:44:31.802 | INFO | 流水线结束 | total=2 ms steps=[二值化处理(2ms)]
+11:44:31.803 | INFO | 处理完成 | elapsed=2 ms path=D:/opencv/opencv/sources/samples/data/HappyFish.jpg result=259x194
+11:44:31.803 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/HappyFish.jpg size=259x194 prev=D:/opencv/opencv/sources/samples/data/Blender_Suzanne2.jpg session=强制模板 blocks=1 rois=0
+11:44:32.309 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/HappyFish.jpg blocks=1 rois=0
+11:44:32.310 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:32.327 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:32.328 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:32.328 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:32.332 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:44:32.333 | INFO | 流水线结束 | total=3 ms steps=[二值化处理(3ms)]
+11:44:32.333 | INFO | 处理完成 | elapsed=3 ms path=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg result=320x240
+11:44:32.334 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg size=320x240 prev=D:/opencv/opencv/sources/samples/data/HappyFish.jpg session=强制模板 blocks=1 rois=0
+11:44:32.840 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg blocks=1 rois=0
+11:44:32.842 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:32.860 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:32.861 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:32.861 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:32.865 | INFO | 执行处理块 | name=二值化处理 elapsed=3 ms rois=0
+11:44:32.865 | INFO | 流水线结束 | total=4 ms steps=[二值化处理(3ms)]
+11:44:32.866 | INFO | 处理完成 | elapsed=4 ms path=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg result=320x240
+11:44:32.866 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg size=320x240 prev=D:/opencv/opencv/sources/samples/data/LinuxLogo.jpg session=强制模板 blocks=1 rois=0
+11:44:33.377 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg blocks=1 rois=0
+11:44:33.379 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:33.395 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:33.396 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:33.397 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aero1.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:33.404 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:33.404 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:33.405 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/aero1.jpg result=640x480
+11:44:33.406 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aero1.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/WindowsLogo.jpg session=强制模板 blocks=1 rois=0
+11:44:33.916 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aero1.jpg blocks=1 rois=0
+11:44:33.917 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:33.934 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:33.934 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:33.935 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:33.941 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:33.942 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:33.943 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/aero3.jpg result=640x480
+11:44:33.943 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/aero1.jpg session=强制模板 blocks=1 rois=0
+11:44:34.322 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg blocks=1 rois=0
+11:44:34.331 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:34.332 | INFO | 全部执行结束 | dir=D:/opencv/opencv/sources/samples/data ok=7 fail=0 canceled=是 templateBlocks=1 templateRois=0
+11:44:37.422 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg blocks=1 rois=0
+11:44:37.431 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:37.432 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:37.446 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:37.447 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:37.447 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:37.474 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=0
+11:44:37.475 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+11:44:37.476 | INFO | 处理完成 | elapsed=26 ms path=D:/opencv/opencv/sources/samples/data/aloeGT.png result=1282x1110
+11:44:37.476 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png size=1282x1110 prev=D:/opencv/opencv/sources/samples/data/aero3.jpg session=恢复 blocks=1 rois=0
+11:44:37.937 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png blocks=1 rois=0
+11:44:37.945 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:37.948 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:37.962 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:37.963 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:37.963 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:37.990 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=0
+11:44:37.990 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(25ms)]
+11:44:37.991 | INFO | 处理完成 | elapsed=27 ms path=D:/opencv/opencv/sources/samples/data/aloeL.jpg result=1282x1110
+11:44:37.992 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg size=1282x1110 prev=D:/opencv/opencv/sources/samples/data/aloeGT.png session=恢复 blocks=1 rois=0
+11:44:38.361 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg blocks=1 rois=0
+11:44:38.369 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+11:44:38.372 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+11:44:38.387 | INFO | 添加处理块 | name=二值化处理 index=0
+11:44:38.388 | INFO | 恢复会话 | blocks=1 rois=0
+11:44:38.388 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+11:44:38.395 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+11:44:38.395 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+11:44:38.395 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/aero3.jpg result=640x480
+11:44:38.396 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg size=640x480 prev=D:/opencv/opencv/sources/samples/data/aloeL.jpg session=恢复 blocks=1 rois=0
+14:02:04.417 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aero3.jpg blocks=1 rois=0
+14:02:04.426 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+14:02:04.428 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+14:02:04.443 | INFO | 添加处理块 | name=二值化处理 index=0
+14:02:04.444 | INFO | 恢复会话 | blocks=1 rois=0
+14:02:04.444 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png blocks=1 enabled=1 rois=0 chain=[二值化处理]
+14:02:04.474 | INFO | 执行处理块 | name=二值化处理 elapsed=28 ms rois=0
+14:02:04.474 | INFO | 流水线结束 | total=29 ms steps=[二值化处理(28ms)]
+14:02:04.475 | INFO | 处理完成 | elapsed=29 ms path=D:/opencv/opencv/sources/samples/data/aloeGT.png result=1282x1110
+14:02:04.475 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png size=1282x1110 prev=D:/opencv/opencv/sources/samples/data/aero3.jpg session=恢复 blocks=1 rois=0
+14:02:04.860 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aloeGT.png blocks=1 rois=0
+14:02:04.869 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+14:02:04.872 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+14:02:04.887 | INFO | 添加处理块 | name=二值化处理 index=0
+14:02:04.887 | INFO | 恢复会话 | blocks=1 rois=0
+14:02:04.888 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+14:02:04.916 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=0
+14:02:04.916 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+14:02:04.917 | INFO | 处理完成 | elapsed=27 ms path=D:/opencv/opencv/sources/samples/data/aloeL.jpg result=1282x1110
+14:02:04.918 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg size=1282x1110 prev=D:/opencv/opencv/sources/samples/data/aloeGT.png session=恢复 blocks=1 rois=0
+14:02:05.277 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aloeL.jpg blocks=1 rois=0
+14:02:05.286 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+14:02:05.289 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+14:02:05.304 | INFO | 添加处理块 | name=二值化处理 index=0
+14:02:05.305 | INFO | 恢复会话 | blocks=1 rois=0
+14:02:05.305 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/aloeR.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+14:02:05.334 | INFO | 执行处理块 | name=二值化处理 elapsed=27 ms rois=0
+14:02:05.335 | INFO | 流水线结束 | total=28 ms steps=[二值化处理(27ms)]
+14:02:05.335 | INFO | 处理完成 | elapsed=28 ms path=D:/opencv/opencv/sources/samples/data/aloeR.jpg result=1282x1110
+14:02:05.336 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/aloeR.jpg size=1282x1110 prev=D:/opencv/opencv/sources/samples/data/aloeL.jpg session=恢复 blocks=1 rois=0
+14:02:05.673 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/aloeR.jpg blocks=1 rois=0
+14:02:05.681 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+14:02:05.684 | INFO | 清空处理链 | removed=1 reprocessAfter=否
+14:02:05.699 | INFO | 添加处理块 | name=二值化处理 index=0
+14:02:05.700 | INFO | 恢复会话 | blocks=1 rois=0
+14:02:05.700 | INFO | 开始处理 | path=D:/opencv/opencv/sources/samples/data/apple.jpg blocks=1 enabled=1 rois=0 chain=[二值化处理]
+14:02:05.706 | INFO | 执行处理块 | name=二值化处理 elapsed=5 ms rois=0
+14:02:05.706 | INFO | 流水线结束 | total=6 ms steps=[二值化处理(5ms)]
+14:02:05.707 | INFO | 处理完成 | elapsed=6 ms path=D:/opencv/opencv/sources/samples/data/apple.jpg result=512x512
+14:02:05.708 | INFO | 加载图片 | path=D:/opencv/opencv/sources/samples/data/apple.jpg size=512x512 prev=D:/opencv/opencv/sources/samples/data/aloeR.jpg session=恢复 blocks=1 rois=0
+14:02:07.676 | INFO | 程序退出
+14:02:07.677 | INFO | 保存会话 | path=D:/opencv/opencv/sources/samples/data/apple.jpg blocks=1 rois=0
+14:02:07.690 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125
+14:02:07.700 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=125

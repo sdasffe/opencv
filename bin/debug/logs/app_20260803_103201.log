@@ -1,0 +1,426 @@
+========== 会话开始 2026-08-03 10:32:01.895 ==========
+INFO | 日志文件 | D:\Qt\project\opencv\bin\debug\logs\app_20260803_103201.log
+INFO | 应用 | 图像处理工具 1.0.0
+10:32:01.896 | INFO | 程序启动
+10:32:01.896 | INFO | 可执行文件 | D:/Qt/project/opencv/bin/debug/opencv.exe
+10:32:01.897 | INFO | 图像内存上限 | 不限制
+10:32:01.903 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_binarization_en.qm
+10:32:01.904 | INFO | 已加载外部插件 | block_binarization.dll → 二值化处理
+10:32:01.907 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_filter_en.qm
+10:32:01.907 | INFO | 已加载外部插件 | block_filter.dll → 滤波处理
+10:32:02.041 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_glcm_en.qm
+10:32:02.041 | INFO | 已加载外部插件 | block_glcm.dll → 灰度共生矩阵
+10:32:02.186 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_graytransform_en.qm
+10:32:02.187 | INFO | 已加载外部插件 | block_graytransform.dll → 灰度变换
+10:32:02.191 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_morphology_en.qm
+10:32:02.191 | INFO | 已加载外部插件 | block_morphology.dll → 形态学处理
+10:32:02.326 | INFO | 已加载插件翻译 | D:/Qt/project/opencv/bin/debug/plugins/block_pseudocolor_en.qm
+10:32:02.327 | INFO | 已加载外部插件 | block_pseudocolor.dll → 伪彩色处理
+10:32:02.327 | INFO | 尝试插件目录 | D:/Qt/project/opencv/bin/debug/plugins → 6
+10:32:02.328 | INFO | 算法插件 | 目录=D:/Qt/project/opencv/bin/debug/plugins 加载=6
+10:32:03.546 | INFO | 会话已加载 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=1
+10:32:04.032 | INFO | 切换主题 | light
+10:32:04.123 | INFO | 主窗口已显示
+10:32:11.494 | INFO | 打开单张图片 | C:/Users/Admin/Desktop/图片/input.png
+10:32:11.551 | INFO | 清空处理链 | removed=0 reprocessAfter=否
+10:32:11.637 | INFO | 添加处理块 | name=二值化处理 index=0
+10:32:11.639 | INFO | 恢复会话 | blocks=1 rois=1
+10:32:11.640 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:11.697 | INFO | 执行处理块 | name=二值化处理 elapsed=56 ms rois=1
+10:32:11.698 | INFO | 流水线结束 | total=58 ms steps=[二值化处理(56ms)]
+10:32:11.700 | INFO | 处理完成 | elapsed=58 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:11.700 | INFO | 加载图片 | path=C:/Users/Admin/Desktop/图片/input.png size=1066x1061 prev=(无) session=恢复 blocks=1 rois=1
+10:32:15.630 | INFO | 撤销快照 | reason=添加旋转矩形ROI depth=1
+10:32:15.630 | INFO | 添加ROI | type=rotatedRect center=(533,530.5) size=140x100 total=2
+10:32:15.697 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:15.725 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=2
+10:32:15.726 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:32:15.727 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:16.753 | INFO | 撤销快照 | reason=修改ROI depth=2
+10:32:17.146 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:17.174 | INFO | 执行处理块 | name=二值化处理 elapsed=28 ms rois=2
+10:32:17.175 | INFO | 流水线结束 | total=29 ms steps=[二值化处理(28ms)]
+10:32:17.176 | INFO | 处理完成 | elapsed=29 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:17.404 | INFO | 撤销快照 | reason=修改ROI depth=3
+10:32:17.749 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:17.776 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=2
+10:32:17.777 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:32:17.778 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:18.674 | INFO | 撤销快照 | reason=修改ROI depth=4
+10:32:18.983 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:19.008 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=2
+10:32:19.008 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(23ms)]
+10:32:19.009 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:20.039 | INFO | 撤销快照 | reason=修改ROI depth=5
+10:32:20.844 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:20.871 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=2
+10:32:20.871 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:20.873 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:22.331 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:22.357 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:22.357 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:22.358 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:22.440 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:22.467 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=2
+10:32:22.467 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:22.470 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:23.751 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:23.780 | INFO | 执行处理块 | name=二值化处理 elapsed=27 ms rois=2
+10:32:23.781 | INFO | 流水线结束 | total=28 ms steps=[二值化处理(27ms)]
+10:32:23.783 | INFO | 处理完成 | elapsed=28 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:24.360 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:24.388 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=2
+10:32:24.389 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:32:24.390 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:25.657 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:25.686 | INFO | 执行处理块 | name=二值化处理 elapsed=27 ms rois=2
+10:32:25.687 | INFO | 流水线结束 | total=28 ms steps=[二值化处理(27ms)]
+10:32:25.689 | INFO | 处理完成 | elapsed=28 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:26.012 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:26.038 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=2
+10:32:26.038 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(23ms)]
+10:32:26.040 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:26.247 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:26.276 | INFO | 执行处理块 | name=二值化处理 elapsed=28 ms rois=2
+10:32:26.277 | INFO | 流水线结束 | total=29 ms steps=[二值化处理(28ms)]
+10:32:26.280 | INFO | 处理完成 | elapsed=29 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:27.106 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:27.136 | INFO | 执行处理块 | name=二值化处理 elapsed=27 ms rois=2
+10:32:27.136 | INFO | 流水线结束 | total=28 ms steps=[二值化处理(27ms)]
+10:32:27.138 | INFO | 处理完成 | elapsed=28 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:27.637 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:27.664 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=2
+10:32:27.664 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:27.666 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:28.418 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:28.444 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:28.444 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:28.446 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:28.526 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:28.551 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:28.552 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:28.553 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:29.150 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:29.176 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:29.177 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:29.177 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:29.260 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:29.287 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=2
+10:32:29.287 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:32:29.289 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:29.381 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:29.407 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:29.468 | INFO | 流水线结束 | total=85 ms steps=[二值化处理(24ms)]
+10:32:29.470 | INFO | 处理完成 | elapsed=85 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:29.537 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:29.561 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=2
+10:32:29.562 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(23ms)]
+10:32:29.563 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:29.655 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:29.679 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=2
+10:32:29.679 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(23ms)]
+10:32:29.680 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:29.814 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:29.840 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=2
+10:32:29.840 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(23ms)]
+10:32:29.842 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:29.907 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:29.933 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:29.933 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(24ms)]
+10:32:29.935 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:30.472 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:30.499 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:30.499 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(24ms)]
+10:32:30.500 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:30.567 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:30.593 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:30.593 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:30.595 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:30.675 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:30.702 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=2
+10:32:30.703 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:30.704 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:31.301 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:31.329 | INFO | 执行处理块 | name=二值化处理 elapsed=27 ms rois=2
+10:32:31.329 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(27ms)]
+10:32:31.330 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:32.315 | INFO | 撤销快照 | reason=修改ROI depth=6
+10:32:32.716 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:32.744 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=2
+10:32:32.745 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:32:32.746 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:32.920 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:32.950 | INFO | 执行处理块 | name=二值化处理 elapsed=27 ms rois=2
+10:32:32.951 | INFO | 流水线结束 | total=28 ms steps=[二值化处理(27ms)]
+10:32:32.953 | INFO | 处理完成 | elapsed=28 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:33.189 | INFO | 撤销快照 | reason=修改ROI depth=7
+10:32:33.555 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:33.582 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=2
+10:32:33.582 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:33.584 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:35.341 | INFO | 撤销快照 | reason=修改ROI depth=8
+10:32:35.486 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:35.511 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=2
+10:32:35.512 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:35.513 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:37.302 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:37.328 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=2
+10:32:37.328 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:37.330 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:38.206 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:38.237 | INFO | 执行处理块 | name=二值化处理 elapsed=30 ms rois=2
+10:32:38.238 | INFO | 流水线结束 | total=31 ms steps=[二值化处理(30ms)]
+10:32:38.239 | INFO | 处理完成 | elapsed=31 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:38.901 | INFO | 撤销快照 | reason=修改ROI depth=9
+10:32:39.266 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:39.296 | INFO | 执行处理块 | name=二值化处理 elapsed=28 ms rois=2
+10:32:39.298 | INFO | 流水线结束 | total=29 ms steps=[二值化处理(28ms)]
+10:32:39.299 | INFO | 处理完成 | elapsed=29 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:39.791 | INFO | 撤销快照 | reason=修改ROI depth=10
+10:32:40.763 | INFO | 撤销快照 | reason=修改ROI depth=11
+10:32:41.107 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:41.135 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=2
+10:32:41.135 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:32:41.137 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:41.453 | INFO | 撤销快照 | reason=修改ROI depth=12
+10:32:42.323 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:42.349 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=2
+10:32:42.349 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:42.351 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:42.783 | INFO | 撤销快照 | reason=修改ROI depth=13
+10:32:43.226 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=2 chain=[二值化处理]
+10:32:43.260 | INFO | 执行处理块 | name=二值化处理 elapsed=32 ms rois=2
+10:32:43.261 | INFO | 流水线结束 | total=33 ms steps=[二值化处理(32ms)]
+10:32:43.262 | INFO | 处理完成 | elapsed=33 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:44.241 | INFO | 撤销快照 | reason=修改ROI depth=14
+10:32:45.210 | INFO | 撤销快照 | reason=删除ROI depth=15
+10:32:45.211 | INFO | 删除ROI | mode=选中 removed=1 remain=1
+10:32:45.211 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:45.236 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=1
+10:32:45.236 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(23ms)]
+10:32:45.237 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:45.696 | INFO | 撤销快照 | reason=修改ROI depth=16
+10:32:46.042 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:46.069 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=1
+10:32:46.069 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:46.072 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:46.308 | INFO | 撤销快照 | reason=修改ROI depth=17
+10:32:46.557 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:46.582 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:32:46.582 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:46.585 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:47.549 | INFO | 撤销快照 | reason=修改ROI depth=18
+10:32:48.675 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:48.701 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=1
+10:32:48.701 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(23ms)]
+10:32:48.702 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:50.563 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:50.591 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=1
+10:32:50.591 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:50.593 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:51.218 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:51.249 | INFO | 执行处理块 | name=二值化处理 elapsed=29 ms rois=1
+10:32:51.251 | INFO | 流水线结束 | total=30 ms steps=[二值化处理(29ms)]
+10:32:51.252 | INFO | 处理完成 | elapsed=30 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:52.092 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:52.118 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=1
+10:32:52.119 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:52.121 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:52.651 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:52.676 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=1
+10:32:52.677 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(23ms)]
+10:32:52.678 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:53.494 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:53.519 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:32:53.520 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:53.521 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:54.290 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:54.317 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=1
+10:32:54.318 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:54.318 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:54.884 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:54.909 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=1
+10:32:54.909 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(23ms)]
+10:32:54.911 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:55.288 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:55.314 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:32:55.314 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:55.316 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:55.491 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:55.516 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=1
+10:32:55.517 | INFO | 流水线结束 | total=24 ms steps=[二值化处理(23ms)]
+10:32:55.518 | INFO | 处理完成 | elapsed=24 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:55.707 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:55.737 | INFO | 执行处理块 | name=二值化处理 elapsed=27 ms rois=1
+10:32:55.737 | INFO | 流水线结束 | total=28 ms steps=[二值化处理(27ms)]
+10:32:55.738 | INFO | 处理完成 | elapsed=28 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:56.082 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:56.109 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=1
+10:32:56.109 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:56.111 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:56.270 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:56.305 | INFO | 执行处理块 | name=二值化处理 elapsed=33 ms rois=1
+10:32:56.306 | INFO | 流水线结束 | total=35 ms steps=[二值化处理(33ms)]
+10:32:56.307 | INFO | 处理完成 | elapsed=35 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:57.300 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:57.327 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:32:57.328 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:32:57.328 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:57.934 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:57.961 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=1
+10:32:57.962 | INFO | 流水线结束 | total=26 ms steps=[二值化处理(25ms)]
+10:32:57.963 | INFO | 处理完成 | elapsed=26 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:32:59.273 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:32:59.310 | INFO | 执行处理块 | name=二值化处理 elapsed=34 ms rois=1
+10:32:59.311 | INFO | 流水线结束 | total=36 ms steps=[二值化处理(34ms)]
+10:32:59.313 | INFO | 处理完成 | elapsed=36 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:00.257 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:00.284 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=1
+10:33:00.285 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:33:00.286 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:01.139 | INFO | 撤销快照 | reason=修改ROI depth=19
+10:33:01.311 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:01.338 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=1
+10:33:01.339 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:33:01.340 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:03.132 | INFO | 撤销快照 | reason=修改ROI depth=20
+10:33:04.918 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:04.944 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:04.945 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:33:04.946 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:05.026 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:05.052 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:05.053 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:33:05.054 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:05.758 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:05.783 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:05.784 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:33:05.785 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:05.890 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:05.915 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:05.915 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:33:05.917 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:07.021 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:07.046 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:07.047 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:33:07.049 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:07.847 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:07.873 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:07.873 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:33:07.875 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:08.855 | INFO | 撤销快照 | reason=修改处理块参数 depth=21
+10:33:08.979 | INFO | 块参数变化 | 二值化处理
+10:33:08.980 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:09.006 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:09.006 | INFO | 流水线结束 | total=25 ms steps=[二值化处理(24ms)]
+10:33:09.008 | INFO | 处理完成 | elapsed=25 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:09.008 | INFO | Otsu自动阈值 | t=147 rois=1
+10:33:09.712 | INFO | 撤销快照 | reason=修改ROI depth=22
+10:33:10.085 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:10.110 | INFO | 执行处理块 | name=二值化处理 elapsed=22 ms rois=1
+10:33:10.110 | INFO | 流水线结束 | total=23 ms steps=[二值化处理(22ms)]
+10:33:10.112 | INFO | 处理完成 | elapsed=23 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:11.133 | INFO | 撤销快照 | reason=修改处理块参数 depth=23
+10:33:11.238 | INFO | 块参数变化 | 二值化处理
+10:33:11.239 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:11.266 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=1
+10:33:11.267 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:33:11.269 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:11.270 | INFO | Otsu自动阈值 | t=151 rois=1
+10:33:11.624 | INFO | 块参数变化 | 二值化处理
+10:33:11.624 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:11.652 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=1
+10:33:11.652 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:33:11.653 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:11.654 | INFO | Otsu自动阈值 | t=151 rois=1
+10:33:11.870 | INFO | 块参数变化 | 二值化处理
+10:33:11.872 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:11.900 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=1
+10:33:11.900 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(26ms)]
+10:33:11.902 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:11.902 | INFO | Otsu自动阈值 | t=151 rois=1
+10:33:12.107 | INFO | 块参数变化 | 二值化处理
+10:33:12.108 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:12.134 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=1
+10:33:12.135 | INFO | 流水线结束 | total=27 ms steps=[二值化处理(25ms)]
+10:33:12.137 | INFO | 处理完成 | elapsed=27 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:12.137 | INFO | Otsu自动阈值 | t=151 rois=1
+10:33:12.299 | INFO | 块参数变化 | 二值化处理
+10:33:12.301 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=1 enabled=1 rois=1 chain=[二值化处理]
+10:33:12.329 | INFO | 执行处理块 | name=二值化处理 elapsed=28 ms rois=1
+10:33:12.330 | INFO | 流水线结束 | total=29 ms steps=[二值化处理(28ms)]
+10:33:12.331 | INFO | 处理完成 | elapsed=29 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:12.332 | INFO | Otsu自动阈值 | t=151 rois=1
+10:33:13.866 | INFO | 撤销快照 | reason=添加处理块 depth=24
+10:33:13.866 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=2 enabled=2 rois=1 chain=[二值化处理 -> 形态学处理]
+10:33:13.892 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:13.917 | INFO | 执行处理块 | name=形态学处理 elapsed=23 ms rois=1
+10:33:13.918 | INFO | 流水线结束 | total=50 ms steps=[二值化处理(24ms) -> 形态学处理(23ms)]
+10:33:13.919 | INFO | 处理完成 | elapsed=50 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:13.939 | INFO | 添加处理块 | name=形态学处理 index=1
+10:33:14.963 | INFO | 撤销快照 | reason=修改处理块参数 depth=25
+10:33:15.511 | INFO | 撤销快照 | reason=修改处理块参数 depth=26
+10:33:16.973 | INFO | 撤销快照 | reason=添加处理块 depth=27
+10:33:16.974 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=3 enabled=3 rois=1 chain=[二值化处理 -> 形态学处理 -> 滤波处理]
+10:33:17.000 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:17.025 | INFO | 执行处理块 | name=形态学处理 elapsed=24 ms rois=1
+10:33:17.070 | INFO | 执行处理块 | name=滤波处理 elapsed=44 ms rois=1
+10:33:17.071 | INFO | 流水线结束 | total=97 ms steps=[二值化处理(24ms) -> 形态学处理(24ms) -> 滤波处理(44ms)]
+10:33:17.073 | INFO | 处理完成 | elapsed=97 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:17.093 | INFO | 添加处理块 | name=滤波处理 index=2
+10:33:18.006 | INFO | 撤销快照 | reason=添加处理块 depth=28
+10:33:18.007 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=4 enabled=4 rois=1 chain=[二值化处理 -> 形态学处理 -> 滤波处理 -> 灰度变换]
+10:33:18.034 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=1
+10:33:18.062 | INFO | 执行处理块 | name=形态学处理 elapsed=26 ms rois=1
+10:33:18.108 | INFO | 执行处理块 | name=滤波处理 elapsed=45 ms rois=1
+10:33:18.133 | INFO | 执行处理块 | name=灰度变换 elapsed=23 ms rois=1
+10:33:18.134 | INFO | 流水线结束 | total=125 ms steps=[二值化处理(26ms) -> 形态学处理(26ms) -> 滤波处理(45ms) -> 灰度变换(23ms)]
+10:33:18.135 | INFO | 处理完成 | elapsed=125 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:18.157 | INFO | 添加处理块 | name=灰度变换 index=3
+10:33:18.890 | INFO | 撤销快照 | reason=添加处理块 depth=29
+10:33:18.891 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=5 enabled=5 rois=1 chain=[二值化处理 -> 形态学处理 -> 滤波处理 -> 灰度变换 -> 伪彩色处理]
+10:33:18.916 | INFO | 执行处理块 | name=二值化处理 elapsed=23 ms rois=1
+10:33:18.940 | INFO | 执行处理块 | name=形态学处理 elapsed=23 ms rois=1
+10:33:18.992 | INFO | 执行处理块 | name=滤波处理 elapsed=50 ms rois=1
+10:33:19.017 | INFO | 执行处理块 | name=灰度变换 elapsed=24 ms rois=1
+10:33:19.045 | INFO | 执行处理块 | name=伪彩色处理 elapsed=26 ms rois=1
+10:33:19.045 | INFO | 流水线结束 | total=153 ms steps=[二值化处理(23ms) -> 形态学处理(23ms) -> 滤波处理(50ms) -> 灰度变换(24ms) -> 伪彩色处理(26ms)]
+10:33:19.047 | INFO | 处理完成 | elapsed=153 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:19.062 | INFO | 添加处理块 | name=伪彩色处理 index=4
+10:33:19.621 | INFO | 撤销快照 | reason=添加处理块 depth=30
+10:33:19.622 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=6 enabled=6 rois=1 chain=[二值化处理 -> 形态学处理 -> 滤波处理 -> 灰度变换 -> 伪彩色处理 -> 灰度共生矩阵]
+10:33:19.648 | INFO | 执行处理块 | name=二值化处理 elapsed=25 ms rois=1
+10:33:19.675 | INFO | 执行处理块 | name=形态学处理 elapsed=25 ms rois=1
+10:33:19.724 | INFO | 执行处理块 | name=滤波处理 elapsed=48 ms rois=1
+10:33:19.750 | INFO | 执行处理块 | name=灰度变换 elapsed=24 ms rois=1
+10:33:19.780 | INFO | 执行处理块 | name=伪彩色处理 elapsed=29 ms rois=1
+10:33:19.851 | INFO | 执行处理块 | name=灰度共生矩阵 elapsed=69 ms rois=1
+10:33:19.852 | INFO | 流水线结束 | total=229 ms steps=[二值化处理(25ms) -> 形态学处理(25ms) -> 滤波处理(48ms) -> 灰度变换(24ms) -> 伪彩色处理(29ms) -> 灰度共生矩阵(69ms)]
+10:33:19.853 | INFO | 处理完成 | elapsed=229 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:19.883 | INFO | 添加处理块 | name=灰度共生矩阵 index=5
+10:33:20.419 | INFO | 撤销快照 | reason=修改处理块参数 depth=31
+10:33:21.646 | INFO | 撤销快照 | reason=修改处理块参数 depth=32
+10:33:21.647 | INFO | 块参数变化 | 滤波处理
+10:33:21.647 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=6 enabled=6 rois=1 chain=[二值化处理 -> 形态学处理 -> 滤波处理 -> 灰度变换 -> 伪彩色处理 -> 灰度共生矩阵]
+10:33:21.673 | INFO | 执行处理块 | name=二值化处理 elapsed=24 ms rois=1
+10:33:21.696 | INFO | 执行处理块 | name=形态学处理 elapsed=22 ms rois=1
+10:33:21.742 | INFO | 执行处理块 | name=滤波处理 elapsed=45 ms rois=1
+10:33:21.768 | INFO | 执行处理块 | name=灰度变换 elapsed=24 ms rois=1
+10:33:21.796 | INFO | 执行处理块 | name=伪彩色处理 elapsed=26 ms rois=1
+10:33:21.862 | INFO | 执行处理块 | name=灰度共生矩阵 elapsed=66 ms rois=1
+10:33:21.863 | INFO | 流水线结束 | total=215 ms steps=[二值化处理(24ms) -> 形态学处理(22ms) -> 滤波处理(45ms) -> 灰度变换(24ms) -> 伪彩色处理(26ms) -> 灰度共生矩阵(66ms)]
+10:33:21.864 | INFO | 处理完成 | elapsed=215 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:21.876 | INFO | 块参数变化 | 滤波处理
+10:33:21.877 | INFO | 开始处理 | path=C:/Users/Admin/Desktop/图片/input.png blocks=6 enabled=6 rois=1 chain=[二值化处理 -> 形态学处理 -> 滤波处理 -> 灰度变换 -> 伪彩色处理 -> 灰度共生矩阵]
+10:33:21.904 | INFO | 执行处理块 | name=二值化处理 elapsed=26 ms rois=1
+10:33:21.931 | INFO | 执行处理块 | name=形态学处理 elapsed=24 ms rois=1
+10:33:21.977 | INFO | 执行处理块 | name=滤波处理 elapsed=45 ms rois=1
+10:33:22.001 | INFO | 执行处理块 | name=灰度变换 elapsed=23 ms rois=1
+10:33:22.032 | INFO | 执行处理块 | name=伪彩色处理 elapsed=28 ms rois=1
+10:33:22.097 | INFO | 执行处理块 | name=灰度共生矩阵 elapsed=64 ms rois=1
+10:33:22.097 | INFO | 流水线结束 | total=220 ms steps=[二值化处理(26ms) -> 形态学处理(24ms) -> 滤波处理(45ms) -> 灰度变换(23ms) -> 伪彩色处理(28ms) -> 灰度共生矩阵(64ms)]
+10:33:22.100 | INFO | 处理完成 | elapsed=220 ms path=C:/Users/Admin/Desktop/图片/input.png result=1066x1061
+10:33:23.828 | INFO | 程序退出
+10:33:23.830 | INFO | 保存会话 | path=C:/Users/Admin/Desktop/图片/input.png blocks=6 rois=1
+10:33:23.832 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=1
+10:33:23.834 | INFO | 会话已落盘 | path=D:/Qt/project/opencv/bin/debug/sessions/app_sessions.json count=1

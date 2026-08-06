@@ -54,6 +54,7 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *btnApply;
+    QPushButton *btnRunAll;
     QPushButton *btnCompare;
     QPushButton *btnSave;
     QSpacerItem *horizontalSpacer;
@@ -155,6 +156,12 @@ public:
         btnApply->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
 
         horizontalLayout_2->addWidget(btnApply);
+
+        btnRunAll = new QPushButton(widget);
+        btnRunAll->setObjectName("btnRunAll");
+        btnRunAll->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+
+        horizontalLayout_2->addWidget(btnRunAll);
 
         btnCompare = new QPushButton(widget);
         btnCompare->setObjectName("btnCompare");
@@ -380,6 +387,10 @@ public:
         btnApply->setToolTip(QCoreApplication::translate("Widget", "\346\214\211\345\275\223\345\211\215 ROI \344\270\216\345\244\204\347\220\206\351\223\276\351\207\215\346\226\260\350\256\241\347\256\227", nullptr));
 #endif // QT_CONFIG(tooltip)
         btnApply->setText(QCoreApplication::translate("Widget", "\345\272\224\347\224\250", nullptr));
+#if QT_CONFIG(tooltip)
+        btnRunAll->setToolTip(QCoreApplication::translate("Widget", "\347\224\250\345\275\223\345\211\215\345\233\276\347\232\204\345\244\204\347\220\206\351\223\276\344\270\216 ROI\357\274\214\346\214\211\346\226\207\344\273\266\345\220\215\351\241\272\345\272\217\346\222\255\346\224\276\345\275\223\345\211\215\346\226\207\344\273\266\345\244\271\345\205\250\351\203\250\345\233\276\347\211\207", nullptr));
+#endif // QT_CONFIG(tooltip)
+        btnRunAll->setText(QCoreApplication::translate("Widget", "\345\205\250\351\203\250\346\211\247\350\241\214", nullptr));
 #if QT_CONFIG(tooltip)
         btnCompare->setToolTip(QCoreApplication::translate("Widget", "\346\214\211\344\275\217\346\237\245\347\234\213\345\216\237\345\233\276\357\274\214\346\235\276\345\274\200\346\201\242\345\244\215\347\273\223\346\236\234", nullptr));
 #endif // QT_CONFIG(tooltip)

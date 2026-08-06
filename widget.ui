@@ -146,6 +146,19 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="btnRunAll">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>用当前图的处理链与 ROI，按文件名顺序播放当前文件夹全部图片</string>
+            </property>
+            <property name="text">
+             <string>全部执行</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="btnCompare">
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
